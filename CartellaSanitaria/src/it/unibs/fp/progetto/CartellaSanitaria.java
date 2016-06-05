@@ -114,14 +114,18 @@ public class CartellaSanitaria {
 		String codiceSanitario="";
 		return codiceSanitario;
 	}
-	public Esame cercaEsame(String nomeEsame){
-		//Da Fare 
-		Esame e=new Esame();
-		return e;
+	public EsameEffettuato cercaEsame(String nomeEsame){
+		for(int i=0; i<esamiEffettuati.size();i++){
+			if(esamiEffettuati.get(i).getNome()==nomeEsame)
+				return esamiEffettuati.get(i);
+		}
+		return null;
 	}
 	public Malattia cercaMalattia(String nomeMalattia){
-		//Da Fare 
-		Malattia m=new Malattia();
-		return m;
+		for(int i=0; i<elencoMalattia.size();i++){
+			if(elencoMalattia.get(i).getNome()==nomeMalattia)
+				return elencoMalattia.get(i);
+		}
+		return null;
 	}
 }
