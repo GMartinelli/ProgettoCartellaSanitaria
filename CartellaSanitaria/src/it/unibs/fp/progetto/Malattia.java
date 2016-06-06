@@ -82,19 +82,12 @@ public class Malattia {
 	
 	/*Metodi*/
 	public String toString(){
-		String descrizione="";
-		descrizione+="Nome: "+nome+"\n";
-		descrizione+="Data Inizio: "+dataInizio+"\n";
-		if(dataTermine!="")
-			descrizione+="Data Termine: "+dataTermine+"\n";
-		descrizione+="Sintomi: "+sintomi+"\n";
-		descrizione+="Diagnosi: "+diagnosi+"\n";
-		descrizione+="Eleno esami associato: \n";
-		for(int i=0; i<elencoEsamiAssociati.size();i++)
-			descrizione=elencoEsamiAssociati.get(i).getNome()+"\n";
-		descrizione+="Terapia: "+terapia+"\n";
+		String descrizione = nome + "%nIniziata: " + dataInizio;
+		if(dataTermine != null) descrizione += ("%nTerminata:  " + dataTermine); 
+		
 		return descrizione;
 	}
+	
 	public boolean isAssociato(String nomeEsame){
 		for(int i=0; i<elencoEsamiAssociati.size(); i++){
 			if(elencoEsamiAssociati.get(i).getNome()==nomeEsame)
