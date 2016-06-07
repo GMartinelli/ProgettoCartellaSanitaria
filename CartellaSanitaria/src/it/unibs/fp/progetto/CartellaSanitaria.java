@@ -94,6 +94,7 @@ public class CartellaSanitaria {
 		for(int i=0; i<elencoMalattia.size();i++)
 			descrizione+=elencoMalattia.get(i).toString()+"\n";
 		
+		
 		return descrizione;
 	}
 	public String toStringSintetico(){
