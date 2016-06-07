@@ -78,29 +78,6 @@ public class CartellaSanitaria {
 		String descrizione="";
 		descrizione+="Nome: "+nome+"\n";
 		descrizione+="Cognome: "+cognome+"\n";
-		descrizione+="Indirizzo: "+indirizzo+"\n";
-		descrizione+="Telefono: "+telefono+"\n";
-		descrizione+="E-Mail: "+email+"\n";
-		descrizione+="Data di nascita: "+dataNascita+"\n";
-		descrizione+="Luogo di nascita: "+luogoNascita+"\n";
-		descrizione+="Genere: "+genere+"\n";
-		descrizione+="Codice fiscale: "+codiceFiscale+"\n";
-		descrizione+="Gruppo sanguigno: "+gruppoSanguigno+"\n";
-		descrizione+="Codice sanitario: "+codiceSanitario+"\n";
-		descrizione+="Esami effettuati: \n";
-		for(int i=0; i<esamiEffettuati.size();i++)
-			descrizione+=esamiEffettuati.get(i).toString()+"\n";
-		descrizione+="Elenco malattie: \n";
-		for(int i=0; i<elencoMalattia.size();i++)
-			descrizione+=elencoMalattia.get(i).toString()+"\n";
-		
-		
-		return descrizione;
-	}
-	public String toStringSintetico(){
-		String descrizione="";
-		descrizione+="Nome: "+nome+"\n";
-		descrizione+="Cognome: "+cognome+"\n";
 		for(int i=0; i<esamiEffettuati.size();i++)
 			descrizione+=esamiEffettuati.get(i).toString()+"\n";
 		descrizione+="Elenco malattie: \n";

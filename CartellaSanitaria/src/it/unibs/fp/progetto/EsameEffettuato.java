@@ -7,11 +7,11 @@
 package it.unibs.fp.progetto;
 
 import java.util.Date;
-import it.unibs.fp.mylib.*;
 
 public class EsameEffettuato {
 	//costanti
 	public static final String GIA_EFFETTUATO = "Impossibile modificare il dato, l'esame è già stato effettuato"; 
+	public static final String ESITO_MANCANTE = "Non è ancora stato impostato un esito";
 	
 	//attributi
 	private Esame esame;

@@ -31,7 +31,6 @@ public class EPeriodicoMisurabileEffettuato extends EsameEffettuato{
 	private String avvisi;
 		
 	//costruttori
-	//super.esame = this.esame!!!!!
 	public EPeriodicoMisurabileEffettuato(){
 		super();
 		esito = -1;
@@ -56,7 +55,15 @@ public class EPeriodicoMisurabileEffettuato extends EsameEffettuato{
 		super(esame, malattia, luogo, data, ora);
 		this.esame = esame;
 		this.esito = esito;
-		setAvvisi();
+		try{
+			setAvvisi();
+		}
+		catch(IllegalAccessException e){
+			/*
+			 * Non si sta ignorando l'eccezione,
+			 * 	semplicemente so che esito è già stato settato quindi non corro il rischio che venga lanciata l'eccezione
+			 */
+		}
 	}
 	
 	//getters	
@@ -73,15 +80,20 @@ public class EPeriodicoMisurabileEffettuato extends EsameEffettuato{
 	}
 	
 	//ANNOTAZIONE metodo con un po' di controlli, controllare se corretto e riferire, lasciare all'autore la responsabilità di togliere l'annotazione
-	public void setAvvisi() {
-		if(isInRange()) this.avvisi = COMPRESO;
-		else{
-			if(isOltreSoglia() && isSuperioreRange()) this.avvisi = SOGLIA_SUPERIORE;
-			else if(isOltreSoglia() && !isSuperioreRange()) this.avvisi = SOGLIA_INFERIORE;
+	public void setAvvisi() throws IllegalAccessException{
+		if(esito != -1){
+			if(isInRange()) this.avvisi = COMPRESO;
 			else{
-				if(isSuperioreRange()) this.avvisi = SUPERIORE;
-				else this.avvisi = INFERIORE;
+				if(isOltreSoglia() && isSuperioreRange()) this.avvisi = SOGLIA_SUPERIORE;
+				else if(isOltreSoglia() && !isSuperioreRange()) this.avvisi = SOGLIA_INFERIORE;
+				else{
+					if(isSuperioreRange()) this.avvisi = SUPERIORE;
+					else this.avvisi = INFERIORE;
+				}
 			}
+		}
+		else{
+			throw new IllegalAccessException(ESITO_MANCANTE);
 		}
 	}
 		
