@@ -5,7 +5,9 @@
  * @author Valtulini Claudio
  */
 package it.unibs.fp.progetto;
+
 import it.unibs.fp.mylib.*;
+import java.util.Date;
 
 public class EDiagnosticoEffettuato extends EsameEffettuato{
 	//attributi
@@ -40,7 +42,7 @@ public class EDiagnosticoEffettuato extends EsameEffettuato{
 		}
 	}
 
-	public void setData(String data){
+	public void setData(Date data){
 		if(!isEffettuato()){
 			super.setData(data);
 		}

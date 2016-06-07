@@ -5,7 +5,10 @@
  * @author Valtulini Claudio
  */
 package it.unibs.fp.progetto;
+
 import it.unibs.fp.mylib.*;
+import java.util.Date;
+
 
 public class EPeriodicoMisurabileEffettuato extends EsameEffettuato{
 	//costanti
@@ -29,6 +32,32 @@ public class EPeriodicoMisurabileEffettuato extends EsameEffettuato{
 		
 	//costruttori
 	//super.esame = this.esame!!!!!
+	public EPeriodicoMisurabileEffettuato(){
+		super();
+		esito = -1;
+		avvisi = null;
+	}
+	
+	public EPeriodicoMisurabileEffettuato(EsamePeriodicoMisurabile esame, Malattia malattia){
+		super(esame, malattia);
+		this.esame = esame;
+		esito = -1;
+		avvisi = null;
+	}
+	
+	public EPeriodicoMisurabileEffettuato(EsamePeriodicoMisurabile esame, Malattia malattia, String luogo, Date data, String ora){
+		super(esame, malattia, luogo, data, ora);
+		this.esame = esame;
+		esito = -1;
+		avvisi = null;
+	}
+	
+	public EPeriodicoMisurabileEffettuato(EsamePeriodicoMisurabile esame, Malattia malattia, String luogo, Date data, String ora, double esito){
+		super(esame, malattia, luogo, data, ora);
+		this.esame = esame;
+		this.esito = esito;
+		setAvvisi();
+	}
 	
 	//getters	
 	public double getEsito() {
@@ -75,7 +104,7 @@ public class EPeriodicoMisurabileEffettuato extends EsameEffettuato{
 		}
 	}
 
-	public void setData(String data){
+	public void setData(Date data){
 		if(!isEffettuato()){
 			super.setData(data);
 		}
