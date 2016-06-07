@@ -145,7 +145,7 @@ public class CartellaSanitaria {
 	}
 	public EsameEffettuato cercaEsame(String nomeEsame){
 		for(int i=0; i<esamiEffettuati.size();i++){
-			if(esamiEffettuati.get(i).getNome()==nomeEsame)
+			if(esamiEffettuati.get(i).getEsame().getNome()==nomeEsame)
 				return esamiEffettuati.get(i);
 		}
 		return null;
