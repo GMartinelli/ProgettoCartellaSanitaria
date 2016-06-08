@@ -18,7 +18,7 @@ public class ListaMalattia {
 	
 	//Costruttore
 	public ListaMalattia(ArrayList<Malattia> lista){
-		lista = new ArrayList<Malattia>();
+		this.lista = new ArrayList<Malattia>();
 		this.lista = lista;
 	}
 	

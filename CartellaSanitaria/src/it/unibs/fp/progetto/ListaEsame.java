@@ -16,9 +16,10 @@ public class ListaEsame{
 	}
 	//Costruttore
 	public ListaEsame(ArrayList<Esame> lista){
-		lista = new ArrayList<Esame>();
+		this.lista = new ArrayList<Esame>();
 		this.lista = lista;
 	}
+	
 	//Metodi
 	public boolean cercaEsame(String nomeEsame){
 		for(int i = 0; i < lista.size(); i++){
