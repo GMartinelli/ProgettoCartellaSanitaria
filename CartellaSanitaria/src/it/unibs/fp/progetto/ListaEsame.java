@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class ListaEsame{
 	//Attributi
-	ArrayList<Esame> lista;
+	private ArrayList<Esame> lista;
 	
 	//Getters
 	public ArrayList<Esame> getLista() {

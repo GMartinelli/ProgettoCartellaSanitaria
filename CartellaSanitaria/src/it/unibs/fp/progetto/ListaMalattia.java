@@ -4,7 +4,7 @@ import java.util.ArrayList;
 public class ListaMalattia {
 	
 	//Attributi
-	ArrayList<Malattia> lista;
+	private ArrayList<Malattia> lista;
 		
 	//Getters
 	public ArrayList<Malattia> getLista() {
