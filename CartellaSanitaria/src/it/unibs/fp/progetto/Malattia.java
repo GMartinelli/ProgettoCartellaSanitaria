@@ -2,7 +2,7 @@ package it.unibs.fp.progetto;
 import java.util.ArrayList;
 
 public class Malattia {
-	/*Attributi*/
+	//attributi
 	private String nome;
 	private String dataInizio;
 	private String dataTermine;
@@ -11,7 +11,7 @@ public class Malattia {
 	private ArrayList<Esame> elencoEsamiAssociati;
 	private String terapia;
 	
-	/*Getters*/
+	//getters
 	public String getNome() {
 		return nome;
 	}
@@ -34,7 +34,7 @@ public class Malattia {
 		return terapia;
 	}
 	
-	/*Setters*/
+	//setters
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
@@ -57,7 +57,7 @@ public class Malattia {
 		this.terapia = terapia;
 	}
 	
-	/*Costruttori*/
+	//costruttori
 	public Malattia(String nome, String dataInizio, String sintomi, String diagnosi, ArrayList<Esame> elencoEsamiAssociati, String terapia){
 		this.nome=nome;
 		this.dataInizio=dataInizio;
@@ -80,7 +80,7 @@ public class Malattia {
 		this.terapia=terapia;
 	}
 	
-	/*Metodi*/
+	//metodi
 	public String toString(){
 		String descrizione = nome + "%nIniziata: " + dataInizio;
 		if(dataTermine != null) descrizione += ("%nTerminata:  " + dataTermine); 

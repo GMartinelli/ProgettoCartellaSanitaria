@@ -1,10 +1,11 @@
+package it.unibs.fp.progetto;
+
 /**
  * EsameEffettuato fornisce lo scheletro per costruire un oggetto che contiene i dati di un esame da effettuare/effettuato
  * 
  * @author Valtulini Claudio
  * 
  */
-package it.unibs.fp.progetto;
 
 import java.util.Date;
 
@@ -12,6 +13,7 @@ public class EsameEffettuato {
 	//costanti
 	public static final String GIA_EFFETTUATO = "Impossibile modificare il dato, l'esame è già stato effettuato"; 
 	public static final String ESITO_MANCANTE = "Non è ancora stato impostato un esito";
+	public static final String ES_MAL_NON_COERENTE = "L'esame richiesto non è coerente con la malattia indicata";
 	
 	//attributi
 	private Esame esame;
@@ -32,6 +34,9 @@ public class EsameEffettuato {
 	public EsameEffettuato(Esame esame, Malattia malattia){
 		this.esame = esame;
 		this.malattia = malattia;
+		if(!isCoerenteMalattia()){
+			throw new IllegalArgumentException(ES_MAL_NON_COERENTE);
+		}
 		data = null;
 		ora = null;
 		luogo = null;
@@ -40,6 +45,9 @@ public class EsameEffettuato {
 	public EsameEffettuato(Esame esame, Malattia malattia, String luogo, Date data, String ora){
 		this.esame = esame;
 		this.malattia = malattia;
+		if(!isCoerenteMalattia()){
+			throw new IllegalArgumentException(ES_MAL_NON_COERENTE);
+		}
 		this.data = data;
 		this.ora = ora;
 		this.luogo = luogo;
@@ -65,6 +73,7 @@ public class EsameEffettuato {
 	//setters
 	public void setEsame(Esame esame) {
 		this.esame = esame;
+		if(!isCoerenteMalattia()) throw new IllegalArgumentException(ES_MAL_NON_COERENTE);
 	}
 	public void setData(Date data) {
 		this.data = data;

@@ -1,9 +1,12 @@
 package it.unibs.fp.progetto;
+
+import it.unibs.fp.mylib.*;
 import java.util.ArrayList;
 
 /**
  * Classe che definisce una <i>Cartella Sanitaria</i>.
- * Una cartella sanitaria ha al suo interno i dati riguardanti il paziente, che sono:
+ * 
+ * Una cartella sanitaria contiene i dati riguardanti il paziente:
  * nome;
  * cognome;
  * indirizzo;
@@ -17,7 +20,7 @@ import java.util.ArrayList;
  * elenco delle malattie di cui soffre;
  * codice sanitario.
  * 
- * @author Giuseppe
+ * @author Martinelli Giuseppe
  * 
  * @version 1.0 1 Giugno 2016
  *
@@ -42,8 +45,9 @@ public class CartellaSanitaria {
 	
 	/*Costruttori*/
 	/**
-	 * Costruttore, una cartella sanitaria è costituita da nome, cognome, indirizzo, numero di telefono, 
+	 * Una cartella sanitaria e' costituita da nome, cognome, indirizzo, numero di telefono, 
 	 * e-mail, data e luogo di nascita, genere, codice fiscale e gruppo sanguigno riguardante il paziente.
+	 * 
 	 * @param nome nome del paaziente
 	 * @param cognome cognome del paziente
 	 * @param indirizzo	indirizzo del paziente
@@ -72,6 +76,7 @@ public class CartellaSanitaria {
 	/*Getters*/
 	/**
 	 * Ritorna il nome del paziente
+	 * 
 	 * @return nome del paziente
 	 */
 	public String getNome() {
@@ -79,6 +84,7 @@ public class CartellaSanitaria {
 	}
 	/**
 	 * Ritorna il cognome del paziente
+	 * 
 	 * @return cognome del paziente
 	 */
 	public String getCognome() {
@@ -86,6 +92,7 @@ public class CartellaSanitaria {
 	}
 	/**
 	 * Ritorna l'indirizzo del paziente
+	 * 
 	 * @return <strong>indirizzo</strong> indirizzo del paziente
 	 */
 	public String getIndirizzo() {
@@ -93,6 +100,7 @@ public class CartellaSanitaria {
 	}
 	/**
 	 * Ritorna il numero di telefono del paziente
+	 * 
 	 * @return numero di telefono del paziente
 	 */
 	public String getTelefono() {
@@ -100,6 +108,7 @@ public class CartellaSanitaria {
 	}
 	/**
 	 * Ritorna l'indirizzo e-mail del paziente
+	 * 
 	 * @return indirizzo e-mail del paziente
 	 */
 	public String getEmail() {
@@ -107,6 +116,7 @@ public class CartellaSanitaria {
 	}
 	/**
 	 * Ritorna la data di nascita del paziente
+	 * 
 	 * @return data di nascita del paziente
 	 */
 	public String getDataNascita() {
@@ -114,6 +124,7 @@ public class CartellaSanitaria {
 	}
 	/**
 	 * Ritorna il luogo di nascita del paziente
+	 * 
 	 * @return luogo di nascita del paziente
 	 */
 	public String getLuogoNascita() {
@@ -121,6 +132,7 @@ public class CartellaSanitaria {
 	}
 	/**
 	 * Ritorna il genere del paziente
+	 * 
 	 * @return genere del paziente
 	 */
 	public char getGenere() {
@@ -128,6 +140,7 @@ public class CartellaSanitaria {
 	}
 	/**
 	 * Ritorna il codice fiscale del paziente
+	 * 
 	 * @return codice fiscale del paziente
 	 */
 	public String getCodiceFiscale() {
@@ -135,6 +148,7 @@ public class CartellaSanitaria {
 	}
 	/**
 	 * Ritorna il gruppo sanguigno del paziente
+	 * 
 	 * @return gruppo sanguigno del paziente
 	 */
 	public String getGruppoSanguigno() {
@@ -142,6 +156,7 @@ public class CartellaSanitaria {
 	}
 	/**
 	 * Ritorna il codice sanitario del paziente
+	 * 
 	 * @return codice sanitario del paziente
 	 */
 	public String getCodiceSanitario() {
@@ -149,6 +164,7 @@ public class CartellaSanitaria {
 	}
 	/**
 	 * Ritorna un arrayList degli esami effettuati
+	 * 
 	 * @return arrayList degli esami effettuati dal paziente
 	 */
 	public ArrayList<EsameEffettuato> getEsamiEffettuati() {
@@ -156,6 +172,7 @@ public class CartellaSanitaria {
 	}
 	/**
 	 * Ritorna un arrayList delle malattie del paziente
+	 * 
 	 * @return arrayList delle malattie del paziente
 	 */
 	public ArrayList<Malattia> getElencoMalattia() {
@@ -165,7 +182,8 @@ public class CartellaSanitaria {
 	/*Metodi*/
 	/**
 	 * Metodo che restituisce una descrizione ridotta in forma di stringa della classe
-	 * @return descrizione della cartella sanitaria in forma ridotta (nome, cognome, esami efffettuati e malattie)
+	 * 
+	 * @return descrizione della cartella sanitaria in forma ridotta (nome, cognome, esami effettuati e malattie)
 	 */
 	public String toString(){
 		String descrizione="";
@@ -180,74 +198,51 @@ public class CartellaSanitaria {
 	}
 	
 	/**
-	 * Controlla se il carattere passato è una lettera dell'alfabeto
-	 * @param carattere carattere da controllare
-	 * @return <strong>true</strong> se il carattere inserito è una lettera dell'alfabeto, <strong>false</strong> se il carattere inserito non è una lettera dell'alfabeto
-	 */
-	private boolean checkLettera(char carattere){
-		if((carattere>='A' && carattere<='Z') || (carattere>='a' && carattere<='z'))
-			return true;		
-		else 
-			return false;
-	}
-	
-	/**
-	 * Controlla se il carattere passato è un numero
-	 * @param carattere carattere da controllare
-	 * @return <strong>true</strong> se il carattere inserito è un numero, <strong>false</strong> se il carattere inserito non è un numero
-	 */
-	private boolean checkNumero(char carattere){
-		if(carattere>='0' && carattere<='9')
-			return true;		
-		else 
-			return false;
-	}
-	
-	/**
-	 * Controlla se la stringa passata può essere un codice fiscale valido oppure no
+	 * Controlla se la stringa passata e' un codice fiscale valido oppure no
+	 * 
 	 * @param codiceF stringa che rappresenta il codice fiscale che si vuole controllare
 	 * @return <strong>true</strong> se la stringa inserita rappresenta un codice fiscale valido, <strong>false</strong> se la stringa inserita non &egrave; un codice fiscale valido
 	 */
 	public boolean checkValiditaCF(String codiceF){
-		if(codiceF.length()==16){	//Controllo la prima condizione, cioè che il codice fiscale sia lungo 16 caratteri
+		if(codiceF.length()==16){	//Controllo la prima condizione, che il codice fiscale sia lungo 16 caratteri
 			for(int i=0;i<codiceF.length();i++){
-				if(i<6){			//I primi sei caratteri devono essere delle lettere per essere valido il CF
-					if(!checkLettera(codiceF.charAt(i))){//Se non è un carattere restituisco false, codice fiscale errato
+				if(i<6){			//I primi sei caratteri devono essere lettere
+					if(!MyCheck.checkLettera(codiceF.charAt(i))){//Se non e' un carattere restituisco false, codice fiscale errato
 						return false;
 					}
 				}
-				if(i>=6 && i<8){	//Dopo le prime 6 letttere ci devono essere 2 cifre per essere valido il CF
-					if(!checkNumero(codiceF.charAt(i))){
+				if(i>=6 && i<8){	//Dopo le prime 6 lettere ci devono essere 2 cifre
+					if(!MyCheck.checkNumero(codiceF.charAt(i))){
 						return false;
 					}
 				}
-				if(i==8){			//Il nono carattere deve essere una lettera per essere valido il CF
-					if(!(checkLettera(codiceF.charAt(i)))){
+				if(i==8){			//Il nono carattere deve essere una lettera
+					if(!(MyCheck.checkLettera(codiceF.charAt(i)))){
 						return false;
 					}
 				}
-				if(i>=9 && i<11){	//Decimo e Undicesimo carattere devono essere numeri per essere valido il CF
-					if(!checkNumero(codiceF.charAt(i))){
+				if(i>=9 && i<11){	//Decimo e Undicesimo carattere devono essere numeri
+					if(!MyCheck.checkNumero(codiceF.charAt(i))){
 						return false;
 					}
 				}
-				if(i==11){			//Il dodicesimo carattere deve essere una lettera per essere valido il CF
-					if(!checkLettera(codiceF.charAt(i))){
+				if(i==11){			//Il dodicesimo carattere deve essere una lettera
+					if(!MyCheck.checkLettera(codiceF.charAt(i))){
 						return false;
 					}
 				}
-				if(i>=12 && i<15){	//Dal tredicesimo al quindicesimo devono essere dei numeri per essere valido il CF
-					if(!checkNumero(codiceF.charAt(i))){
+				if(i>=12 && i<15){	//Dal tredicesimo al quindicesimo devono essere numeri
+					if(!MyCheck.checkNumero(codiceF.charAt(i))){
 						return false;
 					}
 				}
-				if(i==15){			//L'ultimo carattere deve essere una lettera per essere valido il CF
-					if(!checkLettera(codiceF.charAt(i))){
+				if(i==15){			//L'ultimo carattere deve essere una lettera
+					if(!MyCheck.checkLettera(codiceF.charAt(i))){
 						return false;
 					}
 				}
 			}
-			return true; //Se non si è verificata nessuna delle condizioni che faceva invalidare il Codice Fiscale, possiamo dire che il codice fiscale è valido
+			return true; //Se non si e' verificata nessuna delle condizioni che faceva invalidare il Codice Fiscale, possiamo dire che il codice fiscale e' valido
 		}
 		else{
 			return false;
@@ -291,9 +286,9 @@ public class CartellaSanitaria {
 	}
 	
 	/**
-	 * Metodo che cerca se esiste l'esame da cercare tra quelli effettuati dall'utente
+	 * Metodo che cerca l'esame tra quelli effettuati dall'utente
 	 * @param nomeEsame nome dell'esame da cercare
-	 * @return <strong>esameEffettuato</strong> se esiste un esame che si chiama come la stringa inserita, <strong>null</strong> in caso contrario
+	 * @return <strong>esameEffettuato</strong> se esiste un esame il cui nome equivale alla stringa inserita, <strong>null</strong> in caso contrario
 	 */
 	public EsameEffettuato cercaEsame(String nomeEsame){
 		for(int i=0; i<esamiEffettuati.size();i++){
@@ -304,9 +299,9 @@ public class CartellaSanitaria {
 	}
 	
 	/**
-	 *Metodo che cerca se esiste la malattia cercata tra quelle del paziente 
+	 *Metodo che cerca la malattia passata come argomento tra quelle del paziente 
 	 * @param nomeMalattia nome della malattia da cercare
-	 * @return <strong>malattia</strong> se esiste una malattia che si chiama come la stringa inserita, <strong>null</strong> in caso contrario
+	 * @return <strong>malattia</strong> se esiste una malattia il cui nome equivale alla stringa inserita, <strong>null</strong> in caso contrario
 	 */
 	public Malattia cercaMalattia(String nomeMalattia){
 		for(int i=0; i<elencoMalattia.size();i++){
