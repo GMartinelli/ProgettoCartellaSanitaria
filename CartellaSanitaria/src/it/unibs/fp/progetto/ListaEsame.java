@@ -4,6 +4,12 @@ import java.util.ArrayList;
 public class ListaEsame{
 	//Attributi
 	private ArrayList<Esame> lista;
+
+	//Costruttore
+	public ListaEsame(ArrayList<Esame> lista){
+		this.lista = new ArrayList<Esame>();
+		this.lista = lista;
+	}
 	
 	//Getters
 	public ArrayList<Esame> getLista() {
@@ -12,11 +18,6 @@ public class ListaEsame{
 	
 	//Setters
 	public void setLista(ArrayList<Esame> lista) {
-		this.lista = lista;
-	}
-	//Costruttore
-	public ListaEsame(ArrayList<Esame> lista){
-		this.lista = new ArrayList<Esame>();
 		this.lista = lista;
 	}
 	

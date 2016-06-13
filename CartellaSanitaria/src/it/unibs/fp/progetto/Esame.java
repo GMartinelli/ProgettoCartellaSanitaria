@@ -22,17 +22,19 @@ public class Esame {
 	}
 	
 	//Costruttori
-	public Esame(String nome, String raccomandazioni){
-		this.nome = nome;
-		this.raccomandazioni = raccomandazioni;
+	public Esame(){
+		nome = null;
+		raccomandazioni = null;
 	}
 	
 	public Esame(String nome){
 		this.nome = nome;
-	}
-	public Esame(){
-		nome = "";
-		raccomandazioni = "";
+		raccomandazioni = null;
+	} 
+	
+	public Esame(String nome, String raccomandazioni){
+		this.nome = nome;
+		this.raccomandazioni = raccomandazioni;
 	}
 	//Metodi
 	
