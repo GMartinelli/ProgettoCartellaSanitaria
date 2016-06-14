@@ -58,6 +58,15 @@ public class Malattia {
 	}
 	
 	//costruttori
+	public Malattia(String nome, String dataInizio, String sintomi, String diagnosi, String terapia){
+		this.nome=nome;
+		this.dataInizio=dataInizio;
+		this.dataTermine="";
+		this.sintomi=sintomi;
+		this.diagnosi=diagnosi;
+		this.terapia=terapia;
+	}
+	
 	public Malattia(String nome, String dataInizio, String sintomi, String diagnosi, ArrayList<Esame> elencoEsamiAssociati, String terapia){
 		this.nome=nome;
 		this.dataInizio=dataInizio;

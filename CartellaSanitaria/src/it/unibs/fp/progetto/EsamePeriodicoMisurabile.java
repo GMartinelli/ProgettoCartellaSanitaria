@@ -9,6 +9,20 @@ public class EsamePeriodicoMisurabile extends Esame {
 	private double valoreMax;
 	private double sogliaErrore;
 	
+	//Costruttori
+	public EsamePeriodicoMisurabile(String nome, double valoreMin, double valoreMax, double sogliaErrore){
+		super(nome);
+		this.valoreMin = valoreMin;
+		this.valoreMax = valoreMax;
+		this.sogliaErrore = sogliaErrore;
+	}
+
+	public EsamePeriodicoMisurabile(String nome, String raccomandazioni, double valoreMin, double valoreMax, double sogliaErrore){
+			super(nome, raccomandazioni);
+			this.valoreMin = valoreMin;
+			this.valoreMax = valoreMax;
+			this.sogliaErrore = sogliaErrore;
+	}
 	
 	//Getters
 	public double getValoreMin() {
@@ -45,21 +59,6 @@ public class EsamePeriodicoMisurabile extends Esame {
 		
 	}
 	public void setSogliaErrore(double sogliaErrore) {
-		this.sogliaErrore = sogliaErrore;
-	}
-	
-	//Costruttori
-	public EsamePeriodicoMisurabile(String nome, String raccomandazioni, double valoreMin, double valoreMax, double sogliaErrore){
-			super(nome, raccomandazioni);
-			this.valoreMin = valoreMin;
-			this.valoreMax = valoreMax;
-			this.sogliaErrore = sogliaErrore;
-	}
-	
-	public EsamePeriodicoMisurabile(String nome, double valoreMin, double valoreMax, double sogliaErrore){
-		super(nome);
-		this.valoreMin = valoreMin;
-		this.valoreMax = valoreMax;
 		this.sogliaErrore = sogliaErrore;
 	}
 	

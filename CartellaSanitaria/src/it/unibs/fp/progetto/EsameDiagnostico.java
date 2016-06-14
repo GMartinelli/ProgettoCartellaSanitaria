@@ -6,6 +6,25 @@ public class EsameDiagnostico extends Esame {
 	private String esitoAcc;
 	private String areaInteressata;
 	
+
+	//Costruttori
+	public EsameDiagnostico(){
+		super();
+		this.esitoAcc = null;
+		this.areaInteressata = null;
+	}
+	
+	public EsameDiagnostico(String nome, String esitoAcc, String areaInteressata){
+		super(nome);
+		this.esitoAcc = esitoAcc;
+		this.areaInteressata = areaInteressata;
+	}
+	
+	public EsameDiagnostico(String nome, String raccomandazioni, String esitoAcc, String areaInteressata){
+		super(nome, raccomandazioni);
+		this.esitoAcc = esitoAcc;
+		this.areaInteressata = areaInteressata;
+	}
 	
 	//Getters
 	public String getEsitoAcc() {
@@ -20,18 +39,6 @@ public class EsameDiagnostico extends Esame {
 	}
 	
 	public void setAreaInteressata(String areaInteressata) {
-		this.areaInteressata = areaInteressata;
-	}
-	//Costruttori
-	public EsameDiagnostico(String nome, String raccomandazioni, String esitoAcc, String areaInteressata){
-		super(nome, raccomandazioni);
-		this.esitoAcc = esitoAcc;
-		this.areaInteressata = areaInteressata;
-	}
-	
-	public EsameDiagnostico(String nome, String esitoAcc, String areaInteressata){
-		super(nome);
-		this.esitoAcc = esitoAcc;
 		this.areaInteressata = areaInteressata;
 	}
 	//Metodi

@@ -5,6 +5,12 @@ public class ListaMalattia {
 	
 	//Attributi
 	private ArrayList<Malattia> lista;
+	
+	//Costruttore
+	public ListaMalattia(ArrayList<Malattia> lista){
+		this.lista = new ArrayList<Malattia>();
+		this.lista = lista;
+	}
 		
 	//Getters
 	public ArrayList<Malattia> getLista() {
@@ -13,12 +19,6 @@ public class ListaMalattia {
 		
 	//Setters
 	public void setLista(ArrayList<Malattia> lista) {
-		this.lista = lista;
-	}
-	
-	//Costruttore
-	public ListaMalattia(ArrayList<Malattia> lista){
-		this.lista = new ArrayList<Malattia>();
 		this.lista = lista;
 	}
 	

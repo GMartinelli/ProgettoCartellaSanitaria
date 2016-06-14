@@ -50,7 +50,8 @@ public class EPeriodicoMisurabileEffettuato extends EsameEffettuato{
 	 * @param esame la tipologia di esame da prenotare
 	 * @param malattia la malattia per il quale viene richiesto
 	 */
-	public EPeriodicoMisurabileEffettuato(EsamePeriodicoMisurabile esame, Malattia malattia) throws IllegalArgumentException{
+	public EPeriodicoMisurabileEffettuato(EsamePeriodicoMisurabile esame, Malattia malattia)
+			throws IllegalAccessException, IllegalArgumentException{
 		super(esame, malattia);
 		this.esame = esame;
 		esito = DEFAULT_NE;
@@ -68,7 +69,8 @@ public class EPeriodicoMisurabileEffettuato extends EsameEffettuato{
 	 * @param data la data in cui effettuare l'esame
 	 * @param ora l'ora in cui effettuare l'esame
 	 */
-	public EPeriodicoMisurabileEffettuato(EsamePeriodicoMisurabile esame, Malattia malattia, String luogo, Date data, String ora){
+	public EPeriodicoMisurabileEffettuato(EsamePeriodicoMisurabile esame, Malattia malattia, String luogo, Date data, String ora)
+			throws IllegalAccessException, IllegalArgumentException{
 		super(esame, malattia, luogo, data, ora);
 		this.esame = esame;
 		esito = DEFAULT_NE;
@@ -88,7 +90,8 @@ public class EPeriodicoMisurabileEffettuato extends EsameEffettuato{
 	 * @param ora l'ora in cui effettuare l'esame
 	 * @param esito l'esito dell'esame
 	 */
-	public EPeriodicoMisurabileEffettuato(EsamePeriodicoMisurabile esame, Malattia malattia, String luogo, Date data, String ora, double esito){
+	public EPeriodicoMisurabileEffettuato(EsamePeriodicoMisurabile esame, Malattia malattia, String luogo, Date data, String ora, double esito)
+			throws IllegalAccessException, IllegalArgumentException{
 		super(esame, malattia, luogo, data, ora);
 		this.esame = esame;
 		this.esito = esito;
@@ -132,6 +135,7 @@ public class EPeriodicoMisurabileEffettuato extends EsameEffettuato{
 	//setters
 	/**
 	 * Permette di impostare l'esito dell'esame
+	 * 
 	 * @param esito l'esito da impostare
 	 */
 	public void setEsito(double esito) {
@@ -209,7 +213,7 @@ public class EPeriodicoMisurabileEffettuato extends EsameEffettuato{
 	 * 
 	 * @param esame la tipologia di esame che si vuole impostare
 	 */
-	public void setEsame(EsamePeriodicoMisurabile esame) throws IllegalArgumentException{
+	public void setEsame(EsamePeriodicoMisurabile esame) throws IllegalAccessException, IllegalArgumentException{
 		this.esame = esame;
 		super.setEsame(esame);
 	}

@@ -36,7 +36,7 @@ public class EDiagnosticoEffettuato extends EsameEffettuato{
 	 * @param esame la tipologia di esame da prenotare
 	 * @param malattia la malattia per il quale viene richiesto
 	 */
-	public EDiagnosticoEffettuato(EsameDiagnostico esame, Malattia malattia) throws IllegalArgumentException{
+	public EDiagnosticoEffettuato(EsameDiagnostico esame, Malattia malattia) throws IllegalAccessException, IllegalArgumentException{
 		super(esame, malattia);
 		this.esame = esame;
 		esito = null;
@@ -53,7 +53,8 @@ public class EDiagnosticoEffettuato extends EsameEffettuato{
 	 * @param data la data in cui effettuare l'esame
 	 * @param ora l'ora in cui effettuare l'esame
 	 */
-	public EDiagnosticoEffettuato(EsameDiagnostico esame, Malattia malattia, String luogo, Date data, String ora) throws IllegalArgumentException{
+	public EDiagnosticoEffettuato(EsameDiagnostico esame, Malattia malattia, String luogo, Date data, String ora)
+			throws IllegalAccessException, IllegalArgumentException{
 		super(esame, malattia, luogo, data, ora);
 		this.esame = esame;
 		esito = null;
@@ -71,7 +72,8 @@ public class EDiagnosticoEffettuato extends EsameEffettuato{
 	 * @param ora l'ora in cui effettuare l'esame
 	 * @param esito l'esito dell'esame
 	 */
-	public EDiagnosticoEffettuato(EsameDiagnostico esame, Malattia malattia, String luogo, Date data, String ora, String esito) throws IllegalArgumentException{
+	public EDiagnosticoEffettuato(EsameDiagnostico esame, Malattia malattia, String luogo, Date data, String ora, String esito)
+			throws IllegalAccessException, IllegalArgumentException{
 		super(esame, malattia, luogo, data, ora);
 		this.esame = esame;
 		this.esito = esito;
@@ -101,7 +103,7 @@ public class EDiagnosticoEffettuato extends EsameEffettuato{
 	 * 
 	 * @param esame la tipologia di esame che si vuole impostare
 	 */
-	public void setEsame(EsameDiagnostico esame) throws IllegalArgumentException{
+	public void setEsame(EsameDiagnostico esame) throws IllegalAccessException, IllegalArgumentException{
 		this.esame = esame;
 		super.setEsame(esame);
 	}
