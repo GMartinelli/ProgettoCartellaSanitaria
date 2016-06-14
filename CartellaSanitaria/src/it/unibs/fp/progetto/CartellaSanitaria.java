@@ -58,6 +58,8 @@ public class CartellaSanitaria {
 	 * @param genere sesso del paziente
 	 * @param codiceFiscale codice fiscale del paziente
 	 * @param gruppoSanguigno gruppo sanguigno del paziente
+	 * 
+	 * @author Martinelli Giuseppe
 	 */
 	public CartellaSanitaria(String nome, String cognome, String indirizzo, String telefono, String email, String dataNascita, String luogoNascita, char genere, String codiceFiscale, String gruppoSanguigno){
 		this.nome=nome;
@@ -76,104 +78,117 @@ public class CartellaSanitaria {
 	/*Getters*/
 	/**
 	 * Ritorna il nome del paziente
-	 * 
 	 * @return nome del paziente
+	 * 
+	 * @author Martinelli Giuseppe
 	 */
 	public String getNome() {
 		return nome;
 	}
 	/**
 	 * Ritorna il cognome del paziente
-	 * 
 	 * @return cognome del paziente
+	 * 
+	 * @author Martinelli Giuseppe
 	 */
 	public String getCognome() {
 		return cognome;
 	}
 	/**
 	 * Ritorna l'indirizzo del paziente
-	 * 
 	 * @return <strong>indirizzo</strong> indirizzo del paziente
+	 * 
+	 * @author Martinelli Giuseppe
 	 */
 	public String getIndirizzo() {
 		return indirizzo;
 	}
 	/**
 	 * Ritorna il numero di telefono del paziente
-	 * 
 	 * @return numero di telefono del paziente
+	 * 
+	 * @author Martinelli Giuseppe
 	 */
 	public String getTelefono() {
 		return telefono;
 	}
 	/**
 	 * Ritorna l'indirizzo e-mail del paziente
-	 * 
 	 * @return indirizzo e-mail del paziente
+	 * 
+	 * @author Martinelli Giuseppe
 	 */
 	public String getEmail() {
 		return email;
 	}
 	/**
 	 * Ritorna la data di nascita del paziente
-	 * 
 	 * @return data di nascita del paziente
+	 * 
+	 * @author Martinelli Giuseppe
 	 */
 	public String getDataNascita() {
 		return dataNascita;
 	}
 	/**
 	 * Ritorna il luogo di nascita del paziente
-	 * 
 	 * @return luogo di nascita del paziente
+	 * 
+	 * @author Martinelli Giuseppe
 	 */
 	public String getLuogoNascita() {
 		return luogoNascita;
 	}
 	/**
 	 * Ritorna il genere del paziente
-	 * 
 	 * @return genere del paziente
+	 * 
+	 * @author Martinelli Giuseppe
 	 */
 	public char getGenere() {
 		return genere;
 	}
 	/**
 	 * Ritorna il codice fiscale del paziente
-	 * 
 	 * @return codice fiscale del paziente
+	 * 
+	 * @author Martinelli Giuseppe
 	 */
 	public String getCodiceFiscale() {
 		return codiceFiscale;
 	}
 	/**
 	 * Ritorna il gruppo sanguigno del paziente
-	 * 
 	 * @return gruppo sanguigno del paziente
+	 * 
+	 * @author Martinelli Giuseppe
 	 */
 	public String getGruppoSanguigno() {
 		return gruppoSanguigno;
 	}
 	/**
 	 * Ritorna il codice sanitario del paziente
-	 * 
 	 * @return codice sanitario del paziente
+	 * 
+	 * @author Martinelli Giuseppe
 	 */
 	public String getCodiceSanitario() {
 		return codiceSanitario;
 	}
 	/**
 	 * Ritorna un arrayList degli esami effettuati
-	 * 
 	 * @return arrayList degli esami effettuati dal paziente
+	 * 
+	 * @author Martinelli Giuseppe
 	 */
 	public ArrayList<EsameEffettuato> getEsamiEffettuati() {
 		return esamiEffettuati;
 	}
 	/**
 	 * Ritorna un arrayList delle malattie del paziente
-	 * 
 	 * @return arrayList delle malattie del paziente
+	 * 
+	 * @author Martinelli Giuseppe
 	 */
 	public ArrayList<Malattia> getElencoMalattia() {
 		return elencoMalattia;
@@ -182,8 +197,9 @@ public class CartellaSanitaria {
 	/*Metodi*/
 	/**
 	 * Metodo che restituisce una descrizione ridotta in forma di stringa della classe
-	 * 
 	 * @return descrizione della cartella sanitaria in forma ridotta (nome, cognome, esami effettuati e malattie)
+	 * 
+	 * @author Martinelli Giuseppe
 	 */
 	public String toString(){
 		String descrizione="";
@@ -199,9 +215,10 @@ public class CartellaSanitaria {
 	
 	/**
 	 * Controlla se la stringa passata e' un codice fiscale valido oppure no
-	 * 
 	 * @param codiceF stringa che rappresenta il codice fiscale che si vuole controllare
 	 * @return <strong>true</strong> se la stringa inserita rappresenta un codice fiscale valido, <strong>false</strong> se la stringa inserita non &egrave; un codice fiscale valido
+	 * 
+	 * @author Martinelli Giuseppe
 	 */
 	public boolean checkValiditaCF(String codiceF){
 		if(codiceF.length()==16){	//Controllo la prima condizione, che il codice fiscale sia lungo 16 caratteri
@@ -249,31 +266,90 @@ public class CartellaSanitaria {
 		}
 	}
 	
-	public boolean checkValiditaTelefono(){
-		//Da Fare
-		boolean valido=false;
-		return valido;
+	/**
+	 * Controlla se la stringa passata e' un numero di telefono valido
+	 * @param nTelefono stringa che rappresenta il numero di telefono da controllare
+	 * @return <strong>true</strong> se la stringa inserita rappresenta un numero di telefono valido, <strong>false</strong> se la stringa inserita non &egrave; un codice fiscale valido
+	 * 
+	 * @author Martinelli Giuseppe
+	 */
+	public boolean checkValiditaTelefono(String nTelefono){
+		if(nTelefono.length()>0){
+			for(int i=0; i<nTelefono.length();i++){
+				if(!MyCheck.checkNumero(nTelefono.charAt(i))){
+					return false;
+				}
+			}
+			return true;
+		}
+		else
+			return false;
 	}
 	
-	public boolean checkValiditaEMail(){
-		//Da Fare
-		boolean valido=false;
-		return valido;
+	/**
+	 * Controlla se la stringa inserita e' un indirzzo e-mail valido
+	 * @param eMail indirizzo e-mail da controllare
+	 * @return <strong>true</strong> se la stringa inserita rappresenta un indirzzo e-mail valido, <strong>false</strong> se la stringa inserita non &egrave; un codice fiscale valido
+	 * 
+	 * @author Martinelli Giuseppe
+	 */
+	public boolean checkValiditaEMail(String eMail){
+		if(eMail.length()>0){
+			String emailPattern = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";	//Pattern di un indirizzo e-mail, trovata sul web
+			if(eMail.matches(emailPattern)){
+				return true;
+			}
+			else 
+				return false;
+		}
+		else{
+			return false;
+		}
 	}
 	
-	public boolean checkDataNascita(){
+	/**
+	 * Controlla se la data di nascita inserita e' valida nel formato utilizzato
+	 * @param dNascita data di nascita da controllare
+	 * @return <strong>true</strong> se la stringa inserita rappresenta una data di nascita valida, <strong>false</strong> se la stringa inserita non &egrave; un codice fiscale valido
+	 * 
+	 * @author Martinelli Giuseppe
+	 */
+	public boolean checkDataNascita(String dNascita){
+		if(dNascita.length()>0){
+			if(dNascita.matches(MyTime.PATTERN_DATA)){	//Per prima cosa controllo se la stringa combacia col pattern della data
+				int contan=0;	//Variabile che conta quanti numeri sono presenti nella stringa	
+				for(int i=0;i<dNascita.length();i++){
+					if(MyCheck.checkNumero(dNascita.charAt(i))){	//Se c'è un numero aumento il contatore
+						contan++;
+					}
+				}
+				if(contan==8)	//Se ci sono otto numeri vuol dire che la data di nascita è corretta
+					return true;
+				else
+					return false;
+			}
+			else{
+				return false;
+			}
+		}	
+		else
+			return false;
+	}
+	
+	/**
+	 * Controlla se la stringa passata rappresenta un valido gruppo sanguigno
+	 * @param gSanguigno gruppo sanguigno da controllare
+	 * @return <strong>true</strong> se la stringa inserita rappresenta un gruppo sanguigno valido, <strong>false</strong> se la stringa inserita non &egrave; un codice fiscale valido
+	 * 
+	 * @author Giuseppe
+	 */
+	public boolean checkGruppoSanguigno(String gSanguigno){
 		//Da Fare
 		boolean valido=false;
 		return valido;		
 	}
 	
-	public boolean checkGruppoSanguigno(){
-		//Da Fare
-		boolean valido=false;
-		return valido;		
-	}
-	
-	public boolean checkIndirizzo(){
+	public boolean checkIndirizzo(String indirizzo){
 		//Da Fare
 		boolean valido=false;
 		return valido;		
