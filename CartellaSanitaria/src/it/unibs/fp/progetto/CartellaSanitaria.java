@@ -340,7 +340,7 @@ public class CartellaSanitaria {
 	 * Controlla se la stringa passata rappresenta un valido gruppo sanguigno
 	 * @param gSanguigno gruppo sanguigno da controllare
 	 * @return <strong>true</strong> se la stringa inserita rappresenta un gruppo sanguigno valido, <strong>false</strong> se la stringa inserita non &egrave; un codice fiscale valido
-	 * 
+	 *  
 	 * @author Giuseppe
 	 */
 	public boolean checkGruppoSanguigno(String gSanguigno){
