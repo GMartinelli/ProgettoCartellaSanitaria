@@ -202,14 +202,12 @@ public class CartellaSanitaria {
 	 * @author Martinelli Giuseppe
 	 */
 	public String toString(){
-		String descrizione="";
-		descrizione+="Nome: "+nome+"\n";
-		descrizione+="Cognome: "+cognome+"\n";
+		String descrizione="Nome: " + nome + "%n" + "Cognome: " + cognome + "%n" + "Elenco esami: %n";
 		for(int i=0; i<esamiEffettuati.size();i++)
-			descrizione+=esamiEffettuati.get(i).toString()+"\n";
-		descrizione+="Elenco malattie: \n";
+			descrizione+=esamiEffettuati.get(i).toString()+"%n";
+		descrizione+="Elenco malattie: %n";
 		for(int i=0; i<elencoMalattia.size();i++)
-			descrizione+=elencoMalattia.get(i).toString()+"\n";
+			descrizione+=elencoMalattia.get(i).toString()+"%n";
 		return descrizione;
 	}
 	
@@ -294,9 +292,8 @@ public class CartellaSanitaria {
 	 * @author Martinelli Giuseppe
 	 */
 	public boolean checkValiditaEMail(String eMail){
-		if(eMail.length()>0){
-			String emailPattern = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";	//Pattern di un indirizzo e-mail, trovata sul web
-			if(eMail.matches(emailPattern)){
+		if(eMail.length()>4){
+			if(eMail.matches(MyCheck.EMAIL_PATTERN)){
 				return true;
 			}
 			else 
@@ -315,25 +312,21 @@ public class CartellaSanitaria {
 	 * @author Martinelli Giuseppe
 	 */
 	public boolean checkDataNascita(String dNascita){
-		if(dNascita.length()>0){
-			if(dNascita.matches(MyTime.PATTERN_DATA)){	//Per prima cosa controllo se la stringa combacia col pattern della data
-				int contan=0;	//Variabile che conta quanti numeri sono presenti nella stringa	
-				for(int i=0;i<dNascita.length();i++){
-					if(MyCheck.checkNumero(dNascita.charAt(i))){	//Se c'è un numero aumento il contatore
-						contan++;
-					}
+		if(dNascita.matches(MyTime.PATTERN_DATA)){	//Per prima cosa controllo se la stringa combacia col pattern della data
+			int contan=0;	//Variabile che conta quanti numeri sono presenti nella stringa	
+			for(int i=0;i<dNascita.length();i++){	
+				if(MyCheck.checkNumero(dNascita.charAt(i))){	//Se c'e' un numero aumento il contatore
+					contan++;
 				}
-				if(contan==8)	//Se ci sono otto numeri vuol dire che la data di nascita è corretta
-					return true;
-				else
-					return false;
 			}
-			else{
+			if(contan==8)	//Se ci sono otto numeri vuol dire che la data di nascita e' corretta
+				return true;
+			else
 				return false;
-			}
-		}	
-		else
+		}
+		else{
 			return false;
+		}
 	}
 	
 	/**
