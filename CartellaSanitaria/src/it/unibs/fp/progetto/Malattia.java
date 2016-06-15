@@ -1,11 +1,12 @@
 package it.unibs.fp.progetto;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Malattia {
 	//attributi
 	private String nome;
-	private String dataInizio;
-	private String dataTermine;
+	private Date dataInizio;
+	private Date dataTermine;
 	private String sintomi;
 	private String diagnosi;
 	private ArrayList<Esame> elencoEsamiAssociati;
@@ -15,10 +16,10 @@ public class Malattia {
 	public String getNome() {
 		return nome;
 	}
-	public String getDataInizio() {
+	public Date getDataInizio() {
 		return dataInizio;
 	}
-	public String getDataTermine() {
+	public Date getDataTermine() {
 		return dataTermine;
 	}
 	public String getSintomi() {
@@ -38,10 +39,10 @@ public class Malattia {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public void setDataInizio(String dataInizio) {
+	public void setDataInizio(Date dataInizio) {
 		this.dataInizio = dataInizio;
 	}
-	public void setDataTermine(String dataTermine) {
+	public void setDataTermine(Date dataTermine) {
 		this.dataTermine = dataTermine;
 	}
 	public void setSintomi(String sintomi) {
@@ -58,19 +59,19 @@ public class Malattia {
 	}
 	
 	//costruttori
-	public Malattia(String nome, String dataInizio, String sintomi, String diagnosi, String terapia){
+	public Malattia(String nome, Date dataInizio, String sintomi, String diagnosi, String terapia){
 		this.nome=nome;
 		this.dataInizio=dataInizio;
-		this.dataTermine="";
+		this.dataTermine=null;
 		this.sintomi=sintomi;
 		this.diagnosi=diagnosi;
 		this.terapia=terapia;
 	}
 	
-	public Malattia(String nome, String dataInizio, String sintomi, String diagnosi, ArrayList<Esame> elencoEsamiAssociati, String terapia){
+	public Malattia(String nome, Date dataInizio, String sintomi, String diagnosi, ArrayList<Esame> elencoEsamiAssociati, String terapia){
 		this.nome=nome;
 		this.dataInizio=dataInizio;
-		this.dataTermine="";
+		this.dataTermine=null;
 		this.sintomi=sintomi;
 		this.diagnosi=diagnosi;
 		this.elencoEsamiAssociati=new ArrayList<Esame>();
@@ -78,7 +79,7 @@ public class Malattia {
 		this.terapia=terapia;
 	}
 	
-	public Malattia(String nome, String dataInizio, String dataTermine, String sintomi, String diagnosi, ArrayList<Esame> elencoEsamiAssociati, String terapia){
+	public Malattia(String nome, Date dataInizio, Date dataTermine, String sintomi, String diagnosi, ArrayList<Esame> elencoEsamiAssociati, String terapia){
 		this.nome=nome;
 		this.dataInizio=dataInizio;
 		this.dataTermine=dataTermine;
