@@ -3,6 +3,7 @@ package it.unibs.fp.progetto;
 import java.text.*;
 import it.unibs.fp.mylib.*;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Classe che definisce una <i>Cartella Sanitaria</i>.
@@ -35,9 +36,9 @@ public class CartellaSanitaria {
 	private String indirizzo;
 	private String telefono;
 	private String email;
-	private String dataNascita;
+	private Date dataNascita;
 	private String luogoNascita;
-	private char genere;
+	private boolean genere; //FALSE-M / TRUE-F
 	private String codiceFiscale;
 	private String gruppoSanguigno;
 	private ArrayList<EsameEffettuato> esamiEffettuati;
@@ -62,7 +63,7 @@ public class CartellaSanitaria {
 	 * 
 	 * @author Martinelli Giuseppe
 	 */
-	public CartellaSanitaria(String nome, String cognome, String indirizzo, String telefono, String email, String dataNascita, String luogoNascita, char genere, String codiceFiscale, String gruppoSanguigno){
+	public CartellaSanitaria(String nome, String cognome, String indirizzo, String telefono, String email, Date dataNascita, String luogoNascita, boolean genere, String codiceFiscale, String gruppoSanguigno){
 		this.nome=nome;
 		this.cognome=cognome;
 		this.indirizzo=indirizzo;
@@ -73,7 +74,7 @@ public class CartellaSanitaria {
 		this.genere=genere;
 		this.codiceFiscale=codiceFiscale;
 		this.gruppoSanguigno=gruppoSanguigno;
-		this.codiceSanitario="";
+		this.codiceSanitario=null;
 	}
 	
 	/*Getters*/
@@ -128,7 +129,7 @@ public class CartellaSanitaria {
 	 * 
 	 * @author Martinelli Giuseppe
 	 */
-	public String getDataNascita() {
+	public Date getDataNascita() {
 		return dataNascita;
 	}
 	/**
@@ -146,7 +147,7 @@ public class CartellaSanitaria {
 	 * 
 	 * @author Martinelli Giuseppe
 	 */
-	public char getGenere() {
+	public boolean getGenere() {
 		return genere;
 	}
 	/**
