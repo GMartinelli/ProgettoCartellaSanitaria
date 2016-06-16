@@ -195,6 +195,59 @@ public class CartellaSanitaria {
 		return elencoMalattia;
 	}
 	
+	/*Setters*/
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public void setCognome(String cognome) {
+		this.cognome = cognome;
+	}
+
+	public void setIndirizzo(String indirizzo) {
+		this.indirizzo = indirizzo;
+	}
+
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public void setDataNascita(Date dataNascita) {
+		this.dataNascita = dataNascita;
+	}
+
+	public void setLuogoNascita(String luogoNascita) {
+		this.luogoNascita = luogoNascita;
+	}
+
+	public void setGenere(boolean genere) {
+		this.genere = genere;
+	}
+
+	public void setCodiceFiscale(String codiceFiscale) {
+		this.codiceFiscale = codiceFiscale;
+	}
+
+	public void setGruppoSanguigno(String gruppoSanguigno) {
+		this.gruppoSanguigno = gruppoSanguigno;
+	}
+
+	public void setEsamiEffettuati(ArrayList<EsameEffettuato> esamiEffettuati) {
+		this.esamiEffettuati = esamiEffettuati;
+	}
+
+	public void setElencoMalattia(ArrayList<Malattia> elencoMalattia) {
+		this.elencoMalattia = elencoMalattia;
+	}
+
+	public void setCodiceSanitario(String codiceSanitario) {
+		this.codiceSanitario = codiceSanitario;
+	}
+
 	/*Metodi*/
 	/**
 	 * Metodo che restituisce una descrizione ridotta in forma di stringa della classe
@@ -203,7 +256,7 @@ public class CartellaSanitaria {
 	 * @author Martinelli Giuseppe
 	 */
 	public String toString(){
-		String descrizione="Nome: " + nome + "%n" + "Cognome: " + cognome + "%n" + "Elenco esami: %n";
+		String descrizione="Nome: " + nome + "%nCognome: " + cognome + "%nElenco esami: %n";
 		for(int i=0; i<esamiEffettuati.size();i++)
 			descrizione+=esamiEffettuati.get(i).toString()+"%n";
 		descrizione+="Elenco malattie: %n";
