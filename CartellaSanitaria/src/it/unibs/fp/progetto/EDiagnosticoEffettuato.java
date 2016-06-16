@@ -123,6 +123,7 @@ public class EDiagnosticoEffettuato extends EsameEffettuato{
 	 * 
 	 * @param luogo il luogo in cui effettuare l'esame
 	 */
+	@Override
 	public void setLuogo(String luogo){
 		if(!isEffettuato()){
 			super.setLuogo(luogo);
@@ -137,6 +138,7 @@ public class EDiagnosticoEffettuato extends EsameEffettuato{
 	 * 
 	 * @param ora l'ora in cui si vuole effettuare l'esame
 	 */
+	@Override
 	public void setOra(String ora){
 		if(!isEffettuato()){
 			super.setOra(ora);
@@ -151,6 +153,7 @@ public class EDiagnosticoEffettuato extends EsameEffettuato{
 	 * 
 	 * @param data la data in cui si vuole effettuare l'esame
 	 */
+	@Override
 	public void setData(Date data){
 		if(!isEffettuato()){
 			super.setData(data);
