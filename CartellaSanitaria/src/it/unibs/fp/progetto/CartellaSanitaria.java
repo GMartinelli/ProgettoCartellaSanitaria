@@ -1,5 +1,6 @@
 package it.unibs.fp.progetto;
 
+import java.text.*;
 import it.unibs.fp.mylib.*;
 import java.util.ArrayList;
 
@@ -307,24 +308,17 @@ public class CartellaSanitaria {
 	/**
 	 * Controlla se la data di nascita inserita e' valida nel formato utilizzato
 	 * @param dNascita data di nascita da controllare
-	 * @return <strong>true</strong> se la stringa inserita rappresenta una data di nascita valida, <strong>false</strong> se la stringa inserita non &egrave; un codice fiscale valido
+	 * @return <strong>true</strong> se la stringa inserita rappresenta una data di nascita valida, <strong>false</strong> se la stringa inserita non &egrave; una data di nascita valido
 	 * 
 	 * @author Martinelli Giuseppe
 	 */
 	public boolean checkDataNascita(String dNascita){
-		if(dNascita.matches(MyTime.PATTERN_DATA)){	//Per prima cosa controllo se la stringa combacia col pattern della data
-			int contan=0;	//Variabile che conta quanti numeri sono presenti nella stringa	
-			for(int i=0;i<dNascita.length();i++){	
-				if(MyCheck.checkNumero(dNascita.charAt(i))){	//Se c'e' un numero aumento il contatore
-					contan++;
-				}
-			}
-			if(contan==8)	//Se ci sono otto numeri vuol dire che la data di nascita e' corretta
-				return true;
-			else
-				return false;
-		}
-		else{
+		MyTime.DATE_FORMAT.setLenient(false);
+		try {
+			MyTime.DATE_FORMAT.parse(dNascita);
+			return true;
+		} 
+		catch (ParseException e) {
 			return false;
 		}
 	}
@@ -332,7 +326,7 @@ public class CartellaSanitaria {
 	/**
 	 * Controlla se la stringa passata rappresenta un valido gruppo sanguigno
 	 * @param gSanguigno gruppo sanguigno da controllare
-	 * @return <strong>true</strong> se la stringa inserita rappresenta un gruppo sanguigno valido, <strong>false</strong> se la stringa inserita non &egrave; un codice fiscale valido
+	 * @return <strong>true</strong> se la stringa inserita rappresenta un gruppo sanguigno valido, <strong>false</strong> se la stringa inserita non &egrave; un gruppo sanguigno valido
 	 *  
 	 * @author Giuseppe
 	 */
@@ -342,6 +336,13 @@ public class CartellaSanitaria {
 		return valido;		
 	}
 	
+	/**
+	 * Controlla se la stringa passata rappresenta un valido gruppo sanguigno
+	 * @param gSanguigno gruppo sanguigno da controllare
+	 * @return <strong>true</strong> se la stringa inserita rappresenta un indirizzo valido, <strong>false</strong> se la stringa inserita non &egrave; un indirizzo valido
+	 *  
+	 * @author Giuseppe
+	 */
 	public boolean checkIndirizzo(String indirizzo){
 		//Da Fare
 		boolean valido=false;
