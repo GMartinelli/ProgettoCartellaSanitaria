@@ -400,8 +400,7 @@ public class CartellaSanitaria {
 	 */
 	public boolean checkGruppoSanguigno(String gSanguigno){
 		//Tolgo tutti gli eventuali spazi dalla stringa
-		String gS=gSanguigno.trim();
-		gS=gS.replace(" ", "");
+		String gS=BelleStringhe.togliSpazi(gSanguigno);
 		if(gS.length()>0 && gS.length()<4){	//Un gruppo sanguigno puo' essere composto al massimo da tre caratteri, nel caso AB- e AB+
 			if(gS.charAt(0)=='+'||gS.charAt(0)=='-'){	//Controllo se ha inserito prima il valore rh o prima il gruppo
 				if(gS.length()==2){
@@ -451,15 +450,21 @@ public class CartellaSanitaria {
 	 */
 	public String generaCodiceSanitario(){
 		String codiceSanitario="";
-		codiceSanitario=codiceSanitario+nome.substring(0,3);
-		codiceSanitario=codiceSanitario+cognome.substring(0,3);
+		
+		//Creo stringhe senza spazi per avere un codice sanitario privo di eventuali spazi
+		String n=BelleStringhe.togliSpazi(nome);
+		String c=BelleStringhe.togliSpazi(cognome);
+		String l=BelleStringhe.togliSpazi(luogoNascita);
+		
+		codiceSanitario=codiceSanitario+n.substring(0,3);
+		codiceSanitario=codiceSanitario+c.substring(0,3);
 		if(genere){
 			codiceSanitario=codiceSanitario+"1";
 		}
 		else{
 			codiceSanitario=codiceSanitario+"0";
 		}
-		codiceSanitario=codiceSanitario+luogoNascita.substring(0,2);
+		codiceSanitario=codiceSanitario+l.substring(0,2);
 		codiceSanitario=codiceSanitario+dataNascita.toString().substring(0,2);
 		return codiceSanitario;
 	}
