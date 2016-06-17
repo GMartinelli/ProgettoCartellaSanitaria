@@ -196,6 +196,59 @@ public class CartellaSanitaria {
 		return elencoMalattia;
 	}
 	
+	/*Setters*/
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public void setCognome(String cognome) {
+		this.cognome = cognome;
+	}
+
+	public void setIndirizzo(String indirizzo) {
+		this.indirizzo = indirizzo;
+	}
+
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public void setDataNascita(Date dataNascita) {
+		this.dataNascita = dataNascita;
+	}
+
+	public void setLuogoNascita(String luogoNascita) {
+		this.luogoNascita = luogoNascita;
+	}
+
+	public void setGenere(boolean genere) {
+		this.genere = genere;
+	}
+
+	public void setCodiceFiscale(String codiceFiscale) {
+		this.codiceFiscale = codiceFiscale;
+	}
+
+	public void setGruppoSanguigno(String gruppoSanguigno) {
+		this.gruppoSanguigno = gruppoSanguigno;
+	}
+
+	public void setEsamiEffettuati(ArrayList<EsameEffettuato> esamiEffettuati) {
+		this.esamiEffettuati = esamiEffettuati;
+	}
+
+	public void setElencoMalattia(ArrayList<Malattia> elencoMalattia) {
+		this.elencoMalattia = elencoMalattia;
+	}
+
+	public void setCodiceSanitario(String codiceSanitario) {
+		this.codiceSanitario = codiceSanitario;
+	}
+
 	/*Metodi*/
 	/**
 	 * Metodo che restituisce una descrizione ridotta in forma di stringa della classe
@@ -204,7 +257,7 @@ public class CartellaSanitaria {
 	 * @author Martinelli Giuseppe
 	 */
 	public String toString(){
-		String descrizione="Nome: " + nome + "%n" + "Cognome: " + cognome + "%n" + "Elenco esami: %n";
+		String descrizione="Nome: " + nome + "%nCognome: " + cognome + "%nElenco esami: %n";
 		for(int i=0; i<esamiEffettuati.size();i++)
 			descrizione+=esamiEffettuati.get(i).toString()+"%n";
 		descrizione+="Elenco malattie: %n";
@@ -335,10 +388,10 @@ public class CartellaSanitaria {
 		//Tolgo tutti gli eventuali spazi dalla stringa
 		String gS=gSanguigno.trim();
 		gS=gS.replace(" ", "");
-		if(gS.length()>0 && gS.length()<4){	//Un gruppo sanguigno può essere composto al massimo da tre caratteri, nel caso AB- e AB+
+		if(gS.length()>0 && gS.length()<4){	//Un gruppo sanguigno puo' essere composto al massimo da tre caratteri, nel caso AB- e AB+
 			if(gS.charAt(0)=='+'||gS.charAt(0)=='-'){	//Controllo se ha inserito prima il valore rh o prima il gruppo
 				if(gS.length()==2){
-					if(gS.charAt(1)=='A' || gS.charAt(1)=='B'){
+					if(gS.charAt(1)=='A' || gS.charAt(1)=='B' || gS.charAt(1)=='0'){
 						return true;
 					}
 				}
@@ -348,13 +401,18 @@ public class CartellaSanitaria {
 					}
 				}
 			}
+			else if(gS.charAt(0)=='0' && gS.length()==2){
+				if(gS.charAt(1)=='-' || gS.charAt(1)=='+'){
+					return true;
+				}
+			}
 			else if(gS.charAt(0)=='B' && gS.length()==2){
 				if(gS.charAt(1)=='-' || gS.charAt(1)=='+'){
 					return true;
 				}
 			}
 			else if (gS.charAt(0)=='A'){
-				if(gS.length()==2){//Controllo se è un gruppo sanguigno A con il suo relativo rh
+				if(gS.length()==2){//Controllo se e' un gruppo sanguigno A con il suo relativo rh
 					if(gS.charAt(1)=='-' || gS.charAt(1)=='+'){
 						return true;
 					}

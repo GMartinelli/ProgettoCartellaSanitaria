@@ -134,6 +134,16 @@ public class EPeriodicoMisurabileEffettuato extends EsameEffettuato{
 		
 	//setters
 	/**
+	 * Permette di impostare la tipologia di esame
+	 * 
+	 * @param esame la tipologia di esame che si vuole impostare
+	 */
+	public void setEsame(EsamePeriodicoMisurabile esame) throws IllegalAccessException, IllegalArgumentException{
+		this.esame = esame;
+		super.setEsame(esame);
+	}
+	
+	/**
 	 * Permette di impostare l'esito dell'esame
 	 * 
 	 * @param esito l'esito da impostare
@@ -171,6 +181,7 @@ public class EPeriodicoMisurabileEffettuato extends EsameEffettuato{
 	 * 
 	 * @param luogo il luogo in cui effettuare l'esame
 	 */
+	@Override
 	public void setLuogo(String luogo){
 		if(!isEffettuato()){
 			super.setLuogo(luogo);
@@ -185,6 +196,7 @@ public class EPeriodicoMisurabileEffettuato extends EsameEffettuato{
 	 * 
 	 * @param ora l'ora in cui si vuole effettuare l'esame
 	 */
+	@Override
 	public void setOra(String ora){
 		if(!isEffettuato()){
 			super.setOra(ora);
@@ -199,6 +211,7 @@ public class EPeriodicoMisurabileEffettuato extends EsameEffettuato{
 	 * 
 	 * @param data la data in cui si vuole effettuare l'esame
 	 */
+	@Override
 	public void setData(Date data){
 		if(!isEffettuato()){
 			super.setData(data);
@@ -206,16 +219,6 @@ public class EPeriodicoMisurabileEffettuato extends EsameEffettuato{
 		else{
 			throw new TooLateException(GIA_EFFETTUATO);
 		}
-	}
-	
-	/**
-	 * Permette di impostare la tipologia di esame
-	 * 
-	 * @param esame la tipologia di esame che si vuole impostare
-	 */
-	public void setEsame(EsamePeriodicoMisurabile esame) throws IllegalAccessException, IllegalArgumentException{
-		this.esame = esame;
-		super.setEsame(esame);
 	}
 	
 	//metodi
@@ -228,7 +231,6 @@ public class EPeriodicoMisurabileEffettuato extends EsameEffettuato{
 		if(esito > this.esame.getValoreMin() && esito < this.esame.getValoreMax()) return true;
 		else return false;
 	}
-	
 	
 	/**
 	 * Controlla se il valore e' oltre ai valori di soglia impostati nella tipologia di esame
