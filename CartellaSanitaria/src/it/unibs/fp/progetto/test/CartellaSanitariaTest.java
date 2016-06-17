@@ -1,5 +1,7 @@
 package it.unibs.fp.progetto.test;
 
+import java.util.Date;
+
 /**
  * Classe contenente Test JUnit per il controllo della correttezza della Classe CartellaSanitaria
  * 
@@ -9,6 +11,7 @@ package it.unibs.fp.progetto.test;
 
 import static org.junit.Assert.*;
 
+import it.unibs.fp.mylib.MyCheck;
 import it.unibs.fp.mylib.MyTime;
 import it.unibs.fp.progetto.*;
 import java.util.ArrayList;
@@ -239,5 +242,289 @@ public class CartellaSanitariaTest {
 		CartellaSanitaria CS1 = new CartellaSanitaria("Mario", "Rossi", "Via Mario Rossi", telefono, mail, MyTime.creaData("22/09/1985"), "Iseo", false, CF, "+A");
 		
 		assertFalse(CS1.checkValiditaEMail(CS1.getEmail()));
+	}
+	
+	@Test
+	public void checkValiditaDataNascitaCorretto(){
+		String CF = "RSIROM85D18X999B";
+		String telefono = "000000000";
+		String mail = "ab@cd.ef";
+		String data = "22/09/1985";
+		CartellaSanitaria CS1 = new CartellaSanitaria("Mario", "Rossi", "Via Mario Rossi", telefono, mail, MyTime.creaData(data), "Iseo", false, CF, "+A");
+		
+		assertTrue(CS1.checkDataNascita(data));
+	}
+	
+	@Test
+	public void checkValiditaDataNascitaErrato(){
+		String CF = "RSIROM85D18X999B";
+		String telefono = "000000000";
+		String mail = "ab@cd.ef";
+		String data = "1985/09/22";
+		CartellaSanitaria CS1 = new CartellaSanitaria("Mario", "Rossi", "Via Mario Rossi", telefono, mail, MyTime.creaData(data), "Iseo", false, CF, "+A");
+
+		assertFalse(CS1.checkDataNascita(data));
+	}
+	
+	@Test
+	public void checkValiditaDataNascitaErrato2(){
+		String CF = "RSIROM85D18X999B";
+		String telefono = "000000000";
+		String mail = "ab@cd.ef";
+		String data = "22/1985/09";
+		CartellaSanitaria CS1 = new CartellaSanitaria("Mario", "Rossi", "Via Mario Rossi", telefono, mail, MyTime.creaData(data), "Iseo", false, CF, "+A");
+
+		assertFalse(CS1.checkDataNascita(data));
+	}
+	
+	@Test
+	public void checkValiditaDataNascitaErrato3(){
+		String CF = "RSIROM85D18X999B";
+		String telefono = "000000000";
+		String mail = "ab@cd.ef";
+		String data = "22/029/1985";
+		CartellaSanitaria CS1 = new CartellaSanitaria("Mario", "Rossi", "Via Mario Rossi", telefono, mail, MyTime.creaData(data), "Iseo", false, CF, "+A");
+
+		assertFalse(CS1.checkDataNascita(data));
+	}
+	
+	@Test
+	public void checkValiditaDataNascitaErrato4(){
+		String CF = "RSIROM85D18X999B";
+		String telefono = "000000000";
+		String mail = "ab@cd.ef";
+		String data = "22//09/1985";
+		CartellaSanitaria CS1 = new CartellaSanitaria("Mario", "Rossi", "Via Mario Rossi", telefono, mail, MyTime.creaData(data), "Iseo", false, CF, "+A");
+
+		assertFalse(CS1.checkDataNascita(data));
+	}
+	
+	@Test
+	public void checkValiditaDataNascitaErrato5(){
+		String CF = "RSIROM85D18X999B";
+		String telefono = "000000000";
+		String mail = "ab@cd.ef";
+		String data = "22/09//1985";
+		CartellaSanitaria CS1 = new CartellaSanitaria("Mario", "Rossi", "Via Mario Rossi", telefono, mail, MyTime.creaData(data), "Iseo", false, CF, "+A");
+
+		assertFalse(CS1.checkDataNascita(data));
+	}
+	
+	@Test
+	public void checkValiditaDataNascitaErrato6(){
+		String CF = "RSIROM85D18X999B";
+		String telefono = "000000000";
+		String mail = "ab@cd.ef";
+		String data = "22/09/19Z85";
+		CartellaSanitaria CS1 = new CartellaSanitaria("Mario", "Rossi", "Via Mario Rossi", telefono, mail, MyTime.creaData(data), "Iseo", false, CF, "+A");
+
+		assertFalse(CS1.checkDataNascita(data));
+	}
+	
+	@Test
+	public void checkValiditaGruppoSanguignoCorrettoL2(){
+		String CF = "RSIROM85D18X999B";
+		String telefono = "000000000";
+		String mail = "ab@cd.ef";
+		String data = "22/09/19Z85";
+		String gS = "+A";
+		CartellaSanitaria CS1 = new CartellaSanitaria("Mario", "Rossi", "Via Mario Rossi", telefono, mail, MyTime.creaData(data), "Iseo", false, CF, gS);
+
+		assertTrue(CS1.checkGruppoSanguigno(CS1.getGruppoSanguigno()));
+	}
+	
+	@Test
+	public void checkValiditaGruppoSanguignoCorrettoInversoL2(){
+		String CF = "RSIROM85D18X999B";
+		String telefono = "000000000";
+		String mail = "ab@cd.ef";
+		String data = "22/09/19Z85";
+		String gS = "A+";
+		CartellaSanitaria CS1 = new CartellaSanitaria("Mario", "Rossi", "Via Mario Rossi", telefono, mail, MyTime.creaData(data), "Iseo", false, CF, gS);
+
+		assertTrue(CS1.checkGruppoSanguigno(CS1.getGruppoSanguigno()));
+	}
+	
+	@Test
+	public void checkValiditaGruppoSanguignoCorrettoL3(){
+		String CF = "RSIROM85D18X999B";
+		String telefono = "000000000";
+		String mail = "ab@cd.ef";
+		String data = "22/09/19Z85";
+		String gS = "+AB";
+		CartellaSanitaria CS1 = new CartellaSanitaria("Mario", "Rossi", "Via Mario Rossi", telefono, mail, MyTime.creaData(data), "Iseo", false, CF, gS);
+
+		assertTrue(CS1.checkGruppoSanguigno(CS1.getGruppoSanguigno()));
+	}
+	
+	@Test
+	public void checkValiditaGruppoSanguignoCorrettoInversoL3(){
+		String CF = "RSIROM85D18X999B";
+		String telefono = "000000000";
+		String mail = "ab@cd.ef";
+		String data = "22/09/19Z85";
+		String gS = "AB+";
+		CartellaSanitaria CS1 = new CartellaSanitaria("Mario", "Rossi", "Via Mario Rossi", telefono, mail, MyTime.creaData(data), "Iseo", false, CF, gS);
+
+		assertTrue(CS1.checkGruppoSanguigno(CS1.getGruppoSanguigno()));
+	}
+	
+	@Test
+	public void checkValiditaGruppoSanguignoErratoVuoto(){
+		String CF = "RSIROM85D18X999B";
+		String telefono = "000000000";
+		String mail = "ab@cd.ef";
+		String data = "22/09/19Z85";
+		String gS = "";
+		CartellaSanitaria CS1 = new CartellaSanitaria("Mario", "Rossi", "Via Mario Rossi", telefono, mail, MyTime.creaData(data), "Iseo", false, CF, gS);
+
+		assertFalse(CS1.checkGruppoSanguigno(CS1.getGruppoSanguigno()));
+	}
+	
+	@Test
+	public void checkValiditaGruppoSanguignoErratoLungo(){
+		String CF = "RSIROM85D18X999B";
+		String telefono = "000000000";
+		String mail = "ab@cd.ef";
+		String data = "22/09/19Z85";
+		String gS = "+ABCD";
+		CartellaSanitaria CS1 = new CartellaSanitaria("Mario", "Rossi", "Via Mario Rossi", telefono, mail, MyTime.creaData(data), "Iseo", false, CF, gS);
+
+		assertFalse(CS1.checkGruppoSanguigno(CS1.getGruppoSanguigno()));
+	}
+	
+	@Test
+	public void checkValiditaGruppoSanguignoErrato1CarattereL2(){
+		String CF = "RSIROM85D18X999B";
+		String telefono = "000000000";
+		String mail = "ab@cd.ef";
+		String data = "22/09/19Z85";
+		String gS = "SA";
+		CartellaSanitaria CS1 = new CartellaSanitaria("Mario", "Rossi", "Via Mario Rossi", telefono, mail, MyTime.creaData(data), "Iseo", false, CF, gS);
+
+		assertFalse(CS1.checkGruppoSanguigno(CS1.getGruppoSanguigno()));
+	}
+	
+	@Test
+	public void checkValiditaGruppoSanguignoErrato2CarattereL2(){
+		String CF = "RSIROM85D18X999B";
+		String telefono = "000000000";
+		String mail = "ab@cd.ef";
+		String data = "22/09/19Z85";
+		String gS = "-G";
+		CartellaSanitaria CS1 = new CartellaSanitaria("Mario", "Rossi", "Via Mario Rossi", telefono, mail, MyTime.creaData(data), "Iseo", false, CF, gS);
+
+		assertFalse(CS1.checkGruppoSanguigno(CS1.getGruppoSanguigno()));
+	}
+	
+	@Test
+	public void checkValiditaGruppoSanguignoErratoInverso1CarattereL2(){
+		String CF = "RSIROM85D18X999B";
+		String telefono = "000000000";
+		String mail = "ab@cd.ef";
+		String data = "22/09/19Z85";
+		String gS = "1-";
+		CartellaSanitaria CS1 = new CartellaSanitaria("Mario", "Rossi", "Via Mario Rossi", telefono, mail, MyTime.creaData(data), "Iseo", false, CF, gS);
+
+		assertFalse(CS1.checkGruppoSanguigno(CS1.getGruppoSanguigno()));
+	}
+	
+	@Test
+	public void checkValiditaGruppoSanguignoErratoInverso2CarattereL2(){
+		String CF = "RSIROM85D18X999B";
+		String telefono = "000000000";
+		String mail = "ab@cd.ef";
+		String data = "22/09/19Z85";
+		String gS = "B3";
+		CartellaSanitaria CS1 = new CartellaSanitaria("Mario", "Rossi", "Via Mario Rossi", telefono, mail, MyTime.creaData(data), "Iseo", false, CF, gS);
+
+		assertFalse(CS1.checkGruppoSanguigno(CS1.getGruppoSanguigno()));
+	}
+	
+	@Test
+	public void checkValiditaGruppoSanguignoErrato1CarattereL3(){
+		String CF = "RSIROM85D18X999B";
+		String telefono = "000000000";
+		String mail = "ab@cd.ef";
+		String data = "22/09/19Z85";
+		String gS = "gAB";
+		CartellaSanitaria CS1 = new CartellaSanitaria("Mario", "Rossi", "Via Mario Rossi", telefono, mail, MyTime.creaData(data), "Iseo", false, CF, gS);
+
+		assertFalse(CS1.checkGruppoSanguigno(CS1.getGruppoSanguigno()));
+	}
+	
+	@Test
+	public void checkValiditaGruppoSanguignoErrato2CarattereL3(){
+		String CF = "RSIROM85D18X999B";
+		String telefono = "000000000";
+		String mail = "ab@cd.ef";
+		String data = "22/09/19Z85";
+		String gS = "+0B";
+		CartellaSanitaria CS1 = new CartellaSanitaria("Mario", "Rossi", "Via Mario Rossi", telefono, mail, MyTime.creaData(data), "Iseo", false, CF, gS);
+
+		assertFalse(CS1.checkGruppoSanguigno(CS1.getGruppoSanguigno()));
+	}
+	
+	@Test
+	public void checkValiditaGruppoSanguignoErrato3CarattereL3(){
+		String CF = "RSIROM85D18X999B";
+		String telefono = "000000000";
+		String mail = "ab@cd.ef";
+		String data = "22/09/19Z85";
+		String gS = "+AA";
+		CartellaSanitaria CS1 = new CartellaSanitaria("Mario", "Rossi", "Via Mario Rossi", telefono, mail, MyTime.creaData(data), "Iseo", false, CF, gS);
+
+		assertFalse(CS1.checkGruppoSanguigno(CS1.getGruppoSanguigno()));
+	}
+	
+	@Test
+	public void checkValiditaGruppoSanguignoErrato1CarattereInversoL3(){
+		String CF = "RSIROM85D18X999B";
+		String telefono = "000000000";
+		String mail = "ab@cd.ef";
+		String data = "22/09/19Z85";
+		String gS = "BB+";
+		CartellaSanitaria CS1 = new CartellaSanitaria("Mario", "Rossi", "Via Mario Rossi", telefono, mail, MyTime.creaData(data), "Iseo", false, CF, gS);
+
+		assertFalse(CS1.checkGruppoSanguigno(CS1.getGruppoSanguigno()));
+	}
+	
+	@Test
+	public void checkValiditaGruppoSanguignoErrato2CarattereInversoL3(){
+		String CF = "RSIROM85D18X999B";
+		String telefono = "000000000";
+		String mail = "ab@cd.ef";
+		String data = "22/09/19Z85";
+		String gS = "AL+";
+		CartellaSanitaria CS1 = new CartellaSanitaria("Mario", "Rossi", "Via Mario Rossi", telefono, mail, MyTime.creaData(data), "Iseo", false, CF, gS);
+
+		assertFalse(CS1.checkGruppoSanguigno(CS1.getGruppoSanguigno()));
+	}
+	
+	@Test
+	public void checkValiditaGruppoSanguignoErrato3CarattereInversoL3(){
+		String CF = "RSIROM85D18X999B";
+		String telefono = "000000000";
+		String mail = "ab@cd.ef";
+		String data = "22/09/19Z85";
+		String gS = "ABc";
+		CartellaSanitaria CS1 = new CartellaSanitaria("Mario", "Rossi", "Via Mario Rossi", telefono, mail, MyTime.creaData(data), "Iseo", false, CF, gS);
+
+		assertFalse(CS1.checkGruppoSanguigno(CS1.getGruppoSanguigno()));
+	}
+	
+	@Test
+	public void checkGeneraCodiceSanitario(){
+		String CF = "RSIROM85D18X999B";
+		String telefono = "000000000";
+		String mail = "ab@cd.ef";
+		String data = "22/09/19Z85";
+		String gS = "+AB";
+		CartellaSanitaria CS1 = new CartellaSanitaria("Mario", "Rossi", "Via Mario Rossi", telefono, mail, MyTime.creaData(data), "Iseo", false, CF, gS);
+		
+		String stringaMetodo = CS1.generaCodiceSanitario();
+		String stringaMia = "";
+		
+		assertEquals(stringaMetodo, stringaMia);
 	}
 }
