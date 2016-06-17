@@ -372,18 +372,9 @@ public class CartellaSanitaria {
 	}
 	
 	/**
-	 * Controlla se la stringa passata rappresenta un valido gruppo sanguigno
-	 * @param gSanguigno gruppo sanguigno da controllare
-	 * @return <strong>true</strong> se la stringa inserita rappresenta un indirizzo valido, <strong>false</strong> se la stringa inserita non &egrave; un indirizzo valido
-	 *  
-	 * @author Giuseppe
+	 * 
+	 * @return
 	 */
-	public boolean checkIndirizzo(String indirizzo){
-		//Da Fare
-		boolean valido=false;
-		return valido;		
-	}
-	
 	public String generaCodiceSanitario(){
 		//Da Fare
 		String codiceSanitario="";
