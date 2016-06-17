@@ -388,10 +388,10 @@ public class CartellaSanitaria {
 		//Tolgo tutti gli eventuali spazi dalla stringa
 		String gS=gSanguigno.trim();
 		gS=gS.replace(" ", "");
-		if(gS.length()>0 && gS.length()<4){	//Un gruppo sanguigno può essere composto al massimo da tre caratteri, nel caso AB- e AB+
+		if(gS.length()>0 && gS.length()<4){	//Un gruppo sanguigno puo' essere composto al massimo da tre caratteri, nel caso AB- e AB+
 			if(gS.charAt(0)=='+'||gS.charAt(0)=='-'){	//Controllo se ha inserito prima il valore rh o prima il gruppo
 				if(gS.length()==2){
-					if(gS.charAt(1)=='A' || gS.charAt(1)=='B'){
+					if(gS.charAt(1)=='A' || gS.charAt(1)=='B' || gS.charAt(1)=='0'){
 						return true;
 					}
 				}
@@ -401,13 +401,18 @@ public class CartellaSanitaria {
 					}
 				}
 			}
+			else if(gS.charAt(0)=='0' && gS.length()==2){
+				if(gS.charAt(1)=='-' || gS.charAt(1)=='+'){
+					return true;
+				}
+			}
 			else if(gS.charAt(0)=='B' && gS.length()==2){
 				if(gS.charAt(1)=='-' || gS.charAt(1)=='+'){
 					return true;
 				}
 			}
 			else if (gS.charAt(0)=='A'){
-				if(gS.length()==2){//Controllo se è un gruppo sanguigno A con il suo relativo rh
+				if(gS.length()==2){//Controllo se e' un gruppo sanguigno A con il suo relativo rh
 					if(gS.charAt(1)=='-' || gS.charAt(1)=='+'){
 						return true;
 					}
