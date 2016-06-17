@@ -372,7 +372,7 @@ public class CartellaSanitaria {
 	public boolean checkDataNascita(String dNascita){
 		boolean controlla=true;	//Variabile per capire se bisngna controllare o meno la stringa, il controllo si fa solo se i caratteri nella stringa sono tutti numeri o /, in caso contrario la stringa non è una data accettabile
 		for(int i=0; i<dNascita.length();i++){
-			if(!MyCheck.checkNumero(dNascita.charAt(i)) || dNascita.charAt(i)!='/'){
+			if(!MyCheck.checkNumero(dNascita.charAt(i)) && dNascita.charAt(i)!='/'){
 				controlla=false;
 			}
 		}
