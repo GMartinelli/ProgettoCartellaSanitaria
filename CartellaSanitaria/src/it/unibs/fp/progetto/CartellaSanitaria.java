@@ -30,6 +30,9 @@ import java.util.Date;
 
 
 public class CartellaSanitaria {
+	/*Costanti*/
+	private static final int LUNGHEZZA_CF=16;
+	
 	/*Attributi*/
 	private String nome;
 	private String cognome;
@@ -274,7 +277,7 @@ public class CartellaSanitaria {
 	 * @author Martinelli Giuseppe
 	 */
 	public boolean checkValiditaCF(String codiceF){
-		if(codiceF.length()==16){	//Controllo la prima condizione, che il codice fiscale sia lungo 16 caratteri
+		if(codiceF.length()==LUNGHEZZA_CF){	//Controllo la prima condizione, che il codice fiscale sia lungo 16 caratteri
 			for(int i=0;i<codiceF.length();i++){
 				if(i<6){			//I primi sei caratteri devono essere lettere
 					if(!MyCheck.checkLettera(codiceF.charAt(i))){//Se non e' un carattere restituisco false, codice fiscale errato
@@ -367,12 +370,23 @@ public class CartellaSanitaria {
 	 * @author Martinelli Giuseppe
 	 */
 	public boolean checkDataNascita(String dNascita){
-		MyTime.DATE_FORMAT.setLenient(false);
-		try {
-			MyTime.DATE_FORMAT.parse(dNascita);
-			return true;
-		} 
-		catch (ParseException e) {
+		boolean controlla=true;	//Variabile per capire se bisngna controllare o meno la stringa, il controllo si fa solo se i caratteri nella stringa sono tutti numeri o /, in caso contrario la stringa non è una data accettabile
+		for(int i=0; i<dNascita.length();i++){
+			if(!MyCheck.checkNumero(dNascita.charAt(i)) || dNascita.charAt(i)!='/'){
+				controlla=false;
+			}
+		}
+		if(controlla){
+			MyTime.DATE_FORMAT.setLenient(false);
+			try {
+				MyTime.DATE_FORMAT.parse(dNascita);
+				return true;
+			} 
+			catch (ParseException e) {
+				return false;
+			}
+		}
+		else{
 			return false;
 		}
 	}
@@ -382,7 +396,7 @@ public class CartellaSanitaria {
 	 * @param gSanguigno gruppo sanguigno da controllare
 	 * @return <strong>true</strong> se la stringa inserita rappresenta un gruppo sanguigno valido, <strong>false</strong> se la stringa inserita non &egrave; un gruppo sanguigno valido
 	 *  
-	 * @author Giuseppe
+	 * @author Martinelli Giuseppe
 	 */
 	public boolean checkGruppoSanguigno(String gSanguigno){
 		//Tolgo tutti gli eventuali spazi dalla stringa
@@ -430,12 +444,23 @@ public class CartellaSanitaria {
 	}
 	
 	/**
+	 * Metodo che genera il codice sanitario 
+	 * @return codice sanitario generato in base ai dati dell'utente
 	 * 
-	 * @return
+	 * @author Martinelli Giuseppe 
 	 */
 	public String generaCodiceSanitario(){
-		//Da Fare
 		String codiceSanitario="";
+		codiceSanitario=codiceSanitario+nome.substring(0,3);
+		codiceSanitario=codiceSanitario+cognome.substring(0,3);
+		if(genere){
+			codiceSanitario=codiceSanitario+"1";
+		}
+		else{
+			codiceSanitario=codiceSanitario+"0";
+		}
+		codiceSanitario=codiceSanitario+luogoNascita.substring(0,2);
+		codiceSanitario=codiceSanitario+dataNascita.toString().substring(0,2);
 		return codiceSanitario;
 	}
 	
