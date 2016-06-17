@@ -8,6 +8,7 @@ package it.unibs.fp.progetto;
  */
 
 import java.util.Date;
+import it.unibs.fp.mylib.MyTime;
 
 public class EsameEffettuato {
 	//costanti
@@ -181,6 +182,6 @@ public class EsameEffettuato {
 	 * Ritorna una stringa rappresentativa contenente il nome della tipologia di esame, data, ora e luogo
 	 */
 	public String toString(){
-		return esame.getNome() + "%nData: " + data + "%nOra: " + ora + "%nLuogo: " + luogo;
+		return esame.getNome() + "%nData: " + MyTime.toStringData(data) + "%nOra: " + ora + "%nLuogo: " + luogo;
 	}
 }

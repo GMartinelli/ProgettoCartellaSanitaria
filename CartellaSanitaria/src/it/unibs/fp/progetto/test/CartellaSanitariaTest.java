@@ -523,7 +523,7 @@ public class CartellaSanitariaTest {
 		CartellaSanitaria CS1 = new CartellaSanitaria("Mario", "Rossi", "Via Mario Rossi", telefono, mail, MyTime.creaData(data), "Iseo", false, CF, gS);
 		
 		String stringaMetodo = CS1.generaCodiceSanitario();
-		String stringaMia = "";
+		String stringaMia = "MARROS0IS" + CS1.getDataNascita().toString().substring(0,2).toUpperCase();
 		
 		assertEquals(stringaMetodo, stringaMia);
 	}
