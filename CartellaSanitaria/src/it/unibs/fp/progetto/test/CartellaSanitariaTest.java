@@ -527,4 +527,124 @@ public class CartellaSanitariaTest {
 		
 		assertEquals(stringaMetodo, stringaMia);
 	}
+	
+	@Test
+	public void cercaEsameTestCorretto(){
+		try{
+			ArrayList<Esame> associati = new ArrayList<>();
+			Esame esame1 = new Esame("Colesterolo");
+			Esame esame2 = new Esame("Sangue");
+			associati.add(esame1);
+			associati.add(esame2);
+			
+			ArrayList<Malattia> elencoMalattia = new ArrayList<>();
+			Malattia malattia1 = new Malattia("Raffreddore", MyTime.creaData("01/01/2009"), "Catarro", "Malato", associati, "Soffia");
+			Malattia malattia2 = new Malattia("Bronchite", MyTime.creaData("01/02/2009"), MyTime.creaData("15/02/2009"), "Catarro", "Malato", associati, "Soffia");
+			elencoMalattia.add(malattia1);
+			elencoMalattia.add(malattia2);
+
+			ArrayList<EsameEffettuato> esamiEffettuati = new ArrayList<>();
+			esamiEffettuati.add(new EsameEffettuato(esame1, malattia1, "Sarnico", MyTime.creaData("18/01/2009"), "15:30"));
+			esamiEffettuati.add(new EsameEffettuato(esame2, malattia2, "Sarnico", MyTime.creaData("18/01/2009"), "17:30"));
+			
+			CartellaSanitaria CS1 = new CartellaSanitaria("Mario", "Rossi", "Via Mario Rossi", "000000000", "ab@cd.ef", MyTime.creaData("22/09/1985"), "Iseo", false, "RSIROM85D18X999B", "+A");
+			CS1.setElencoMalattia(elencoMalattia);
+			CS1.setEsamiEffettuati(esamiEffettuati);
+			
+			assertEquals(CS1.cercaEsame("Colesterolo"), esamiEffettuati.get(0));
+		}
+		catch(IllegalAccessException e){
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void cercaEsameTestErrato(){
+		try{
+			ArrayList<Esame> associati = new ArrayList<>();
+			Esame esame1 = new Esame("Colesterolo");
+			Esame esame2 = new Esame("Sangue");
+			associati.add(esame1);
+			associati.add(esame2);
+			
+			ArrayList<Malattia> elencoMalattia = new ArrayList<>();
+			Malattia malattia1 = new Malattia("Raffreddore", MyTime.creaData("01/01/2009"), "Catarro", "Malato", associati, "Soffia");
+			Malattia malattia2 = new Malattia("Bronchite", MyTime.creaData("01/02/2009"), MyTime.creaData("15/02/2009"), "Catarro", "Malato", associati, "Soffia");
+			elencoMalattia.add(malattia1);
+			elencoMalattia.add(malattia2);
+
+			ArrayList<EsameEffettuato> esamiEffettuati = new ArrayList<>();
+			esamiEffettuati.add(new EsameEffettuato(esame1, malattia1, "Sarnico", MyTime.creaData("18/01/2009"), "15:30"));
+			esamiEffettuati.add(new EsameEffettuato(esame2, malattia2, "Sarnico", MyTime.creaData("18/01/2009"), "17:30"));
+			
+			CartellaSanitaria CS1 = new CartellaSanitaria("Mario", "Rossi", "Via Mario Rossi", "000000000", "ab@cd.ef", MyTime.creaData("22/09/1985"), "Iseo", false, "RSIROM85D18X999B", "+A");
+			CS1.setElencoMalattia(elencoMalattia);
+			CS1.setEsamiEffettuati(esamiEffettuati);
+			
+			assertEquals(CS1.cercaEsame("Radiografia"), null);
+		}
+		catch(IllegalAccessException e){
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void cercaMalattiaTestCorretto(){
+		try{
+			ArrayList<Esame> associati = new ArrayList<>();
+			Esame esame1 = new Esame("Colesterolo");
+			Esame esame2 = new Esame("Sangue");
+			associati.add(esame1);
+			associati.add(esame2);
+			
+			ArrayList<Malattia> elencoMalattia = new ArrayList<>();
+			Malattia malattia1 = new Malattia("Raffreddore", MyTime.creaData("01/01/2009"), "Catarro", "Malato", associati, "Soffia");
+			Malattia malattia2 = new Malattia("Bronchite", MyTime.creaData("01/02/2009"), MyTime.creaData("15/02/2009"), "Catarro", "Malato", associati, "Soffia");
+			elencoMalattia.add(malattia1);
+			elencoMalattia.add(malattia2);
+
+			ArrayList<EsameEffettuato> esamiEffettuati = new ArrayList<>();
+			esamiEffettuati.add(new EsameEffettuato(esame1, malattia1, "Sarnico", MyTime.creaData("18/01/2009"), "15:30"));
+			esamiEffettuati.add(new EsameEffettuato(esame2, malattia2, "Sarnico", MyTime.creaData("18/01/2009"), "17:30"));
+			
+			CartellaSanitaria CS1 = new CartellaSanitaria("Mario", "Rossi", "Via Mario Rossi", "000000000", "ab@cd.ef", MyTime.creaData("22/09/1985"), "Iseo", false, "RSIROM85D18X999B", "+A");
+			CS1.setElencoMalattia(elencoMalattia);
+			CS1.setEsamiEffettuati(esamiEffettuati);
+			
+			assertEquals(CS1.cercaMalattia("Raffreddore"), malattia1);
+		}
+		catch(IllegalAccessException e){
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void cercaMalattiaTestErrato(){
+		try{
+			ArrayList<Esame> associati = new ArrayList<>();
+			Esame esame1 = new Esame("Colesterolo");
+			Esame esame2 = new Esame("Sangue");
+			associati.add(esame1);
+			associati.add(esame2);
+			
+			ArrayList<Malattia> elencoMalattia = new ArrayList<>();
+			Malattia malattia1 = new Malattia("Raffreddore", MyTime.creaData("01/01/2009"), "Catarro", "Malato", associati, "Soffia");
+			Malattia malattia2 = new Malattia("Bronchite", MyTime.creaData("01/02/2009"), MyTime.creaData("15/02/2009"), "Catarro", "Malato", associati, "Soffia");
+			elencoMalattia.add(malattia1);
+			elencoMalattia.add(malattia2);
+
+			ArrayList<EsameEffettuato> esamiEffettuati = new ArrayList<>();
+			esamiEffettuati.add(new EsameEffettuato(esame1, malattia1, "Sarnico", MyTime.creaData("18/01/2009"), "15:30"));
+			esamiEffettuati.add(new EsameEffettuato(esame2, malattia2, "Sarnico", MyTime.creaData("18/01/2009"), "17:30"));
+			
+			CartellaSanitaria CS1 = new CartellaSanitaria("Mario", "Rossi", "Via Mario Rossi", "000000000", "ab@cd.ef", MyTime.creaData("22/09/1985"), "Iseo", false, "RSIROM85D18X999B", "+A");
+			CS1.setElencoMalattia(elencoMalattia);
+			CS1.setEsamiEffettuati(esamiEffettuati);
+			
+			assertEquals(CS1.cercaMalattia("Mononucleosi"), null);
+		}
+		catch(IllegalAccessException e){
+			e.printStackTrace();
+		}
+	}
 }
