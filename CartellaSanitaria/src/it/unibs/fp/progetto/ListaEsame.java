@@ -1,4 +1,9 @@
 package it.unibs.fp.progetto;
+/**
+ * La classe ListaEsame permette di creare una lista in cui inserire un elenco di Esami.
+ * 
+ * @author Manenti Gabriele
+ */
 import java.util.ArrayList;
 
 public class ListaEsame{
@@ -6,22 +11,51 @@ public class ListaEsame{
 	private ArrayList<Esame> lista;
 
 	//Costruttore
+	/**
+	 * Costruttore che permette di impostare una ArrayList che contiene un elenco di esami.
+	 * 
+	 * @param lista l'ArrayList che contiene un elenco di esami
+	 * 
+	 * @author Manenti Gabriele
+	 */
 	public ListaEsame(ArrayList<Esame> lista){
 		this.lista = new ArrayList<Esame>();
 		this.lista = lista;
 	}
 	
 	//Getters
+	/**
+	 * Ritorna l'ArrayList lista che contiene un elenco di esami
+	 * 
+	 * @return lista l'ArrayList che contiene un elenco di esami
+	 * 
+	 * @author Manenti Gabriele
+	 */
 	public ArrayList<Esame> getLista() {
 		return lista;
 	}
 	
 	//Setters
+	/**
+	 * Metodo che imposta una lista di esami
+	 * 
+	 * @param lista l'ArrayList che contiene un elenco di esami
+	 * 
+	 * @author Manenti Gabriele
+	 */
 	public void setLista(ArrayList<Esame> lista) {
 		this.lista = lista;
 	}
 	
 	//Metodi
+	/**
+	 * Metodo che ricerca per nome un esame all'interno di un'ArrayList.
+	 * @param nomeEsame il nome dell'esame da cercare.
+	 * 
+	 * @return true se l'esame è stato trovato, altrimenti ritorna false.
+	 * 
+	 * @author Manenti Gabriele
+	 */
 	public boolean cercaEsame(String nomeEsame){
 		for(int i = 0; i < lista.size(); i++){
 			if(lista.get(i).getNome() == nomeEsame)
