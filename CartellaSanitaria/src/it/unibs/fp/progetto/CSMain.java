@@ -4,10 +4,7 @@ import java.util.Date;
 import java.util.ArrayList;
 import java.io.*;
 
-import it.unibs.fp.mylib.MyGestioneFile;
-import it.unibs.fp.mylib.MyInput;
-import it.unibs.fp.mylib.MyMenu;
-import it.unibs.fp.mylib.MyTime;
+import it.unibs.fp.mylib.*;
 
 public class CSMain{
 	/* Costanti */
@@ -189,7 +186,7 @@ public class CSMain{
 		}
 		else{
 			//Creo il file e la cartella sanitaria
-			MyGestioneFile.creaFile(PATH);
+			MyServizioFile.creaFile(PATH);
 			creaCartellaSanitaria();
 		}
 		int scelta=0;
