@@ -10,13 +10,15 @@ public class CSMain{
 	/* Costanti */
 	private static final String MEX_BENVENUTO = "Benvenuto nell'applicazione per la gestione della cartella sanitaria di un paziente";
 	private static final String MEX_USCITA = "Grazie per avere utilizzato la nostra applicazione! Arrivederci!";
+
 	private static final String MEX_SCELTA = "Cosa desideri fare?";
-	
+
 	private static final String [] OPZIONI_BASE = {"Crea cartella sanitaria", "Gestisci cartella sanitaria"};
 	private static final String [] OPZIONI = {"Gestione dati paziente","Gestione esami","Gestione malattie"};
 	private static final String [] OPZIONI_ESAME = {"Inserisci esame","Modifica esame","Visualizza esame","Visualizza lista esami"};
 	private static final String [] OPZIONI_MALATTIA = {"Inserisci malattia","Modifica malattia","Visualizza malattia","Visualizza lista malattie"};
 	private static final String [] OPZIONI_PAZIENTE = {"Modifica nome","Modifica cognome","Modifica indirizzo","Modifica telefono","..."};
+	private static final String [] OPZIONI_PAZIENTE_2 = {"Modifica nome","Modifica cognome","Modifica indirizzo","Modifica telefono","Modifica email", "Modifica luogo di nascita", "Modifica data di nascita", "Modifica genere", "Modifica codice fiscale", "Modifica gruppo sanguigno"};
 	
 	private static final String PATH = "cartella_sanitaria.txt";
 	
@@ -54,15 +56,22 @@ public class CSMain{
 	}
 	
 	/*Metodo che crea la cartella sanitaria*/
-	private CartellaSanitaria creaCartellaSanitaria(){
+	/**
+	 * Metodo che crea un oggetto della classe cartellaSanitaria
+	 * @return oggetto della classe cartella sanitaria
+	 * 
+	 * @author Martinelli Giuseppe 
+	 */
+	private static CartellaSanitaria creaCartellaSanitaria(){
 		String nome = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_NOME);
 		String cognome = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_COGNOME);
 		String indirizzo = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_INDIRIZZO);
 		
 		//Controllo se il numero di telefono inserito dall'utente risulta valido o meno
-		boolean valido=false;
+		boolean valido = false;
+		String telefono = "";
 		do{
-			String telefono = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_TELEFONO);
+			telefono = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_TELEFONO);
 			if(CartellaSanitaria.checkValiditaTelefono(telefono))
 				valido = true;
 			else{
@@ -72,9 +81,10 @@ public class CSMain{
 		}while(!valido);
 		
 		//Controlla se l'indirizzo e-mail inserito dall'utente risulta valido o meno
-		valido=false;
+		valido = false;
+		String mail = "";
 		do{
-			String mail = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_MAIL);
+			mail = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_MAIL);
 			if(CartellaSanitaria.checkValiditaEMail(mail))
 				valido = true;
 			else{
@@ -83,14 +93,15 @@ public class CSMain{
 			}
 		}while(!valido);
 		
-		String luogoN=MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_LUOGON);
+		String luogoN = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_LUOGON);
 		
 		//Controlla se la data di nascita inserita dall'utente risulta valida o meno
-		valido=false;
+		valido = false;
+		Date dataN = null;
 		do{
-			String dataN = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_DATAN);
-			MyTime.creaData(dataN);
-			if(dataN != null && CartellaSanitaria.checkDataNascita(dataN))
+			String data = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_DATAN);
+			MyTime.creaData(data);
+			if((dataN != null) && CartellaSanitaria.checkDataNascita(data))
 				valido = true;
 			else{
 				stampaMex(MEX_ERRORE_INSERIMENTO);
@@ -99,14 +110,14 @@ public class CSMain{
 		}while(!valido);
 		
 		//Controlla il genere inserito dall'utente
-		valido=false;
-		boolean genereP;
+		valido = false;
+		boolean genereP = false;
 		do{
 			char genere = MyInput.leggiChar(MEX_INSERIMENTO_GENERE);
-			if(genere=='M' || genere =='m'){
+			if(genere == 'M' || genere == 'm'){
 				genereP = false;
 			}
-			else if(genere =='f' || genere=='F'){
+			else if(genere == 'f' || genere == 'F'){
 				genereP = false;
 			}
 			else{
@@ -116,11 +127,38 @@ public class CSMain{
 		}while(!valido);
 		
 		//Controlla il codice fiscale
-		CartellaSanitaria cs = new CartellaSanitaria();
+		valido=false;
+		String codiceF="";
+		do{
+			codiceF = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_CODICEF);
+			if(CartellaSanitaria.checkValiditaCF(codiceF))
+				valido = true;
+			else{
+				System.out.println(MEX_ERRORE_INSERIMENTO);
+				System.out.println(" ");
+			}
+		}while(!valido);
+		
+		//Controlla il gruppo sanguigno
+		valido = false;
+		String gruppoS = "";
+		do{
+			gruppoS = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_GSANGUIGNO);
+			if(CartellaSanitaria.checkValiditaCF(gruppoS))
+				valido = true;
+			else{
+				stampaMex(MEX_ERRORE_INSERIMENTO);
+				stampaMex(" ");
+			}
+		}while(!valido);
+		
+		CartellaSanitaria cs = new CartellaSanitaria(nome, cognome, indirizzo, telefono, mail, dataN, luogoN, genereP, codiceF, gruppoS);
 		return cs;
 	}
 	
+	/*
 	public void menuPaziente(CartellaSanitaria CS){
+
 		//conterrà il menu paziente
 	}
 	
@@ -135,6 +173,7 @@ public class CSMain{
 	public void menuMalattia(){
 		//conterra il menu delle malattie
 	}
+	*/
 	
 	/*Main*/
 	public static void main(String[] args) {
@@ -146,26 +185,39 @@ public class CSMain{
 			
 		}
 		else{
-			//a seconda se sto creando la cartella o caricandolaaa
+			//a seconda se sto creando la cartella o caricandola
 			
+			MyServizioFile.creaFile(PATH);
+			creaCartellaSanitaria();
 		}
 		
 		int scelta = 0;
 		do{
-			MyMenu menuGenerale = new MyMenu("Cartella Sanitaria",OPZIONI);
+			MyMenu menuGenerale = new MyMenu("Cartella Sanitaria", OPZIONI);
 			scelta = menuGenerale.scegli();
 			switch(scelta){
 			case 1:
 				int scelta2 = 0;
-				do{
-					MyMenu menuPaziente = new MyMenu("Gestione informazioni utente",OPZIONI_PAZIENTE);
-					scelta2 = menuPaziente.scegli();
-				}while(scelta2 != 0);
+				MyMenu menuPaziente = new MyMenu("Gestione informazioni utente", OPZIONI_PAZIENTE);
+				scelta2 = menuPaziente.scegli();
+				switch(scelta2){
+					case 1:
+						int scelta5 = 0;
+						MyMenu menuModificaPaziente = new MyMenu("Modifica informazioni utente", OPZIONI_PAZIENTE_2);
+						scelta5 = menuModificaPaziente.scegli();
+						break;
+					case 2:
+						break;
+					case 3:
+						break;
+					default:
+						stampaMex(MEX_ERRORE_INSERIMENTO);
+					}
 				break;
 			case 2:
 				int scelta3 = 0;
 				do{
-					MyMenu menuEsame = new MyMenu("Gestione esami",OPZIONI_ESAME);
+					MyMenu menuEsame = new MyMenu("Gestione esami", OPZIONI_ESAME);
 					scelta3 = menuEsame.scegli();
 				}while(scelta3 != 0);
 				break;
@@ -179,7 +231,7 @@ public class CSMain{
 			case 0:
 				break;
 			default:
-				stampaMex("Valore inserito non valido");
+				stampaMex(MEX_ERRORE_INSERIMENTO);
 			}
 			stampaMex(" ");
 		}while(scelta != 0);
