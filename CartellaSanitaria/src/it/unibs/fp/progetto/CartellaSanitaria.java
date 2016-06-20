@@ -101,7 +101,7 @@ public class CartellaSanitaria {
 	}
 	/**
 	 * Ritorna l'indirizzo del paziente
-	 * @return <strong>indirizzo</strong> indirizzo del paziente
+	 * @return indirizzo del paziente
 	 * 
 	 * @author Martinelli Giuseppe
 	 */
@@ -200,6 +200,12 @@ public class CartellaSanitaria {
 	}
 	
 	/*Setters*/
+	/**
+	 * Metodo che permette di impostare il nome del paziente
+	 * @param nome nome del paziente
+	 * 
+	 * @author Martinelli Giuseppe
+	 */
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
@@ -276,7 +282,7 @@ public class CartellaSanitaria {
 	 * 
 	 * @author Martinelli Giuseppe
 	 */
-	public boolean checkValiditaCF(String codiceF){
+	public static boolean checkValiditaCF(String codiceF){
 		if(codiceF.length()==LUNGHEZZA_CF){	//Controllo la prima condizione, che il codice fiscale sia lungo 16 caratteri
 			for(int i=0;i<codiceF.length();i++){
 				if(i<6){			//I primi sei caratteri devono essere lettere
@@ -329,7 +335,7 @@ public class CartellaSanitaria {
 	 * 
 	 * @author Martinelli Giuseppe
 	 */
-	public boolean checkValiditaTelefono(String nTelefono){
+	public static boolean checkValiditaTelefono(String nTelefono){
 		if(nTelefono.length()>0){
 			for(int i=0; i<nTelefono.length();i++){
 				if(!MyCheck.checkNumero(nTelefono.charAt(i))){
@@ -349,7 +355,7 @@ public class CartellaSanitaria {
 	 * 
 	 * @author Martinelli Giuseppe
 	 */
-	public boolean checkValiditaEMail(String eMail){
+	public static boolean checkValiditaEMail(String eMail){
 		if(eMail.length()>4){
 			if(eMail.matches(MyCheck.EMAIL_PATTERN)){
 				return true;
@@ -369,7 +375,7 @@ public class CartellaSanitaria {
 	 * 
 	 * @author Martinelli Giuseppe
 	 */
-	public boolean checkDataNascita(String dNascita){
+	public static boolean checkDataNascita(String dNascita){
 		boolean controlla=true;	//Variabile per capire se bisngna controllare o meno la stringa, il controllo si fa solo se i caratteri nella stringa sono tutti numeri o /, in caso contrario la stringa non � una data accettabile
 		for(int i=0; i<dNascita.length();i++){
 			if(!MyCheck.checkNumero(dNascita.charAt(i)) && dNascita.charAt(i)!='/'){
@@ -398,7 +404,7 @@ public class CartellaSanitaria {
 	 *  
 	 * @author Martinelli Giuseppe
 	 */
-	public boolean checkGruppoSanguigno(String gSanguigno){
+	public static boolean checkGruppoSanguigno(String gSanguigno){
 		//Tolgo tutti gli eventuali spazi dalla stringa
 		String gS=BelleStringhe.togliSpazi(gSanguigno);
 		if(gS.length()>0 && gS.length()<4){	//Un gruppo sanguigno puo' essere composto al massimo da tre caratteri, nel caso AB- e AB+
@@ -473,6 +479,8 @@ public class CartellaSanitaria {
 	 * Metodo che cerca l'esame tra quelli effettuati dall'utente
 	 * @param nomeEsame nome dell'esame da cercare
 	 * @return <strong>esameEffettuato</strong> se esiste un esame il cui nome equivale alla stringa inserita, <strong>null</strong> in caso contrario
+	 * 
+	 * @author Martinelli Giuseppe
 	 */
 	public EsameEffettuato cercaEsame(String nomeEsame){
 		for(int i=0; i<esamiEffettuati.size();i++){
@@ -486,6 +494,8 @@ public class CartellaSanitaria {
 	 *Metodo che cerca la malattia passata come argomento tra quelle del paziente 
 	 * @param nomeMalattia nome della malattia da cercare
 	 * @return <strong>malattia</strong> se esiste una malattia il cui nome equivale alla stringa inserita, <strong>null</strong> in caso contrario
+	 * 
+	 * @author Martinelli Giuseppe
 	 */
 	public Malattia cercaMalattia(String nomeMalattia){
 		for(int i=0; i<elencoMalattia.size();i++){
