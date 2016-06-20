@@ -2,9 +2,19 @@ package it.unibs.fp.progetto;
 
 import java.util.Date;
 import java.util.ArrayList;
+
+import it.unibs.fp.mylib.MyMenu;
 import it.unibs.fp.mylib.MyTime;
 
 public class CSMain{
+	/* Costanti */
+	private static final String MEX_BENVENUTO = "Benvenuto nell'applicazione per la gestione della cartella sanitaria di un paziente";
+	private static final String MEX_USCITA = "Grazie per avere utilizzato la nostra applicazione! Arrivederci!";
+	private static final String OPZIONI[]={"Gestione dati paziente","Gestione esami","Gestione malattie"};
+	private static final String OPZIONI_ESAME[]={"Inserisci esame","Modifica esame","Visualizza esame","Visualizza lista esami"};
+	private static final String OPZIONI_MALATTIA[]={"Inserisci malattia","Modifica malattia","Visualizza malattia","Visualizza lista malattie"};
+	private static final String OPZIONI_PAZIENTE[]={"Modifica nome","Modifica cognome","Modifica indirizzo","Modifica telefono","..."};
+	
 	/*
 	 * ""Inutile""
 	 * 	Creo gli oggetti richiesti dalla traccia
@@ -50,5 +60,44 @@ public class CSMain{
 		catch(IllegalAccessException e){
 			e.printStackTrace();
 		}
+	}
+	
+	/*Main*/
+	public static void main(String[] args) {
+		System.out.println(MEX_BENVENUTO);
+		int scelta=0;
+		do{
+			MyMenu menuGenerale=new MyMenu("Cartella Sanitaria",OPZIONI);
+			scelta = menuGenerale.scegli();
+			switch(scelta){
+			case 1:
+				int scelta2=0;
+				do{
+					MyMenu menuPaziente = new MyMenu("Gestione informazioni utente",OPZIONI_PAZIENTE);
+					scelta2=menuPaziente.scegli();
+				}while(scelta2!=0);
+				break;
+			case 2:
+				int scelta3=0;
+				do{
+					MyMenu menuEsame=new MyMenu("Gestione esami",OPZIONI_ESAME);
+					scelta3=menuEsame.scegli();
+				}while(scelta3!=0);
+				break;
+			case 3:
+				int scelta4=0;
+				do{
+					MyMenu menuMalattia= new MyMenu("Gestione malattia", OPZIONI_MALATTIA);
+					scelta4= menuMalattia.scegli();
+				}while(scelta4!=0);
+				break;
+			case 0:
+				break;
+			default:
+				System.out.println("Valore inserito non valido");
+			}
+			System.out.println(" ");
+		}while(scelta!=0);
+		System.out.println(MEX_USCITA);
 	}
 }
