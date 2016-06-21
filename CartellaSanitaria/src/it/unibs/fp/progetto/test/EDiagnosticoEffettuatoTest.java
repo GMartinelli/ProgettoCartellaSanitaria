@@ -11,7 +11,7 @@ import org.junit.Test;
 import it.unibs.fp.progetto.*;
 import java.util.ArrayList;
 
-import it.unibs.fp.mylib.MyTime;
+import it.unibs.fp.mylib.*;
 
 
 public class EDiagnosticoEffettuatoTest {
@@ -29,8 +29,8 @@ public class EDiagnosticoEffettuatoTest {
 		
 			EDiagnosticoEffettuato e1 = new EDiagnosticoEffettuato(radiografia, polmonite);
 			assertFalse(e1.isEffettuato());
-	}
-	catch(IllegalAccessException e){
+		}
+		catch(IllegalAccessException e){
 			e.printStackTrace();
 		}
 	}
@@ -50,8 +50,8 @@ public class EDiagnosticoEffettuatoTest {
 			e1.setLuogo("Bergamo");
 			
 			assertEquals("Bergamo", e1.getLuogo());
-	}
-	catch(IllegalAccessException e){
+		}
+		catch(IllegalAccessException e){
 			e.printStackTrace();
 		}
 	}
@@ -71,8 +71,8 @@ public class EDiagnosticoEffettuatoTest {
 			e1.setOra("09:51");
 			
 			assertEquals("09:51", e1.getOra());
-	}
-	catch(IllegalAccessException e){
+		}
+		catch(IllegalAccessException e){
 			e.printStackTrace();
 		}
 	}
@@ -95,15 +95,15 @@ public class EDiagnosticoEffettuatoTest {
 			String effettiva = e1.getData().toString();
 			
 			assertEquals(attesa, effettiva);
-	}
-	catch(IllegalAccessException e){
+		}
+		catch(IllegalAccessException e){
 			e.printStackTrace();
 		}
 	}
 	
 	@Test
 	public void setLuogoImpossibile(){
-		try {
+		try{
 			ArrayList<Esame> associati = new ArrayList<>();
 			EsameDiagnostico radiografia = new EsameDiagnostico("Radiografia", "Focolaio", "Torace");
 			associati.add(radiografia);
@@ -112,19 +112,19 @@ public class EDiagnosticoEffettuatoTest {
 			Malattia polmonite = new Malattia("Polmonite", MyTime.creaData("01/01/2012"), "Dolori al petto e febbre", "Malato", associati, "Penicillina");
 			elencoMalattia.add(polmonite);
 		
+			String esito = "Malato";
 			EDiagnosticoEffettuato e1 = new EDiagnosticoEffettuato(radiografia, polmonite);
+			e1.setEsito(esito);
 
 			boolean thrown = false;
 			
 			try{
-				
-				e1.setLuogo("1234");
+				e1.setLuogo("nomePaese");
 			}
-			catch(IllegalArgumentException e){
+			catch(TooLateException e){
 				thrown = true;
 			}
 			assertTrue(thrown);
-		
 		}
 		catch(IllegalAccessException e){
 			e.printStackTrace();
@@ -134,7 +134,7 @@ public class EDiagnosticoEffettuatoTest {
 	
 	@Test
 	public void setOraImpossibile(){
-		try {
+		try{
 			ArrayList<Esame> associati = new ArrayList<>();
 			EsameDiagnostico radiografia = new EsameDiagnostico("Radiografia", "Focolaio", "Torace");
 			associati.add(radiografia);
@@ -143,18 +143,19 @@ public class EDiagnosticoEffettuatoTest {
 			Malattia polmonite = new Malattia("Polmonite", MyTime.creaData("01/01/2012"), "Dolori al petto e febbre", "Malato", associati, "Penicillina");
 			elencoMalattia.add(polmonite);
 		
+			String esito = "Malato";
 			EDiagnosticoEffettuato e1 = new EDiagnosticoEffettuato(radiografia, polmonite);
+			e1.setEsito(esito);
 
 			boolean thrown = false;
 			
 			try{
-				e1.setOra("09:g");
+				e1.setOra("09:51");
 			}
-			catch(IllegalArgumentException e){
+			catch(TooLateException e){
 				thrown = true;
 			}
 			assertTrue(thrown);
-		
 		}
 		catch(IllegalAccessException e){
 			e.printStackTrace();
@@ -164,7 +165,7 @@ public class EDiagnosticoEffettuatoTest {
 	
 	@Test
 	public void setDataImpossibile(){
-		try {
+		try{
 			ArrayList<Esame> associati = new ArrayList<>();
 			EsameDiagnostico radiografia = new EsameDiagnostico("Radiografia", "Focolaio", "Torace");
 			associati.add(radiografia);
@@ -173,15 +174,16 @@ public class EDiagnosticoEffettuatoTest {
 			Malattia polmonite = new Malattia("Polmonite", MyTime.creaData("01/01/2012"), "Dolori al petto e febbre", "Malato", associati, "Penicillina");
 			elencoMalattia.add(polmonite);
 		
+			String esito = "Malato";
 			EDiagnosticoEffettuato e1 = new EDiagnosticoEffettuato(radiografia, polmonite);
+			e1.setEsito(esito);
 
 			boolean thrown = false;
 			
 			try{
-				
-				e1.setData(MyTime.creaData("m/m/m"));
+				e1.setData(MyTime.creaData("10/01/2012"));
 			}
-			catch(IllegalArgumentException e){
+			catch(TooLateException e){
 				thrown = true;
 			}
 			assertTrue(thrown);
