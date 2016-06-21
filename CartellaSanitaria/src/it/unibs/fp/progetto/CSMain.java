@@ -164,7 +164,35 @@ public class CSMain{
 		CartellaSanitaria cs = new CartellaSanitaria(nome, cognome, indirizzo, telefono, mail, dataN, luogoN, genereP, codiceF, gruppoS);
 		return cs;
 	}
-	
+
+	/*Metodo che permette la creazione di un nuovo esame*/
+	public static Esame creaEsame(){
+		String nome = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_NOME);
+		String raccomandazioni = MyInput.leggiStringa(MEX_INSERIMENTO_RACCOMANDAZIONI);
+		int sceltaT=0;
+		do{
+			MyMenu menuTipo = new MyMenu("Tipo esame",TIPOLOGIA_ESAME);
+			sceltaT = menuTipo.scegli();
+			switch(sceltaT){
+			case 1:
+				String areaInteressata=MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_AREA_INTERESSATA);
+				if(raccomandazioni!=null && BelleStringhe.togliSpazi(raccomandazioni)!=""){
+					
+				}
+				break;
+			case 2:
+				break;
+			case 0:
+				break;
+			default:
+				stampaMex(MEX_ERRORE_INSERIMENTO);
+				break;
+			}
+		}while(sceltaT!=0);
+		
+		Esame esame = null;
+		return esame;
+	}
 	public static void modificaDatiPaziente(CartellaSanitaria CS){
 		int scelta = 0;
 		boolean valido = false;
@@ -272,35 +300,6 @@ public class CSMain{
 			default:
 				stampaMex(MEX_ERRORE_INSERIMENTO);
 		}
-	}
-	
-	/*Metodo che permette la creazione di un nuovo esame*/
-	public Esame void creaEsame(){
-		String nome = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_NOME);
-		String raccomandazioni = MyInput.leggiStringa(MEX_INSERIMENTO_RACCOMANDAZIONI);
-		int sceltaT=0;
-		do{
-			MyMenu menuTipo = new MyMenu("Tipo esame",TIPOLOGIA_ESAME);
-			sceltaT = menuTipo.scegli();
-			switch(sceltaT){
-			case 1:
-				String areaInteressata=MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_AREA_INTERESSATA);
-				if(raccomandazioni!=null && BelleStringhe.togliSpazi(raccomandazioni)!=""){
-					
-				}
-				break;
-			case 2:
-				break;
-			case 0:
-				break;
-			default:
-				stampaMex(MEX_ERRORE_INSERIMENTO);
-				break;
-			}
-		}while(sceltaT!=0);
-		
-		
-		
 	}
 	
 	/*Main*/
