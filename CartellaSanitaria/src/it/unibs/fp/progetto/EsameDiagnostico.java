@@ -3,41 +3,26 @@ package it.unibs.fp.progetto;
 public class EsameDiagnostico extends Esame {
 	
 	//Attributi
-	private String esitoAcc;
 	private String areaInteressata;
 	
 
 	//Costruttori
 	public EsameDiagnostico(){
 		super();
-		this.esitoAcc = null;
 		this.areaInteressata = null;
 	}
 	
-	public EsameDiagnostico(String nome, String esitoAcc, String areaInteressata){
-		super(nome);
-		this.esitoAcc = esitoAcc;
-		this.areaInteressata = areaInteressata;
-	}
-	
-	public EsameDiagnostico(String nome, String raccomandazioni, String esitoAcc, String areaInteressata){
+	public EsameDiagnostico(String nome, String raccomandazioni, String areaInteressata){
 		super(nome, raccomandazioni);
-		this.esitoAcc = esitoAcc;
 		this.areaInteressata = areaInteressata;
 	}
 	
 	//Getters
-	public String getEsitoAcc() {
-		return esitoAcc;
-	}
 	public String getAreaInteressata() {
 		return areaInteressata;
 	}
-	//Setters
-	public void setEsitoAcc(String esitoAcc) {
-		this.esitoAcc = esitoAcc;
-	}
 	
+	//Setters
 	public void setAreaInteressata(String areaInteressata) {
 		this.areaInteressata = areaInteressata;
 	}
