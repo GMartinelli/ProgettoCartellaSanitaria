@@ -53,7 +53,7 @@ public class ListaMalattia {
 	 * Metodo che ricerca per nome una malattia all'interno di un'ArrayList.
 	 * @param nomeMalattia il nome della malattia da cercare.
 	 * 
-	 * @return true se la malattia è stata trovata, altrimenti ritorna false.
+	 * @return true se la malattia ï¿½ stata trovata, altrimenti ritorna false.
 	 * 
 	 * @author Manenti Gabriele
 	 */
@@ -71,8 +71,7 @@ public class ListaMalattia {
 	 * 
 	 * @return Malattia se viene trovata, altrimenti ritorna null.
 	 */
-	public Malattia cercaEsame(String nomeMalattia){
-
+	public Malattia cercaMalattia(String nomeMalattia){
 		for(int i = 0; i < lista.size(); i++){
 			if(lista.get(i).getNome() == nomeMalattia)
 				return lista.get(i);

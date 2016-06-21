@@ -12,15 +12,16 @@ import java.util.Date;
 
 public class EPeriodicoMisurabileEffettuato extends EsameEffettuato{
 	//costanti
-	public final static double DEFAULT_NE = -1; //NE = non effettuato
+	private final static double DEFAULT_NE = -1; //NE = non effettuato
 	
 	public final static String COMPRESO_ECC = "Il valore è nel range accettabile";
 	
-	public final static String COMPRESO = "L'esito dell'esame è conforme ai valori accettabili";
-	public final static String SUPERIORE = "Attenzione! L'esito dell'esame è superiore al valore massimo accettabile";
-	public final static String INFERIORE = "Attenzione! L'esito dell'esame è inferiore al valore massimo accettabile";
-	public final static String SOGLIA_SUPERIORE = "URGENZA! L'esito dell'esame è MOLTO superiore al valore massimo accettabile";
-	public final static String SOGLIA_INFERIORE = "URGENZA! L'esito dell'esame è MOLTO inferiore al valore massimo accettabile";
+	//avvisi
+	private final static String COMPRESO = "L'esito dell'esame è conforme ai valori accettabili";
+	private final static String SUPERIORE = "Attenzione! L'esito dell'esame è superiore al valore massimo accettabile";
+	private final static String INFERIORE = "Attenzione! L'esito dell'esame è inferiore al valore massimo accettabile";
+	private final static String SOGLIA_SUPERIORE = "URGENZA! L'esito dell'esame è MOLTO superiore al valore massimo accettabile";
+	private final static String SOGLIA_INFERIORE = "URGENZA! L'esito dell'esame è MOLTO inferiore al valore massimo accettabile";
 	
 	//attributi
 	private EsamePeriodicoMisurabile esame;
@@ -101,7 +102,7 @@ public class EPeriodicoMisurabileEffettuato extends EsameEffettuato{
 		catch(IllegalAccessException e){
 			/*
 			 * Non si sta ignorando l'eccezione,
-			 * 	semplicemente so che esito è già stato settato quindi non corro il rischio che venga lanciata l'eccezione
+			 * so che esito è già stato settato quindi non corro il rischio che venga lanciata l'eccezione
 			 */
 		}
 	}
@@ -138,9 +139,21 @@ public class EPeriodicoMisurabileEffettuato extends EsameEffettuato{
 	 * 
 	 * @param esame la tipologia di esame che si vuole impostare
 	 */
-	public void setEsame(EsamePeriodicoMisurabile esame) throws IllegalAccessException, IllegalArgumentException{
-		this.esame = esame;
-		super.setEsame(esame);
+	public void setEsame(EsamePeriodicoMisurabile esame) throws IllegalArgumentException{
+		if(!isEffettuato()){
+			EsamePeriodicoMisurabile oldEsame = this.esame;
+			this.esame = esame;
+			try{
+			super.setEsame(esame);
+			}
+			catch(IllegalArgumentException e){
+				this.esame = oldEsame;
+				throw new IllegalArgumentException(e.getMessage());
+			}
+		}
+		else{
+			throw new TooLateException(GIA_EFFETTUATO);
+		}
 	}
 	
 	/**
@@ -159,7 +172,7 @@ public class EPeriodicoMisurabileEffettuato extends EsameEffettuato{
 	 */
 	//ANNOTAZIONE metodo con un po' di controlli, controllare se corretto
 	public void setAvvisi() throws IllegalAccessException{
-		if(Double.compare(esito, DEFAULT_NE) != 0){
+		if(isEffettuato()){
 			if(isInRange()) this.avvisi = COMPRESO;
 			else{
 				if(isOltreSoglia() && isSuperioreRange()) this.avvisi = SOGLIA_SUPERIORE;
