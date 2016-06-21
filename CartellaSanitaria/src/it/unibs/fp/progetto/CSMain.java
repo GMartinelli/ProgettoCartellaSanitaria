@@ -1,7 +1,6 @@
 package it.unibs.fp.progetto;
 
 import java.util.Date;
-import java.util.ArrayList;
 import java.io.*;
 
 import it.unibs.fp.mylib.*;
