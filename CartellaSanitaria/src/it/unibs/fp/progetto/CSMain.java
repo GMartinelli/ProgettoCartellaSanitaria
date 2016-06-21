@@ -156,39 +156,128 @@ public class CSMain{
 		return cs;
 	}
 	
-	/*
-	public void menuPaziente(CartellaSanitaria CS){
-
-		//conterrà il menu paziente
+	public static void modificaDatiPaziente(CartellaSanitaria CS){
+		int scelta = 0;
+		boolean valido = false;
+		MyMenu menuModificaPaziente = new MyMenu("Modifica informazioni utente", OPZIONI_PAZIENTE_2);
+		scelta = menuModificaPaziente.scegli();
+		
+		switch(scelta){
+			case 1:
+				CS.setNome(MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_NOME));
+				break;
+			case 2:
+				CS.setCognome(MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_COGNOME));
+				break;
+			case 3:
+				CS.setIndirizzo(MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_INDIRIZZO));
+				break;
+			case 4:
+				valido = false;
+				String telefono = null;
+				do{
+					telefono = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_TELEFONO);
+					if(CartellaSanitaria.checkValiditaTelefono(telefono)){
+						valido = true;
+					}
+					else{
+						stampaMex(MEX_ERRORE_INSERIMENTO);
+					}
+				}while(valido == false);
+				CS.setTelefono(telefono);
+				break;
+			case 5:
+				valido = false;
+				String mail = null;
+				do{
+					mail = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_MAIL);
+					if(CartellaSanitaria.checkValiditaEMail(mail)){
+						valido = true;
+					}
+					else{
+						stampaMex(MEX_ERRORE_INSERIMENTO);
+					}
+				}while(valido == false);
+				CS.setEmail(mail);
+				break;
+			case 6:
+				valido = false;
+				String data = null;
+				do{
+					data = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_TELEFONO);
+					if(CartellaSanitaria.checkDataNascita(data)){
+						valido = true;
+					}
+					else{
+						stampaMex(MEX_ERRORE_INSERIMENTO);
+					}
+				}while(valido == false);
+				CS.setDataNascita(MyTime.creaData(data));
+				break;
+			case 7:
+				CS.setLuogoNascita(MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_LUOGON));
+				break;
+			case 8:
+				valido = false;
+				char genereInserito;
+				boolean genere = true;
+				do{
+					genereInserito = MyInput.leggiChar(MEX_INSERIMENTO_GENERE);
+					try{
+						genere = CartellaSanitaria.ritornaBoolGenere(genereInserito);
+					}
+					catch(IllegalArgumentException e){
+						stampaMex(e.getMessage());
+					}
+				}while(valido == false);
+				CS.setGenere(genere);
+				break;
+			case 9:
+				valido = false;
+				String codiceF = null;
+				do{
+					codiceF = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_CODICEF);
+					if(CartellaSanitaria.checkValiditaCF(codiceF)){
+						valido = true;
+					}
+					else{
+						stampaMex(MEX_ERRORE_INSERIMENTO);
+					}
+				}while(valido == false);
+				CS.setCodiceFiscale(codiceF);
+				break;
+			case 10:
+				valido = false;
+				String gruppoS = null;
+				do{
+					gruppoS = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_GSANGUIGNO);
+					if(CartellaSanitaria.checkGruppoSanguigno(gruppoS)){
+						valido = false;
+					}
+					else{
+						stampaMex(MEX_ERRORE_INSERIMENTO);
+					}
+				}while(valido == false);
+				CS.setGruppoSanguigno(gruppoS);
+				break;
+			default:
+				stampaMex(MEX_ERRORE_INSERIMENTO);
+		}
 	}
-	
-	public void menuEsamiEffettuati(CartellaSanitaria CS){
-		//conterrà il menu esami effettuati
-	}
-	
-	public void menuEsame(){
-		//conterrà il menu delle tipologie di esame
-	}
-	
-	public void menuMalattia(){
-		//conterra il menu delle malattie
-	}
-	*/
 	
 	/*Main*/
 	public static void main(String[] args) {
 		stampaMex(MEX_BENVENUTO);
-		
+		CartellaSanitaria CS = null; //momentaneo per non ricevere errori dall'editor
 		File file = new File(PATH);
 		if (file.exists()){
 			// Il file esiste, devo caricare le informazioni contenute
-			
 		}
 		else{
 			//a seconda se sto creando la cartella o caricandola
 			
 			MyServizioFile.creaFile(PATH);
-			creaCartellaSanitaria();
+			CS = creaCartellaSanitaria();
 		}
 		
 		int scelta = 0;
@@ -202,9 +291,7 @@ public class CSMain{
 				scelta2 = menuPaziente.scegli();
 				switch(scelta2){
 					case 1:
-						int scelta5 = 0;
-						MyMenu menuModificaPaziente = new MyMenu("Modifica informazioni utente", OPZIONI_PAZIENTE_2);
-						scelta5 = menuModificaPaziente.scegli();
+						modificaDatiPaziente(CS);
 						break;
 					case 2:
 						break;
