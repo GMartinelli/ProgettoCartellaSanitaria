@@ -14,8 +14,8 @@ public class EDiagnosticoEffettuato extends EsameEffettuato{
 	private EsameDiagnostico esame;
 	/*
 	 * Shadowing utilizzato in assenza di altre soluzioni progettuali/implementative
-	 * Verr√† perci√≤ esplicitato, per miglior comprensione, l'uso di this.esame ogni qualvolta
-	 * nella classe sar√† utilizzato questo attributo
+	 * Verr‡† percio' esplicitato, per miglior comprensione, l'uso di this.esame ogni qualvolta
+	 * nella classe sar‡ utilizzato questo attributo
 	 */
 	private String esito;
 	
@@ -171,7 +171,7 @@ public class EDiagnosticoEffettuato extends EsameEffettuato{
 	 * 
 	 * @return false se esito == null, true altrimenti
 	 */
-	private boolean isEffettuato(){
+	public boolean isEffettuato(){
 		if(esito == null) return false;
 		else return true;
 	}

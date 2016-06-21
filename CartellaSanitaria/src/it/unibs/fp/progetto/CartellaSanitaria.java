@@ -31,6 +31,8 @@ import java.util.Date;
 
 public class CartellaSanitaria {
 	/*Costanti*/
+	private static final String CHAR_NON_VALIDO= "Il carattere inserito deve essere M/m o F/f";
+	
 	private static final int LUNGHEZZA_CF=16;
 	
 	/*Attributi*/
@@ -273,6 +275,25 @@ public class CartellaSanitaria {
 		for(int i=0; i<elencoMalattia.size();i++)
 			descrizione+=elencoMalattia.get(i).toString()+"%n";
 		return descrizione;
+	}
+	
+	/**
+	 * Dato un carattere in ingresso ritorna il valore booleano assegnabile al genere per quel carattere
+	 * @param dato il carattere da passare al metodo
+	 * @return <strong>false</strong> se e' stato inserito M/m <strong>true</strong> se e' stato inserito F/f
+	 * 
+	 * @author Valtulini Claudio
+	 */
+	public static boolean ritornaBoolGenere(char dato){
+		if(dato == 'M' || dato == 'm'){
+			return false;
+		}
+		else if(dato == 'F' || dato == 'f'){
+			return true;
+		}
+		else{
+			throw new IllegalArgumentException(CHAR_NON_VALIDO);
+		}
 	}
 	
 	/**

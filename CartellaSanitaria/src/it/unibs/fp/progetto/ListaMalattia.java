@@ -57,12 +57,27 @@ public class ListaMalattia {
 	 * 
 	 * @author Manenti Gabriele
 	 */
-	public boolean cercaMalattia(String nomeMalattia){
+	public boolean isEsistente(String nomeMalattia){
 		for(int i = 0; i < lista.size(); i++){
 			if(lista.get(i).getNome() == nomeMalattia)
 				return true;
 		}
 		return false;
+	}
+	/**
+	 * Metodo che ricerca per nome una malattia all'interno di un'ArrayList.
+	 * 
+	 * @param nomeMalattia il nome della malattia da cercare.
+	 * 
+	 * @return Malattia se viene trovata, altrimenti ritorna null.
+	 */
+	public Malattia cercaEsame(String nomeMalattia){
+
+		for(int i = 0; i < lista.size(); i++){
+			if(lista.get(i).getNome() == nomeMalattia)
+				return lista.get(i);
+		}
+		return null;
 	}
 
 }

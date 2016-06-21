@@ -56,12 +56,27 @@ public class ListaEsame{
 	 * 
 	 * @author Manenti Gabriele
 	 */
-	public boolean cercaEsame(String nomeEsame){
+	public boolean isEsistente(String nomeEsame){
 		for(int i = 0; i < lista.size(); i++){
 			if(lista.get(i).getNome() == nomeEsame)
 				return true;
 		}
 		return false;
+	}
+	/**
+	 * Metodo che ricerca per nome un esame all'interno di un'ArrayList.
+	 * 
+	 * @param nomeEsame il nome dell'esame da cercare.
+	 * 
+	 * @return Esame se l'esame viene trovato, altrimenti ritorna null.
+	 */
+	public Esame cercaEsame(String nomeEsame){
+
+		for(int i = 0; i < lista.size(); i++){
+			if(lista.get(i).getNome() == nomeEsame)
+				return lista.get(i);
+		}
+		return null;
 	}
 	
 

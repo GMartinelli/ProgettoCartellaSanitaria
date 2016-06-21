@@ -1,7 +1,5 @@
 package it.unibs.fp.progetto.test;
 
-import java.util.Date;
-
 /**
  * Classe contenente Test JUnit per il controllo della correttezza della Classe CartellaSanitaria
  * 
@@ -11,7 +9,6 @@ import java.util.Date;
 
 import static org.junit.Assert.*;
 
-import it.unibs.fp.mylib.MyCheck;
 import it.unibs.fp.mylib.MyTime;
 import it.unibs.fp.progetto.*;
 import java.util.ArrayList;
@@ -58,7 +55,7 @@ public class CartellaSanitariaTest {
 		String CF = "RSIROM85D18X999B";
 		CartellaSanitaria CS1 = new CartellaSanitaria("Mario", "Rossi", "Via Mario Rossi", "000000000", "ab@cd.ef", MyTime.creaData("22/09/1985"), "Iseo", false, CF, "+A");
 		
-		assertTrue(CS1.checkValiditaCF(CS1.getCodiceFiscale()));
+		assertTrue(CartellaSanitaria.checkValiditaCF(CS1.getCodiceFiscale()));
 	}
 	
 	@Test
@@ -66,7 +63,7 @@ public class CartellaSanitariaTest {
 		String CF = "RSIRM85D18X999B";
 		CartellaSanitaria CS1 = new CartellaSanitaria("Mario", "Rossi", "Via Mario Rossi", "000000000", "ab@cd.ef", MyTime.creaData("22/09/1985"), "Iseo", false, CF, "+A");
 		
-		assertFalse(CS1.checkValiditaCF(CS1.getCodiceFiscale()));
+		assertFalse(CartellaSanitaria.checkValiditaCF(CS1.getCodiceFiscale()));
 	}
 	
 	@Test
@@ -74,7 +71,7 @@ public class CartellaSanitariaTest {
 		String CF = "R3IROM85D18X999B";
 		CartellaSanitaria CS1 = new CartellaSanitaria("Mario", "Rossi", "Via Mario Rossi", "000000000", "ab@cd.ef", MyTime.creaData("22/09/1985"), "Iseo", false, CF, "+A");
 		
-		assertFalse(CS1.checkValiditaCF(CS1.getCodiceFiscale()));
+		assertFalse(CartellaSanitaria.checkValiditaCF(CS1.getCodiceFiscale()));
 	}
 	
 	@Test
@@ -82,7 +79,7 @@ public class CartellaSanitariaTest {
 		String CF = "RSIRO385D18X999B";
 		CartellaSanitaria CS1 = new CartellaSanitaria("Mario", "Rossi", "Via Mario Rossi", "000000000", "ab@cd.ef", MyTime.creaData("22/09/1985"), "Iseo", false, CF, "+A");
 		
-		assertFalse(CS1.checkValiditaCF(CS1.getCodiceFiscale()));
+		assertFalse(CartellaSanitaria.checkValiditaCF(CS1.getCodiceFiscale()));
 	}
 	
 	@Test
@@ -90,7 +87,7 @@ public class CartellaSanitariaTest {
 		String CF = "RSIROMA5D18X999B";
 		CartellaSanitaria CS1 = new CartellaSanitaria("Mario", "Rossi", "Via Mario Rossi", "000000000", "ab@cd.ef", MyTime.creaData("22/09/1985"), "Iseo", false, CF, "+A");
 		
-		assertFalse(CS1.checkValiditaCF(CS1.getCodiceFiscale()));
+		assertFalse(CartellaSanitaria.checkValiditaCF(CS1.getCodiceFiscale()));
 	}
 	
 	@Test
@@ -98,7 +95,7 @@ public class CartellaSanitariaTest {
 		String CF = "RSIROM8SD18X999B";
 		CartellaSanitaria CS1 = new CartellaSanitaria("Mario", "Rossi", "Via Mario Rossi", "000000000", "ab@cd.ef", MyTime.creaData("22/09/1985"), "Iseo", false, CF, "+A");
 		
-		assertFalse(CS1.checkValiditaCF(CS1.getCodiceFiscale()));
+		assertFalse(CartellaSanitaria.checkValiditaCF(CS1.getCodiceFiscale()));
 	}
 	
 	@Test
@@ -106,7 +103,7 @@ public class CartellaSanitariaTest {
 		String CF = "RSIROM85418X999B";
 		CartellaSanitaria CS1 = new CartellaSanitaria("Mario", "Rossi", "Via Mario Rossi", "000000000", "ab@cd.ef", MyTime.creaData("22/09/1985"), "Iseo", false, CF, "+A");
 		
-		assertFalse(CS1.checkValiditaCF(CS1.getCodiceFiscale()));
+		assertFalse(CartellaSanitaria.checkValiditaCF(CS1.getCodiceFiscale()));
 	}
 	
 	@Test
@@ -114,7 +111,7 @@ public class CartellaSanitariaTest {
 		String CF = "RSIROM85DG8X999B";
 		CartellaSanitaria CS1 = new CartellaSanitaria("Mario", "Rossi", "Via Mario Rossi", "000000000", "ab@cd.ef", MyTime.creaData("22/09/1985"), "Iseo", false, CF, "+A");
 		
-		assertFalse(CS1.checkValiditaCF(CS1.getCodiceFiscale()));
+		assertFalse(CartellaSanitaria.checkValiditaCF(CS1.getCodiceFiscale()));
 	}
 	
 	@Test
@@ -122,7 +119,7 @@ public class CartellaSanitariaTest {
 		String CF = "RSIROM85D1LX999B";
 		CartellaSanitaria CS1 = new CartellaSanitaria("Mario", "Rossi", "Via Mario Rossi", "000000000", "ab@cd.ef", MyTime.creaData("22/09/1985"), "Iseo", false, CF, "+A");
 		
-		assertFalse(CS1.checkValiditaCF(CS1.getCodiceFiscale()));
+		assertFalse(CartellaSanitaria.checkValiditaCF(CS1.getCodiceFiscale()));
 	}
 	
 	@Test
@@ -130,7 +127,7 @@ public class CartellaSanitariaTest {
 		String CF = "RSIROM85D188999B";
 		CartellaSanitaria CS1 = new CartellaSanitaria("Mario", "Rossi", "Via Mario Rossi", "000000000", "ab@cd.ef", MyTime.creaData("22/09/1985"), "Iseo", false, CF, "+A");
 		
-		assertFalse(CS1.checkValiditaCF(CS1.getCodiceFiscale()));
+		assertFalse(CartellaSanitaria.checkValiditaCF(CS1.getCodiceFiscale()));
 	}
 	
 	@Test
@@ -138,7 +135,7 @@ public class CartellaSanitariaTest {
 		String CF = "RSIROM85D18XW99B";
 		CartellaSanitaria CS1 = new CartellaSanitaria("Mario", "Rossi", "Via Mario Rossi", "000000000", "ab@cd.ef", MyTime.creaData("22/09/1985"), "Iseo", false, CF, "+A");
 		
-		assertFalse(CS1.checkValiditaCF(CS1.getCodiceFiscale()));
+		assertFalse(CartellaSanitaria.checkValiditaCF(CS1.getCodiceFiscale()));
 	}
 	
 	@Test
@@ -146,7 +143,7 @@ public class CartellaSanitariaTest {
 		String CF = "RSIROM85D18X99WB";
 		CartellaSanitaria CS1 = new CartellaSanitaria("Mario", "Rossi", "Via Mario Rossi", "000000000", "ab@cd.ef", MyTime.creaData("22/09/1985"), "Iseo", false, CF, "+A");
 		
-		assertFalse(CS1.checkValiditaCF(CS1.getCodiceFiscale()));
+		assertFalse(CartellaSanitaria.checkValiditaCF(CS1.getCodiceFiscale()));
 	}
 	
 	@Test
@@ -154,7 +151,7 @@ public class CartellaSanitariaTest {
 		String CF = "RSIROM85D18X9990";
 		CartellaSanitaria CS1 = new CartellaSanitaria("Mario", "Rossi", "Via Mario Rossi", "000000000", "ab@cd.ef", MyTime.creaData("22/09/1985"), "Iseo", false, CF, "+A");
 		
-		assertFalse(CS1.checkValiditaCF(CS1.getCodiceFiscale()));
+		assertFalse(CartellaSanitaria.checkValiditaCF(CS1.getCodiceFiscale()));
 	}
 	
 	@Test
@@ -163,7 +160,7 @@ public class CartellaSanitariaTest {
 		String telefono = "000000000";
 		CartellaSanitaria CS1 = new CartellaSanitaria("Mario", "Rossi", "Via Mario Rossi", telefono, "ab@cd.ef", MyTime.creaData("22/09/1985"), "Iseo", false, CF, "+A");
 		
-		assertTrue(CS1.checkValiditaTelefono(CS1.getTelefono()));
+		assertTrue(CartellaSanitaria.checkValiditaTelefono(CS1.getTelefono()));
 	}
 	
 	@Test
@@ -172,7 +169,7 @@ public class CartellaSanitariaTest {
 		String telefono = "";
 		CartellaSanitaria CS1 = new CartellaSanitaria("Mario", "Rossi", "Via Mario Rossi", telefono, "ab@cd.ef", MyTime.creaData("22/09/1985"), "Iseo", false, CF, "+A");
 		
-		assertFalse(CS1.checkValiditaTelefono(CS1.getTelefono()));
+		assertFalse(CartellaSanitaria.checkValiditaTelefono(CS1.getTelefono()));
 	}
 	
 	@Test
@@ -181,7 +178,7 @@ public class CartellaSanitariaTest {
 		String telefono = "00000D000";
 		CartellaSanitaria CS1 = new CartellaSanitaria("Mario", "Rossi", "Via Mario Rossi", telefono, "ab@cd.ef", MyTime.creaData("22/09/1985"), "Iseo", false, CF, "+A");
 		
-		assertFalse(CS1.checkValiditaTelefono(CS1.getTelefono()));
+		assertFalse(CartellaSanitaria.checkValiditaTelefono(CS1.getTelefono()));
 	}
 	
 	@Test
@@ -191,7 +188,7 @@ public class CartellaSanitariaTest {
 		String mail = "ab@cd.ef";
 		CartellaSanitaria CS1 = new CartellaSanitaria("Mario", "Rossi", "Via Mario Rossi", telefono, mail, MyTime.creaData("22/09/1985"), "Iseo", false, CF, "+A");
 		
-		assertTrue(CS1.checkValiditaEMail(CS1.getEmail()));
+		assertTrue(CartellaSanitaria.checkValiditaEMail(CS1.getEmail()));
 	}
 	
 	@Test
@@ -201,7 +198,7 @@ public class CartellaSanitariaTest {
 		String mail = "@d.f";
 		CartellaSanitaria CS1 = new CartellaSanitaria("Mario", "Rossi", "Via Mario Rossi", telefono, mail, MyTime.creaData("22/09/1985"), "Iseo", false, CF, "+A");
 		
-		assertFalse(CS1.checkValiditaEMail(CS1.getEmail()));
+		assertFalse(CartellaSanitaria.checkValiditaEMail(CS1.getEmail()));
 	}
 	
 	@Test
@@ -211,7 +208,7 @@ public class CartellaSanitariaTest {
 		String mail = "ab.cd@ef";
 		CartellaSanitaria CS1 = new CartellaSanitaria("Mario", "Rossi", "Via Mario Rossi", telefono, mail, MyTime.creaData("22/09/1985"), "Iseo", false, CF, "+A");
 		
-		assertFalse(CS1.checkValiditaEMail(CS1.getEmail()));
+		assertFalse(CartellaSanitaria.checkValiditaEMail(CS1.getEmail()));
 	}
 	
 	@Test
@@ -221,7 +218,7 @@ public class CartellaSanitariaTest {
 		String mail = "abcd.ef";
 		CartellaSanitaria CS1 = new CartellaSanitaria("Mario", "Rossi", "Via Mario Rossi", telefono, mail, MyTime.creaData("22/09/1985"), "Iseo", false, CF, "+A");
 		
-		assertFalse(CS1.checkValiditaEMail(CS1.getEmail()));
+		assertFalse(CartellaSanitaria.checkValiditaEMail(CS1.getEmail()));
 	}
 	
 	@Test
@@ -231,7 +228,7 @@ public class CartellaSanitariaTest {
 		String mail = "ab@cdef";
 		CartellaSanitaria CS1 = new CartellaSanitaria("Mario", "Rossi", "Via Mario Rossi", telefono, mail, MyTime.creaData("22/09/1985"), "Iseo", false, CF, "+A");
 		
-		assertFalse(CS1.checkValiditaEMail(CS1.getEmail()));
+		assertFalse(CartellaSanitaria.checkValiditaEMail(CS1.getEmail()));
 	}
 	
 	@Test
@@ -241,84 +238,56 @@ public class CartellaSanitariaTest {
 		String mail = "abcdef";
 		CartellaSanitaria CS1 = new CartellaSanitaria("Mario", "Rossi", "Via Mario Rossi", telefono, mail, MyTime.creaData("22/09/1985"), "Iseo", false, CF, "+A");
 		
-		assertFalse(CS1.checkValiditaEMail(CS1.getEmail()));
+		assertFalse(CartellaSanitaria.checkValiditaEMail(CS1.getEmail()));
 	}
 	
 	@Test
 	public void checkValiditaDataNascitaCorretto(){
-		String CF = "RSIROM85D18X999B";
-		String telefono = "000000000";
-		String mail = "ab@cd.ef";
 		String data = "22/09/1985";
-		CartellaSanitaria CS1 = new CartellaSanitaria("Mario", "Rossi", "Via Mario Rossi", telefono, mail, MyTime.creaData(data), "Iseo", false, CF, "+A");
 		
-		assertTrue(CS1.checkDataNascita(data));
+		assertTrue(CartellaSanitaria.checkDataNascita(data));
 	}
 	
 	@Test
 	public void checkValiditaDataNascitaErrato(){
-		String CF = "RSIROM85D18X999B";
-		String telefono = "000000000";
-		String mail = "ab@cd.ef";
 		String data = "1985/09/22";
-		CartellaSanitaria CS1 = new CartellaSanitaria("Mario", "Rossi", "Via Mario Rossi", telefono, mail, MyTime.creaData(data), "Iseo", false, CF, "+A");
 
-		assertFalse(CS1.checkDataNascita(data));
+		assertFalse(CartellaSanitaria.checkDataNascita(data));
 	}
 	
 	@Test
 	public void checkValiditaDataNascitaErrato2(){
-		String CF = "RSIROM85D18X999B";
-		String telefono = "000000000";
-		String mail = "ab@cd.ef";
 		String data = "22/1985/09";
-		CartellaSanitaria CS1 = new CartellaSanitaria("Mario", "Rossi", "Via Mario Rossi", telefono, mail, MyTime.creaData(data), "Iseo", false, CF, "+A");
 
-		assertFalse(CS1.checkDataNascita(data));
+		assertFalse(CartellaSanitaria.checkDataNascita(data));
 	}
 	
 	@Test
 	public void checkValiditaDataNascitaErrato3(){
-		String CF = "RSIROM85D18X999B";
-		String telefono = "000000000";
-		String mail = "ab@cd.ef";
 		String data = "22/029/1985";
-		CartellaSanitaria CS1 = new CartellaSanitaria("Mario", "Rossi", "Via Mario Rossi", telefono, mail, MyTime.creaData(data), "Iseo", false, CF, "+A");
 
-		assertFalse(CS1.checkDataNascita(data));
+		assertFalse(CartellaSanitaria.checkDataNascita(data));
 	}
 	
 	@Test
 	public void checkValiditaDataNascitaErrato4(){
-		String CF = "RSIROM85D18X999B";
-		String telefono = "000000000";
-		String mail = "ab@cd.ef";
 		String data = "22//09/1985";
-		CartellaSanitaria CS1 = new CartellaSanitaria("Mario", "Rossi", "Via Mario Rossi", telefono, mail, MyTime.creaData(data), "Iseo", false, CF, "+A");
 
-		assertFalse(CS1.checkDataNascita(data));
+		assertFalse(CartellaSanitaria.checkDataNascita(data));
 	}
 	
 	@Test
 	public void checkValiditaDataNascitaErrato5(){
-		String CF = "RSIROM85D18X999B";
-		String telefono = "000000000";
-		String mail = "ab@cd.ef";
 		String data = "22/09//1985";
-		CartellaSanitaria CS1 = new CartellaSanitaria("Mario", "Rossi", "Via Mario Rossi", telefono, mail, MyTime.creaData(data), "Iseo", false, CF, "+A");
 
-		assertFalse(CS1.checkDataNascita(data));
+		assertFalse(CartellaSanitaria.checkDataNascita(data));
 	}
 	
 	@Test
 	public void checkValiditaDataNascitaErrato6(){
-		String CF = "RSIROM85D18X999B";
-		String telefono = "000000000";
-		String mail = "ab@cd.ef";
 		String data = "22/09/19Z85";
-		CartellaSanitaria CS1 = new CartellaSanitaria("Mario", "Rossi", "Via Mario Rossi", telefono, mail, MyTime.creaData(data), "Iseo", false, CF, "+A");
 
-		assertFalse(CS1.checkDataNascita(data));
+		assertFalse(CartellaSanitaria.checkDataNascita(data));
 	}
 	
 	@Test
@@ -330,7 +299,7 @@ public class CartellaSanitariaTest {
 		String gS = "+A";
 		CartellaSanitaria CS1 = new CartellaSanitaria("Mario", "Rossi", "Via Mario Rossi", telefono, mail, MyTime.creaData(data), "Iseo", false, CF, gS);
 
-		assertTrue(CS1.checkGruppoSanguigno(CS1.getGruppoSanguigno()));
+		assertTrue(CartellaSanitaria.checkGruppoSanguigno(CS1.getGruppoSanguigno()));
 	}
 	
 	@Test
@@ -342,7 +311,7 @@ public class CartellaSanitariaTest {
 		String gS = "A+";
 		CartellaSanitaria CS1 = new CartellaSanitaria("Mario", "Rossi", "Via Mario Rossi", telefono, mail, MyTime.creaData(data), "Iseo", false, CF, gS);
 
-		assertTrue(CS1.checkGruppoSanguigno(CS1.getGruppoSanguigno()));
+		assertTrue(CartellaSanitaria.checkGruppoSanguigno(CS1.getGruppoSanguigno()));
 	}
 	
 	@Test
@@ -354,7 +323,7 @@ public class CartellaSanitariaTest {
 		String gS = "+AB";
 		CartellaSanitaria CS1 = new CartellaSanitaria("Mario", "Rossi", "Via Mario Rossi", telefono, mail, MyTime.creaData(data), "Iseo", false, CF, gS);
 
-		assertTrue(CS1.checkGruppoSanguigno(CS1.getGruppoSanguigno()));
+		assertTrue(CartellaSanitaria.checkGruppoSanguigno(CS1.getGruppoSanguigno()));
 	}
 	
 	@Test
@@ -366,7 +335,7 @@ public class CartellaSanitariaTest {
 		String gS = "AB+";
 		CartellaSanitaria CS1 = new CartellaSanitaria("Mario", "Rossi", "Via Mario Rossi", telefono, mail, MyTime.creaData(data), "Iseo", false, CF, gS);
 
-		assertTrue(CS1.checkGruppoSanguigno(CS1.getGruppoSanguigno()));
+		assertTrue(CartellaSanitaria.checkGruppoSanguigno(CS1.getGruppoSanguigno()));
 	}
 	
 	@Test
@@ -378,7 +347,7 @@ public class CartellaSanitariaTest {
 		String gS = "";
 		CartellaSanitaria CS1 = new CartellaSanitaria("Mario", "Rossi", "Via Mario Rossi", telefono, mail, MyTime.creaData(data), "Iseo", false, CF, gS);
 
-		assertFalse(CS1.checkGruppoSanguigno(CS1.getGruppoSanguigno()));
+		assertFalse(CartellaSanitaria.checkGruppoSanguigno(CS1.getGruppoSanguigno()));
 	}
 	
 	@Test
@@ -390,7 +359,7 @@ public class CartellaSanitariaTest {
 		String gS = "+ABCD";
 		CartellaSanitaria CS1 = new CartellaSanitaria("Mario", "Rossi", "Via Mario Rossi", telefono, mail, MyTime.creaData(data), "Iseo", false, CF, gS);
 
-		assertFalse(CS1.checkGruppoSanguigno(CS1.getGruppoSanguigno()));
+		assertFalse(CartellaSanitaria.checkGruppoSanguigno(CS1.getGruppoSanguigno()));
 	}
 	
 	@Test
@@ -402,7 +371,7 @@ public class CartellaSanitariaTest {
 		String gS = "SA";
 		CartellaSanitaria CS1 = new CartellaSanitaria("Mario", "Rossi", "Via Mario Rossi", telefono, mail, MyTime.creaData(data), "Iseo", false, CF, gS);
 
-		assertFalse(CS1.checkGruppoSanguigno(CS1.getGruppoSanguigno()));
+		assertFalse(CartellaSanitaria.checkGruppoSanguigno(CS1.getGruppoSanguigno()));
 	}
 	
 	@Test
@@ -414,7 +383,7 @@ public class CartellaSanitariaTest {
 		String gS = "-G";
 		CartellaSanitaria CS1 = new CartellaSanitaria("Mario", "Rossi", "Via Mario Rossi", telefono, mail, MyTime.creaData(data), "Iseo", false, CF, gS);
 
-		assertFalse(CS1.checkGruppoSanguigno(CS1.getGruppoSanguigno()));
+		assertFalse(CartellaSanitaria.checkGruppoSanguigno(CS1.getGruppoSanguigno()));
 	}
 	
 	@Test
@@ -426,7 +395,7 @@ public class CartellaSanitariaTest {
 		String gS = "1-";
 		CartellaSanitaria CS1 = new CartellaSanitaria("Mario", "Rossi", "Via Mario Rossi", telefono, mail, MyTime.creaData(data), "Iseo", false, CF, gS);
 
-		assertFalse(CS1.checkGruppoSanguigno(CS1.getGruppoSanguigno()));
+		assertFalse(CartellaSanitaria.checkGruppoSanguigno(CS1.getGruppoSanguigno()));
 	}
 	
 	@Test
@@ -438,7 +407,7 @@ public class CartellaSanitariaTest {
 		String gS = "B3";
 		CartellaSanitaria CS1 = new CartellaSanitaria("Mario", "Rossi", "Via Mario Rossi", telefono, mail, MyTime.creaData(data), "Iseo", false, CF, gS);
 
-		assertFalse(CS1.checkGruppoSanguigno(CS1.getGruppoSanguigno()));
+		assertFalse(CartellaSanitaria.checkGruppoSanguigno(CS1.getGruppoSanguigno()));
 	}
 	
 	@Test
@@ -450,7 +419,7 @@ public class CartellaSanitariaTest {
 		String gS = "gAB";
 		CartellaSanitaria CS1 = new CartellaSanitaria("Mario", "Rossi", "Via Mario Rossi", telefono, mail, MyTime.creaData(data), "Iseo", false, CF, gS);
 
-		assertFalse(CS1.checkGruppoSanguigno(CS1.getGruppoSanguigno()));
+		assertFalse(CartellaSanitaria.checkGruppoSanguigno(CS1.getGruppoSanguigno()));
 	}
 	
 	@Test
@@ -462,7 +431,7 @@ public class CartellaSanitariaTest {
 		String gS = "+0B";
 		CartellaSanitaria CS1 = new CartellaSanitaria("Mario", "Rossi", "Via Mario Rossi", telefono, mail, MyTime.creaData(data), "Iseo", false, CF, gS);
 
-		assertFalse(CS1.checkGruppoSanguigno(CS1.getGruppoSanguigno()));
+		assertFalse(CartellaSanitaria.checkGruppoSanguigno(CS1.getGruppoSanguigno()));
 	}
 	
 	@Test
@@ -474,7 +443,7 @@ public class CartellaSanitariaTest {
 		String gS = "+AA";
 		CartellaSanitaria CS1 = new CartellaSanitaria("Mario", "Rossi", "Via Mario Rossi", telefono, mail, MyTime.creaData(data), "Iseo", false, CF, gS);
 
-		assertFalse(CS1.checkGruppoSanguigno(CS1.getGruppoSanguigno()));
+		assertFalse(CartellaSanitaria.checkGruppoSanguigno(CS1.getGruppoSanguigno()));
 	}
 	
 	@Test
@@ -486,7 +455,7 @@ public class CartellaSanitariaTest {
 		String gS = "BB+";
 		CartellaSanitaria CS1 = new CartellaSanitaria("Mario", "Rossi", "Via Mario Rossi", telefono, mail, MyTime.creaData(data), "Iseo", false, CF, gS);
 
-		assertFalse(CS1.checkGruppoSanguigno(CS1.getGruppoSanguigno()));
+		assertFalse(CartellaSanitaria.checkGruppoSanguigno(CS1.getGruppoSanguigno()));
 	}
 	
 	@Test
@@ -498,7 +467,7 @@ public class CartellaSanitariaTest {
 		String gS = "AL+";
 		CartellaSanitaria CS1 = new CartellaSanitaria("Mario", "Rossi", "Via Mario Rossi", telefono, mail, MyTime.creaData(data), "Iseo", false, CF, gS);
 
-		assertFalse(CS1.checkGruppoSanguigno(CS1.getGruppoSanguigno()));
+		assertFalse(CartellaSanitaria.checkGruppoSanguigno(CS1.getGruppoSanguigno()));
 	}
 	
 	@Test
@@ -510,7 +479,7 @@ public class CartellaSanitariaTest {
 		String gS = "ABc";
 		CartellaSanitaria CS1 = new CartellaSanitaria("Mario", "Rossi", "Via Mario Rossi", telefono, mail, MyTime.creaData(data), "Iseo", false, CF, gS);
 
-		assertFalse(CS1.checkGruppoSanguigno(CS1.getGruppoSanguigno()));
+		assertFalse(CartellaSanitaria.checkGruppoSanguigno(CS1.getGruppoSanguigno()));
 	}
 	
 	@Test
@@ -646,5 +615,59 @@ public class CartellaSanitariaTest {
 		catch(IllegalAccessException e){
 			e.printStackTrace();
 		}
+	}
+	
+	@Test
+	public void ritornaBoolGenereTestCorrettoM(){
+		char genere = 'M';
+		
+		boolean risultatoAtteso = false;
+		boolean risultato = CartellaSanitaria.ritornaBoolGenere(genere);
+		
+		assertEquals(risultatoAtteso, risultato);
+	}
+	
+	@Test
+	public void ritornaBoolGenereTestCorretto2m(){
+		char genere = 'm';
+		
+		boolean risultatoAtteso = false;
+		boolean risultato = CartellaSanitaria.ritornaBoolGenere(genere);
+		
+		assertEquals(risultatoAtteso, risultato);
+	}
+	
+	@Test
+	public void ritornaBoolGenereTestCorrettoF(){
+		char genere = 'F';
+		
+		boolean risultatoAtteso = true;
+		boolean risultato = CartellaSanitaria.ritornaBoolGenere(genere);
+		
+		assertEquals(risultatoAtteso, risultato);
+	}
+	
+	@Test
+	public void ritornaBoolGenereTestCorretto2f(){
+		char genere = 'f';
+		
+		boolean risultatoAtteso = true;
+		boolean risultato = CartellaSanitaria.ritornaBoolGenere(genere);
+		
+		assertEquals(risultatoAtteso, risultato);
+	}
+	
+	@Test
+	public void ritornaBoolGenereTestErratoEccezione(){
+		char genere = 's';
+		boolean thrown = false;
+		
+		try{
+			CartellaSanitaria.ritornaBoolGenere(genere);
+		}
+		catch(IllegalArgumentException e){
+			thrown = true;
+		}
+		assertTrue(thrown);
 	}
 }

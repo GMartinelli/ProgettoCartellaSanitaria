@@ -1,3 +1,4 @@
+
 package it.unibs.fp.progetto;
 /**
  * La classe EsamePeriodicoMisurabile estende la classe Esame per poter creare oggetti EsamePeriodicoMisurabile.
@@ -147,5 +148,4 @@ public class EsamePeriodicoMisurabile extends Esame {
 	//Metodi
 	
 	
-
 }
