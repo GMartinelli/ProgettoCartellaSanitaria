@@ -1,7 +1,6 @@
 package it.unibs.fp.progetto;
 
 import java.util.Date;
-import java.util.ArrayList;
 import java.io.*;
 
 import it.unibs.fp.mylib.*;
@@ -19,6 +18,8 @@ public class CSMain{
 	private static final String [] OPZIONI_MALATTIA = {"Inserisci malattia","Modifica malattia","Visualizza malattia","Visualizza lista malattie"};
 	private static final String [] OPZIONI_PAZIENTE = {"Modifica nome","Modifica cognome","Modifica indirizzo","Modifica telefono","..."};
 	private static final String [] OPZIONI_PAZIENTE_2 = {"Modifica nome","Modifica cognome","Modifica indirizzo","Modifica telefono","Modifica email", "Modifica luogo di nascita", "Modifica data di nascita", "Modifica genere", "Modifica codice fiscale", "Modifica gruppo sanguigno"};
+	private static final String [] TIPOLOGIA_ESAME = {"Diagnostici","Periodici misurabili"};
+	private static final String [] SELEZIONE_ESAME = {"Tutti","Diagnostici","Periodici misurabili"};
 	
 	private static final String PATH = "cartella_sanitaria.txt";
 	
@@ -32,6 +33,14 @@ public class CSMain{
 	private static final String MEX_INSERIMENTO_CODICEF = "Inserisci il codice fiscale del paziente: ";
 	private static final String MEX_INSERIMENTO_GENERE = "Inserisci il genere del paziente: ";
 	private static final String MEX_INSERIMENTO_GSANGUIGNO = "Inserisci il guppo sanguigno del paziente: ";
+	
+	private static final String MEX_INSERIMENTO_NOME_EASAME="Inserisci il nome dell'esame: ";
+	private static final String MEX_INSERIMENTO_RACCOMANDAZIONI="Inserisci eventuali raccomandazioni: ";
+	private static final String MEX_INSERIMENTO_AREA_INTERESSATA="Inserisci l'area interessata: ";
+	private static final String MEX_VALORE_MIN="Inserisci il valore minimo: ";
+	private static final String MEX_VALORE_MAX="Inserisci il valore massimo: ";
+	private static final String MEX_SOGLIA_ERRORE="Inserisci la soglia di errore: ";
+	
 	
 	private static final String MEX_ERRORE_FILE_ESISTENTE = "Attenzione, esiste gia' un file con questo nome.";
 	private static final String MEX_ERRORE_INSERIMENTO = "Errore! Dato inserito non valido!";
@@ -155,7 +164,35 @@ public class CSMain{
 		CartellaSanitaria cs = new CartellaSanitaria(nome, cognome, indirizzo, telefono, mail, dataN, luogoN, genereP, codiceF, gruppoS);
 		return cs;
 	}
-	
+
+	/*Metodo che permette la creazione di un nuovo esame*/
+	public static Esame creaEsame(){
+		String nome = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_NOME);
+		String raccomandazioni = MyInput.leggiStringa(MEX_INSERIMENTO_RACCOMANDAZIONI);
+		int sceltaT=0;
+		do{
+			MyMenu menuTipo = new MyMenu("Tipo esame",TIPOLOGIA_ESAME);
+			sceltaT = menuTipo.scegli();
+			switch(sceltaT){
+			case 1:
+				String areaInteressata=MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_AREA_INTERESSATA);
+				if(raccomandazioni!=null && BelleStringhe.togliSpazi(raccomandazioni)!=""){
+					
+				}
+				break;
+			case 2:
+				break;
+			case 0:
+				break;
+			default:
+				stampaMex(MEX_ERRORE_INSERIMENTO);
+				break;
+			}
+		}while(sceltaT!=0);
+		
+		Esame esame = null;
+		return esame;
+	}
 	public static void modificaDatiPaziente(CartellaSanitaria CS){
 		int scelta = 0;
 		boolean valido = false;
@@ -306,6 +343,35 @@ public class CSMain{
 				do{
 					MyMenu menuEsame = new MyMenu("Gestione esami", OPZIONI_ESAME);
 					scelta3 = menuEsame.scegli();
+					switch(scelta3){
+					case 1:	//Si vuole inserire un nuovo esame
+						int scelta4 = 0; 
+						do{
+							MyMenu menuTipo = new MyMenu("Tipo esame", TIPOLOGIA_ESAME);
+							scelta4 = menuTipo.scegli();
+							switch(scelta4){	//Faccio scegliere se inserire un nuovo esame o un nuovo esame effettuato
+							case 1:		//Esame 
+								creaEsame();
+								scelta4=0;	//Scelta valida, posso uscire dal ciclo
+								break;
+							case 2:		//EsameEffettuato
+								creaEsameEffettuato();
+								scelta4=0;	//Scelta valida, posso uscire dal ciclo
+								break;
+							default:
+								stampaMex(MEX_ERRORE_INSERIMENTO);
+							}
+						}while(scelta4!=0);
+						break;
+					case 2:
+						break;
+					case 3:
+						break;
+					case 4:
+						break;
+					default:
+						stampaMex(MEX_ERRORE_INSERIMENTO);
+					}
 				}while(scelta3 != 0);
 				break;
 			case 3:
