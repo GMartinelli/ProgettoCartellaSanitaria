@@ -23,7 +23,7 @@ public class ListaEsameTest{
 		array1.add(esame1);
 		array1.add(esame2);
 		ListaEsame lista1 = new ListaEsame(array1);
-		boolean trovato = lista1.cercaEsame("Radiografia"); 
+		boolean trovato = lista1.isEsistente("Radiografia"); 
 		assertEquals(true, trovato);
 	}
 	
@@ -35,7 +35,7 @@ public class ListaEsameTest{
 		array1.add(esame1);
 		array1.add(esame2);
 		ListaEsame lista1 = new ListaEsame(array1);
-		boolean trovato = lista1.cercaEsame("Esame del sangue"); 
+		boolean trovato = lista1.isEsistente("Esame del sangue"); 
 		assertEquals(false, trovato);
 	}
 

@@ -33,7 +33,7 @@ public class ListaMalattiaTest {
 		elencoMalattia.add(malattia2);
 		
 		ListaMalattia lista1 = new ListaMalattia(elencoMalattia);
-		boolean trovato = lista1.cercaMalattia("Raffreddore"); 
+		boolean trovato = lista1.isEsistente("Raffreddore"); 
 		assertEquals(true, trovato);
 	}
 	
@@ -52,7 +52,7 @@ public class ListaMalattiaTest {
 		elencoMalattia.add(malattia2);
 		
 		ListaMalattia lista1 = new ListaMalattia(elencoMalattia);
-		boolean trovato = lista1.cercaMalattia("Polmonite"); 
+		boolean trovato = lista1.isEsistente("Polmonite"); 
 		assertEquals(false, trovato);
 	}
 
