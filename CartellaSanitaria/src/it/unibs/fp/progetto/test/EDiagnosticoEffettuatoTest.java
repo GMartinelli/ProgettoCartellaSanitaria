@@ -30,6 +30,7 @@ public class EDiagnosticoEffettuatoTest {
 			
 			//EsameDiagnostico ed1 = new EsameDiagnostico("Radiografia", "Focolaio", "Torace");
 			//EDiagnosticoEffettuato e1 = new EDiagnosticoEffettuato(ed1, polmonite);
+			/* EDiagnosticoEffettuato e1 = new EDiagnosticoEffettuato((EsameDiagnostico) radiografia, polmonite); */
 			EDiagnosticoEffettuato e1 = new EDiagnosticoEffettuato(radiografia, polmonite);
 			assertFalse(e1.isEffettuato());
 	}
