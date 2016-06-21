@@ -616,4 +616,58 @@ public class CartellaSanitariaTest {
 			e.printStackTrace();
 		}
 	}
+	
+	@Test
+	public void ritornaBoolGenereTestCorrettoM(){
+		char genere = 'M';
+		
+		boolean risultatoAtteso = false;
+		boolean risultato = CartellaSanitaria.ritornaBoolGenere(genere);
+		
+		assertEquals(risultatoAtteso, risultato);
+	}
+	
+	@Test
+	public void ritornaBoolGenereTestCorretto2m(){
+		char genere = 'm';
+		
+		boolean risultatoAtteso = false;
+		boolean risultato = CartellaSanitaria.ritornaBoolGenere(genere);
+		
+		assertEquals(risultatoAtteso, risultato);
+	}
+	
+	@Test
+	public void ritornaBoolGenereTestCorrettoF(){
+		char genere = 'F';
+		
+		boolean risultatoAtteso = true;
+		boolean risultato = CartellaSanitaria.ritornaBoolGenere(genere);
+		
+		assertEquals(risultatoAtteso, risultato);
+	}
+	
+	@Test
+	public void ritornaBoolGenereTestCorretto2f(){
+		char genere = 'f';
+		
+		boolean risultatoAtteso = true;
+		boolean risultato = CartellaSanitaria.ritornaBoolGenere(genere);
+		
+		assertEquals(risultatoAtteso, risultato);
+	}
+	
+	@Test
+	public void ritornaBoolGenereTestErratoEccezione(){
+		char genere = 's';
+		boolean thrown = false;
+		
+		try{
+			CartellaSanitaria.ritornaBoolGenere(genere);
+		}
+		catch(IllegalArgumentException e){
+			thrown = true;
+		}
+		assertTrue(thrown);
+	}
 }
