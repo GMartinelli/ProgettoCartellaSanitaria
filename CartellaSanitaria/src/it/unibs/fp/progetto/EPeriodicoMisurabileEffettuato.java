@@ -119,7 +119,7 @@ public class EPeriodicoMisurabileEffettuato extends EsameEffettuato{
 	/**
 	 * Ritorna il valore di avvisi
 	 * 
-	 * se l'esito non è stato impostato e di conseguenza viene lanciata IllegalAccessException ritorna il suo getMessage() 
+	 * se l'esito non e' stato impostato e di conseguenza viene lanciata IllegalAccessException ritorna il suo getMessage() 
 	 * 
 	 * @return avvisi impostati in base all'esito
 	 */
