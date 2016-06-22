@@ -177,11 +177,25 @@ public class CSMain{
 			case 1:
 				String areaInteressata=MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_AREA_INTERESSATA);
 				if(raccomandazioni!=null && BelleStringhe.togliSpazi(raccomandazioni)!=""){
-					
+					EsameDiagnostico e1 = new EsameDiagnostico(nome, areaInteressata);
+					return e1;
 				}
-				break;
+				else{
+					EsameDiagnostico e1 = new EsameDiagnostico(nome, raccomandazioni, areaInteressata);
+					return e1;	
+				}
 			case 2:
-				break;
+				int valoreMin= MyInput.leggiInteroConMinimo(MEX_VALORE_MIN, 0);
+				int valoreMax = MyInput.leggiInteroConMinimo(MEX_VALORE_MAX, valoreMin+1);
+				int sogliaErrore = MyInput.leggiInteroConMinimo(MEX_SOGLIA_ERRORE, 0);
+				if(raccomandazioni!=null && BelleStringhe.togliSpazi(raccomandazioni)!=""){
+					EsamePeriodicoMisurabile e1 = new EsamePeriodicoMisurabile(nome, valoreMin, valoreMax, sogliaErrore);
+					return e1;
+				}
+				else{
+					EsamePeriodicoMisurabile e1 = new EsamePeriodicoMisurabile(nome, raccomandazioni, valoreMin, valoreMax, sogliaErrore);
+					return e1;	
+				}
 			case 0:
 				break;
 			default:
@@ -193,6 +207,7 @@ public class CSMain{
 		Esame esame = null;
 		return esame;
 	}
+	
 	public static void modificaDatiPaziente(CartellaSanitaria CS){
 		int scelta = 0;
 		boolean valido = false;
