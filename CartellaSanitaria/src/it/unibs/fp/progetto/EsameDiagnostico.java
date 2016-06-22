@@ -10,7 +10,6 @@ package it.unibs.fp.progetto;
 public class EsameDiagnostico extends Esame {
 	
 	//Attributi
-	private String esitoAcc;
 	private String areaInteressata;
 	
 
@@ -22,7 +21,6 @@ public class EsameDiagnostico extends Esame {
 	 */
 	public EsameDiagnostico(){
 		super();
-		this.esitoAcc = null;
 		this.areaInteressata = null;
 	}
 	
@@ -35,9 +33,8 @@ public class EsameDiagnostico extends Esame {
 	 * 
 	 * @author Manenti Gabriele
 	 */
-	public EsameDiagnostico(String nome, String esitoAcc, String areaInteressata){
+	public EsameDiagnostico(String nome, String areaInteressata){
 		super(nome);
-		this.esitoAcc = esitoAcc;
 		this.areaInteressata = areaInteressata;
 	}
 	
@@ -51,24 +48,12 @@ public class EsameDiagnostico extends Esame {
 	 * 
 	 * @author Manenti Gabriele
 	 */
-	public EsameDiagnostico(String nome, String raccomandazioni, String esitoAcc, String areaInteressata){
+	public EsameDiagnostico(String nome, String raccomandazioni,String areaInteressata){
 		super(nome, raccomandazioni);
-		this.esitoAcc = esitoAcc;
 		this.areaInteressata = areaInteressata;
 	}
 	
 	//Getters
-	/**
-	 * Ritorna l'esito dell'esame Diagnostico.
-	 * 
-	 * @return esistoAcc l'esito dell'esame
-	 * 
-	 * @author Manenti Gabriele
-	 */
-	public String getEsitoAcc() {
-		return esitoAcc;
-	}
-	
 	/**
 	 * Ritorna l'area del corpo interessata in merito all'esame.
 	 * 
@@ -80,17 +65,6 @@ public class EsameDiagnostico extends Esame {
 		return areaInteressata;
 	}
 	//Setters
-	/**
-	 * Metodo che imposta l'esito di un esame Diagnostico.
-	 * 
-	 * @param esitoAcc l'esito dell'esame
-	 * 
-	 * @author Manenti Gabriele
-	 */
-	public void setEsitoAcc(String esitoAcc) {
-		this.esitoAcc = esitoAcc;
-	}
-	
 	/**
 	 * Metodo che imposta l'area del corpo interessata in merito all'esame
 	 * 

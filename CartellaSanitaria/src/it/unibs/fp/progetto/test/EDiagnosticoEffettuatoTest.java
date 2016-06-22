@@ -195,5 +195,55 @@ public class EDiagnosticoEffettuatoTest {
 		
 	}
 	
+	@Test
+	public void setEsamePossibileTest(){
+		try{
+			ArrayList<Esame> associati = new ArrayList<>();
+			EsameDiagnostico radiografia = new EsameDiagnostico("Radiografia", "Focolaio", "Torace");
+			associati.add(radiografia);
 	
+			ArrayList<Malattia> elencoMalattia = new ArrayList<>();
+			Malattia polmonite = new Malattia("Polmonite", MyTime.creaData("01/01/2012"), "Dolori al petto e febbre", "Malato", associati, "Penicillina");
+			elencoMalattia.add(polmonite);
+	
+			EDiagnosticoEffettuato e1 = new EDiagnosticoEffettuato(radiografia, polmonite);
+			e1.setEsame(radiografia);
+			
+			assertEquals(radiografia,e1.getEsame());
+		}
+		catch(IllegalAccessException e){
+			e.printStackTrace();
+		}
+	
+	}
+	
+	@Test
+	public void setEsameImpossibileTest(){
+		try{
+			ArrayList<Esame> associati = new ArrayList<>();
+			EsameDiagnostico radiografia = new EsameDiagnostico("Radiografia", "Focolaio", "Torace");
+			associati.add(radiografia);
+	
+			ArrayList<Malattia> elencoMalattia = new ArrayList<>();
+			Malattia polmonite = new Malattia("Polmonite", MyTime.creaData("01/01/2012"), "Dolori al petto e febbre", "Malato", associati, "Penicillina");
+			elencoMalattia.add(polmonite);
+	
+			EDiagnosticoEffettuato e1 = new EDiagnosticoEffettuato(radiografia, polmonite);
+			String esito = "Malato";
+			e1.setEsito(esito);
+			
+			boolean thrown = false;
+			try{
+				e1.setEsame(radiografia);
+			}
+			catch(TooLateException e){
+				thrown = true;
+			}
+			assertTrue(thrown);
+			
+		}
+		catch(IllegalAccessException e){
+			e.printStackTrace();
+		}
+	}
 }
