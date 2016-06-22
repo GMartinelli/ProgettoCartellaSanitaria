@@ -61,6 +61,9 @@ public class CSMain{
 	private static final String MEX_INSERIMENTO_ESITO = "Inserisci un esito: ";
 	private static final String MEX_INSERIMENTO_ERELATIVO = "Inserisci il nome dell'esame a cui e' associato: ";
 	private static final String MEX_INSERIMENTO_MRELATIVO = "Inserisci il nome della malttia a cui e' associato: ";
+	private static final String MEX_CANCELLA_ESAME = "Inserisci il nome dell'esame da cancellare: ";
+	private static final String MEX_PIU_ESAMI = "Attenzione, sono presenti piu' esami di questo tipo: ";
+	private static final String MEX_CANCELLA_SELEZIONA_DATA = "Inserire la data dell'esame da cancellare: ";
 	
 	//Scelta aggiungi rimuovi
 	private static final String MEX_CREA_CERCA_TIPOLOGIA_ESAME = "Si desidera creare la tipologia di esame o cercarne una nuova?";
@@ -506,15 +509,25 @@ public class CSMain{
 					break;
 				case 13:
 					//rimuovi effettuato
-					
+					//Forse non corretto non sono convinto del confronto della data nel metodo cerca con i due parametri
+					String nomeEsame = MyInput.leggiStringaNonVuota(MEX_CANCELLA_ESAME);
+					if(CS.isEsameEsistente(nomeEsame)){
+						if(CS.contaEsame(nomeEsame) > 1){
+							Date dataEsame = MyInput.leggiData(MEX_PIU_ESAMI + " " + MEX_CANCELLA_SELEZIONA_DATA);
+							CS.getEsamiEffettuati().remove(CS.cercaEsame(nomeEsame, dataEsame));
+						}
+						else{
+							CS.getEsamiEffettuati().remove(CS.cercaEsame(nomeEsame));
+						}
+					}
 					break;
 				case 14:
 					//rimuovi malattia
-					String nomeMalattia = MyInput.leggiStringaNonVuota(MEX_CANCELLA_MALATTIA);
+					/*String nomeMalattia = MyInput.leggiStringaNonVuota(MEX_CANCELLA_MALATTIA);
 					if(CS.isMalattiaEsistente(nomeMalattia)){
 						
 					}
-					break;
+					*/break;
 			default:
 				stampaMex(MEX_ERRORE_INSERIMENTO);
 		}

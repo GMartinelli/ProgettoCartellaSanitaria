@@ -496,6 +496,15 @@ public class CartellaSanitaria {
 		return codiceSanitario.toUpperCase();
 	}
 	
+	public boolean isEsameEsistente(String nomeEsame){
+		for(EsameEffettuato elemento: esamiEffettuati){
+			if(elemento.getEsame().getNome() == nomeEsame)
+				return true;
+		}
+		return false;
+	}
+	
+	
 	/**
 	 * Metodo che cerca l'esame tra quelli effettuati dall'utente
 	 * @param nomeEsame nome dell'esame da cercare
@@ -507,6 +516,14 @@ public class CartellaSanitaria {
 		for(int i=0; i<esamiEffettuati.size();i++){
 			if(esamiEffettuati.get(i).getEsame().getNome()==nomeEsame)
 				return esamiEffettuati.get(i);
+		}
+		return null;
+	}
+	
+	public EsameEffettuato cercaEsame(String nomeEsame, Date dataEsame){
+		for(EsameEffettuato elemento: esamiEffettuati){
+			if(elemento.getEsame().getNome() == nomeEsame && elemento.getData() == dataEsame)
+				return elemento;
 		}
 		return null;
 	}
