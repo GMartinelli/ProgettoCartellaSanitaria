@@ -170,18 +170,15 @@ public class EPeriodicoMisurabileEffettuato extends EsameEffettuato{
 	 * 
 	 * @throws IllegalAccessException se non e' stato impostato un esito
 	 */
-	//ANNOTAZIONE metodo con un po' di controlli, controllare se corretto
+	//ANNOTAZIONE metodo con un po' di controlli, controllare se corretto (SI E' Sbagliato)
 	public void setAvvisi() throws IllegalAccessException{
 		if(isEffettuato()){
 			if(isInRange()) this.avvisi = COMPRESO;
-			else{
-				if(isOltreSoglia() && isSuperioreRange()) this.avvisi = SOGLIA_SUPERIORE;
-				else if(isOltreSoglia() && !isSuperioreRange()) this.avvisi = SOGLIA_INFERIORE;
-				else{
-					if(isSuperioreRange()) this.avvisi = SUPERIORE;
-					else this.avvisi = INFERIORE;
-				}
-			}
+			else if(isSuperioreRange() && !isOltreSogliaMax()) this.avvisi = SUPERIORE;
+			else if(isInferioreRange() && !isOltreSogliaMin()) this.avvisi = INFERIORE;
+			else if(isOltreSogliaMax() ) this.avvisi = SOGLIA_SUPERIORE;
+			else if(isOltreSogliaMin()) this.avvisi = SOGLIA_INFERIORE;
+			
 		}
 		else{
 			throw new IllegalAccessException(ESITO_MANCANTE);
@@ -267,9 +264,64 @@ public class EPeriodicoMisurabileEffettuato extends EsameEffettuato{
 	}
 	
 	/**
-	 * Controlla se il valore dell'esito e' superiore al range definito dalla tipologia di esame o inferiore
+	 * Controlla se il valore e' oltre al valore di soglia minima impostata nella tipologia di esame
 	 * 
-	 * @return true se il valore dell'esito e' superiore a quello di range, false se inferiore
+	 * @return true se il valore dell'esito e' oltre al valore di soglia minima, false altrimenti
+	 * 
+	 * @author Manenti Gabriele
+	 */
+	
+	public boolean isOltreSogliaMin(){
+		try{
+			if(esito < this.esame.getValoreSogliaMin()&& !isSuperioreRange()) return true;
+			else return false;
+		}
+		catch(IllegalStateException exception){
+			return true;
+		}
+	}
+	
+	/**
+	 * Controlla se il valore e' inferiore al range definito nella tipologia di esame
+	 * 
+	 * @return true se il valore dell'esito e' inferiore a quello di range, false altrimenti
+	 * 
+	 * @author Manenti Gabriele
+	 */
+	
+	public boolean isInferioreRange(){
+		try{
+			if(esito < this.esame.getValoreMin()) return true;
+			else return false;
+		}
+		catch(IllegalStateException exception){
+			return true;
+		}
+	}
+	
+	/**
+	 * Controlla se il valore e' oltre al valore di soglia massima impostata nella tipologia di esame
+	 * 
+	 * @return true se il valore dell'esito e' oltre al valore di soglia massima, false altrimenti
+	 * 
+	 * @author Manenti Gabriele
+	 */
+	
+	public boolean isOltreSogliaMax(){
+		try{
+			if(esito > this.esame.getValoreSogliaMax() && isSuperioreRange()) return true;
+			else return false;
+		}
+		catch(IllegalStateException exception){
+			return true;
+		}
+	}
+	
+	/**
+	 * Controlla se il valore dell'esito e' superiore al range definito dalla tipologia di esame
+	 * 
+	 * @return true se il valore dell'esito e' superiore a quello di range, false se altrimenti
+	 * 
 	 */
 	public boolean isSuperioreRange(){
 		if(isInRange()) throw new IllegalStateException(COMPRESO_ECC);
