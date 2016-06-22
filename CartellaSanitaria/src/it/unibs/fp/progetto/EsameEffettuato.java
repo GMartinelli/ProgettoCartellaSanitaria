@@ -191,6 +191,6 @@ public class EsameEffettuato {
 	 * Ritorna una stringa rappresentativa contenente il nome della tipologia di esame, data, ora e luogo
 	 */
 	public String toString(){
-		return esame.getNome() + "%nData: " + MyTime.toStringData(data) + "%nOra: " + ora + "%nLuogo: " + luogo;
+		return esame.getNome() + "%n   Data: " + MyTime.toStringData(data) + "%n   Ora: " + ora + "%n   Luogo: " + luogo;
 	}
 }

@@ -752,12 +752,12 @@ public class CSMain{
 				malattia.setNome(nome);
 				break;
 			case 2:
-				String datai = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_DATAI);
-				malattia.setDataInizio(MyTime.creaData(datai));
+				Date datai = MyInput.leggiData(MEX_INSERIMENTO_DATAI);
+				malattia.setDataInizio(datai);
 				break;
 			case 3:
-				String datat = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_DATAT);
-				malattia.setDataInizio(MyTime.creaData(datat));
+				Date datat = MyInput.leggiData(MEX_INSERIMENTO_DATAT);
+				malattia.setDataInizio(datat);
 				break;
 			case 4:
 				String sintomi = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_SINTOMI);
@@ -774,6 +774,45 @@ public class CSMain{
 			default:
 				stampaMex(MEX_ERRORE_INSERIMENTO);
 		}
+	}
+	
+	//Da controllare se rispetta richieste traccia
+	public static void visualizzaDatiUtenteCompleta(CartellaSanitaria CS){
+		String stringaDescrittivaCompleta = "Cartella sanitaria di " + CS.getNome() + " " + CS.getCognome() + "%n" +
+			"Residente in: " + CS.getIndirizzo() + "%n" +
+			"Contatti: " + "%n" +
+			"  Numero Telefonico: " + CS.getTelefono() + "%n";
+		if(CS.getEmail() != null){ stringaDescrittivaCompleta += 
+			"  Indirizzo E-Mail: " + CS.getEmail() + "%n";
+		}
+		stringaDescrittivaCompleta +=
+			"Nato il: " + CS.getDataNascita().toString() + "%n" +
+			"A: " + CS.getLuogoNascita() + "%n" +
+			"Genere: " + CS.getStringaGenere() + "%n" +
+			"Gruppo Sanguigno: " + CS.getGruppoSanguigno() + "%n" +
+			"Codice Fiscale: " + CS.getCodiceFiscale() + "%n";
+		CS.generaCodiceSanitario();
+		stringaDescrittivaCompleta +=
+			"Codice Sanitario: " + CS.getCodiceSanitario() + "%n" +
+			"Esami Effettuati: " + "%n";
+		for(EsameEffettuato elemento: CS.getEsamiEffettuati()){ stringaDescrittivaCompleta +=
+			"  " + elemento.toString();
+		}
+		stringaDescrittivaCompleta +=
+			"Malattie: " + "%n";
+		for(Malattia elemento: CS.getElencoMalattia()){ stringaDescrittivaCompleta +=
+			"  " + elemento.toString();
+		}
+				
+		stampaMex(stringaDescrittivaCompleta);
+	}
+	
+	public static void visualizzaEsameCompleta(CartellaSanitaria CS, EsameEffettuato esame){
+		
+	}
+	
+	public static void visualizzaMalattiaCompleta(CartellaSanitaria CS, EsameEffettuato esame){
+		
 	}
 	
 	/*Main*/

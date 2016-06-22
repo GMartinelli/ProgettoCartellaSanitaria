@@ -296,6 +296,17 @@ public class CartellaSanitaria {
 		}
 	}
 	
+	public String getStringaGenere(){
+		String genere = null;
+		if(this.genere == false){
+			genere = "Maschio";
+		}
+		else{
+			genere = "Femmina";
+		}
+		return genere;
+	}
+	
 	/**
 	 * Controlla se la stringa passata e' un codice fiscale valido oppure no
 	 * @param codiceF stringa che rappresenta il codice fiscale che si vuole controllare

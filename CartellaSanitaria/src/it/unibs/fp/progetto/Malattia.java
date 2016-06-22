@@ -197,8 +197,8 @@ public class Malattia {
 	 * @return descrizione la descrizione sintetica della malattia
 	 */
 	public String toString(){
-		String descrizione = nome + "%nIniziata: " + dataInizio;
-		if(dataTermine != null) descrizione += ("%nTerminata:  " + dataTermine); 
+		String descrizione = nome + "%n   Iniziata: " + dataInizio;
+		if(dataTermine != null) descrizione += ("%n   Terminata:  " + dataTermine); 
 		
 		return descrizione;
 	}
