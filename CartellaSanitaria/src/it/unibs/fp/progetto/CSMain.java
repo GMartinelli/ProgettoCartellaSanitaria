@@ -15,6 +15,7 @@ public class CSMain{
 	//Menu'
 	private static final String[] OPZIONI_BASE = {"Crea cartella sanitaria", "Gestisci cartella sanitaria"};
 	private static final String[] OPZIONI = {"Gestione dati paziente","Gestione esami","Gestione malattie"};
+	private static final String[] OPZIONI_PAZIENTE = {"Modifica dati paziente","Visualizzazione completa dati paziente","Visualizzazione sintetica dati paziente"};
 	private static final String[] OPZIONI_ESAME = {"Inserisci esame","Modifica esame","Visualizza esame","Visualizza lista esami"};
 	private static final String[] OPZIONI_MODIFICA_E_EFFETTUATO = {"Modifica data", "Modifica esame", "Modifica luogo", "Modifica malattia", "Modifica ora", "Modifica esito", "Modifica avvisi (se l'esame e' di tipologia misurabile"};
 	private static final String[] OPZIONI_MALATTIA = {"Inserisci malattia","Modifica malattia","Visualizza malattia","Visualizza lista malattie"};
@@ -526,13 +527,14 @@ public class CSMain{
 			switch(scelta){
 			case 1:
 				int scelta2 = 0;
-				MyMenu menuPaziente = new MyMenu("Gestione informazioni utente", OPZIONI_MODIFICA_PAZIENTE);
+				MyMenu menuPaziente = new MyMenu("Gestione informazioni utente", OPZIONI_PAZIENTE);
 				scelta2 = menuPaziente.scegli();
 				switch(scelta2){
 					case 1:
 						modificaDatiPaziente(CS);
 						break;
 					case 2:
+						stampaMex(CS.toString());
 						break;
 					case 3:
 						break;
