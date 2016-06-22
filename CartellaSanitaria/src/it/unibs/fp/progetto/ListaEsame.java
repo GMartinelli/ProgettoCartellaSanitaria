@@ -83,5 +83,7 @@ public class ListaEsame{
 		lista.add(esame);
 	}
 	
-
+	public void rimuoviEsame(Esame esame){
+		lista.remove(esame);
+	}
 }

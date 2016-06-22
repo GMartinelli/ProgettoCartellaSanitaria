@@ -6,7 +6,7 @@ package it.unibs.fp.progetto;
  * In particolare definisce:
  * valoreMin, il valore minimo del range di riferimento di un campo dell'esame;
  * valoreMax, il valore massimo del range di riferimento di un campo dell'esame;
- * sogliaErrore, la soglia(troppo BASSA o troppo ALTA) per cui sicuramente è avvenuta un'anomalia durante l'analisi in merito all'esame.
+ * sogliaErrore, la soglia(troppo BASSA o troppo ALTA) per cui sicuramente e' avvenuta un'anomalia durante l'analisi in merito all'esame.
  * 
  * @author Manenti Gabriele
  */
@@ -86,7 +86,7 @@ public class EsamePeriodicoMisurabile extends Esame {
 	
 	/**
 	 * Ritorna il valore di sogliaMin(= valoreMin - sogliaErrore).
-	 * Se l'esito di un campo dell'esame è < 0,lancia IllegalStateException.
+	 * Se l'esito di un campo dell'esame ï¿½ < 0,lancia IllegalStateException.
 	 * 
 	 * @return sogliaMin la soglia minima accettabile
 	 * @throws IllegalStateException

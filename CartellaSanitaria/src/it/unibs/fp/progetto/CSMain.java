@@ -82,6 +82,7 @@ public class CSMain{
 	private static final String MEX_INSERIMENTO_SINTOMI = "Inserisci i sintomi della malattia: ";
 	private static final String MEX_INSERIMENTO_DIAGNOSI = "Inserisci la diagnosi effettuata dal medico: ";
 	private static final String MEX_INSERIMENTO_TERAPIA = "Inserisci la terapia consigliata: ";
+	private static final String MEX_CANCELLA_MALATTIA = "Inserisci il nome della malattia che desideri eliminare: ";
 	
 	//Avvisi
 	private static final String NON_MODIFICA = "Attenzione, non verrà scelto di inserire alcun dato.";
@@ -93,6 +94,7 @@ public class CSMain{
 	private static final String TIPOLOGIA_INESISTENTE = "Attenzione! La tipologia di esame specificata non esiste!";
 	private static final String MALATTIA_INESISTENTE = "Attenzione! La malattia specificata non esiste!";
 	private static final String ERRORE_TIPOLOGIA = "Attenzione, operazione non disponibile per la tipologia di esame scelta.";
+	private static final String ERRORE_TIPOLOGIA_2 = "Attenzione, il tipo di esame non e' della tipologia specificata precedentemente!";
 	private static final String ERRORE_ESAME_NON_TROVATO="Attenzione! Non e' presente alcun esame con quel nome!";
 	private static final String ERRORE_MALATTIA_NON_TROVATA="Attenzione! Non e' presente alcuna malattia con quel nome!";
 	
@@ -313,7 +315,7 @@ public class CSMain{
 	 * 
 	 * @author Martinelli Giuseppe
 	 */
-	public static EsameEffettuato creaEsameEffettuato(EsameDiagnostico E, ListaMalattia listaM){
+	/*public static EsameEffettuato creaEsameEffettuato(EsameDiagnostico E, ListaMalattia listaM){
 		int scelta = 0;
 		boolean valido = false;
 		MyMenu menuEffettuato = new MyMenu("Tipologia di esame", TIPOLOGIA_ESAME);
@@ -347,7 +349,7 @@ public class CSMain{
 				return ed1;
 			case 2:	//Periodico Misurabile
 				valido = false;
-				EsamePeriodico eAssp = E;
+				Esame eAssp = E;
 				valido = false;
 				Malattia mAssp=null;
 				do{
@@ -371,7 +373,7 @@ public class CSMain{
 				stampaMex(MEX_ERRORE_INSERIMENTO);
 		}
 		return null;
-	}
+	}*/
 	
 	/** 
 	 * Crea, mostra ed effettua le opzioni relative ad un menu' per la modifica dei dati utente della cartella sanitaria
@@ -500,12 +502,18 @@ public class CSMain{
 					break;
 				case 12:
 					//aggiungi malattia
+					
 					break;
 				case 13:
 					//rimuovi effettuato
+					
 					break;
 				case 14:
 					//rimuovi malattia
+					String nomeMalattia = MyInput.leggiStringaNonVuota(MEX_CANCELLA_MALATTIA);
+					if(CS.isMalattiaEsistente(nomeMalattia)){
+						
+					}
 					break;
 			default:
 				stampaMex(MEX_ERRORE_INSERIMENTO);
@@ -527,6 +535,12 @@ public class CSMain{
 					if(listaE.cercaEsame(nomeCerca) instanceof EsameDiagnostico){
 					
 					}
+					else{
+						stampaMex(ERRORE_TIPOLOGIA_2);
+					}
+				}
+				else{
+					stampaMex(ERRORE_ESAME_NON_TROVATO);
 				}
 				break;
 			default:
@@ -544,7 +558,18 @@ public class CSMain{
 				listaE.aggiungiEsame(creaEsame(2));
 				break;
 			case 2:
-				
+				String nomeCerca = MyInput.leggiStringaNonVuota(MEX_CERCA_ESAME);
+				if(listaE.isEsistente(nomeCerca)){
+					if(listaE.cercaEsame(nomeCerca) instanceof EsamePeriodicoMisurabile){
+					
+					}
+					else{
+						stampaMex(ERRORE_TIPOLOGIA_2);
+					}
+				}
+				else{
+					stampaMex(ERRORE_ESAME_NON_TROVATO);
+				}
 				break;
 			default:
 				stampaMex(MEX_ERRORE_INSERIMENTO);
@@ -589,7 +614,7 @@ public class CSMain{
 	 * 
 	 * @author Valtulini Claudio
 	 */
-	public static void modificaDatiEsameEffettuato(EsameEffettuato esame, ListaEsame listaE, ListaMalattia listaM){
+	public static void modificaDatiEsameEffettuato(EsameEffettuato esame, ListaEsame listaE, CartellaSanitaria CS){
 		int scelta = 0;
 		boolean valido = false;
 		MyMenu menuModificaEffettuato = new MyMenu(MODIFICA_INFO_E_EFFETTUATO, OPZIONI_MODIFICA_E_EFFETTUATO);
@@ -640,8 +665,8 @@ public class CSMain{
 				valido = false;
 				do{
 					String nomeMalattia = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_MALATTIA);
-					if(listaM.isEsistente(nomeMalattia)){
-						esame.setMalattia(listaM.cercaMalattia(nomeMalattia));
+					if(CS.isMalattiaEsistente(nomeMalattia)){
+						esame.setMalattia(CS.cercaMalattia(nomeMalattia));
 						valido = true;
 					}
 					else{

@@ -511,6 +511,32 @@ public class CartellaSanitaria {
 		return null;
 	}
 	
+	public int contaEsame(String nomeEsame){
+		int nCorrispondenze = 0;
+		for(EsameEffettuato elemento: esamiEffettuati){
+			if(elemento.getEsame().getNome() == nomeEsame)
+				nCorrispondenze++;
+		}
+		return nCorrispondenze;
+	}
+	
+	public boolean isMalattiaEsistente(String nomeMalattia){
+		for(Malattia elemento: elencoMalattia){
+			if(elemento.getNome() == nomeMalattia)
+				return true;
+		}
+		return false;
+	}
+	
+	public int contaMalattiaEsistente(String nomeMalattia){
+		int nCorrispondenze = 0;
+		for(Malattia elemento: elencoMalattia){
+			if(elemento.getNome() == nomeMalattia)
+				nCorrispondenze++;
+		}
+		return nCorrispondenze;
+	}
+	
 	/**
 	 *Metodo che cerca la malattia passata come argomento tra quelle del paziente 
 	 * @param nomeMalattia nome della malattia da cercare
