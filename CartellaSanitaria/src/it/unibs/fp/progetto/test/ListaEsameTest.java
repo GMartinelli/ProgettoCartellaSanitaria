@@ -16,27 +16,50 @@ import java.util.ArrayList;
 public class ListaEsameTest{
 
 	@Test
-	public void testCercaEsamePresente() {
+	public void testIsEsistentePresente() {
 		Esame esame1 = new Esame("Radiografia");
 		Esame esame2 = new Esame("Ecografia");
 		ArrayList<Esame> array1 = new ArrayList<Esame>();
 		array1.add(esame1);
 		array1.add(esame2);
 		ListaEsame lista1 = new ListaEsame(array1);
-		boolean trovato = lista1.cercaEsame("Radiografia"); 
+		boolean trovato = lista1.isEsistente("Radiografia"); 
 		assertEquals(true, trovato);
 	}
 	
 	@Test
-	public void testCercaEsameAssente() {
+	public void testIsEsistenteAssente() {
 		Esame esame1 = new Esame("Radiografia");
 		Esame esame2 = new Esame("Ecografia");
 		ArrayList<Esame> array1 = new ArrayList<Esame>();
 		array1.add(esame1);
 		array1.add(esame2);
 		ListaEsame lista1 = new ListaEsame(array1);
-		boolean trovato = lista1.cercaEsame("Esame del sangue"); 
+		boolean trovato = lista1.isEsistente("Esame del sangue"); 
 		assertEquals(false, trovato);
 	}
 
+	@Test
+	public void testCercaMalattiaPresente() {
+		Esame esame1 = new Esame("Radiografia");
+		Esame esame2 = new Esame("Ecografia");
+		ArrayList<Esame> array1 = new ArrayList<Esame>();
+		array1.add(esame1);
+		array1.add(esame2);
+		ListaEsame lista1 = new ListaEsame(array1);
+		Esame trovato = lista1.cercaEsame("Radiografia"); 
+		assertEquals(esame1, trovato);
+	}
+	
+	@Test
+	public void testCercaMalattiaAssente() {
+		Esame esame1 = new Esame("Radiografia");
+		Esame esame2 = new Esame("Ecografia");
+		ArrayList<Esame> array1 = new ArrayList<Esame>();
+		array1.add(esame1);
+		array1.add(esame2);
+		ListaEsame lista1 = new ListaEsame(array1);
+		Esame trovato = lista1.cercaEsame("Esame del sangue"); 
+		assertEquals(null, trovato);
+	}
 }
