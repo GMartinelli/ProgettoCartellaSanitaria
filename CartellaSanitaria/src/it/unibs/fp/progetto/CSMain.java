@@ -90,7 +90,7 @@ public class CSMain{
 	public void salvaOggetto(Object daSalvare, String nomeFile){
 		File file = new File(nomeFile);
 		if(file.exists()){
-			stampaMex(MEX_ERRORE_FILE_ESISTENTE + " L'oggetto non verr√† salvato.");
+			stampaMex(MEX_ERRORE_FILE_ESISTENTE + " L'oggetto non verra'† salvato.");
 		}
 		else{
 			MyServizioFile.salvaSingoloOggetto(file, daSalvare);
