@@ -3,7 +3,6 @@ package it.unibs.fp.progetto.test;
 /**
  * Classe contenente Test JUnit per il controllo della correttezza della Classe CartellaSanitaria
  * 
- * 
  * @author Valtulini Claudio
  */
 

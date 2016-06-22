@@ -14,8 +14,8 @@ public class EDiagnosticoEffettuato extends EsameEffettuato{
 	private EsameDiagnostico esame;
 	/*
 	 * Shadowing utilizzato in assenza di altre soluzioni progettuali/implementative
-	 * Verrà  percio' esplicitato, per miglior comprensione, l'uso di this.esame ogni qualvolta
-	 * nella classe sarà utilizzato questo attributo
+	 * Verra' percio' esplicitato, per miglior comprensione, l'uso di this.esame ogni qualvolta
+	 * nella classe sara' utilizzato questo attributo
 	 */
 	private String esito;
 	
@@ -103,9 +103,21 @@ public class EDiagnosticoEffettuato extends EsameEffettuato{
 	 * 
 	 * @param esame la tipologia di esame che si vuole impostare
 	 */
-	public void setEsame(EsameDiagnostico esame) throws IllegalAccessException, IllegalArgumentException{
-		this.esame = esame;
-		super.setEsame(esame);
+	public void setEsame(EsameDiagnostico esame) throws IllegalArgumentException{
+		if(!isEffettuato()){
+			EsameDiagnostico oldEsame = this.esame;
+			this.esame = esame;
+			try{
+				super.setEsame(esame);
+			}
+			catch(IllegalArgumentException e){
+				this.esame = oldEsame;
+				throw new IllegalArgumentException(e.getMessage());
+			}
+		}
+		else{
+			throw new TooLateException(GIA_EFFETTUATO);
+		}
 	}
 	
 	/**

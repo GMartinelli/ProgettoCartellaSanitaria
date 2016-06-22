@@ -14,8 +14,8 @@ public class EsameEffettuato {
 	//costanti
 	public static final String GIA_EFFETTUATO = "Impossibile modificare il dato, l'esame è già stato effettuato"; 
 	public static final String ESITO_MANCANTE = "Non è ancora stato impostato un esito";
-	public static final String ES_MAL_NON_COERENTE = "L'esame richiesto non è coerente con la malattia indicata";
-	public static final String MALATTIA_NON_IMPOSTATA = "Il valore di malattia non e' stato impostato";
+	private static final String ES_MAL_NON_COERENTE = "L'esame richiesto non è coerente con la malattia indicata";
+	private static final String MALATTIA_NON_IMPOSTATA = "Il valore di malattia non e' stato impostato";
 	
 	//attributi
 	private Esame esame;
@@ -123,9 +123,18 @@ public class EsameEffettuato {
 	 * 
 	 * @param esame la tipologia di esame da impostare
 	 */
-	public void setEsame(Esame esame) throws IllegalAccessException, IllegalArgumentException{
-		this.esame = esame;
-		if(!isCoerenteMalattia()) throw new IllegalArgumentException(ES_MAL_NON_COERENTE);
+	public void setEsame(Esame esame) throws IllegalArgumentException{
+		try{
+			Esame oldEsame = this.esame;
+			this.esame = esame;
+			if(!isCoerenteMalattia()){
+				this.esame = oldEsame;
+				throw new IllegalArgumentException(ES_MAL_NON_COERENTE);
+			}
+		}
+		catch(IllegalAccessException e){
+			//ignoro perchè tutto a posto, l'assegnamento è comunque valido dato che non è stata impostata una malattia
+		}
 	}
 	/**
 	 * Permette di impostare la data in cui effettuare l'esame
