@@ -40,7 +40,7 @@ public class ListaEsameTest{
 	}
 
 	@Test
-	public void testCercaMalattiaPresente() {
+	public void testCercaEsamePresente() {
 		Esame esame1 = new Esame("Radiografia");
 		Esame esame2 = new Esame("Ecografia");
 		ArrayList<Esame> array1 = new ArrayList<Esame>();
@@ -52,7 +52,7 @@ public class ListaEsameTest{
 	}
 	
 	@Test
-	public void testCercaMalattiaAssente() {
+	public void testCercaEsameAssente() {
 		Esame esame1 = new Esame("Radiografia");
 		Esame esame2 = new Esame("Ecografia");
 		ArrayList<Esame> array1 = new ArrayList<Esame>();

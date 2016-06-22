@@ -74,5 +74,24 @@ public class ListaMalattiaTest {
 		Malattia trovato = lista1.cercaMalattia("Raffreddore"); 
 		assertEquals(malattia1, trovato);
 	}
-
+	
+	@Test
+	public void testCercaMalattiaAssente() {
+		ArrayList<Esame> associati = new ArrayList<>();
+		Esame esame1 = new Esame("Colesterolo");
+		Esame esame2 = new Esame("Sangue");
+		associati.add(esame1);
+		associati.add(esame2);
+		
+		ArrayList<Malattia> elencoMalattia = new ArrayList<>();
+		Malattia malattia1 = new Malattia("Raffreddore", MyTime.creaData("01/01/2009"), "Catarro", "Malato", associati, "Soffia");
+		Malattia malattia2 = new Malattia("Bronchite", MyTime.creaData("01/02/2009"), MyTime.creaData("15/02/2009"), "Catarro", "Malato", associati, "Soffia");
+		elencoMalattia.add(malattia1);
+		elencoMalattia.add(malattia2);
+		
+		ListaMalattia lista1 = new ListaMalattia(elencoMalattia);
+		Malattia trovato = lista1.cercaMalattia("Polmonite"); 
+		assertEquals(null, trovato);
+	}
+	
 }
