@@ -2,7 +2,7 @@ package it.unibs.fp.progetto;
 
 import java.util.Date;
 import java.io.*;
-
+import java.util.ArrayList;
 import it.unibs.fp.mylib.*;
 
 public class CSMain{
@@ -17,6 +17,9 @@ public class CSMain{
 	private static final String[] OPZIONI = {"Gestione dati paziente","Gestione esami","Gestione malattie"};
 	private static final String[] OPZIONI_PAZIENTE = {"Modifica dati paziente","Visualizzazione completa dati paziente","Visualizzazione sintetica dati paziente"};
 	private static final String[] OPZIONI_ESAME = {"Inserisci esame","Modifica esame","Visualizza esame","Visualizza lista esami"};
+	private static final String[] OPZIONI_MODIFICA_ESAME = {"Modifica nome", "Modifica raccomandazioni"};
+	private static final String[] OPZIONI_MODIFICA_ESAME_DIAGNOSTICO = {"Modifica nome", "Modifica raccomandazioni", "Modifica area interessata"};
+	private static final String[] OPZIONI_MODIFICA_ESAME_PM = {"Modifica nome", "Modifica raccomandazioni", "Modifica valore minimo", "Modifica valore massimo","Modifica soglia errore"};
 	private static final String[] OPZIONI_MODIFICA_E_EFFETTUATO = {"Modifica data", "Modifica esame", "Modifica luogo", "Modifica malattia", "Modifica ora", "Modifica esito", "Modifica avvisi (se l'esame e' di tipologia misurabile"};
 	private static final String[] OPZIONI_MALATTIA = {"Inserisci malattia","Modifica malattia","Visualizza malattia","Visualizza lista malattie"};
 	private static final String[] OPZIONI_MODIFICA_MALATTIA = {"Modifica nome", "Modifica data di inizio", "Modifica data di termine", "Modifica sintomi", "Modifica diagnosi", "Modifica terapia"};
@@ -30,6 +33,7 @@ public class CSMain{
 	private static final String MODIFICA_INFO_UTENTE = "Modifica informazioni utente";
 	private static final String MODIFICA_INFO_MALATTIA = "Modifica informazioni malattia";
 	private static final String MODIFICA_INFO_E_EFFETTUATO = "Modifica informazioni esame effettuato";
+	private static final String MODIFICA_INFO_ESAME = "Modifica informazioni esame effettuato";
 	
 	//Paziente
 	private static final String MEX_INSERIMENTO_NOME = "Inserisci il nome del paziente: ";
@@ -56,6 +60,9 @@ public class CSMain{
 	private static final String MEX_VALORE_MIN = "Inserisci il valore minimo: ";
 	private static final String MEX_VALORE_MAX = "Inserisci il valore massimo: ";
 	private static final String MEX_SOGLIA_ERRORE = "Inserisci la soglia di errore: ";
+	private static final String MEX_INSERIMENTO_ESITO = "Inserisci un esito: ";
+	private static final String MEX_INSERIMENTO_ERELATIVO = "Inserisci il nome dell'esame a cui e' associato: ";
+	private static final String MEX_INSERIMENTO_MRELATIVO = "Inserisci il nome della malttia a cui e' associato: ";
 	
 	//Malattia
 	//"Modifica sintomi", "Modifica diagnosi", "Modifica terapia"
@@ -76,6 +83,8 @@ public class CSMain{
 	private static final String TIPOLOGIA_INESISTENTE = "Attenzione! La tipologia di esame specificata non esiste!";
 	private static final String MALATTIA_INESISTENTE = "Attenzione! La malattia specificata non esiste!";
 	private static final String ERRORE_TIPOLOGIA = "Attenzione, operazione non disponibile per la tipologia di esame scelta.";
+	private static final String ERRORE_ESAME_NON_TROVATO="Attenzione! Non e' presente alcun esame con quel nome!";
+	private static final String ERRORE_MALATTIA_NON_TROVATA="Attenzione! Non e' presente alcuna malattia con quel nome!";
 	
 	/*
 	 * 4 tipologie di esami
@@ -198,7 +207,12 @@ public class CSMain{
 		return cs;
 	}
 
-	/*Metodo che permette la creazione di un nuovo esame*/
+	/**
+	 * Metodo che crea un oggetto della classe esame in base alla tipologia scelta nel menu presente nel metodo
+	 * @return esame creato dall'utente
+	 * 
+	 * @author Martinelli Giuseppe
+	 */
 	public static Esame creaEsame(){
 		String nome = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_NOME);
 		String raccomandazioni = MyInput.leggiStringa(MEX_INSERIMENTO_RACCOMANDAZIONI);
@@ -239,6 +253,73 @@ public class CSMain{
 		
 		Esame esame = null;
 		return esame;
+	}
+	
+	/** 
+	 * Crea, mostra ed effettua le opzioni relative ad un menu' per la creazione di un esame effettuato
+	 * @param listaE la lista delle tipologie di esame create
+	 * @param listaM la lista delle malattie create
+	 * 
+	 * @author Martinelli Giuseppe
+	 */
+	public static EsameEffettuato creaEsameEffettuato(EsameDiagnostico E, ListaMalattia listaM){
+		int scelta = 0;
+		boolean valido = false;
+		MyMenu menuEffettuato = new MyMenu("Tipologia di esame", TIPOLOGIA_ESAME);
+		scelta = menuEffettuato.scegli();
+		
+		switch(scelta){
+			case 1:	//Diagnostico
+				EsameDiagnostico eAss=E;
+				valido = false;
+				Malattia mAss=null;
+				do{
+					String nomeMalattiaAss = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_MRELATIVO);
+					if(listaM.isEsistente(nomeMalattiaAss)){
+						mAss = listaM.cercaMalattia(nomeMalattiaAss);
+						valido= true;
+					}
+					else{
+						stampaMex(ERRORE_MALATTIA_NON_TROVATA);
+					}
+				}while(!valido);
+				String luogo = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_LUOGO);
+				String data = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_DATA);
+				String ora = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_ORA);
+				String esito = MyInput.leggiStringa(MEX_INSERIMENTO_ESITO);
+				
+				EDiagnosticoEffettuato ed1;
+				if(esito != null || BelleStringhe.togliSpazi(esito)!="")
+					ed1 = new EDiagnosticoEffettuato(eAss,mAss,luogo,MyTime.creaData(data),ora,esito);
+				else
+					ed1 = new EDiagnosticoEffettuato(eAss,mAss,luogo,MyTime.creaData(data),ora,esito);
+				return ed1;
+			case 2:	//Periodico Misurabile
+				valido = false;
+				EsamePeriodico eAssp = E;
+				valido = false;
+				Malattia mAssp=null;
+				do{
+					String nomeMalattiaAss = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_MRELATIVO);
+					if(listaM.isEsistente(nomeMalattiaAss)){
+						mAssp = listaM.cercaMalattia(nomeMalattiaAss);
+						valido= true;
+					}
+					else{
+						stampaMex(ERRORE_MALATTIA_NON_TROVATA);
+					}
+				}while(!valido);
+				String luogop = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_LUOGO);
+				String datap = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_DATA);
+				String orap = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_ORA);
+				double esitop = MyInput.leggiDouble(MEX_INSERIMENTO_ESITO);
+
+				EPeriodicoMisurabileEffettuato ep1 = new EPeriodicoMisurabileEffettuato(eAssp,mAssp,luogo,MyTime.creaData(data),ora,esitop);
+				return ep1;
+			default:
+				stampaMex(MEX_ERRORE_INSERIMENTO);
+		}
+		return null;
 	}
 	
 	/** 
@@ -350,6 +431,35 @@ public class CSMain{
 					}
 				}while(valido == false);
 				CS.setGruppoSanguigno(gruppoS);
+				break;
+			default:
+				stampaMex(MEX_ERRORE_INSERIMENTO);
+		}
+	}
+	
+	/** 
+	 * Crea, mostra ed effettua le opzioni relative ad un menu' per la modifica dei dati di un esame
+	 * @param EsameEffettuato l'esame da modificare
+	 * @param listaE la lista delle tipologie di esame create
+	 * 
+	 * @author Martinelli Giuseppe
+	 */
+	public static void modificaDatiEsame(Esame esame, ListaEsame listaE){
+		int scelta = 0;
+		boolean valido = false;
+		MyMenu menuModificaEffettuato = new MyMenu(MODIFICA_INFO_ESAME, OPZIONI_MODIFICA_ESAME);
+		scelta = menuModificaEffettuato.scegli();
+		
+		switch(scelta){
+			case 1:
+				String nomeMod = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_NOME_ESAME);
+				esame.setNome(nomeMod);
+				break;
+			case 2:
+				String raccomandazioniMod = MyInput.leggiStringa(MEX_INSERIMENTO_RACCOMANDAZIONI);
+				esame.setNome(raccomandazioniMod);
+				break;
+			case 0:
 				break;
 			default:
 				stampaMex(MEX_ERRORE_INSERIMENTO);
@@ -509,6 +619,8 @@ public class CSMain{
 	public static void main(String[] args) {
 		stampaMex(MEX_BENVENUTO);
 		CartellaSanitaria CS = null; //momentaneo per non ricevere errori dall'editor
+		ArrayList<Esame> lista = new ArrayList<Esame>();
+		ListaEsame listaEsami = new ListaEsame(lista);
 		File file = new File(PATH);
 		if (file.exists()){
 			// Il file esiste, devo caricare le informazioni contenute
@@ -555,7 +667,9 @@ public class CSMain{
 							scelta4 = menuTipo.scegli();
 							switch(scelta4){	//Faccio scegliere se inserire un nuovo esame o un nuovo esame effettuato
 							case 1:		//Esame 
-								creaEsame();
+								Esame esame = creaEsame();
+								lista.add(esame);
+								listaEsami= new ListaEsame (lista);
 								scelta4=0;	//Scelta valida, posso uscire dal ciclo
 								break;
 							case 2:		//EsameEffettuato
