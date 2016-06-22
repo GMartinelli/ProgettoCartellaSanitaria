@@ -14,14 +14,14 @@ public class EPeriodicoMisurabileEffettuato extends EsameEffettuato{
 	//costanti
 	private final static double DEFAULT_NE = -1; //NE = non effettuato
 	
-	public final static String COMPRESO_ECC = "Il valore è nel range accettabile";
+	public final static String COMPRESO_ECC = "Il valore e' nel range accettabile";
 	
 	//avvisi
-	private final static String COMPRESO = "L'esito dell'esame è conforme ai valori accettabili";
-	private final static String SUPERIORE = "Attenzione! L'esito dell'esame è superiore al valore massimo accettabile";
-	private final static String INFERIORE = "Attenzione! L'esito dell'esame è inferiore al valore massimo accettabile";
-	private final static String SOGLIA_SUPERIORE = "URGENZA! L'esito dell'esame è MOLTO superiore al valore massimo accettabile";
-	private final static String SOGLIA_INFERIORE = "URGENZA! L'esito dell'esame è MOLTO inferiore al valore massimo accettabile";
+	private final static String COMPRESO = "L'esito dell'esame e' conforme ai valori accettabili";
+	private final static String SUPERIORE = "Attenzione! L'esito dell'esame e' superiore al valore massimo accettabile";
+	private final static String INFERIORE = "Attenzione! L'esito dell'esame e' inferiore al valore massimo accettabile";
+	private final static String SOGLIA_SUPERIORE = "URGENZA! L'esito dell'esame e' MOLTO superiore al valore massimo accettabile";
+	private final static String SOGLIA_INFERIORE = "URGENZA! L'esito dell'esame e' MOLTO inferiore al valore massimo accettabile";
 	
 	//attributi
 	private EsamePeriodicoMisurabile esame;
