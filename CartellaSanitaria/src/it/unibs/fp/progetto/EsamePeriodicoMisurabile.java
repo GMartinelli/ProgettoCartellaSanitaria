@@ -21,11 +21,13 @@ public class EsamePeriodicoMisurabile extends Esame {
 	
 	//Costruttori
 	/**
+	 * Costruttore che richiama il costruttore della classe Madre e inserisce gli attributi passati dall'utente. 
 	 * 
-	 * @param nome
-	 * @param valoreMin
-	 * @param valoreMax
-	 * @param sogliaErrore
+	 * @param nome il nome dell'esame
+	 * @param valoreMin il valore minimo del range
+	 * @param valoreMax il valore massimo del range
+	 * @param sogliaErrore la soglia(troppo BASSA o troppo ALTA) per cui sicuramente e' avvenuta un'anomalia
+	 * 
 	 * @author Manenti Gabriele
 	 */
 	public EsamePeriodicoMisurabile(String nome, double valoreMin, double valoreMax, double sogliaErrore){
@@ -36,12 +38,14 @@ public class EsamePeriodicoMisurabile extends Esame {
 	}
 
 	/**
+	 * Costruttore che richiama il costruttore della classe Madre e inserisce gli attributi passati dall'utente. 
 	 * 
-	 * @param nome
-	 * @param raccomandazioni
-	 * @param valoreMin
-	 * @param valoreMax
-	 * @param sogliaErrore
+	 * @param nome il nome dell'esame
+	 * @param raccomandazioni le raccomandazioni in merito all'esame
+	 * @param valoreMin il valore minimo del range
+	 * @param valoreMax il valore massimo del range
+	 * @param sogliaErrore la soglia(troppo BASSA o troppo ALTA) per cui sicuramente e' avvenuta un'anomalia
+	 * 
 	 * @author Manenti Gabriele
 	 */
 	public EsamePeriodicoMisurabile(String nome, String raccomandazioni, double valoreMin, double valoreMax, double sogliaErrore){
