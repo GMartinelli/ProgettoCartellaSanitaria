@@ -10,8 +10,6 @@ public class CSMain{
 	private static final String MEX_BENVENUTO = "Benvenuto nell'applicazione per la gestione della cartella sanitaria di un paziente";
 	private static final String MEX_USCITA = "Grazie per avere utilizzato la nostra applicazione! Arrivederci!";
 
-	private static final String MEX_SCELTA = "Cosa desideri fare?";
-
 	//Menu'
 	private static final String[] OPZIONI_BASE = {"Crea cartella sanitaria", "Gestisci cartella sanitaria"};
 	private static final String[] OPZIONI = {"Gestione dati paziente","Gestione esami","Gestione malattie"};
@@ -20,7 +18,7 @@ public class CSMain{
 	private static final String[] OPZIONI_MODIFICA_E_EFFETTUATO = {"Modifica data", "Modifica esame", "Modifica luogo", "Modifica malattia", "Modifica ora", "Modifica esito", "Modifica avvisi (se l'esame e' di tipologia misurabile"};
 	private static final String[] OPZIONI_MALATTIA = {"Inserisci malattia","Modifica malattia","Visualizza malattia","Visualizza lista malattie"};
 	private static final String[] OPZIONI_MODIFICA_MALATTIA = {"Modifica nome", "Modifica data di inizio", "Modifica data di termine", "Modifica sintomi", "Modifica diagnosi", "Modifica terapia"};
-	private static final String[] OPZIONI_MODIFICA_PAZIENTE = {"Modifica nome","Modifica cognome","Modifica indirizzo","Modifica telefono","Modifica email", "Modifica luogo di nascita", "Modifica data di nascita", "Modifica genere", "Modifica codice fiscale", "Modifica gruppo sanguigno"};
+	private static final String[] OPZIONI_MODIFICA_PAZIENTE = {"Modifica nome","Modifica cognome","Modifica indirizzo","Modifica telefono","Modifica email", "Modifica luogo di nascita", "Modifica data di nascita", "Modifica genere", "Modifica codice fiscale", "Modifica gruppo sanguigno", "Aggiungi esame effettuato", "Aggiungi malattia", "Rimuovi esame effettuato", "Rimuovi malattia"};
 	private static final String[] TIPOLOGIA_ESAME = {"Diagnostici","Periodici misurabili"};
 	private static final String[] SELEZIONE_ESAME = {"Tutti","Diagnostici","Periodici misurabili"};
 	
@@ -57,8 +55,20 @@ public class CSMain{
 	private static final String MEX_VALORE_MAX = "Inserisci il valore massimo: ";
 	private static final String MEX_SOGLIA_ERRORE = "Inserisci la soglia di errore: ";
 	
+	//Scelta aggiungi rimuovi
+	private static final String MEX_CREA_CERCA_TIPOLOGIA_ESAME = "Si desidera creare la tipologia di esame o cercarne una nuova?";
+	private static final String[] MEX_SCEGLI_CREA_CERCA_TIPOLOGIA = {"Crea una nuova tipologia di esame", "Cerca una tipologia di esame"};
+	
+	private static final String MEX_TIPO_ESAME = "Si desidera inserire un nuovo Esame Effettuato Diagnostico o Periodico Misurabile?";
+	private static final String[] MEX_SCEGLI_TIPO_ESAME = {"Diagnostico", "Periodico Misurabile"};
+	
+	private static final String MEX_CERCA_ESAME = "Inserire il nome dell'esame che si desidera cercare: ";
+	
+	private static final String MEX_AGGIUNGI_MALATTIA = "";
+	private static final String MEX_RIMUOVI_ESAME = "";
+	private static final String MEX_RIMUOVI_MALATTIA = "";
+	
 	//Malattia
-	//"Modifica sintomi", "Modifica diagnosi", "Modifica terapia"
 	private static final String MEX_INSERIMENTO_NOME_MALATTIA = "Inserisci il nome della malattia: ";
 	private static final String MEX_INSERIMENTO_DATAI = "Inserisci la data di inizio della malattia: ";
 	private static final String MEX_INSERIMENTO_DATAT = "Inserisci la data di termine della malattia: ";
@@ -90,7 +100,7 @@ public class CSMain{
 	public void salvaOggetto(Object daSalvare, String nomeFile){
 		File file = new File(nomeFile);
 		if(file.exists()){
-			stampaMex(MEX_ERRORE_FILE_ESISTENTE + " L'oggetto non verra'  salvato.");
+			stampaMex(MEX_ERRORE_FILE_ESISTENTE + " L'oggetto non verra'ï¿½ salvato.");
 		}
 		else{
 			MyServizioFile.salvaSingoloOggetto(file, daSalvare);
@@ -241,13 +251,54 @@ public class CSMain{
 		return esame;
 	}
 	
+	public static Esame creaEsame(int scelta){
+		String nome = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_NOME);
+		String raccomandazioni = MyInput.leggiStringa(MEX_INSERIMENTO_RACCOMANDAZIONI);
+		int sceltaT=scelta;
+		do{
+			MyMenu menuTipo = new MyMenu("Tipo esame",TIPOLOGIA_ESAME);
+			sceltaT = menuTipo.scegli();
+			switch(sceltaT){
+			case 1:
+				String areaInteressata=MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_AREA_INTERESSATA);
+				if(raccomandazioni!=null && BelleStringhe.togliSpazi(raccomandazioni)!=""){
+					EsameDiagnostico e1 = new EsameDiagnostico(nome, areaInteressata);
+					return e1;
+				}
+				else{
+					EsameDiagnostico e1 = new EsameDiagnostico(nome, raccomandazioni, areaInteressata);
+					return e1;	
+				}
+			case 2:
+				int valoreMin= MyInput.leggiInteroConMinimo(MEX_VALORE_MIN, 0);
+				int valoreMax = MyInput.leggiInteroConMinimo(MEX_VALORE_MAX, valoreMin+1);
+				int sogliaErrore = MyInput.leggiInteroConMinimo(MEX_SOGLIA_ERRORE, 0);
+				if(raccomandazioni!=null && BelleStringhe.togliSpazi(raccomandazioni)!=""){
+					EsamePeriodicoMisurabile e1 = new EsamePeriodicoMisurabile(nome, valoreMin, valoreMax, sogliaErrore);
+					return e1;
+				}
+				else{
+					EsamePeriodicoMisurabile e1 = new EsamePeriodicoMisurabile(nome, raccomandazioni, valoreMin, valoreMax, sogliaErrore);
+					return e1;	
+				}
+			case 0:
+				break;
+			default:
+				stampaMex(MEX_ERRORE_INSERIMENTO);
+				break;
+			}
+		}while(sceltaT!=0);
+		
+		Esame esame = null;
+		return esame;
+	}
 	/** 
 	 * Crea, mostra ed effettua le opzioni relative ad un menu' per la modifica dei dati utente della cartella sanitaria
 	 * @param CS la cartella sanitaria da modificare
 	 * 
 	 * @author Valtulini Claudio
 	 */
-	public static void modificaDatiPaziente(CartellaSanitaria CS){
+	public static void modificaDatiPaziente(CartellaSanitaria CS, ListaEsame listaE){
 		int scelta = 0;
 		boolean valido = false;
 		MyMenu menuModificaPaziente = new MyMenu(MODIFICA_INFO_UTENTE, OPZIONI_MODIFICA_PAZIENTE);
@@ -351,8 +402,72 @@ public class CSMain{
 				}while(valido == false);
 				CS.setGruppoSanguigno(gruppoS);
 				break;
+				case 11:
+					int sceltaAggiungereEffettuato = 0;
+					MyMenu menuAggiungereEffettuato = new MyMenu(MEX_TIPO_ESAME, MEX_SCEGLI_TIPO_ESAME);
+					sceltaAggiungereEffettuato = menuAggiungereEffettuato.scegli();
+					switch(sceltaAggiungereEffettuato){
+						case 1:
+							aggiungiEffettuatoDiagnostico(CS, listaE);
+							break;
+						case 2:
+							aggiungiEffettuatoPeriodicoMisurabile(CS, listaE);
+							break;
+						default:
+							stampaMex(MEX_ERRORE_INSERIMENTO);
+					}
+					break;
+				case 12:
+					//aggiungi malattia
+					break;
+				case 13:
+					//rimuovi effettuato
+					break;
+				case 14:
+					//rimuovi malattia
+					break;
 			default:
 				stampaMex(MEX_ERRORE_INSERIMENTO);
+		}
+	}
+	
+	public static void aggiungiEffettuatoDiagnostico(CartellaSanitaria CS, ListaEsame listaE){
+		int scelta = 0;
+		MyMenu menuCreaCerca = new MyMenu(MEX_CREA_CERCA_TIPOLOGIA_ESAME, MEX_SCEGLI_CREA_CERCA_TIPOLOGIA);
+		scelta = menuCreaCerca.scegli();
+		
+		switch(scelta){
+			case 1:
+				listaE.aggiungiEsame(creaEsame(1));
+				break;
+			case 2:
+				String nomeCerca = MyInput.leggiStringaNonVuota(MEX_CERCA_ESAME);
+				if(listaE.isEsistente(nomeCerca)){
+					if(listaE.cercaEsame(nomeCerca) instanceof EsameDiagnostico){
+					
+					}
+				}
+				break;
+			default:
+				stampaMex(MEX_ERRORE_INSERIMENTO);
+		}
+	}
+	
+	public static void aggiungiEffettuatoPeriodicoMisurabile(CartellaSanitaria CS, ListaEsame listaE){
+		int scelta = 0;
+		MyMenu menuCreaCerca = new MyMenu(MEX_CREA_CERCA_TIPOLOGIA_ESAME, MEX_SCEGLI_CREA_CERCA_TIPOLOGIA);
+		scelta = menuCreaCerca.scegli();
+		
+		switch(scelta){
+			case 1:
+				listaE.aggiungiEsame(creaEsame(2));
+				break;
+			case 2:
+				
+				break;
+			default:
+				stampaMex(MEX_ERRORE_INSERIMENTO);
+		}
 		}
 	}
 	
@@ -471,8 +586,8 @@ public class CSMain{
 	 */
 	public static void modificaDatiMalattia(Malattia malattia){
 		int scelta = 0;
-		boolean valido = false;
-		MyMenu menuModificaMalattia = new MyMenu(MODIFICA_INFO_MALATTIA, OPZIONI_MODIFICA_E_EFFETTUATO);
+		//boolean valido = false;
+		MyMenu menuModificaMalattia = new MyMenu(MODIFICA_INFO_MALATTIA, OPZIONI_MODIFICA_MALATTIA);
 		scelta = menuModificaMalattia.scegli();
 		
 		switch(scelta){
@@ -509,6 +624,8 @@ public class CSMain{
 	public static void main(String[] args) {
 		stampaMex(MEX_BENVENUTO);
 		CartellaSanitaria CS = null; //momentaneo per non ricevere errori dall'editor
+		ListaEsame listaE = null; //come sopra
+		
 		File file = new File(PATH);
 		if (file.exists()){
 			// Il file esiste, devo caricare le informazioni contenute
@@ -531,7 +648,7 @@ public class CSMain{
 				scelta2 = menuPaziente.scegli();
 				switch(scelta2){
 					case 1:
-						modificaDatiPaziente(CS);
+						modificaDatiPaziente(CS, listaE);
 						break;
 					case 2:
 						stampaMex(CS.toString());
