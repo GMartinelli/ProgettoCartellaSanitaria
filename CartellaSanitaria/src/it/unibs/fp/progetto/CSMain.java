@@ -86,6 +86,8 @@ public class CSMain{
 	private static final String MEX_INSERIMENTO_DIAGNOSI = "Inserisci la diagnosi effettuata dal medico: ";
 	private static final String MEX_INSERIMENTO_TERAPIA = "Inserisci la terapia consigliata: ";
 	private static final String MEX_CANCELLA_MALATTIA = "Inserisci il nome della malattia che desideri eliminare: ";
+	private static final String MEX_PIU_MALATTIE = "Attenzione, sono presenti piu' malattie con questo nome: ";
+	private static final String MEX_CANCELLA_SELEZIONA_DATAI = "Inserire la data di inizio della malattia da cancellare: ";
 	
 	//Avvisi
 	private static final String NON_MODIFICA = "Attenzione, non verrà scelto di inserire alcun dato.";
@@ -505,7 +507,7 @@ public class CSMain{
 					break;
 				case 12:
 					//aggiungi malattia
-					
+					//creaMalattia();
 					break;
 				case 13:
 					//rimuovi effettuato
@@ -523,11 +525,17 @@ public class CSMain{
 					break;
 				case 14:
 					//rimuovi malattia
-					/*String nomeMalattia = MyInput.leggiStringaNonVuota(MEX_CANCELLA_MALATTIA);
+					String nomeMalattia = MyInput.leggiStringaNonVuota(MEX_CANCELLA_MALATTIA);
 					if(CS.isMalattiaEsistente(nomeMalattia)){
-						
+						if(CS.contaMalattiaEsistente(nomeMalattia) > 1){
+							Date dataInizio = MyInput.leggiData(MEX_PIU_MALATTIE + " " + MEX_CANCELLA_SELEZIONA_DATAI);
+							CS.getElencoMalattia().remove(CS.cercaMalattia(nomeMalattia, dataInizio));
+						}
+						else{
+							CS.getElencoMalattia().remove(CS.cercaMalattia(nomeMalattia));
+						}
 					}
-					*/break;
+					break;
 			default:
 				stampaMex(MEX_ERRORE_INSERIMENTO);
 		}

@@ -568,4 +568,12 @@ public class CartellaSanitaria {
 		}
 		return null;
 	}
+	
+	public Malattia cercaMalattia(String nomeMalattia, Date dataInizio){
+		for(Malattia elemento: elencoMalattia){
+			if(elemento.getNome() == nomeMalattia && elemento.getDataInizio() == dataInizio)
+				return elemento;
+		}
+		return null;
+	}
 }
