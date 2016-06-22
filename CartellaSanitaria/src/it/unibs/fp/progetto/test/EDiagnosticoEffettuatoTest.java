@@ -246,5 +246,4 @@ public class EDiagnosticoEffettuatoTest {
 			e.printStackTrace();
 		}
 	}
-	
 }

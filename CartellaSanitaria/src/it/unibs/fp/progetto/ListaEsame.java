@@ -52,7 +52,7 @@ public class ListaEsame{
 	 * Metodo che ricerca per nome un esame all'interno di un'ArrayList.
 	 * @param nomeEsame il nome dell'esame da cercare.
 	 * 
-	 * @return true se l'esame è stato trovato, altrimenti ritorna false.
+	 * @return true se l'esame ï¿½ stato trovato, altrimenti ritorna false.
 	 * 
 	 * @author Manenti Gabriele
 	 */
@@ -77,6 +77,10 @@ public class ListaEsame{
 				return lista.get(i);
 		}
 		return null;
+	}
+	
+	public void aggiungiEsame(Esame esame){
+		lista.add(esame);
 	}
 	
 
