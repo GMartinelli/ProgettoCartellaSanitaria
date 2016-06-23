@@ -1,6 +1,8 @@
 package it.unibs.fp.progetto.test;
 /**
  * Classe contenente Test JUnit per il controllo della correttezza della Classe EPeriodicoMisurabileEffettuato.
+ * 
+ * @author Manenti Gabriele
  */
 import static org.junit.Assert.*;
 import it.unibs.fp.progetto.*;

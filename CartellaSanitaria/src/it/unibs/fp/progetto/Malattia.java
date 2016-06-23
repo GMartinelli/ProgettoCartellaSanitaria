@@ -2,6 +2,8 @@ package it.unibs.fp.progetto;
 import java.util.ArrayList;
 import java.util.Date;
 
+import it.unibs.fp.mylib.MyTime;
+
 /**
  * Classe che rappresenta una malattia, attraverso diversi attributi ritenuti significativi per identificarla:
  * nome
@@ -196,9 +198,9 @@ public class Malattia {
 	 * 
 	 * @return descrizione la descrizione sintetica della malattia
 	 */
-	public String toString(){
-		String descrizione = nome + "%n   Iniziata: " + dataInizio;
-		if(dataTermine != null) descrizione += ("%n   Terminata:  " + dataTermine); 
+	public String toString(){ /*Modificato Metodo to String nell'acquisizione data(aggiunto MyTime.toStringData)*/
+		String descrizione = nome + "%n   Iniziata: " + MyTime.toStringData(dataInizio);
+		if(dataTermine != null) descrizione += ("%n   Terminata:  " + MyTime.toStringData(dataTermine)); 
 		
 		return descrizione;
 	}
