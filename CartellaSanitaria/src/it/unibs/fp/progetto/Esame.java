@@ -93,6 +93,9 @@ public class Esame {
 	}
 	
 	//Metodi
+	public String toString(){
+		return nome;
+	}
 	
 
 }

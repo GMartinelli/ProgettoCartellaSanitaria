@@ -187,4 +187,15 @@ public class EDiagnosticoEffettuato extends EsameEffettuato{
 		if(esito == null) return false;
 		else return true;
 	}
+	
+	public String toStringCompleto(){
+		String stringaDescrittivaCompleta = super.toStringCompleto();
+		if(esame.getAreaInteressata() != null){ stringaDescrittivaCompleta +=
+			"Area Interessata: " + esame.getAreaInteressata();
+		}
+		if(esito != null){ stringaDescrittivaCompleta +=
+			"Esito: " + esito + "%n";
+		}
+		return stringaDescrittivaCompleta;
+	}
 }

@@ -1,5 +1,9 @@
 package it.unibs.fp.progetto.test;
-
+/**
+ * Classe contenente Test JUnit per il controllo della correttezza della Classe Malattia.
+ * 
+ * @author Manenti Gabriele 
+ */
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;

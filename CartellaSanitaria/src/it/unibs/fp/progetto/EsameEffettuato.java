@@ -190,7 +190,26 @@ public class EsameEffettuato {
 	/**
 	 * Ritorna una stringa rappresentativa contenente il nome della tipologia di esame, data, ora e luogo
 	 */
-	public String toString(){
+	public String toString(){/*Modificato Metodo to String nell'acquisizione data(aggiunto MyTime.toStringData)*/
 		return esame.getNome() + "%n   Data: " + MyTime.toStringData(data) + "%n   Ora: " + ora + "%n   Luogo: " + luogo;
+	}
+	
+	public String toStringCompleto(){/*Modificato Metodo to String nell'acquisizione data(aggiunto MyTime.toStringData)*/
+		String stringaDescrittivaCompleta =
+			"Tipologia Esame: " + esame.getNome() + "%n" +
+			"Raccomandazioni: " + esame.getRaccomandazioni() + "%n";
+		if(data != null){ stringaDescrittivaCompleta +=
+			"Data: " + MyTime.toStringData(data) + "%n";
+		}
+		if(ora != null){ stringaDescrittivaCompleta +=
+			"Ora: " + ora + "%n";
+		}
+		if(luogo != null){ stringaDescrittivaCompleta +=
+			"Luogo: " + luogo + "%n";
+		}
+		if(malattia != null){ stringaDescrittivaCompleta +=
+			"Malattia associata: " + malattia.toString() + "%n";
+		}
+		return stringaDescrittivaCompleta;
 	}
 }

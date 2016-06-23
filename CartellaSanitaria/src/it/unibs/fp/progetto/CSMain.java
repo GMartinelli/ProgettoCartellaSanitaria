@@ -862,12 +862,30 @@ public class CSMain{
 		stampaMex(stringaDescrittivaCompleta);
 	}
 	
-	public static void visualizzaEsameCompleta(CartellaSanitaria CS, EsameEffettuato esame){
-		
+	public static void visualizzaEsameCompleta(EsameEffettuato esame){
+		String stringaDescrittivaCompleta =
+			esame.toStringCompleto();
+		stampaMex(stringaDescrittivaCompleta);
 	}
 	
-	public static void visualizzaMalattiaCompleta(CartellaSanitaria CS, EsameEffettuato esame){
-		
+	public static void visualizzaMalattiaCompleta(Malattia malattia){
+		String stringaDescrittivaCompleta =
+			malattia.toString() + "%n";
+		if(malattia.getSintomi() != null){ stringaDescrittivaCompleta +=
+			"  Sintomi: " + malattia.getSintomi();
+		}
+		if(malattia.getDiagnosi() != null){ stringaDescrittivaCompleta +=
+			" Diagnosi: "+ malattia.getDiagnosi();
+		}
+		if(malattia.getElencoEsamiAssociati().size() > 0){ stringaDescrittivaCompleta +=
+			"  Elenco delle tipologie di esame associate: " + "%n";
+			for(Esame elemento: malattia.getElencoEsamiAssociati()){ stringaDescrittivaCompleta +=
+			"   " + elemento.toString();
+			}
+		}
+		if(malattia.getTerapia() != null){ stringaDescrittivaCompleta +=
+			"  Terapia: " + malattia.getTerapia();
+		}
 	}
 	
 	/*Main*/
