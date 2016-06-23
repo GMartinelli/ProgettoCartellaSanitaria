@@ -33,16 +33,82 @@ public class EsameEffettuatoTest {
 	}
 	
 	@Test
-	public void setEsameCorrettoTest(){
+	public void isNotCoerenteMalattiaTest(){
 		try{
 			ArrayList<Esame> associati = new ArrayList<>();
 			Esame glicemia = new Esame("Glicemia");
+
+
+			Malattia diabete = new Malattia("Diabete",MyTime.creaData("10/04/1967"),"Pressione Alta","Malato",associati,"Insulina");
+			boolean v=false;
+			try{
+				EsameEffettuato e1 = new EsameEffettuato(glicemia,diabete);
+				try{
+					e1.isCoerenteMalattia();
+				}
+				catch(IllegalArgumentException e){
+					v=true;
+					e.printStackTrace();
+				}
+			}
+			catch(IllegalArgumentException e ){
+				e.printStackTrace();
+				v=true;
+			}
+			
+			assertTrue(v);
+		}
+		catch(IllegalAccessException e){
+			e.printStackTrace();
+		}
+	
+	}
+	
+	@Test
+	public void setEsameNonCorrettoTest(){
+		try{
+			ArrayList<Esame> associati = new ArrayList<>();
+			Esame glicemia = new Esame("Glicemia");
+			Esame radiografia = new Esame("Radiografia");
+			associati.add(glicemia);
+			
+			Malattia diabete = new Malattia("Diabete",MyTime.creaData("10/04/1967"),"Pressione Alta","Malato",associati,"Insulina");
+			boolean v=false;
+			try{
+				EsameEffettuato e1 = new EsameEffettuato(glicemia,diabete);
+				try{
+					e1.setEsame(radiografia);
+				}
+				catch(IllegalArgumentException e){
+					e.printStackTrace();
+					v=true;
+				}
+			}
+			catch(IllegalArgumentException e){
+				e.printStackTrace();
+				v=true;
+			}
+			
+			assertTrue(v);
+		}
+		catch(IllegalAccessException e){
+			e.printStackTrace();
+		}
+	
+	}
+	
+	@Test
+	public void setEsameErratoTest(){
+		try{
+			ArrayList<Esame> associati = new ArrayList<>();
+			Esame glicemia = new Esame("Glicemia");
+			Esame radiografia = new Esame("Radiografia");
 			associati.add(glicemia);
 			
 			Malattia diabete = new Malattia("Diabete",MyTime.creaData("10/04/1967"),"Pressione Alta","Malato",associati,"Insulina");
 			EsameEffettuato e1 = new EsameEffettuato(glicemia,diabete);
-			e1.setEsame(glicemia);
-			assertEquals(glicemia,e1.getEsame());
+			e1.setEsame(radiografia);
+			assertEquals(radiografia,e1.getEsame());
 		}
 		catch(IllegalAccessException e){
 			e.printStackTrace();
