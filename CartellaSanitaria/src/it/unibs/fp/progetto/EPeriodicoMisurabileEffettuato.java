@@ -340,5 +340,17 @@ public class EPeriodicoMisurabileEffettuato extends EsameEffettuato{
 		if(Double.compare(esito, DEFAULT_NE) == 0) return false;
 		else return true;
 	}
-		
+	
+	public String toStringCompleto(){
+		String stringaDescrittivaCompleta = super.toStringCompleto() + 
+			"Valori di riferimento: " + "%n" +
+			"  -Minimo: " + esame.getValoreMin() + "%n" +
+			"  -Massimo: " + esame.getValoreMax() + "%n" +
+			"  -Soglia: " + esame.getSogliaErrore() + "%n";
+		if(Double.compare(esito, DEFAULT_NE) != 0){ stringaDescrittivaCompleta +=
+			"Esito: " + esito + "%n" + 
+			"Avvisi: " + getAvvisi();
+		}
+		return stringaDescrittivaCompleta;
+	}
 }
