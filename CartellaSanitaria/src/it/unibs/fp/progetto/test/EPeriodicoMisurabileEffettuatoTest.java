@@ -1,5 +1,7 @@
 package it.unibs.fp.progetto.test;
-
+/**
+ * Classe contenente Test JUnit per il controllo della correttezza della Classe EPeriodicoMisurabileEffettuato.
+ */
 import static org.junit.Assert.*;
 import it.unibs.fp.progetto.*;
 
@@ -271,6 +273,59 @@ public class EPeriodicoMisurabileEffettuatoTest {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	@Test
+	public void setEsamePossibileTest(){
+		try{
+			ArrayList<Esame> associati = new ArrayList<>();
+			EsamePeriodicoMisurabile glicemia = new EsamePeriodicoMisurabile("Glicemia", 1.00,15.00, 50.00);
+			associati.add(glicemia);
+		
+			ArrayList<Malattia> elencoMalattia = new ArrayList<>();
+			Malattia diabete = new Malattia("Diabete", MyTime.creaData("01/01/2012"), "Pressione Alta", "Malato", associati, "Insulina");
+			elencoMalattia.add(diabete);
+		    
+			EPeriodicoMisurabileEffettuato e1 = new EPeriodicoMisurabileEffettuato(glicemia,diabete, "Sarnico", MyTime.creaData("02/01/2012"),"08:50");
+
+			e1.setEsame(glicemia);
+			
+			assertEquals(glicemia,e1.getEsame());
+		}
+		catch(IllegalAccessException e){
+			e.printStackTrace();
+		}
+	
+	}
+	
+	@Test
+	public void setEsameImpossibileTest(){
+		try{
+			ArrayList<Esame> associati = new ArrayList<>();
+			EsamePeriodicoMisurabile glicemia = new EsamePeriodicoMisurabile("Glicemia", 1.00,15.00, 50.00);
+			associati.add(glicemia);
+		
+			ArrayList<Malattia> elencoMalattia = new ArrayList<>();
+			Malattia diabete = new Malattia("Diabete", MyTime.creaData("01/01/2012"), "Pressione Alta", "Malato", associati, "Insulina");
+			elencoMalattia.add(diabete);
+		    
+			EPeriodicoMisurabileEffettuato e1 = new EPeriodicoMisurabileEffettuato(glicemia,diabete, "Sarnico", MyTime.creaData("02/01/2012"),"08:50",66.00);
+
+			
+			
+			boolean thrown = false;
+			try{
+				e1.setEsame(glicemia);
+			}
+			catch(TooLateException e){
+				thrown = true;
+			}
+			assertTrue(thrown);
+			
+		}
+		catch(IllegalAccessException e){
+			e.printStackTrace();
+		}
 	}
 	
 	
