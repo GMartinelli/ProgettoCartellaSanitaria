@@ -876,6 +876,9 @@ public class CSMain{
 		CartellaSanitaria CS = null; //momentaneo per non ricevere errori dall'editor
 
 		ArrayList<Esame> lista = new ArrayList<Esame>();
+		ArrayList<Malattia> listaM = new ArrayList<Malattia>();
+		ArrayList<EsameEffettuato> listaEffettuati= new ArrayList<EsameEffettuato>();
+		
 		ListaEsame listaE = new ListaEsame(lista);
 
 		File file = new File(PATH);
@@ -906,6 +909,7 @@ public class CSMain{
 						stampaMex(CS.toString());
 						break;
 					case 3:
+						visualizzaDatiUtenteCompleta(CS);
 						break;
 					default:
 						stampaMex(MEX_ERRORE_INSERIMENTO);
@@ -925,13 +929,18 @@ public class CSMain{
 							switch(scelta4){	//Faccio scegliere se inserire un nuovo esame o un nuovo esame effettuato
 							case 1:		//Esame 
 								Esame esame = creaEsame();
-								lista.add(esame);
-								listaE= new ListaEsame (lista);
+								if(esame!=null)
+									listaE.aggiungiEsame(esame);
 								scelta4=0;	//Scelta valida, posso uscire dal ciclo
 								break;
 							case 2:		//EsameEffettuato
-								//creaEsameEffettuato();
+								EsameEffettuato eF = creaEsameEffettuato(listaE, listaM);
+								if(eF!=null)
+									listaEffettuati.add(eF);
+								
 								scelta4=0;	//Scelta valida, posso uscire dal ciclo
+								break;
+							case 0:
 								break;
 							default:
 								stampaMex(MEX_ERRORE_INSERIMENTO);
