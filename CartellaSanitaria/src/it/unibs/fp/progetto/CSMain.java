@@ -66,8 +66,8 @@ public class CSMain{
 	private static final String MEX_CANCELLA_SELEZIONA_DATA = "Inserire la data dell'esame da cancellare: ";
 	
 	//Scelta aggiungi rimuovi
-	private static final String MEX_CREA_CERCA_TIPOLOGIA_ESAME = "Si desidera creare la tipologia di esame o cercarne una nuova?";
-	private static final String[] MEX_SCEGLI_CREA_CERCA_TIPOLOGIA = {"Crea una nuova tipologia di esame", "Cerca una tipologia di esame"};
+	private static final String MEX_CREA_CERCA_ESAME = "Si desidera creare un esame o cercarne uno già esistente?";
+	private static final String[] MEX_SCEGLI_CREA_CERCA = {"Crea un nuovo esame", "Cerca un esame esistente"};
 	
 	private static final String MEX_TIPO_ESAME = "Si desidera inserire un nuovo Esame Effettuato Diagnostico o Periodico Misurabile?";
 	private static final String[] MEX_SCEGLI_TIPO_ESAME = {"Diagnostico", "Periodico Misurabile"};
@@ -88,6 +88,10 @@ public class CSMain{
 	private static final String MEX_CANCELLA_MALATTIA = "Inserisci il nome della malattia che desideri eliminare: ";
 	private static final String MEX_PIU_MALATTIE = "Attenzione, sono presenti piu' malattie con questo nome: ";
 	private static final String MEX_CANCELLA_SELEZIONA_DATAI = "Inserire la data di inizio della malattia da cancellare: ";
+	
+	private static final String SCELTA_INSERIMENTO_DATAT = "Si desidera inserire una data di termine?";
+	private static final String SCELTA_INSERIMENTO_ASSOCIATO = "Si desidera inserire un esame associato?";
+	private static final String SCELTA_INSERIMENTO_ALTRO_ASSOCIATO = "Si desidera inserire un altro esame associato?";
 	
 	//Avvisi
 	private static final String NON_MODIFICA = "Attenzione, non verrà scelto di inserire alcun dato.";
@@ -435,13 +439,243 @@ public class CSMain{
 		return null;
 	}
 	
+	public static EsameEffettuato creaEsameEffettuato(ListaEsame listaE, ArrayList<Malattia> listaM, int scelta){
+		boolean valido = false;
+		MyMenu menuEffettuato = new MyMenu("Tipologia di esame", TIPOLOGIA_ESAME);
+		scelta = menuEffettuato.scegli();
+		
+		switch(scelta){
+			case 1:	//Diagnostico
+				valido = false;
+				EsameDiagnostico eAss=null;
+				do{
+					String nomeEsameAss = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_MRELATIVO);
+					if(listaE.isEsistente(nomeEsameAss)){
+						eAss = (EsameDiagnostico) listaE.cercaEsame(nomeEsameAss);
+						valido= true;
+					}
+					else{
+						stampaMex(ERRORE_MALATTIA_NON_TROVATA);
+					}
+				}while(!valido);
+				valido = false;
+				Malattia mAss=null;
+				do{
+					String nomeMalattiaAss = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_MRELATIVO);
+					for(int i=0; i<listaM.size() && valido==false; i++){
+						if(listaM.get(i).getNome().equals(nomeMalattiaAss)){
+							mAss = listaM.get(i);
+							valido= true;
+						}
+					}
+					if(valido=false){
+						stampaMex(ERRORE_MALATTIA_NON_TROVATA);
+					}
+				}while(!valido);
+				String luogo = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_LUOGO);
+				Date data = MyInput.leggiData(MEX_INSERIMENTO_DATA);
+				String ora = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_ORA);
+				String esito = MyInput.leggiStringa(MEX_INSERIMENTO_ESITO);
+				
+				EDiagnosticoEffettuato ed1 = null;
+				if(esito != null || BelleStringhe.togliSpazi(esito)!="")
+					try{
+						ed1 = new EDiagnosticoEffettuato(eAss,mAss,luogo,data,ora,esito);
+					}
+					catch(IllegalAccessException e){
+						e.printStackTrace();
+						return null;
+					}
+				else
+					try{
+						ed1 = new EDiagnosticoEffettuato(eAss,mAss,luogo,data,ora);
+					}
+					catch(IllegalAccessException e){
+						e.printStackTrace();
+						return null;
+					}
+					return ed1;
+			case 2:	//Periodico Misurabile
+				valido = false;
+				EsamePeriodicoMisurabile eAssP=null;
+				do{
+					String nomeEsameAss = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_MRELATIVO);
+					if(listaE.isEsistente(nomeEsameAss)){
+						eAssP = (EsamePeriodicoMisurabile) listaE.cercaEsame(nomeEsameAss);
+						valido= true;
+					}
+					else{
+						stampaMex(ERRORE_MALATTIA_NON_TROVATA);
+					}
+				}while(!valido);
+				valido = false;
+				Malattia mAssP=null;
+				do{
+					String nomeMalattiaAss = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_MRELATIVO);
+					for(int i=0; i<listaM.size() && valido==false; i++){
+						if(listaM.get(i).getNome().equals(nomeMalattiaAss)){
+							mAssP = listaM.get(i);
+							valido= true;
+						}
+					}
+					if(valido=false){
+						stampaMex(ERRORE_MALATTIA_NON_TROVATA);
+					}
+				}while(!valido);
+				String luogoP = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_LUOGO);
+				Date dataP = MyInput.leggiData(MEX_INSERIMENTO_DATA);
+				String oraP = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_ORA);
+				double esitoP = MyInput.leggiDouble(MEX_INSERIMENTO_ESITO);
+				
+				EPeriodicoMisurabileEffettuato ep1 = null;
+				if(esitoP > 0) //Ritengo l'esito inserito valido solo se >0, se <=0 lo considero come non inserito
+					try{
+						ep1 = new EPeriodicoMisurabileEffettuato(eAssP,mAssP,luogoP,dataP,oraP,esitoP);
+					}
+					catch(IllegalAccessException e){
+						e.printStackTrace();
+						return null;
+					}
+				else
+					try{
+						ep1 = new EPeriodicoMisurabileEffettuato(eAssP,mAssP,luogoP,dataP,oraP);
+					}
+				catch(IllegalAccessException e){
+					e.printStackTrace();
+					return null;
+				}
+				return ep1;
+			default:
+				stampaMex(MEX_ERRORE_INSERIMENTO);
+		}
+		return null;
+	}
+	
+	//modificato non so se funziona
+	public static EsameEffettuato creaEsameEffettuato(Esame esame, ArrayList<Malattia> listaM){
+		boolean valido = false;
+			if(esame instanceof EsameDiagnostico){//Diagnostico
+				valido = false;
+				Malattia mAss = null;
+				do{
+					String nomeMalattiaAss = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_MRELATIVO);
+					for(int i = 0; i < listaM.size() && valido == false; i++){
+						if(listaM.get(i).getNome().equals(nomeMalattiaAss)){
+							mAss = listaM.get(i);
+							valido = true;
+						}
+					}
+					if(valido = false){
+						stampaMex(ERRORE_MALATTIA_NON_TROVATA);
+					}
+				}while(!valido);
+				String luogo = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_LUOGO);
+				Date data = MyInput.leggiData(MEX_INSERIMENTO_DATA);
+				String ora = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_ORA);
+				String esito = MyInput.leggiStringa(MEX_INSERIMENTO_ESITO);
+				
+				EDiagnosticoEffettuato ed1 = null;
+				if(esito != null || BelleStringhe.togliSpazi(esito) != "")
+					try{
+						ed1 = new EDiagnosticoEffettuato((EsameDiagnostico) esame, mAss, luogo, data, ora, esito);
+					}
+					catch(IllegalAccessException e){
+						e.printStackTrace();
+						return null;
+					}
+				else
+					try{
+						ed1 = new EDiagnosticoEffettuato((EsameDiagnostico) esame, mAss, luogo, data, ora);
+					}
+					catch(IllegalAccessException e){
+						e.printStackTrace();
+						return null;
+					}
+					return ed1;
+			}
+			else if(esame instanceof EsamePeriodicoMisurabile){	//Periodico Misurabile
+				valido = false;
+				Malattia mAssP=null;
+				do{
+					String nomeMalattiaAss = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_MRELATIVO);
+					for(int i = 0; i < listaM.size() && valido == false; i++){
+						if(listaM.get(i).getNome().equals(nomeMalattiaAss)){
+							mAssP = listaM.get(i);
+							valido = true;
+						}
+					}
+					if(valido = false){
+						stampaMex(ERRORE_MALATTIA_NON_TROVATA);
+					}
+				}while(!valido);
+				String luogoP = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_LUOGO);
+				Date dataP = MyInput.leggiData(MEX_INSERIMENTO_DATA);
+				String oraP = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_ORA);
+				double esitoP = MyInput.leggiDouble(MEX_INSERIMENTO_ESITO);
+				
+				EPeriodicoMisurabileEffettuato ep1 = null;
+				if(esitoP > 0) //Ritengo l'esito inserito valido solo se >0, se <=0 lo considero come non inserito
+					try{
+						ep1 = new EPeriodicoMisurabileEffettuato((EsamePeriodicoMisurabile) esame, mAssP, luogoP, dataP, oraP, esitoP);
+					}
+					catch(IllegalAccessException e){
+						e.printStackTrace();
+						return null;
+					}
+				else
+					try{
+						ep1 = new EPeriodicoMisurabileEffettuato((EsamePeriodicoMisurabile) esame, mAssP, luogoP, dataP, oraP);
+					}
+				catch(IllegalAccessException e){
+					e.printStackTrace();
+					return null;
+				}
+				return ep1;
+		}
+		return null;
+	}
+	
+	public static Malattia creaMalattia(ListaEsame listaE){
+		String nome = null;
+		Date dataInizio = null;
+		Date dataTermine = null;
+		String sintomi = null;
+		String diagnosi = null;
+		ArrayList<Esame> listaAssociati = new ArrayList<Esame>();
+		String terapia = null;
+		
+		nome = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_NOME_MALATTIA);
+		dataInizio = MyInput.leggiData(MEX_INSERIMENTO_DATAI);
+		
+		boolean scegliTermine = MyInput.yesOrNo(SCELTA_INSERIMENTO_DATAT);
+		if(scegliTermine == true) dataTermine = MyInput.leggiData(MEX_INSERIMENTO_DATAT);
+		
+		sintomi = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_SINTOMI);
+		diagnosi = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_DIAGNOSI);
+		terapia = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_DIAGNOSI);
+		
+		boolean inserisciEsame = MyInput.yesOrNo(SCELTA_INSERIMENTO_ASSOCIATO);
+		String nomeAssociato = null;
+		while(inserisciEsame == true){
+			nomeAssociato = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_NOME_ESAME);
+			if(listaE.isEsistente(nomeAssociato)){
+				listaAssociati.add(listaE.cercaEsame(nomeAssociato));
+			}
+			else{
+				stampaMex(ERRORE_ESAME_NON_TROVATO);
+			}
+			inserisciEsame = MyInput.yesOrNo(SCELTA_INSERIMENTO_ALTRO_ASSOCIATO);
+		}
+		
+		return new Malattia(nome, dataInizio, dataTermine, sintomi, diagnosi, listaAssociati, terapia);
+	}
 	/** 
 	 * Crea, mostra ed effettua le opzioni relative ad un menu' per la modifica dei dati utente della cartella sanitaria
 	 * @param CS la cartella sanitaria da modificare
 	 * 
 	 * @author Valtulini Claudio
 	 */
-	public static void modificaDatiPaziente(CartellaSanitaria CS, ListaEsame listaE){
+	public static void modificaDatiPaziente(CartellaSanitaria CS, ListaEsame listaE, ArrayList<Malattia> listaM){
 		int scelta = 0;
 		boolean valido = false;
 		MyMenu menuModificaPaziente = new MyMenu(MODIFICA_INFO_UTENTE, OPZIONI_MODIFICA_PAZIENTE);
@@ -546,23 +780,12 @@ public class CSMain{
 				CS.setGruppoSanguigno(gruppoS);
 				break;
 				case 11:
-					int sceltaAggiungereEffettuato = 0;
-					MyMenu menuAggiungereEffettuato = new MyMenu(MEX_TIPO_ESAME, MEX_SCEGLI_TIPO_ESAME);
-					sceltaAggiungereEffettuato = menuAggiungereEffettuato.scegli();
-					switch(sceltaAggiungereEffettuato){
-						case 1:
-							aggiungiEffettuatoDiagnostico(CS, listaE);
-							break;
-						case 2:
-							aggiungiEffettuatoPeriodicoMisurabile(CS, listaE);
-							break;
-						default:
-							stampaMex(MEX_ERRORE_INSERIMENTO);
-					}
+					//aggiungi esame
+					aggiungiEffettuato(CS, listaE, listaM);
 					break;
 				case 12:
 					//aggiungi malattia
-					//creaMalattia();
+					creaMalattia(listaE);
 					break;
 				case 13:
 					//rimuovi effettuato
@@ -596,61 +819,41 @@ public class CSMain{
 		}
 	}
 	
-	public static void aggiungiEffettuatoDiagnostico(CartellaSanitaria CS, ListaEsame listaE){
+	public static void aggiungiEffettuato(CartellaSanitaria CS, ListaEsame listaE, ArrayList<Malattia> listaM){
 		int scelta = 0;
-		MyMenu menuCreaCerca = new MyMenu(MEX_CREA_CERCA_TIPOLOGIA_ESAME, MEX_SCEGLI_CREA_CERCA_TIPOLOGIA);
-		scelta = menuCreaCerca.scegli();
+		MyMenu creaCerca = new MyMenu(MEX_CREA_CERCA_ESAME, MEX_SCEGLI_CREA_CERCA);
+		scelta = creaCerca.scegli();
 		
 		switch(scelta){
 			case 1:
-				listaE.aggiungiEsame(creaEsame(1));
+				int scelta2 = 0;
+				MyMenu scegliTipo = new MyMenu(MEX_TIPO_ESAME, MEX_SCEGLI_TIPO_ESAME);
+				scelta2 = scegliTipo.scegli();
+				
+				switch(scelta2){
+					case 1:
+						CS.getEsamiEffettuati().add(creaEsameEffettuato(listaE, listaM, scelta2));
+						break;
+					case 2:
+						CS.getEsamiEffettuati().add(creaEsameEffettuato(listaE, listaM, scelta2));
+						break;
+					default:
+						stampaMex(MEX_ERRORE_INSERIMENTO);
+				}
 				break;
 			case 2:
-				String nomeCerca = MyInput.leggiStringaNonVuota(MEX_CERCA_ESAME);
-				if(listaE.isEsistente(nomeCerca)){
-					if(listaE.cercaEsame(nomeCerca) instanceof EsameDiagnostico){
-					
-					}
-					else{
-						stampaMex(ERRORE_TIPOLOGIA_2);
-					}
-				}
-				else{
-					stampaMex(ERRORE_ESAME_NON_TROVATO);
-				}
+				String daCercare = null;
+				Esame esame = null;
+				do{
+					daCercare = MyInput.leggiStringaNonVuota(MEX_CERCA_ESAME);
+					esame = listaE.cercaEsame(daCercare);
+				}while(esame == null);
+				
+				CS.getEsamiEffettuati().add(creaEsameEffettuato(esame, listaM));
 				break;
 			default:
 				stampaMex(MEX_ERRORE_INSERIMENTO);
 		}
-	}
-	
-	public static void aggiungiEffettuatoPeriodicoMisurabile(CartellaSanitaria CS, ListaEsame listaE){
-		int scelta = 0;
-		MyMenu menuCreaCerca = new MyMenu(MEX_CREA_CERCA_TIPOLOGIA_ESAME, MEX_SCEGLI_CREA_CERCA_TIPOLOGIA);
-		scelta = menuCreaCerca.scegli();
-		
-		switch(scelta){
-			case 1:
-				listaE.aggiungiEsame(creaEsame(2));
-				break;
-			case 2:
-				String nomeCerca = MyInput.leggiStringaNonVuota(MEX_CERCA_ESAME);
-				if(listaE.isEsistente(nomeCerca)){
-					if(listaE.cercaEsame(nomeCerca) instanceof EsamePeriodicoMisurabile){
-					
-					}
-					else{
-						stampaMex(ERRORE_TIPOLOGIA_2);
-					}
-				}
-				else{
-					stampaMex(ERRORE_ESAME_NON_TROVATO);
-				}
-				break;
-			default:
-				stampaMex(MEX_ERRORE_INSERIMENTO);
-		}
-
 	}
 	
 	/** 
@@ -921,7 +1124,7 @@ public class CSMain{
 				scelta2 = menuPaziente.scegli();
 				switch(scelta2){
 					case 1:
-						modificaDatiPaziente(CS, listaE);
+						modificaDatiPaziente(CS, listaE, listaM);
 						break;
 					case 2:
 						stampaMex(CS.toString());

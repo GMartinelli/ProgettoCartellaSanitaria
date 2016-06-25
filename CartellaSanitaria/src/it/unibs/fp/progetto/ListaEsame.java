@@ -71,7 +71,6 @@ public class ListaEsame{
 	 * @return Esame se l'esame viene trovato, altrimenti ritorna null.
 	 */
 	public Esame cercaEsame(String nomeEsame){
-
 		for(int i = 0; i < lista.size(); i++){
 			if(lista.get(i).getNome() == nomeEsame)
 				return lista.get(i);
