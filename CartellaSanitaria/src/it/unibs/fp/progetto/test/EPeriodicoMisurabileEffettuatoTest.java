@@ -13,9 +13,7 @@ import org.junit.Test;
 
 import it.unibs.fp.mylib.MyTime;
 import it.unibs.fp.mylib.TooLateException;
-import it.unibs.fp.progetto.EDiagnosticoEffettuato;
 import it.unibs.fp.progetto.Esame;
-import it.unibs.fp.progetto.EsameDiagnostico;
 import it.unibs.fp.progetto.Malattia;
 
 public class EPeriodicoMisurabileEffettuatoTest {
