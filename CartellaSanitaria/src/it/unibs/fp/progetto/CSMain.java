@@ -11,7 +11,6 @@ public class CSMain{
 	private static final String MEX_USCITA = "Grazie per avere utilizzato la nostra applicazione! Arrivederci!";
 
 	//Menu'
-	private static final String[] OPZIONI_BASE = {"Crea cartella sanitaria", "Gestisci cartella sanitaria"};
 	private static final String[] OPZIONI = {"Gestione dati paziente","Gestione esami","Gestione malattie"};
 	private static final String[] OPZIONI_PAZIENTE = {"Modifica dati paziente","Visualizzazione completa dati paziente","Visualizzazione sintetica dati paziente"};
 	private static final String[] OPZIONI_ESAME = {"Inserisci esame","Modifica esame","Visualizza esame","Visualizza lista esami"};
@@ -74,10 +73,6 @@ public class CSMain{
 	
 	private static final String MEX_CERCA_ESAME = "Inserire il nome dell'esame che si desidera cercare: ";
 	
-	private static final String MEX_AGGIUNGI_MALATTIA = "";
-	private static final String MEX_RIMUOVI_ESAME = "";
-	private static final String MEX_RIMUOVI_MALATTIA = "";
-	
 	//Malattia
 	private static final String MEX_INSERIMENTO_NOME_MALATTIA = "Inserisci il nome della malattia: ";
 	private static final String MEX_INSERIMENTO_DATAI = "Inserisci la data di inizio della malattia: ";
@@ -94,7 +89,7 @@ public class CSMain{
 	private static final String SCELTA_INSERIMENTO_ALTRO_ASSOCIATO = "Si desidera inserire un altro esame associato?";
 	
 	//Avvisi
-	private static final String NON_MODIFICA = "Attenzione, non verrà scelto di inserire alcun dato.";
+	private static final String NON_MODIFICA = "Attenzione, non verrà chiesto di inserire alcun dato.";
 	private static final String AVVISI_IMPOSTATI_CORRETTAMENTE = "Gli avvisi sono stati impostati correttamente. Operazione finita.";
 	
 	//Errori
@@ -103,7 +98,6 @@ public class CSMain{
 	private static final String TIPOLOGIA_INESISTENTE = "Attenzione! La tipologia di esame specificata non esiste!";
 	private static final String MALATTIA_INESISTENTE = "Attenzione! La malattia specificata non esiste!";
 	private static final String ERRORE_TIPOLOGIA = "Attenzione, operazione non disponibile per la tipologia di esame scelta.";
-	private static final String ERRORE_TIPOLOGIA_2 = "Attenzione, il tipo di esame non e' della tipologia specificata precedentemente!";
 	private static final String ERRORE_ESAME_NON_TROVATO="Attenzione! Non e' presente alcun esame con quel nome!";
 	private static final String ERRORE_MALATTIA_NON_TROVATA="Attenzione! Non e' presente alcuna malattia con quel nome!";
 	
@@ -185,16 +179,12 @@ public class CSMain{
 		valido = false;
 		boolean genereP = false;
 		do{
-			char genere = MyInput.leggiChar(MEX_INSERIMENTO_GENERE);
-			if(genere == 'M' || genere == 'm'){
-				genereP = false;
+			try{
+				genereP = CartellaSanitaria.ritornaBoolGenere(MyInput.leggiChar(MEX_INSERIMENTO_GENERE));
+				valido = true;
 			}
-			else if(genere == 'f' || genere == 'F'){
-				genereP = false;
-			}
-			else{
-				stampaMex(MEX_ERRORE_INSERIMENTO);
-				stampaMex(" ");
+			catch(IllegalArgumentException e){
+				stampaMex(e.getMessage());
 			}
 		}while(!valido);
 		
