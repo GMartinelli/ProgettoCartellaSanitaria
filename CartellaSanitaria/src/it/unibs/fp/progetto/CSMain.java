@@ -189,8 +189,8 @@ public class CSMain{
 		}while(!valido);
 		
 		//Controlla il codice fiscale
-		valido=false;
-		String codiceF="";
+		valido = false;
+		String codiceF = "";
 		do{
 			codiceF = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_CODICEF);
 			if(CartellaSanitaria.checkValiditaCF(codiceF))
@@ -227,14 +227,14 @@ public class CSMain{
 	public static Esame creaEsame(){
 		String nome = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_NOME);
 		String raccomandazioni = MyInput.leggiStringa(MEX_INSERIMENTO_RACCOMANDAZIONI);
-		int sceltaT=0;
+		int sceltaT = 0;
 		do{
-			MyMenu menuTipo = new MyMenu("Tipo esame",TIPOLOGIA_ESAME);
+			MyMenu menuTipo = new MyMenu("Tipo esame", TIPOLOGIA_ESAME);
 			sceltaT = menuTipo.scegli();
 			switch(sceltaT){
 			case 1:
-				String areaInteressata=MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_AREA_INTERESSATA);
-				if(raccomandazioni!=null && BelleStringhe.togliSpazi(raccomandazioni)!=""){
+				String areaInteressata = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_AREA_INTERESSATA);
+				if(raccomandazioni != null && BelleStringhe.togliSpazi(raccomandazioni) != ""){
 					EsameDiagnostico e1 = new EsameDiagnostico(nome, areaInteressata);
 					return e1;
 				}
@@ -243,10 +243,10 @@ public class CSMain{
 					return e1;	
 				}
 			case 2:
-				int valoreMin= MyInput.leggiInteroConMinimo(MEX_VALORE_MIN, 0);
+				int valoreMin = MyInput.leggiInteroConMinimo(MEX_VALORE_MIN, 0);
 				int valoreMax = MyInput.leggiInteroConMinimo(MEX_VALORE_MAX, valoreMin+1);
 				int sogliaErrore = MyInput.leggiInteroConMinimo(MEX_SOGLIA_ERRORE, 0);
-				if(raccomandazioni!=null && BelleStringhe.togliSpazi(raccomandazioni)!=""){
+				if(raccomandazioni != null && BelleStringhe.togliSpazi(raccomandazioni) != ""){
 					EsamePeriodicoMisurabile e1 = new EsamePeriodicoMisurabile(nome, valoreMin, valoreMax, sogliaErrore);
 					return e1;
 				}
@@ -269,14 +269,14 @@ public class CSMain{
 	public static Esame creaEsame(int scelta){
 		String nome = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_NOME);
 		String raccomandazioni = MyInput.leggiStringa(MEX_INSERIMENTO_RACCOMANDAZIONI);
-		int sceltaT=scelta;
+		int sceltaT = scelta;
 		do{
-			MyMenu menuTipo = new MyMenu("Tipo esame",TIPOLOGIA_ESAME);
+			MyMenu menuTipo = new MyMenu("Tipo esame", TIPOLOGIA_ESAME);
 			sceltaT = menuTipo.scegli();
 			switch(sceltaT){
 			case 1:
-				String areaInteressata=MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_AREA_INTERESSATA);
-				if(raccomandazioni!=null && BelleStringhe.togliSpazi(raccomandazioni)!=""){
+				String areaInteressata = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_AREA_INTERESSATA);
+				if(raccomandazioni != null && BelleStringhe.togliSpazi(raccomandazioni) != ""){
 					EsameDiagnostico e1 = new EsameDiagnostico(nome, areaInteressata);
 					return e1;
 				}
@@ -285,10 +285,10 @@ public class CSMain{
 					return e1;	
 				}
 			case 2:
-				int valoreMin= MyInput.leggiInteroConMinimo(MEX_VALORE_MIN, 0);
+				int valoreMin = MyInput.leggiInteroConMinimo(MEX_VALORE_MIN, 0);
 				int valoreMax = MyInput.leggiInteroConMinimo(MEX_VALORE_MAX, valoreMin+1);
 				int sogliaErrore = MyInput.leggiInteroConMinimo(MEX_SOGLIA_ERRORE, 0);
-				if(raccomandazioni!=null && BelleStringhe.togliSpazi(raccomandazioni)!=""){
+				if(raccomandazioni != null && BelleStringhe.togliSpazi(raccomandazioni) != ""){
 					EsamePeriodicoMisurabile e1 = new EsamePeriodicoMisurabile(nome, valoreMin, valoreMax, sogliaErrore);
 					return e1;
 				}
@@ -302,7 +302,7 @@ public class CSMain{
 				stampaMex(MEX_ERRORE_INSERIMENTO);
 				break;
 			}
-		}while(sceltaT!=0);
+		}while(sceltaT != 0);
 		
 		Esame esame = null;
 		return esame;
@@ -325,54 +325,57 @@ public class CSMain{
 		switch(scelta){
 			case 1:	//Diagnostico
 				valido = false;
-				EsameDiagnostico eAss=null;
+				EsameDiagnostico eAss = null;
 				do{
 					String nomeEsameAss = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_MRELATIVO);
 					if(listaE.isEsistente(nomeEsameAss)){
 						eAss = (EsameDiagnostico) listaE.cercaEsame(nomeEsameAss);
-						valido= true;
+						valido = true;
 					}
 					else{
 						stampaMex(ERRORE_MALATTIA_NON_TROVATA);
 					}
 				}while(!valido);
 				valido = false;
-				Malattia mAss=null;
+				Malattia mAss = null;
 				do{
 					String nomeMalattiaAss = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_MRELATIVO);
-					for(int i=0; i<listaM.size() && valido==false; i++){
+					for(int i = 0; i < listaM.size() && valido == false; i++){
 						if(listaM.get(i).getNome().equals(nomeMalattiaAss)){
 							mAss = listaM.get(i);
-							valido= true;
+							valido = true;
 						}
 					}
-					if(valido=false){
+					if(!valido){
 						stampaMex(ERRORE_MALATTIA_NON_TROVATA);
 					}
 				}while(!valido);
+				
 				String luogo = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_LUOGO);
 				Date data = MyInput.leggiData(MEX_INSERIMENTO_DATA);
 				String ora = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_ORA);
 				String esito = MyInput.leggiStringa(MEX_INSERIMENTO_ESITO);
 				
 				EDiagnosticoEffettuato ed1 = null;
-				if(esito != null || BelleStringhe.togliSpazi(esito)!="")
+				if(esito != null || BelleStringhe.togliSpazi(esito) != ""){
 					try{
-						ed1 = new EDiagnosticoEffettuato(eAss,mAss,luogo,data,ora,esito);
+						ed1 = new EDiagnosticoEffettuato(eAss, mAss, luogo, data, ora, esito);
 					}
 					catch(IllegalAccessException e){
 						e.printStackTrace();
 						return null;
 					}
-				else
+				}
+				else{
 					try{
-						ed1 = new EDiagnosticoEffettuato(eAss,mAss,luogo,data,ora);
+						ed1 = new EDiagnosticoEffettuato(eAss, mAss, luogo, data, ora);
 					}
 					catch(IllegalAccessException e){
 						e.printStackTrace();
 						return null;
 					}
-					return ed1;
+				}
+				return ed1;
 			case 2:	//Periodico Misurabile
 				valido = false;
 				EsamePeriodicoMisurabile eAssP=null;
@@ -380,47 +383,50 @@ public class CSMain{
 					String nomeEsameAss = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_MRELATIVO);
 					if(listaE.isEsistente(nomeEsameAss)){
 						eAssP = (EsamePeriodicoMisurabile) listaE.cercaEsame(nomeEsameAss);
-						valido= true;
+						valido = true;
 					}
 					else{
 						stampaMex(ERRORE_MALATTIA_NON_TROVATA);
 					}
 				}while(!valido);
 				valido = false;
-				Malattia mAssP=null;
+				Malattia mAssP = null;
 				do{
 					String nomeMalattiaAss = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_MRELATIVO);
-					for(int i=0; i<listaM.size() && valido==false; i++){
+					for(int i = 0; i<listaM.size() && valido == false; i++){
 						if(listaM.get(i).getNome().equals(nomeMalattiaAss)){
 							mAssP = listaM.get(i);
-							valido= true;
+							valido = true;
 						}
 					}
-					if(valido=false){
+					if(!valido){
 						stampaMex(ERRORE_MALATTIA_NON_TROVATA);
 					}
 				}while(!valido);
+				
 				String luogoP = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_LUOGO);
 				Date dataP = MyInput.leggiData(MEX_INSERIMENTO_DATA);
 				String oraP = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_ORA);
 				double esitoP = MyInput.leggiDouble(MEX_INSERIMENTO_ESITO);
 				
 				EPeriodicoMisurabileEffettuato ep1 = null;
-				if(esitoP > 0) //Ritengo l'esito inserito valido solo se >0, se <=0 lo considero come non inserito
+				if(esitoP > 0){ //Ritengo l'esito inserito valido solo se >0, se <=0 lo considero come non inserito
 					try{
-						ep1 = new EPeriodicoMisurabileEffettuato(eAssP,mAssP,luogoP,dataP,oraP,esitoP);
+						ep1 = new EPeriodicoMisurabileEffettuato(eAssP, mAssP, luogoP, dataP, oraP, esitoP);
 					}
 					catch(IllegalAccessException e){
 						e.printStackTrace();
 						return null;
 					}
-				else
+				}
+				else{
 					try{
-						ep1 = new EPeriodicoMisurabileEffettuato(eAssP,mAssP,luogoP,dataP,oraP);
+						ep1 = new EPeriodicoMisurabileEffettuato(eAssP, mAssP, luogoP, dataP, oraP);
 					}
-				catch(IllegalAccessException e){
-					e.printStackTrace();
-					return null;
+					catch(IllegalAccessException e){
+						e.printStackTrace();
+						return null;
+					}
 				}
 				return ep1;
 			default:
@@ -437,46 +443,48 @@ public class CSMain{
 		switch(scelta){
 			case 1:	//Diagnostico
 				valido = false;
-				EsameDiagnostico eAss=null;
+				EsameDiagnostico eAss = null;
 				do{
 					String nomeEsameAss = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_MRELATIVO);
 					if(listaE.isEsistente(nomeEsameAss)){
 						eAss = (EsameDiagnostico) listaE.cercaEsame(nomeEsameAss);
-						valido= true;
+						valido = true;
 					}
 					else{
 						stampaMex(ERRORE_MALATTIA_NON_TROVATA);
 					}
 				}while(!valido);
 				valido = false;
-				Malattia mAss=null;
+				Malattia mAss = null;
 				do{
 					String nomeMalattiaAss = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_MRELATIVO);
-					for(int i=0; i<listaM.size() && valido==false; i++){
+					for(int i = 0; i < listaM.size() && valido == false; i++){
 						if(listaM.get(i).getNome().equals(nomeMalattiaAss)){
 							mAss = listaM.get(i);
-							valido= true;
+							valido = true;
 						}
 					}
-					if(valido=false){
+					if(!valido){
 						stampaMex(ERRORE_MALATTIA_NON_TROVATA);
 					}
 				}while(!valido);
+				
 				String luogo = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_LUOGO);
 				Date data = MyInput.leggiData(MEX_INSERIMENTO_DATA);
 				String ora = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_ORA);
 				String esito = MyInput.leggiStringa(MEX_INSERIMENTO_ESITO);
 				
 				EDiagnosticoEffettuato ed1 = null;
-				if(esito != null || BelleStringhe.togliSpazi(esito)!="")
+				if(esito != null || BelleStringhe.togliSpazi(esito) != ""){
 					try{
-						ed1 = new EDiagnosticoEffettuato(eAss,mAss,luogo,data,ora,esito);
+						ed1 = new EDiagnosticoEffettuato(eAss, mAss, luogo, data, ora, esito);
 					}
 					catch(IllegalAccessException e){
 						e.printStackTrace();
 						return null;
 					}
-				else
+				}
+				else{
 					try{
 						ed1 = new EDiagnosticoEffettuato(eAss,mAss,luogo,data,ora);
 					}
@@ -484,31 +492,32 @@ public class CSMain{
 						e.printStackTrace();
 						return null;
 					}
-					return ed1;
+				}
+				return ed1;
 			case 2:	//Periodico Misurabile
 				valido = false;
-				EsamePeriodicoMisurabile eAssP=null;
+				EsamePeriodicoMisurabile eAssP = null;
 				do{
 					String nomeEsameAss = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_MRELATIVO);
 					if(listaE.isEsistente(nomeEsameAss)){
 						eAssP = (EsamePeriodicoMisurabile) listaE.cercaEsame(nomeEsameAss);
-						valido= true;
+						valido = true;
 					}
 					else{
 						stampaMex(ERRORE_MALATTIA_NON_TROVATA);
 					}
 				}while(!valido);
 				valido = false;
-				Malattia mAssP=null;
+				Malattia mAssP = null;
 				do{
 					String nomeMalattiaAss = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_MRELATIVO);
-					for(int i=0; i<listaM.size() && valido==false; i++){
+					for(int i = 0; i < listaM.size() && valido == false; i++){
 						if(listaM.get(i).getNome().equals(nomeMalattiaAss)){
 							mAssP = listaM.get(i);
-							valido= true;
+							valido = true;
 						}
 					}
-					if(valido=false){
+					if(!valido){
 						stampaMex(ERRORE_MALATTIA_NON_TROVATA);
 					}
 				}while(!valido);
@@ -518,21 +527,23 @@ public class CSMain{
 				double esitoP = MyInput.leggiDouble(MEX_INSERIMENTO_ESITO);
 				
 				EPeriodicoMisurabileEffettuato ep1 = null;
-				if(esitoP > 0) //Ritengo l'esito inserito valido solo se >0, se <=0 lo considero come non inserito
+				if(esitoP > 0){ //Ritengo l'esito inserito valido solo se >0, se <=0 lo considero come non inserito
 					try{
-						ep1 = new EPeriodicoMisurabileEffettuato(eAssP,mAssP,luogoP,dataP,oraP,esitoP);
+						ep1 = new EPeriodicoMisurabileEffettuato(eAssP, mAssP, luogoP, dataP, oraP, esitoP);
 					}
 					catch(IllegalAccessException e){
 						e.printStackTrace();
 						return null;
 					}
-				else
+				}
+				else{
 					try{
 						ep1 = new EPeriodicoMisurabileEffettuato(eAssP,mAssP,luogoP,dataP,oraP);
 					}
-				catch(IllegalAccessException e){
-					e.printStackTrace();
-					return null;
+					catch(IllegalAccessException e){
+						e.printStackTrace();
+						return null;
+					}
 				}
 				return ep1;
 			default:
@@ -555,17 +566,18 @@ public class CSMain{
 							valido = true;
 						}
 					}
-					if(valido = false){
+					if(!valido){
 						stampaMex(ERRORE_MALATTIA_NON_TROVATA);
 					}
 				}while(!valido);
+				
 				String luogo = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_LUOGO);
 				Date data = MyInput.leggiData(MEX_INSERIMENTO_DATA);
 				String ora = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_ORA);
 				String esito = MyInput.leggiStringa(MEX_INSERIMENTO_ESITO);
 				
 				EDiagnosticoEffettuato ed1 = null;
-				if(esito != null || BelleStringhe.togliSpazi(esito) != "")
+				if(esito != null || BelleStringhe.togliSpazi(esito) != ""){
 					try{
 						ed1 = new EDiagnosticoEffettuato((EsameDiagnostico) esame, mAss, luogo, data, ora, esito);
 					}
@@ -573,7 +585,8 @@ public class CSMain{
 						e.printStackTrace();
 						return null;
 					}
-				else
+				}
+				else{
 					try{
 						ed1 = new EDiagnosticoEffettuato((EsameDiagnostico) esame, mAss, luogo, data, ora);
 					}
@@ -581,11 +594,12 @@ public class CSMain{
 						e.printStackTrace();
 						return null;
 					}
-					return ed1;
+				}
+				return ed1;
 			}
 			else if(esame instanceof EsamePeriodicoMisurabile){	//Periodico Misurabile
 				valido = false;
-				Malattia mAssP=null;
+				Malattia mAssP = null;
 				do{
 					String nomeMalattiaAss = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_MRELATIVO);
 					for(int i = 0; i < listaM.size() && valido == false; i++){
@@ -598,13 +612,14 @@ public class CSMain{
 						stampaMex(ERRORE_MALATTIA_NON_TROVATA);
 					}
 				}while(!valido);
+				
 				String luogoP = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_LUOGO);
 				Date dataP = MyInput.leggiData(MEX_INSERIMENTO_DATA);
 				String oraP = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_ORA);
 				double esitoP = MyInput.leggiDouble(MEX_INSERIMENTO_ESITO);
 				
 				EPeriodicoMisurabileEffettuato ep1 = null;
-				if(esitoP > 0) //Ritengo l'esito inserito valido solo se >0, se <=0 lo considero come non inserito
+				if(esitoP > 0){ //Ritengo l'esito inserito valido solo se >0, se <=0 lo considero come non inserito
 					try{
 						ep1 = new EPeriodicoMisurabileEffettuato((EsamePeriodicoMisurabile) esame, mAssP, luogoP, dataP, oraP, esitoP);
 					}
@@ -612,13 +627,15 @@ public class CSMain{
 						e.printStackTrace();
 						return null;
 					}
-				else
+				}
+				else{
 					try{
 						ep1 = new EPeriodicoMisurabileEffettuato((EsamePeriodicoMisurabile) esame, mAssP, luogoP, dataP, oraP);
 					}
-				catch(IllegalAccessException e){
-					e.printStackTrace();
-					return null;
+					catch(IllegalAccessException e){
+						e.printStackTrace();
+						return null;
+					}
 				}
 				return ep1;
 		}
