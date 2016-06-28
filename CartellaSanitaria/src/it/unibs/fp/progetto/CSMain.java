@@ -865,7 +865,6 @@ public class CSMain{
 	 */
 	public static void modificaDatiEsame(Esame esame, ListaEsame listaE){
 		int scelta = 0;
-		boolean valido = false;
 		MyMenu menuModificaEffettuato = new MyMenu(MODIFICA_INFO_ESAME, OPZIONI_MODIFICA_ESAME);
 		scelta = menuModificaEffettuato.scegli();
 		
@@ -1089,6 +1088,76 @@ public class CSMain{
 		if(malattia.getTerapia() != null){ stringaDescrittivaCompleta +=
 			"  Terapia: " + malattia.getTerapia();
 		}
+		
+		stampaMex(stringaDescrittivaCompleta);
+	}
+	
+	//da decidere se ignorare i valori oltre soglia, in tal caso va modificato
+	public static ArrayList<EPeriodicoMisurabileEffettuato> esameEsitoMax(ArrayList<EPeriodicoMisurabileEffettuato> listaEPME){
+		ArrayList<EPeriodicoMisurabileEffettuato> listaMax = new ArrayList<>();
+		listaMax.add(listaEPME.get(0));
+		
+		for(EPeriodicoMisurabileEffettuato elemento: listaEPME){
+			if(Double.compare(elemento.getEsito(), listaMax.get(0).getEsito()) > 0){
+				listaMax.clear();
+				listaMax.add(elemento);
+			}
+			else if(Double.compare(elemento.getEsito(), listaMax.get(0).getEsito()) == 0){
+				listaMax.add(elemento);
+			}
+		}
+		
+		return listaMax;
+	}
+	
+	//come sopra
+	public static ArrayList<EPeriodicoMisurabileEffettuato> esameEsitoMin(ArrayList<EPeriodicoMisurabileEffettuato> listaEPME){
+		ArrayList<EPeriodicoMisurabileEffettuato> listaMin = new ArrayList<>();
+		listaMin.add(listaEPME.get(0));
+		
+		for(EPeriodicoMisurabileEffettuato elemento: listaEPME){
+			if(Double.compare(elemento.getEsito(), listaMin.get(0).getEsito()) < 0){
+				listaMin.clear();
+				listaMin.add(elemento);
+			}
+			else if(Double.compare(elemento.getEsito(), listaMin.get(0).getEsito()) == 0){
+				listaMin.add(elemento);
+			}
+		}
+		
+		return listaMin;
+	}
+	
+	/*
+	 * Stessa cosa riguardante esito max e min
+	 * decidere se controllare se la dimensione dell'arraylist passato sia maggiore di 0
+	 * 
+	 */
+	public static double esameEsitoMedio(ArrayList<EPeriodicoMisurabileEffettuato> listaEPME){
+		double somma = 0.0;
+		int nEsami = 0;
+		
+		for(EPeriodicoMisurabileEffettuato elemento: listaEPME){
+			somma += elemento.getEsito();
+			nEsami++;
+		}
+		
+		double vMedio = somma / nEsami;
+		
+		return vMedio;
+	}
+	
+	//nome non molto significativo
+	public static ArrayList<EsameEffettuato> esameStessaTipologia(ArrayList<EsameEffettuato> listaEE, String nomeTipologia){
+		ArrayList<EsameEffettuato> listaStessaTipologia = new ArrayList<>();
+		
+		for(EsameEffettuato elemento: listaEE){
+			if(elemento.getEsame().getNome() == nomeTipologia){
+				listaStessaTipologia.add(elemento);
+			}
+		}
+		
+		return listaStessaTipologia;
 	}
 	
 	/*Main*/
