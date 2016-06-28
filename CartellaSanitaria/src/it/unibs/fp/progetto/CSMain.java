@@ -655,7 +655,7 @@ public class CSMain{
 		dataInizio = MyInput.leggiData(MEX_INSERIMENTO_DATAI);
 		
 		boolean scegliTermine = MyInput.yesOrNo(SCELTA_INSERIMENTO_DATAT);
-		if(scegliTermine == true) dataTermine = MyInput.leggiData(MEX_INSERIMENTO_DATAT);
+		if(scegliTermine) dataTermine = MyInput.leggiData(MEX_INSERIMENTO_DATAT);
 		
 		sintomi = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_SINTOMI);
 		diagnosi = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_DIAGNOSI);
@@ -663,7 +663,7 @@ public class CSMain{
 		
 		boolean inserisciEsame = MyInput.yesOrNo(SCELTA_INSERIMENTO_ASSOCIATO);
 		String nomeAssociato = null;
-		while(inserisciEsame == true){
+		while(inserisciEsame){
 			nomeAssociato = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_NOME_ESAME);
 			if(listaE.isEsistente(nomeAssociato)){
 				listaAssociati.add(listaE.cercaEsame(nomeAssociato));
@@ -676,6 +676,7 @@ public class CSMain{
 		
 		return new Malattia(nome, dataInizio, dataTermine, sintomi, diagnosi, listaAssociati, terapia);
 	}
+	
 	/** 
 	 * Crea, mostra ed effettua le opzioni relative ad un menu' per la modifica dei dati utente della cartella sanitaria
 	 * @param CS la cartella sanitaria da modificare
@@ -686,144 +687,144 @@ public class CSMain{
 		int scelta = 0;
 		boolean valido = false;
 		MyMenu menuModificaPaziente = new MyMenu(MODIFICA_INFO_UTENTE, OPZIONI_MODIFICA_PAZIENTE);
-		scelta = menuModificaPaziente.scegli();
+		do{
+			scelta = menuModificaPaziente.scegli();
 		
-		switch(scelta){
-			case 1:
-				CS.setNome(MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_NOME));
-				break;
-			case 2:
-				CS.setCognome(MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_COGNOME));
-				break;
-			case 3:
-				CS.setIndirizzo(MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_INDIRIZZO));
-				break;
-			case 4:
-				valido = false;
-				String telefono = null;
-				do{
-					telefono = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_TELEFONO);
-					if(CartellaSanitaria.checkValiditaTelefono(telefono)){
-						valido = true;
-					}
-					else{
-						stampaMex(MEX_ERRORE_INSERIMENTO);
-					}
-				}while(valido == false);
-				CS.setTelefono(telefono);
-				break;
-			case 5:
-				valido = false;
-				String mail = null;
-				do{
-					mail = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_MAIL);
-					if(CartellaSanitaria.checkValiditaEMail(mail)){
-						valido = true;
-					}
-					else{
-						stampaMex(MEX_ERRORE_INSERIMENTO);
-					}
-				}while(valido == false);
-				CS.setEmail(mail);
-				break;
-			case 6:
-				valido = false;
-				String data = null;
-				do{
-					data = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_DATAN);
-					if(CartellaSanitaria.checkDataNascita(data)){
-						valido = true;
-					}
-					else{
-						stampaMex(MEX_ERRORE_INSERIMENTO);
-					}
-				}while(valido == false);
-				CS.setDataNascita(MyTime.creaData(data));
-				break;
-			case 7:
-				CS.setLuogoNascita(MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_LUOGON));
-				break;
-			case 8:
-				valido = false;
-				char genereInserito;
-				boolean genere = true;
-				do{
-					genereInserito = MyInput.leggiChar(MEX_INSERIMENTO_GENERE);
-					try{
-						genere = CartellaSanitaria.ritornaBoolGenere(genereInserito);
-					}
-					catch(IllegalArgumentException e){
-						stampaMex(e.getMessage());
-					}
-				}while(valido == false);
-				CS.setGenere(genere);
-				break;
-			case 9:
-				valido = false;
-				String codiceF = null;
-				do{
-					codiceF = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_CODICEF);
-					if(CartellaSanitaria.checkValiditaCF(codiceF)){
-						valido = true;
-					}
-					else{
-						stampaMex(MEX_ERRORE_INSERIMENTO);
-					}
-				}while(valido == false);
-				CS.setCodiceFiscale(codiceF);
-				break;
-			case 10:
-				valido = false;
-				String gruppoS = null;
-				do{
-					gruppoS = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_GSANGUIGNO);
-					if(CartellaSanitaria.checkGruppoSanguigno(gruppoS)){
-						valido = false;
-					}
-					else{
-						stampaMex(MEX_ERRORE_INSERIMENTO);
-					}
-				}while(valido == false);
-				CS.setGruppoSanguigno(gruppoS);
-				break;
-				case 11:
-					//aggiungi esame
-					aggiungiEffettuato(CS, listaE, listaM);
+			switch(scelta){
+				case 1:
+					CS.setNome(MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_NOME));
 					break;
-				case 12:
-					//aggiungi malattia
-					creaMalattia(listaE);
+				case 2:
+					CS.setCognome(MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_COGNOME));
 					break;
-				case 13:
-					//rimuovi effettuato
-					//Forse non corretto non sono convinto del confronto della data nel metodo cerca con i due parametri
-					String nomeEsame = MyInput.leggiStringaNonVuota(MEX_CANCELLA_ESAME);
-					if(CS.isEsameEsistente(nomeEsame)){
-						if(CS.contaEsame(nomeEsame) > 1){
-							Date dataEsame = MyInput.leggiData(MEX_PIU_ESAMI + " " + MEX_CANCELLA_SELEZIONA_DATA);
-							CS.getEsamiEffettuati().remove(CS.cercaEsame(nomeEsame, dataEsame));
+				case 3:
+					CS.setIndirizzo(MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_INDIRIZZO));
+					break;
+				case 4:
+					valido = false;
+					String telefono = null;
+					do{
+						telefono = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_TELEFONO);
+						if(CartellaSanitaria.checkValiditaTelefono(telefono)){
+							valido = true;
 						}
 						else{
-							CS.getEsamiEffettuati().remove(CS.cercaEsame(nomeEsame));
+							stampaMex(MEX_ERRORE_INSERIMENTO);
 						}
-					}
+					}while(!valido);
+					CS.setTelefono(telefono);
 					break;
-				case 14:
-					//rimuovi malattia
-					String nomeMalattia = MyInput.leggiStringaNonVuota(MEX_CANCELLA_MALATTIA);
-					if(CS.isMalattiaEsistente(nomeMalattia)){
-						if(CS.contaMalattiaEsistente(nomeMalattia) > 1){
-							Date dataInizio = MyInput.leggiData(MEX_PIU_MALATTIE + " " + MEX_CANCELLA_SELEZIONA_DATAI);
-							CS.getElencoMalattia().remove(CS.cercaMalattia(nomeMalattia, dataInizio));
+				case 5:
+					valido = false;
+					String mail = null;
+					do{
+						mail = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_MAIL);
+						if(CartellaSanitaria.checkValiditaEMail(mail)){
+							valido = true;
 						}
 						else{
-							CS.getElencoMalattia().remove(CS.cercaMalattia(nomeMalattia));
+							stampaMex(MEX_ERRORE_INSERIMENTO);
 						}
-					}
+					}while(!valido);
+					CS.setEmail(mail);
 					break;
-			default:
-				stampaMex(MEX_ERRORE_INSERIMENTO);
-		}
+				case 6:
+					valido = false;
+					String data = null;
+					do{
+						data = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_DATAN);
+						if(CartellaSanitaria.checkDataNascita(data)){
+							valido = true;
+						}
+						else{
+							stampaMex(MEX_ERRORE_INSERIMENTO);
+						}
+					}while(!valido);
+					CS.setDataNascita(MyTime.creaData(data));
+					break;
+				case 7:
+					CS.setLuogoNascita(MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_LUOGON));
+					break;
+				case 8:
+					valido = false;
+					char genereInserito;
+					boolean genere = true;
+					do{
+						genereInserito = MyInput.leggiChar(MEX_INSERIMENTO_GENERE);
+						try{
+							genere = CartellaSanitaria.ritornaBoolGenere(genereInserito);
+						}
+						catch(IllegalArgumentException e){
+							stampaMex(e.getMessage());
+						}
+					}while(!valido);
+					CS.setGenere(genere);
+					break;
+				case 9:
+					valido = false;
+					String codiceF = null;
+					do{
+						codiceF = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_CODICEF);
+						if(CartellaSanitaria.checkValiditaCF(codiceF)){
+							valido = true;
+						}
+						else{
+							stampaMex(MEX_ERRORE_INSERIMENTO);
+						}
+					}while(!valido);
+					CS.setCodiceFiscale(codiceF);
+					break;
+				case 10:
+					valido = false;
+					String gruppoS = null;
+					do{
+						gruppoS = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_GSANGUIGNO);
+						if(CartellaSanitaria.checkGruppoSanguigno(gruppoS)){
+							valido = false;
+						}
+						else{
+							stampaMex(MEX_ERRORE_INSERIMENTO);
+						}
+					}while(!valido);
+					CS.setGruppoSanguigno(gruppoS);
+					break;
+					case 11: //aggiungi esame
+						aggiungiEffettuato(CS, listaE, listaM);
+						break;
+					case 12: //aggiungi malattia
+						creaMalattia(listaE);
+						break;
+					case 13: //rimuovi effettuato
+						//Forse non corretto non sono convinto del confronto della data nel metodo cerca con i due parametri
+						String nomeEsame = MyInput.leggiStringaNonVuota(MEX_CANCELLA_ESAME);
+						if(CS.isEsameEsistente(nomeEsame)){
+							if(CS.contaEsame(nomeEsame) > 1){
+								Date dataEsame = MyInput.leggiData(MEX_PIU_ESAMI + " " + MEX_CANCELLA_SELEZIONA_DATA);
+								CS.getEsamiEffettuati().remove(CS.cercaEsame(nomeEsame, dataEsame));
+							}
+							else{
+								CS.getEsamiEffettuati().remove(CS.cercaEsame(nomeEsame));
+							}
+						}
+						break;
+					case 14: //rimuovi malattia
+						String nomeMalattia = MyInput.leggiStringaNonVuota(MEX_CANCELLA_MALATTIA);
+						if(CS.isMalattiaEsistente(nomeMalattia)){
+							if(CS.contaMalattiaEsistente(nomeMalattia) > 1){
+								Date dataInizio = MyInput.leggiData(MEX_PIU_MALATTIE + " " + MEX_CANCELLA_SELEZIONA_DATAI);
+								CS.getElencoMalattia().remove(CS.cercaMalattia(nomeMalattia, dataInizio));
+							}
+							else{
+								CS.getElencoMalattia().remove(CS.cercaMalattia(nomeMalattia));
+							}
+						}
+						break;
+					case 0:
+						break;
+					default:
+						stampaMex(MEX_ERRORE_INSERIMENTO);
+			}
+		}while(scelta != 0);
 	}
 	
 	public static void aggiungiEffettuato(CartellaSanitaria CS, ListaEsame listaE, ArrayList<Malattia> listaM){
@@ -831,36 +832,40 @@ public class CSMain{
 		MyMenu creaCerca = new MyMenu(MEX_CREA_CERCA_ESAME, MEX_SCEGLI_CREA_CERCA);
 		scelta = creaCerca.scegli();
 		
-		switch(scelta){
-			case 1:
-				int scelta2 = 0;
-				MyMenu scegliTipo = new MyMenu(MEX_TIPO_ESAME, MEX_SCEGLI_TIPO_ESAME);
-				scelta2 = scegliTipo.scegli();
+		do{
+			switch(scelta){
+				case 1:
+					int scelta2 = 0;
+					MyMenu scegliTipo = new MyMenu(MEX_TIPO_ESAME, MEX_SCEGLI_TIPO_ESAME);
+					scelta2 = scegliTipo.scegli();
 				
-				switch(scelta2){
-					case 1:
-						CS.getEsamiEffettuati().add(creaEsameEffettuato(listaE, listaM, scelta2));
-						break;
-					case 2:
-						CS.getEsamiEffettuati().add(creaEsameEffettuato(listaE, listaM, scelta2));
-						break;
-					default:
-						stampaMex(MEX_ERRORE_INSERIMENTO);
-				}
-				break;
-			case 2:
-				String daCercare = null;
-				Esame esame = null;
-				do{
-					daCercare = MyInput.leggiStringaNonVuota(MEX_CERCA_ESAME);
-					esame = listaE.cercaEsame(daCercare);
-				}while(esame == null);
+					switch(scelta2){
+						case 1:
+							CS.getEsamiEffettuati().add(creaEsameEffettuato(listaE, listaM, scelta2));
+							break;
+						case 2:
+							CS.getEsamiEffettuati().add(creaEsameEffettuato(listaE, listaM, scelta2));
+							break;
+						default:
+							stampaMex(MEX_ERRORE_INSERIMENTO);
+					}
+					break;
+				case 2:
+					String daCercare = null;
+					Esame esame = null;
+					do{
+						daCercare = MyInput.leggiStringaNonVuota(MEX_CERCA_ESAME);
+						esame = listaE.cercaEsame(daCercare);
+					}while(esame == null);
 				
-				CS.getEsamiEffettuati().add(creaEsameEffettuato(esame, listaM));
-				break;
-			default:
-				stampaMex(MEX_ERRORE_INSERIMENTO);
-		}
+					CS.getEsamiEffettuati().add(creaEsameEffettuato(esame, listaM));
+					break;
+				case 0:
+					break;
+				default:
+					stampaMex(MEX_ERRORE_INSERIMENTO);
+			}
+		}while(scelta != 0);
 	}
 	
 	/** 
@@ -873,22 +878,24 @@ public class CSMain{
 	public static void modificaDatiEsame(Esame esame, ListaEsame listaE){
 		int scelta = 0;
 		MyMenu menuModificaEffettuato = new MyMenu(MODIFICA_INFO_ESAME, OPZIONI_MODIFICA_ESAME);
-		scelta = menuModificaEffettuato.scegli();
+		do{
+			scelta = menuModificaEffettuato.scegli();
 		
-		switch(scelta){
-			case 1:
-				String nomeMod = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_NOME_ESAME);
-				esame.setNome(nomeMod);
-				break;
-			case 2:
-				String raccomandazioniMod = MyInput.leggiStringa(MEX_INSERIMENTO_RACCOMANDAZIONI);
-				esame.setNome(raccomandazioniMod);
-				break;
-			case 0:
-				break;
-			default:
-				stampaMex(MEX_ERRORE_INSERIMENTO);
-		}
+			switch(scelta){
+				case 1:
+					String nomeMod = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_NOME_ESAME);
+					esame.setNome(nomeMod);
+					break;
+				case 2:
+					String raccomandazioniMod = MyInput.leggiStringa(MEX_INSERIMENTO_RACCOMANDAZIONI);
+					esame.setNome(raccomandazioniMod);
+					break;
+				case 0:
+					break;
+				default:
+					stampaMex(MEX_ERRORE_INSERIMENTO);
+			}
+		}while(scelta != 0);
 	}
 	
 	/** 
@@ -903,99 +910,104 @@ public class CSMain{
 		int scelta = 0;
 		boolean valido = false;
 		MyMenu menuModificaEffettuato = new MyMenu(MODIFICA_INFO_E_EFFETTUATO, OPZIONI_MODIFICA_E_EFFETTUATO);
-		scelta = menuModificaEffettuato.scegli();
 		
-		switch(scelta){
-			case 1:
-				try{
-					String data = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_DATA);
-					esame.setData(MyTime.creaData(data));
-				}
-				catch(TooLateException e){
-					stampaMex(e.getMessage());
-				}
-				break;
-			case 2:
-				valido = false;
-				do{
+		do{
+			scelta = menuModificaEffettuato.scegli();
+		
+			switch(scelta){
+				case 1:
 					try{
-						String nomeEsame = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_NOME);
-						if(listaE.isEsistente(nomeEsame)){
-							esame.setEsame(listaE.cercaEsame(nomeEsame));
-							valido = true;
-						}
-						else{
-							stampaMex(TIPOLOGIA_INESISTENTE);
-						}
+						String data = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_DATA);
+						esame.setData(MyTime.creaData(data));
 					}
 					catch(TooLateException e){
 						stampaMex(e.getMessage());
-						valido = true;
 					}
-					catch(IllegalArgumentException e){ //se l'esame non è coerente con la malattia
-						stampaMex(e.getMessage());
-					}
-				}while(valido = false);
-				break;
-			case 3:
-				try{
-					String luogo = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_LUOGO);
-					esame.setLuogo(luogo);
-				}
-				catch(TooLateException e){
-					stampaMex(e.getMessage());
-				}
-				break;
-			case 4:
-				valido = false;
-				do{
-					String nomeMalattia = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_MALATTIA);
-					if(CS.isMalattiaEsistente(nomeMalattia)){
-						esame.setMalattia(CS.cercaMalattia(nomeMalattia));
-						valido = true;
-					}
-					else{
-						stampaMex(MALATTIA_INESISTENTE);
-					}
-				}while(valido == false);
-				break;
-			case 5:
-				try{
-					String ora = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_ORA);
-					esame.setOra(ora);
-				}
-				catch(TooLateException e){
-					stampaMex(e.getMessage());
-				}
-				break;
-			case 6:
-				if(esame instanceof EPeriodicoMisurabileEffettuato){
-					double esito = MyInput.leggiInteroNonNegativo(MEX_ESITO_PERIODICO);
-					((EPeriodicoMisurabileEffettuato) esame).setEsito(esito);
-				}
-				else if(esame instanceof EDiagnosticoEffettuato){
-					String esito = MyInput.leggiStringaNonVuota(MEX_ESITO_DIAGNOSTICO);
-					((EDiagnosticoEffettuato) esame).setEsito(esito);
-				}
-				break;
-			case 7:
-				if(esame instanceof EDiagnosticoEffettuato){
-					stampaMex(ERRORE_TIPOLOGIA);
-				}
-				else if(esame instanceof EPeriodicoMisurabileEffettuato){
+					break;
+				case 2:
+					valido = false;
+					do{
+						try{
+							String nomeEsame = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_NOME);
+							if(listaE.isEsistente(nomeEsame)){
+								esame.setEsame(listaE.cercaEsame(nomeEsame));
+								valido = true;
+							}
+							else{
+								stampaMex(TIPOLOGIA_INESISTENTE);
+							}
+						}
+						catch(TooLateException e){
+							stampaMex(e.getMessage());
+							valido = true;
+						}
+						catch(IllegalArgumentException e){ //se l'esame non è coerente con la malattia
+							stampaMex(e.getMessage());
+						}
+					}while(valido = false);
+					break;
+				case 3:
 					try{
-						stampaMex(NON_MODIFICA);
-						((EPeriodicoMisurabileEffettuato) esame).setAvvisi();
-						stampaMex(AVVISI_IMPOSTATI_CORRETTAMENTE);
+						String luogo = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_LUOGO);
+						esame.setLuogo(luogo);
 					}
-					catch(IllegalAccessException e){
+					catch(TooLateException e){
 						stampaMex(e.getMessage());
 					}
-				}
-				break;
-			default:
-				stampaMex(MEX_ERRORE_INSERIMENTO);
-		}
+					break;
+				case 4:
+					valido = false;
+					do{
+						String nomeMalattia = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_MALATTIA);
+						if(CS.isMalattiaEsistente(nomeMalattia)){
+							esame.setMalattia(CS.cercaMalattia(nomeMalattia));
+							valido = true;
+						}
+						else{
+							stampaMex(MALATTIA_INESISTENTE);
+						}
+					}while(valido == false);
+					break;
+				case 5:
+					try{
+						String ora = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_ORA);
+						esame.setOra(ora);
+					}
+					catch(TooLateException e){
+						stampaMex(e.getMessage());
+					}
+					break;
+				case 6:
+					if(esame instanceof EPeriodicoMisurabileEffettuato){
+						double esito = MyInput.leggiInteroNonNegativo(MEX_ESITO_PERIODICO);
+						((EPeriodicoMisurabileEffettuato) esame).setEsito(esito);
+					}
+					else if(esame instanceof EDiagnosticoEffettuato){
+						String esito = MyInput.leggiStringaNonVuota(MEX_ESITO_DIAGNOSTICO);
+						((EDiagnosticoEffettuato) esame).setEsito(esito);
+					}
+					break;
+				case 7:
+					if(esame instanceof EDiagnosticoEffettuato){
+						stampaMex(ERRORE_TIPOLOGIA);
+					}
+					else if(esame instanceof EPeriodicoMisurabileEffettuato){
+						try{
+							stampaMex(NON_MODIFICA);
+							((EPeriodicoMisurabileEffettuato) esame).setAvvisi();
+							stampaMex(AVVISI_IMPOSTATI_CORRETTAMENTE);
+						}
+						catch(IllegalAccessException e){
+							stampaMex(e.getMessage());
+						}
+					}
+					break;
+				case 0:
+					break;
+				default:
+					stampaMex(MEX_ERRORE_INSERIMENTO);
+			}
+		}while(scelta != 0);
 	}
 	
 	/** 
@@ -1008,36 +1020,38 @@ public class CSMain{
 		int scelta = 0;
 		//boolean valido = false;
 		MyMenu menuModificaMalattia = new MyMenu(MODIFICA_INFO_MALATTIA, OPZIONI_MODIFICA_MALATTIA);
-		scelta = menuModificaMalattia.scegli();
+		do{
+			scelta = menuModificaMalattia.scegli();
 		
-		switch(scelta){
-			case 1:
-				String nome = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_NOME_MALATTIA);
-				malattia.setNome(nome);
-				break;
-			case 2:
-				Date datai = MyInput.leggiData(MEX_INSERIMENTO_DATAI);
-				malattia.setDataInizio(datai);
-				break;
-			case 3:
-				Date datat = MyInput.leggiData(MEX_INSERIMENTO_DATAT);
-				malattia.setDataInizio(datat);
-				break;
-			case 4:
-				String sintomi = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_SINTOMI);
-				malattia.setSintomi(sintomi);
-				break;
-			case 5:
-				String diagnosi = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_DIAGNOSI);
-				malattia.setDiagnosi(diagnosi);
-				break;
-			case 6:
-				String terapia = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_TERAPIA);
-				malattia.setTerapia(terapia);
-				break;
-			default:
-				stampaMex(MEX_ERRORE_INSERIMENTO);
-		}
+			switch(scelta){
+				case 1:
+					String nome = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_NOME_MALATTIA);
+					malattia.setNome(nome);
+					break;
+				case 2:
+					Date datai = MyInput.leggiData(MEX_INSERIMENTO_DATAI);
+					malattia.setDataInizio(datai);
+					break;
+				case 3:
+					Date datat = MyInput.leggiData(MEX_INSERIMENTO_DATAT);
+					malattia.setDataInizio(datat);
+					break;
+				case 4:
+					String sintomi = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_SINTOMI);
+					malattia.setSintomi(sintomi);
+					break;
+				case 5:
+					String diagnosi = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_DIAGNOSI);
+					malattia.setDiagnosi(diagnosi);
+					break;
+				case 6:
+					String terapia = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_TERAPIA);
+					malattia.setTerapia(terapia);
+					break;
+				default:
+					stampaMex(MEX_ERRORE_INSERIMENTO);
+			}
+		}while(scelta != 0);
 	}
 	
 	//Da controllare se rispetta richieste traccia
@@ -1138,7 +1152,6 @@ public class CSMain{
 	/*
 	 * Stessa cosa riguardante esito max e min
 	 * decidere se controllare se la dimensione dell'arraylist passato sia maggiore di 0
-	 * 
 	 */
 	public static double esameEsitoMedio(ArrayList<EPeriodicoMisurabileEffettuato> listaEPME){
 		double somma = 0.0;
@@ -1174,7 +1187,7 @@ public class CSMain{
 
 		ArrayList<Esame> lista = new ArrayList<Esame>();
 		ArrayList<Malattia> listaM = new ArrayList<Malattia>();
-		ArrayList<EsameEffettuato> listaEffettuati= new ArrayList<EsameEffettuato>();
+		ArrayList<EsameEffettuato> listaEffettuati = new ArrayList<EsameEffettuato>();
 		
 		ListaEsame listaE = new ListaEsame(lista);
 
@@ -1226,23 +1239,23 @@ public class CSMain{
 							switch(scelta4){	//Faccio scegliere se inserire un nuovo esame o un nuovo esame effettuato
 							case 1:		//Esame 
 								Esame esame = creaEsame();
-								if(esame!=null)
+								if(esame != null)
 									listaE.aggiungiEsame(esame);
-								scelta4=0;	//Scelta valida, posso uscire dal ciclo
+								scelta4 = 0;	//Scelta valida, posso uscire dal ciclo
 								break;
 							case 2:		//EsameEffettuato
 								EsameEffettuato eF = creaEsameEffettuato(listaE, listaM);
-								if(eF!=null)
+								if(eF != null)
 									listaEffettuati.add(eF);
 								
-								scelta4=0;	//Scelta valida, posso uscire dal ciclo
+								scelta4 = 0;	//Scelta valida, posso uscire dal ciclo
 								break;
 							case 0:
 								break;
 							default:
 								stampaMex(MEX_ERRORE_INSERIMENTO);
 							}
-						}while(scelta4!=0);
+						}while(scelta4 != 0);
 						break;
 					case 2:
 						break;
