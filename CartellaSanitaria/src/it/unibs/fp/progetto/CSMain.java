@@ -107,6 +107,16 @@ public class CSMain{
 	 * 3 esami diagnostici dello stesso tipo (3 effettuati)
 	 * 3 esami prenotati (senza esito)
 	*/
+	
+	/**
+	 * Stampa un messaggio nella console attraverso System.out.println
+	 * Usato per poter modificare velocemente la visualizzazione di un messaggio se per esempio nel progetto venisse implementata
+	 * un interfaccia grafica
+	 * 
+	 * @param <strong>messaggio</strong> il messaggio da stampare
+	 * 
+	 * @author Valtulini Claudio
+	 */
 	public static void stampaMex(String messaggio){
 		System.out.println(messaggio);
 	}
@@ -266,14 +276,19 @@ public class CSMain{
 		return esame;
 	}
 	
+	/**
+	 * Overload di creaEsame che permette di essere chiamato da altri metodi o dall'utente preimpostando la scelta della
+	 * tipologia di esame da creare
+	 * 
+	 * @param scelta <strong>1</strong> se si preimposta di creare un esame diagnostico <strong>2</strong> se periodico misurabile
+	 * @return l'esame creato
+	 */
 	public static Esame creaEsame(int scelta){
 		String nome = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_NOME);
 		String raccomandazioni = MyInput.leggiStringa(MEX_INSERIMENTO_RACCOMANDAZIONI);
-		int sceltaT = scelta;
-		do{
-			MyMenu menuTipo = new MyMenu("Tipo esame", TIPOLOGIA_ESAME);
-			sceltaT = menuTipo.scegli();
-			switch(sceltaT){
+		
+		MyMenu menuTipo = new MyMenu("Tipo esame", TIPOLOGIA_ESAME);
+		switch(scelta){
 			case 1:
 				String areaInteressata = MyInput.leggiStringaNonVuota(MEX_INSERIMENTO_AREA_INTERESSATA);
 				if(raccomandazioni != null && BelleStringhe.togliSpazi(raccomandazioni) != ""){
@@ -296,13 +311,10 @@ public class CSMain{
 					EsamePeriodicoMisurabile e1 = new EsamePeriodicoMisurabile(nome, raccomandazioni, valoreMin, valoreMax, sogliaErrore);
 					return e1;	
 				}
-			case 0:
-				break;
 			default:
 				stampaMex(MEX_ERRORE_INSERIMENTO);
 				break;
 			}
-		}while(sceltaT != 0);
 		
 		Esame esame = null;
 		return esame;
@@ -313,7 +325,7 @@ public class CSMain{
 	 * @param listaE la lista delle tipologie di esame create
 	 * @param listaM la lista delle malattie create
 	 * 
-	 * @return EsameEffettuato se non si incontrano eccezzioni, altrimenti null
+	 * @return EsameEffettuato se non si incontrano eccezioni, altrimenti null
 	 * @author Martinelli Giuseppe
 	 */
 	public static EsameEffettuato creaEsameEffettuato(ListaEsame listaE, ArrayList<Malattia> listaM){
@@ -435,10 +447,18 @@ public class CSMain{
 		return null;
 	}
 	
+	/**
+	 * Overload di creaEsameEffettuato che permette di essere chiamato da altri metodi o dall'utente preimpostando la scelta della
+	 * tipologia di esame da creare
+	 * 
+	 * @param listaE la lista delle tipologie di esame create
+	 * @param listaM la lista delle malattie create
+	 * @param scelta <strong>1</strong> se si preimposta di creare un esame diagnostico <strong>2</strong> se periodico misurabile
+	 * @return l'esame creato se non si generano eccezioni, altrimenti null
+	 */
 	public static EsameEffettuato creaEsameEffettuato(ListaEsame listaE, ArrayList<Malattia> listaM, int scelta){
 		boolean valido = false;
 		MyMenu menuEffettuato = new MyMenu("Tipologia di esame", TIPOLOGIA_ESAME);
-		scelta = menuEffettuato.scegli();
 		
 		switch(scelta){
 			case 1:	//Diagnostico
@@ -552,6 +572,13 @@ public class CSMain{
 		return null;
 	}
 	
+	/**
+	 * Overload di creaEsameEffettuato che crea un oggetto EsameEffettuato di tipo basato su quello dell'oggetto Esame 
+	 *
+	 * @param esame il tipo di esame
+	 * @param listaM la lista delle malattie create
+	 * @return l'esame effettuato se non si generano eccezioni, altrimenti null
+	 */
 	//modificato non so se funziona
 	public static EsameEffettuato creaEsameEffettuato(Esame esame, ArrayList<Malattia> listaM){
 		boolean valido = false;
@@ -642,6 +669,14 @@ public class CSMain{
 		return null;
 	}
 	
+	/**
+	 * Metodo che crea un oggetto di tipo Malattia permettendo all'utente di inserire i dati desiderati
+	 * 
+	 * @param listaE la lista delle tipologie di esame create
+	 * @return la malattia creata
+	 * 
+	 * @author Valtulini Claudio
+	 */
 	public static Malattia creaMalattia(ListaEsame listaE){
 		String nome = null;
 		Date dataInizio = null;
@@ -827,6 +862,17 @@ public class CSMain{
 		}while(scelta != 0);
 	}
 	
+	/**
+	 * Crea un oggetto di tipo EsameEffettuato e lo aggiunge alla lista di esami della cartella sanitaria passata come parametro
+	 * permette di scegliere se creare un esame diagnostico o periodico misurabile (effettuati) creando un nuovo oggetto Esame
+	 * o cercandolo tra quelli esistenti
+	 * 
+	 * @param CS la cartella sanitaria alla quale va aggiunto l'esame effettuato
+	 * @param listaE la lista di tipologie di esame create
+	 * @param listaM la lista di malattie create
+	 * 
+	 * @author Valtulini Claudio
+	 */
 	public static void aggiungiEffettuato(CartellaSanitaria CS, ListaEsame listaE, ArrayList<Malattia> listaM){
 		int scelta = 0;
 		MyMenu creaCerca = new MyMenu(MEX_CREA_CERCA_ESAME, MEX_SCEGLI_CREA_CERCA);
@@ -1054,7 +1100,13 @@ public class CSMain{
 		}while(scelta != 0);
 	}
 	
-	//Da controllare se rispetta richieste traccia
+	/**
+	 * Permette la visualizzazione completa dei dati di una cartella sanitaria
+	 * 
+	 * @param CS la cartella sanitaria di cui visualizzare i dati
+	 *
+	 * @author Valtulini Claudio
+	 */
 	public static void visualizzaDatiUtenteCompleta(CartellaSanitaria CS){
 		String stringaDescrittivaCompleta = "Cartella sanitaria di " + CS.getNome() + " " + CS.getCognome() + "%n" +
 			"Residente in: " + CS.getIndirizzo() + "%n" +
@@ -1085,12 +1137,24 @@ public class CSMain{
 		stampaMex(stringaDescrittivaCompleta);
 	}
 	
+	/**
+	 * Permette la visualizzazione competa dei dati di un EsameEffettuato
+	 * @param esame l'esame di cui visualizzare i dati
+	 * 
+	 * @author Valtulini Claudio
+	 */
 	public static void visualizzaEsameCompleta(EsameEffettuato esame){
 		String stringaDescrittivaCompleta =
 			esame.toStringCompleto();
 		stampaMex(stringaDescrittivaCompleta);
 	}
 	
+	/**
+	 * Permette la visualizzazione completa dei dati di una malattia
+	 * @param malattia la malattia di cui visualizzare i dati
+	 * 
+	 * @author Valtulini Claudio
+	 */
 	public static void visualizzaMalattiaCompleta(Malattia malattia){
 		String stringaDescrittivaCompleta =
 			malattia.toString() + "%n";
@@ -1113,6 +1177,15 @@ public class CSMain{
 		stampaMex(stringaDescrittivaCompleta);
 	}
 	
+	/**
+	 * Partendo da un ArrayList (che dovrebbe essere di esami della stessa tipologia) restituisce un ArrayList di EsameEffettuato
+	 * contenente quello/quelli (se più di uno con lo stesso esito) con esito massimo
+	 * 
+	 * @param listaEPME la lista di esami in cui cercare quello con esito maggiore
+	 * @return una lista di esami contenente quelli con esito massimo
+	 * 
+	 * @author Valtulini Claudio
+	 */
 	//da decidere se ignorare i valori oltre soglia, in tal caso va modificato
 	public static ArrayList<EPeriodicoMisurabileEffettuato> esameEsitoMax(ArrayList<EPeriodicoMisurabileEffettuato> listaEPME){
 		ArrayList<EPeriodicoMisurabileEffettuato> listaMax = new ArrayList<>();
@@ -1131,6 +1204,15 @@ public class CSMain{
 		return listaMax;
 	}
 	
+	/**
+	 * Partendo da un ArrayList (che dovrebbe essere di esami della stessa tipologia) restituisce un ArrayList di EsameEffettuato
+	 * contenente quello/quelli (se più di uno con lo stesso esito) con esito minimo
+	 * 
+	 * @param listaEPME la lista di esami in cui cercare quello con esito minore
+	 * @return una lista di esami contenente quelli con esito minimo
+	 * 
+	 * @author Valtulini Claudio
+	 */
 	//come sopra
 	public static ArrayList<EPeriodicoMisurabileEffettuato> esameEsitoMin(ArrayList<EPeriodicoMisurabileEffettuato> listaEPME){
 		ArrayList<EPeriodicoMisurabileEffettuato> listaMin = new ArrayList<>();
@@ -1149,10 +1231,17 @@ public class CSMain{
 		return listaMin;
 	}
 	
-	/*
-	 * Stessa cosa riguardante esito max e min
-	 * decidere se controllare se la dimensione dell'arraylist passato sia maggiore di 0
+	/**
+	 * Partendo da un ArrayList (che dovrebbe essere di esami della stessa tipologia) restituisce un double contenente il valore
+	 * medio degli esiti
+	 * 
+	 * @param listaEPME la lista di esami dei quali trovare l'esito medio
+	 * @return vMedio il valore medio degli esiti
+	 * 
+	 * @author Valtulini Claudio
 	 */
+	 //Stessa cosa riguardante esito max e min
+	 //decidere se controllare se la dimensione dell'arraylist passato sia maggiore di 0
 	public static double esameEsitoMedio(ArrayList<EPeriodicoMisurabileEffettuato> listaEPME){
 		double somma = 0.0;
 		int nEsami = 0;
@@ -1167,6 +1256,15 @@ public class CSMain{
 		return vMedio;
 	}
 	
+	/**
+	 * Passata una lista di EsamiEffettuati ne trova quelli il cui nome dell'esame corrispondente equivale a quello della stringa passata
+	 * 
+	 * @param listaEE la lista di EsamiEffettuati
+	 * @param nomeTipologia una stringa contenente il nome della tipologia di esami che si vuole isolare
+	 * @return listaStessaTipologia un ArrayList di esami effettuati tutti della stessa tipologia
+	 * 
+	 * @author Valtulini Claudio
+	 */
 	//nome non molto significativo
 	public static ArrayList<EsameEffettuato> esameStessaTipologia(ArrayList<EsameEffettuato> listaEE, String nomeTipologia){
 		ArrayList<EsameEffettuato> listaStessaTipologia = new ArrayList<>();
