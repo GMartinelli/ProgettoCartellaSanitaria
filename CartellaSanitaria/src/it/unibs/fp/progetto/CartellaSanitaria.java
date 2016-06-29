@@ -296,6 +296,13 @@ public class CartellaSanitaria {
 		}
 	}
 	
+	/**
+	 * A seconda del genere impostato come attributo ritorna una stringa
+	 * 
+	 * @return <strong> "Maschio" </strong> se genere == false <strong> "Femmina" </strong> se genere == true
+	 * 
+	 * @author Valtulini Claudio
+	 */
 	public String getStringaGenere(){
 		String genere = null;
 		if(this.genere == false){
@@ -507,6 +514,15 @@ public class CartellaSanitaria {
 		return codiceSanitario.toUpperCase();
 	}
 	
+	/**
+	 * Controlla se esiste almeno un esame effettuato il cui nome ha valore uguale alla stringa passata
+	 * all'interno dell'ArrayList esamiEffettuati
+	 * 
+	 * @param <strong>nomeEsame</strong> il nome di tipologia di esame da cercare
+	 * @return <strong>true</strong> se e' presente <strong>false</strong> se non e' presente
+	 * 
+	 * @author Valtulini Claudio
+	 */
 	public boolean isEsameEsistente(String nomeEsame){
 		for(EsameEffettuato elemento: esamiEffettuati){
 			if(elemento.getEsame().getNome() == nomeEsame)
@@ -531,6 +547,16 @@ public class CartellaSanitaria {
 		return null;
 	}
 	
+	/**
+	 * Controlla se esiste almeno un esame effettuato il cui nome ha valore uguale alla stringa passata
+	 * all'interno dell'ArrayList esamiEffettuati e lo ritorna se anche la data dell'esame corrisponde a quella passata
+	 * 
+	 * @param <strong>nomeEsame</strong> il nome della tipologia di esame da cercare
+	 * @param <strong>dataEsame</strong> la data in cui deve essere stato effettuato l'esame
+	 * @return l'<strong>esame</strong> se i due parametri corrispondono, <strong>null</strong> altrimenti
+	 * 
+	 * @author Valtulini Claudio
+	 */
 	public EsameEffettuato cercaEsame(String nomeEsame, Date dataEsame){
 		for(EsameEffettuato elemento: esamiEffettuati){
 			if(elemento.getEsame().getNome() == nomeEsame && elemento.getData() == dataEsame)
@@ -539,6 +565,15 @@ public class CartellaSanitaria {
 		return null;
 	}
 	
+	
+	/**
+	 * Conta il numero di occorrenze di una certa tipologia di esame all'interno dell'ArrayList esamiEffettuati
+	 * 
+	 * @param <strong>nomeEsame</strong> stringa contenente il nome della tipologia di esame di cui contare le occorrenze
+	 * @return un intero contenente il numero di occorrenze riscontrate
+	 * 
+	 * @author Valtulini Claudio
+	 */
 	public int contaEsame(String nomeEsame){
 		int nCorrispondenze = 0;
 		for(EsameEffettuato elemento: esamiEffettuati){
@@ -548,6 +583,15 @@ public class CartellaSanitaria {
 		return nCorrispondenze;
 	}
 	
+	/**
+	 * Controlla se esiste almeno una malattia il cui nome ha valore uguale alla stringa passata
+	 * all'interno dell'ArrayList elencoMalattia
+	 * 
+	 * @param <strong>nomeMalattia</strong> il nome della malattia da cercare
+	 * @return <strong>true</strong> se e' presente <strong>false</strong> se non e' presente
+	 * 
+	 * @author Valtulini Claudio
+	 */
 	public boolean isMalattiaEsistente(String nomeMalattia){
 		for(Malattia elemento: elencoMalattia){
 			if(elemento.getNome() == nomeMalattia)
@@ -556,6 +600,14 @@ public class CartellaSanitaria {
 		return false;
 	}
 	
+	/**
+	 * Conta il numero di occorrenze di una certa malattia all'interno dell'ArrayList esamiEffettuati
+	 * 
+	 * @param <strong>nomeMalattia</strong> stringa contenente il nome della malattia di cui contare le occorrenze
+	 * @return un intero contenente il numero di occorrenze riscontrate
+	 * 
+	 * @author Valtulini Claudio
+	 */
 	public int contaMalattiaEsistente(String nomeMalattia){
 		int nCorrispondenze = 0;
 		for(Malattia elemento: elencoMalattia){
@@ -580,6 +632,14 @@ public class CartellaSanitaria {
 		return null;
 	}
 	
+	/**
+	 * Metodo che cerca la malattia tra quelle avute/in corso dall'utente
+	 * @param nomeMalattia nome della malattia da cercare
+	 * @param dataInizio la data di inizio della malattia da cercare
+	 * @return la <strong>malattia cercata</strong> se esiste una il cui nome e data di inizio equivalgono a quelle passate, <strong>null</strong> altrimenti
+	 * 
+	 * @author Valtulini Claudio
+	 */
 	public Malattia cercaMalattia(String nomeMalattia, Date dataInizio){
 		for(Malattia elemento: elencoMalattia){
 			if(elemento.getNome() == nomeMalattia && elemento.getDataInizio() == dataInizio)
