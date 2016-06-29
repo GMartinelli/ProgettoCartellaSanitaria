@@ -78,10 +78,22 @@ public class ListaEsame{
 		return null;
 	}
 	
+	/**
+	 * Permette di aggiungere un'esame all'ArrayList che li contiene
+	 * @param <strong>esame</strong> l'esame da aggiungere
+	 * 
+	 * @author Valtulini Claudio
+	 */
 	public void aggiungiEsame(Esame esame){
 		lista.add(esame);
 	}
 	
+	/**
+	 * Permette di rimuovere un'esame all'ArrayList che li contiene
+	 * @param <strong>esame</strong> l'esame da rimuovere
+	 * 
+	 * @author Valtulini Claudio
+	 */
 	public void rimuoviEsame(Esame esame){
 		lista.remove(esame);
 	}

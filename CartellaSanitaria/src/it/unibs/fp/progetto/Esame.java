@@ -93,6 +93,12 @@ public class Esame {
 	}
 	
 	//Metodi
+	/**
+	 * Ritorna una stringa contenente le informazioni dell'oggetto
+	 * @return il nome dell'oggetto
+	 * 
+	 * @author Valtulini Claudio
+	 */
 	public String toString(){
 		return nome;
 	}

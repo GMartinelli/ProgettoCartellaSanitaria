@@ -188,6 +188,10 @@ public class EDiagnosticoEffettuato extends EsameEffettuato{
 		else return true;
 	}
 	
+	/**
+	 * Restituisce una stringa contenente le informazioni complete dell'esame effettuato
+	 * @return <strong>stringaDescrittivaCompleta</strong> la stringa contenente le informazioni
+	 */
 	public String toStringCompleto(){
 		String stringaDescrittivaCompleta = super.toStringCompleto();
 		if(esame.getAreaInteressata() != null){ stringaDescrittivaCompleta +=

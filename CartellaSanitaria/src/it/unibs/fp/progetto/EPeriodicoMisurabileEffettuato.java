@@ -270,7 +270,6 @@ public class EPeriodicoMisurabileEffettuato extends EsameEffettuato{
 	 * 
 	 * @author Manenti Gabriele
 	 */
-	
 	public boolean isOltreSogliaMin(){
 		try{
 			if(esito < this.esame.getValoreSogliaMin()&& !isSuperioreRange()) return true;
@@ -288,7 +287,6 @@ public class EPeriodicoMisurabileEffettuato extends EsameEffettuato{
 	 * 
 	 * @author Manenti Gabriele
 	 */
-	
 	public boolean isInferioreRange(){
 		try{
 			if(esito < this.esame.getValoreMin()) return true;
@@ -306,7 +304,6 @@ public class EPeriodicoMisurabileEffettuato extends EsameEffettuato{
 	 * 
 	 * @author Manenti Gabriele
 	 */
-	
 	public boolean isOltreSogliaMax(){
 		try{
 			if(esito > this.esame.getValoreSogliaMax() && isSuperioreRange()) return true;
@@ -321,7 +318,6 @@ public class EPeriodicoMisurabileEffettuato extends EsameEffettuato{
 	 * Controlla se il valore dell'esito e' superiore al range definito dalla tipologia di esame
 	 * 
 	 * @return true se il valore dell'esito e' superiore a quello di range, false se altrimenti
-	 * 
 	 */
 	public boolean isSuperioreRange(){
 		if(isInRange()) throw new IllegalStateException(COMPRESO_ECC);
@@ -341,6 +337,10 @@ public class EPeriodicoMisurabileEffettuato extends EsameEffettuato{
 		else return true;
 	}
 	
+	/**
+	 * Ritorna una stringa contenente tutte le informazioni relative all'esame effettuato
+	 * @return <strong>stringaDescrittivaCompleta</strong> la stringa contenente le informazioni
+	 */
 	public String toStringCompleto(){
 		String stringaDescrittivaCompleta = super.toStringCompleto() + 
 			"Valori di riferimento: " + "%n" +

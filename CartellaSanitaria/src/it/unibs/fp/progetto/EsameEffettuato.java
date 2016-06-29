@@ -194,6 +194,10 @@ public class EsameEffettuato {
 		return esame.getNome() + "%n   Data: " + MyTime.toStringData(data) + "%n   Ora: " + ora + "%n   Luogo: " + luogo;
 	}
 	
+	/**
+	 * Ritorna una stringa contenente le informazioni complete relative all'esame effettuato
+	 * @return <strong>stringaDescrittivaCompleta</strong> la stringa contenente le informazioni
+	 */
 	public String toStringCompleto(){/*Modificato Metodo to String nell'acquisizione data(aggiunto MyTime.toStringData)*/
 		String stringaDescrittivaCompleta =
 			"Tipologia Esame: " + esame.getNome() + "%n" +
