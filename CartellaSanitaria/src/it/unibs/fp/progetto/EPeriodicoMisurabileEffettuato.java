@@ -337,6 +337,12 @@ public class EPeriodicoMisurabileEffettuato extends EsameEffettuato{
 		else return true;
 	}
 	
+	@Override
+	public String toString(){
+		String descrizione = super.toString() + "%n  Esito:" + this.esito;
+		return descrizione;
+	}
+	
 	/**
 	 * Ritorna una stringa contenente tutte le informazioni relative all'esame effettuato
 	 * @return <strong>stringaDescrittivaCompleta</strong> la stringa contenente le informazioni

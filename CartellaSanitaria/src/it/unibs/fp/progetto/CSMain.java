@@ -94,8 +94,9 @@ public class CSMain{
 	
 	// Errori
 	private static final String ERRORE_FILE_ESISTENTE = "Attenzione, esiste gia' un file con questo nome.";
-	private static final String ERRORE_INSERIMENTO = "Errore! Dato inserito non valido!";
+	private static final String ERRORE_INS = "Errore! Dato inserito non valido!";
 	private static final String ERRORE_TIPOLOGIA_INESISTENTE = "Attenzione! La tipologia di esame specificata non esiste!";
+	private static final String ERRORE_TIPO = "Attenzione! Il tipo di esame passato non e' corretto!";
 	private static final String ERRORE_MALATTIA_INESISTENTE = "Attenzione! La malattia specificata non esiste!";
 	private static final String ERRORE_OPERAZIONE_ND_TIPO = "Attenzione, operazione non disponibile per il tipo di esame scelto."; //ND = NON DISPONIBILE
 	private static final String ERRORE_ESAME_NON_TROVATO = "Attenzione! Non e' presente alcun esame con quel nome!";
@@ -144,7 +145,7 @@ public class CSMain{
 			if(CartellaSanitaria.checkValiditaTelefono(telefono))
 				valido = true;
 			else{
-				stampaMex(ERRORE_INSERIMENTO);
+				stampaMex(ERRORE_INS);
 				stampaMex(" ");
 			}
 		}while(!valido);
@@ -157,7 +158,7 @@ public class CSMain{
 			if(CartellaSanitaria.checkValiditaEMail(mail))
 				valido = true;
 			else{
-				stampaMex(ERRORE_INSERIMENTO);
+				stampaMex(ERRORE_INS);
 				stampaMex(" ");
 			}
 		}while(!valido);
@@ -173,7 +174,7 @@ public class CSMain{
 			if((dataN != null) && CartellaSanitaria.checkDataNascita(data))
 				valido = true;
 			else{
-				stampaMex(ERRORE_INSERIMENTO);
+				stampaMex(ERRORE_INS);
 				stampaMex(" ");
 			}
 		}while(!valido);
@@ -199,7 +200,7 @@ public class CSMain{
 			if(CartellaSanitaria.checkValiditaCF(codiceF))
 				valido = true;
 			else{
-				stampaMex(ERRORE_INSERIMENTO);
+				stampaMex(ERRORE_INS);
 				stampaMex(" ");
 			}
 		}while(!valido);
@@ -212,7 +213,7 @@ public class CSMain{
 			if(CartellaSanitaria.checkValiditaCF(gruppoS))
 				valido = true;
 			else{
-				stampaMex(ERRORE_INSERIMENTO);
+				stampaMex(ERRORE_INS);
 				stampaMex(" ");
 			}
 		}while(!valido);
@@ -260,7 +261,7 @@ public class CSMain{
 			case 0:
 				break;
 			default:
-				stampaMex(ERRORE_INSERIMENTO);
+				stampaMex(ERRORE_INS);
 				break;
 			}
 		}while(sceltaT!=0);
@@ -305,7 +306,7 @@ public class CSMain{
 					return e1;	
 				}
 			default:
-				stampaMex(ERRORE_INSERIMENTO);
+				stampaMex(ERRORE_INS);
 				break;
 			}
 		
@@ -435,7 +436,7 @@ public class CSMain{
 				}
 				return ep1;
 			default:
-				stampaMex(ERRORE_INSERIMENTO);
+				stampaMex(ERRORE_INS);
 		}
 		return null;
 	}
@@ -560,7 +561,7 @@ public class CSMain{
 				}
 				return ep1;
 			default:
-				stampaMex(ERRORE_INSERIMENTO);
+				stampaMex(ERRORE_INS);
 		}
 		return null;
 	}
@@ -737,7 +738,7 @@ public class CSMain{
 							valido = true;
 						}
 						else{
-							stampaMex(ERRORE_INSERIMENTO);
+							stampaMex(ERRORE_INS);
 						}
 					}while(!valido);
 					CS.setTelefono(telefono);
@@ -751,7 +752,7 @@ public class CSMain{
 							valido = true;
 						}
 						else{
-							stampaMex(ERRORE_INSERIMENTO);
+							stampaMex(ERRORE_INS);
 						}
 					}while(!valido);
 					CS.setEmail(mail);
@@ -765,7 +766,7 @@ public class CSMain{
 							valido = true;
 						}
 						else{
-							stampaMex(ERRORE_INSERIMENTO);
+							stampaMex(ERRORE_INS);
 						}
 					}while(!valido);
 					CS.setDataNascita(MyTime.creaData(data));
@@ -797,7 +798,7 @@ public class CSMain{
 							valido = true;
 						}
 						else{
-							stampaMex(ERRORE_INSERIMENTO);
+							stampaMex(ERRORE_INS);
 						}
 					}while(!valido);
 					CS.setCodiceFiscale(codiceF);
@@ -811,7 +812,7 @@ public class CSMain{
 							valido = false;
 						}
 						else{
-							stampaMex(ERRORE_INSERIMENTO);
+							stampaMex(ERRORE_INS);
 						}
 					}while(!valido);
 					CS.setGruppoSanguigno(gruppoS);
@@ -850,7 +851,7 @@ public class CSMain{
 					case 0:
 						break;
 					default:
-						stampaMex(ERRORE_INSERIMENTO);
+						stampaMex(ERRORE_INS);
 			}
 		}while(scelta != 0);
 	}
@@ -886,7 +887,7 @@ public class CSMain{
 							CS.getEsamiEffettuati().add(creaEsameEffettuato(listaE, listaM, scelta2));
 							break;
 						default:
-							stampaMex(ERRORE_INSERIMENTO);
+							stampaMex(ERRORE_INS);
 					}
 					break;
 				case 2:
@@ -902,7 +903,7 @@ public class CSMain{
 				case 0:
 					break;
 				default:
-					stampaMex(ERRORE_INSERIMENTO);
+					stampaMex(ERRORE_INS);
 			}
 		}while(scelta != 0);
 	}
@@ -932,7 +933,7 @@ public class CSMain{
 				case 0:
 					break;
 				default:
-					stampaMex(ERRORE_INSERIMENTO);
+					stampaMex(ERRORE_INS);
 			}
 		}while(scelta != 0);
 	}
@@ -1044,7 +1045,7 @@ public class CSMain{
 				case 0:
 					break;
 				default:
-					stampaMex(ERRORE_INSERIMENTO);
+					stampaMex(ERRORE_INS);
 			}
 		}while(scelta != 0);
 	}
@@ -1088,7 +1089,7 @@ public class CSMain{
 					malattia.setTerapia(terapia);
 					break;
 				default:
-					stampaMex(ERRORE_INSERIMENTO);
+					stampaMex(ERRORE_INS);
 			}
 		}while(scelta != 0);
 	}
@@ -1180,21 +1181,32 @@ public class CSMain{
 	 * @author Valtulini Claudio
 	 */
 	//da decidere se ignorare i valori oltre soglia, in tal caso va modificato
-	public static ArrayList<EPeriodicoMisurabileEffettuato> esameEsitoMax(ArrayList<EPeriodicoMisurabileEffettuato> listaEPME){
-		ArrayList<EPeriodicoMisurabileEffettuato> listaMax = new ArrayList<>();
-		listaMax.add(listaEPME.get(0));
+	public static ArrayList<EPeriodicoMisurabileEffettuato> esameEsitoMax(ArrayList<EsameEffettuato> listaEPME){
+		if(listaEPME.get(0) instanceof EPeriodicoMisurabileEffettuato){
+			ArrayList<EPeriodicoMisurabileEffettuato> listaMax = new ArrayList<>();
+			ArrayList<EPeriodicoMisurabileEffettuato> listaCopia = new ArrayList<>();
+			
+			for(EsameEffettuato elemento: listaEPME){
+				listaCopia.add((EPeriodicoMisurabileEffettuato) elemento);
+			}
+			
+			listaMax.add(listaCopia.get(0));
 		
-		for(EPeriodicoMisurabileEffettuato elemento: listaEPME){
-			if(Double.compare(elemento.getEsito(), listaMax.get(0).getEsito()) > 0){
-				listaMax.clear();
-				listaMax.add(elemento);
+			for(EPeriodicoMisurabileEffettuato elemento: listaCopia){
+				if(Double.compare(elemento.getEsito(), listaMax.get(0).getEsito()) > 0){
+					listaMax.clear();
+					listaMax.add(elemento);
+				}
+				else if(Double.compare(elemento.getEsito(), listaMax.get(0).getEsito()) == 0){
+					listaMax.add(elemento);
+				}
 			}
-			else if(Double.compare(elemento.getEsito(), listaMax.get(0).getEsito()) == 0){
-				listaMax.add(elemento);
-			}
+
+			return listaMax;
 		}
-		
-		return listaMax;
+		else{
+			throw new IllegalArgumentException(ERRORE_TIPO);
+		}
 	}
 	
 	/**
@@ -1207,21 +1219,32 @@ public class CSMain{
 	 * @author Valtulini Claudio
 	 */
 	//come sopra
-	public static ArrayList<EPeriodicoMisurabileEffettuato> esameEsitoMin(ArrayList<EPeriodicoMisurabileEffettuato> listaEPME){
-		ArrayList<EPeriodicoMisurabileEffettuato> listaMin = new ArrayList<>();
-		listaMin.add(listaEPME.get(0));
+	public static ArrayList<EPeriodicoMisurabileEffettuato> esameEsitoMin(ArrayList<EsameEffettuato> listaEPME){
+		if(listaEPME.get(0) instanceof EPeriodicoMisurabileEffettuato){
+			ArrayList<EPeriodicoMisurabileEffettuato> listaMin = new ArrayList<>();
+			ArrayList<EPeriodicoMisurabileEffettuato> listaCopia = new ArrayList<>();
+			
+			for(EsameEffettuato elemento: listaEPME){
+				listaCopia.add((EPeriodicoMisurabileEffettuato) elemento);
+			}
+			
+			listaMin.add(listaCopia.get(0));
+			
+			for(EPeriodicoMisurabileEffettuato elemento: listaCopia){
+				if(Double.compare(elemento.getEsito(), listaMin.get(0).getEsito()) < 0){
+					listaMin.clear();
+					listaMin.add(elemento);
+				}
+				else if(Double.compare(elemento.getEsito(), listaMin.get(0).getEsito()) == 0){
+					listaMin.add(elemento);
+				}
+			}
 		
-		for(EPeriodicoMisurabileEffettuato elemento: listaEPME){
-			if(Double.compare(elemento.getEsito(), listaMin.get(0).getEsito()) < 0){
-				listaMin.clear();
-				listaMin.add(elemento);
-			}
-			else if(Double.compare(elemento.getEsito(), listaMin.get(0).getEsito()) == 0){
-				listaMin.add(elemento);
-			}
+			return listaMin;
 		}
-		
-		return listaMin;
+		else{
+			throw new IllegalArgumentException(ERRORE_TIPO);
+		}
 	}
 	
 	/**
@@ -1295,7 +1318,7 @@ public class CSMain{
 				visualizzaDatiUtenteCompleta(CS);
 				break;
 			default:
-				stampaMex(ERRORE_INSERIMENTO);
+				stampaMex(ERRORE_INS);
 		}
 	}
 	
@@ -1326,7 +1349,77 @@ public class CSMain{
 	 * 		gestire max e min multipli (presumo si intenda più valori uguali in date diverse)
 	 * 	visualizzare valore medio (media dei valori o valore più vicino alla media? presumo la prima)
 	 * 	altre statistiche a scelta (ci si può non incasinare ed evitare)
+	 * 
+	 *  QUI SOTTO METODO BASATO SU QUESTA DESCRIZIONE (POTREBBE ESSERE NON COMPLETO)
 	 */
+	
+	private static final String[] RICHIESTO_VISUALIZZA_OPZIONI = {"Visualizzazione completa dati anagrafici", "Visualizzazione completa di un esame tra quelli mostrati nella lista", "Visualizzazione completa di una malattia tra quelle mostrate nella lista"};
+	private static final String[] RICHIESTO_SI_NO = {"SI", "NO"};
+	private static final String RICHIESTO_E_MEX_INS_TIPOLOGIA = "Inserisci il nome della tipologia di cui visualizzare le statistiche: "; 
+	public static void richiesto(CartellaSanitaria CS, ListaEsame listaE, ArrayList<Malattia> listaM){
+		stampaMex(MEX_BENVENUTO);
+		CS.toString();
+		
+		int scelta = 0;
+		MyMenu menuRichiestaVisualizzazioniComplete = new MyMenu("Cosa si desidera fare?", RICHIESTO_VISUALIZZA_OPZIONI);
+		
+		do{
+			scelta = menuRichiestaVisualizzazioniComplete.scegli();
+			
+			switch(scelta){
+				case 1:
+					visualizzaDatiUtenteCompleta(CS);
+					break;
+				case 2:
+					//scelgo e visualizzo esame
+					break;
+				case 3:
+					//scelgo e visualizzo malattia
+					break;
+				case 0:
+					break;
+				default:
+					stampaMex(ERRORE_INS);
+			}
+		}while(scelta != 0);
+		
+		scelta = 0;
+		MyMenu menuRichiestoVisualizzaTipologia = new MyMenu("Si desidera scegliere una tipologia di esame di cui visualizzare le statistiche?", RICHIESTO_SI_NO);
+		
+		do{
+			scelta = menuRichiestoVisualizzaTipologia.scegli();
+			
+			//controllare i toString se visualizzano le richieste
+			switch(scelta){
+				case 1:
+					String tipologia = null;
+					ArrayList<EsameEffettuato> simili = null;
+					do{
+						tipologia = MyInput.leggiStringaNonVuota(RICHIESTO_E_MEX_INS_TIPOLOGIA);
+						simili = esameStessaTipologia(CS.getEsamiEffettuati(), tipologia);
+						if(simili.size() == 0){
+							stampaMex(ERRORE_TIPOLOGIA_INESISTENTE);
+						}
+					}while(simili.size() == 0);
+					
+					for(EPeriodicoMisurabileEffettuato elemento: esameEsitoMax(simili)){
+						elemento.toString();
+					}
+					
+					for(EPeriodicoMisurabileEffettuato elemento: esameEsitoMin(simili)){
+						elemento.toString();
+					}
+					//visualizzo max min soglia + date
+					//visualizzo valore medio
+					break;
+				case 2:
+					break;
+				default:
+					stampaMex(ERRORE_INS);
+			}
+		}while(scelta != 2);
+	}
+	
 	/*Main*/
 	public static void main(String[] args) {
 		stampaMex(MEX_BENVENUTO);
@@ -1385,7 +1478,7 @@ public class CSMain{
 							case 0:
 								break;
 							default:
-								stampaMex(ERRORE_INSERIMENTO);
+								stampaMex(ERRORE_INS);
 							}
 						}while(scelta4 != 0);
 						break;
@@ -1396,7 +1489,7 @@ public class CSMain{
 					case 4:
 						break;
 					default:
-						stampaMex(ERRORE_INSERIMENTO);
+						stampaMex(ERRORE_INS);
 					}
 				}while(scelta3 != 0);
 				break;
@@ -1410,7 +1503,7 @@ public class CSMain{
 			case 0:
 				break;
 			default:
-				stampaMex(ERRORE_INSERIMENTO);
+				stampaMex(ERRORE_INS);
 			}
 			stampaMex(" ");
 		}while(scelta != 0);
