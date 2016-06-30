@@ -19,7 +19,7 @@ public class CSMain{
 	// Opzioni menu'
 	private static final String[] G_OPZIONI = {"Gestione dati paziente","Gestione esami","Gestione malattie"}; // G = GESTIONE
 	
-	private static final String[] P_OPZIONI = {"Modifica dati paziente","Visualizzazione completa dati paziente","Visualizzazione sintetica dati paziente"};
+	private static final String[] P_OPZIONI = {"Modifica dati paziente","Visualizzazione sintetica dati paziente","Visualizzazione completa dati paziente"};
 	private static final String[] P_OPZIONI_MODIFICA = {"Modifica nome","Modifica cognome","Modifica indirizzo","Modifica telefono","Modifica email", "Modifica luogo di nascita", "Modifica data di nascita", "Modifica genere", "Modifica codice fiscale", "Modifica gruppo sanguigno", "Aggiungi esame effettuato", "Aggiungi malattia", "Rimuovi esame effettuato", "Rimuovi malattia"};
 	
 	private static final String[] E_OPZIONI = {"Inserisci esame","Modifica esame","Visualizza esame","Visualizza lista esami"};
@@ -100,13 +100,6 @@ public class CSMain{
 	private static final String ERRORE_OPERAZIONE_ND_TIPO = "Attenzione, operazione non disponibile per il tipo di esame scelto."; //ND = NON DISPONIBILE
 	private static final String ERRORE_ESAME_NON_TROVATO = "Attenzione! Non e' presente alcun esame con quel nome!";
 	private static final String ERRORE_MALATTIA_NON_TROVATA = "Attenzione! Non e' presente alcuna malattia con quel nome!";
-	
-	/*
-	 * 4 tipologie di esami
-	 * 6 esami misurabili dello stesso tipo (6 effettuati)
-	 * 3 esami diagnostici dello stesso tipo (3 effettuati)
-	 * 3 esami prenotati (senza esito)
-	*/
 	
 	/**
 	 * Stampa un messaggio nella console attraverso System.out.println
@@ -1278,6 +1271,62 @@ public class CSMain{
 		return listaStessaTipologia;
 	}
 	
+	/**
+	 * Menu per la gestione delle info di utente Modifica/Visualizza/Visualizza Completo
+	 * @param CS la cartella sanitaria da gestire
+	 * @param listaE la lista delle tipologie di esami creati
+	 * @param listaM la lista delle malattie create
+	 * 
+	 * @author Martinelli Giuseppe
+	 */
+	// probabilmente da riscrivere secondo le richieste traccia
+	public static void gestioneInfoUtente(CartellaSanitaria CS, ListaEsame listaE, ArrayList<Malattia> listaM){
+		int scelta = 0;
+		MyMenu menuPaziente = new MyMenu("Gestione informazioni utente", P_OPZIONI);
+		scelta = menuPaziente.scegli();
+		switch(scelta){
+			case 1:
+				modificaDatiPaziente(CS, listaE, listaM);
+				break;
+			case 2:
+				stampaMex(CS.toString());
+				break;
+			case 3:
+				visualizzaDatiUtenteCompleta(CS);
+				break;
+			default:
+				stampaMex(ERRORE_INSERIMENTO);
+		}
+	}
+	
+	/* Oggetti da pre-creare salvati per esame
+	 * 4 tipologie di esami
+	 * 6 esami misurabili dello stesso tipo (6 effettuati)
+	 * 3 esami diagnostici dello stesso tipo (3 effettuati)
+	 * 3 esami prenotati (senza esito)
+	*/
+	/* Cosa si dovrebbe fare nel main secondo la traccia (mia interpretazione V)
+	 * (partendo dalla visualizzazione dell'utente, no scelte, no operazioni di caricamento)
+	 * Visualizzo nome e cognome
+	 * 	con elenco esami
+	 * 		nome e data, se periodici valore esito
+	 * 	con elenco malattie
+	 * 
+	 * Dopo chiedo se
+	 * 	visualizzare tutti i dati anagrafici
+	 * 		visualizzacompleto()
+	 *  scegliere un esame e visualizzarlo completamente
+	 *  	visualizzacompleto()
+	 *  scegliere una malattia e visualizzarla completamente
+	 *  	visualizzacompleto()
+	 *  
+	 * Scegliere una tipologia di esame e
+	 * 	visualizzare tutte le misurazioni data + esito
+	 * 	visualizzare valore max e min e superamenti di soglia + date
+	 * 		gestire max e min multipli (presumo si intenda più valori uguali in date diverse)
+	 * 	visualizzare valore medio (media dei valori o valore più vicino alla media? presumo la prima)
+	 * 	altre statistiche a scelta (ci si può non incasinare ed evitare)
+	 */
 	/*Main*/
 	public static void main(String[] args) {
 		stampaMex(MEX_BENVENUTO);
@@ -1305,25 +1354,10 @@ public class CSMain{
 			MyMenu menuGenerale = new MyMenu("Cartella Sanitaria", G_OPZIONI);
 			scelta = menuGenerale.scegli();
 			switch(scelta){
-			case 1:
-				int scelta2 = 0;
-				MyMenu menuPaziente = new MyMenu("Gestione informazioni utente", P_OPZIONI);
-				scelta2 = menuPaziente.scegli();
-				switch(scelta2){
-					case 1:
-						modificaDatiPaziente(CS, listaE, listaM);
-						break;
-					case 2:
-						stampaMex(CS.toString());
-						break;
-					case 3:
-						visualizzaDatiUtenteCompleta(CS);
-						break;
-					default:
-						stampaMex(ERRORE_INSERIMENTO);
-					}
+			case 1: //Modifica Visualizza utente
+				gestioneInfoUtente(CS, listaE, listaM);
 				break;
-			case 2:
+			case 2: //Modifica visualizza esame
 				int scelta3 = 0;
 				do{
 					MyMenu menuEsame = new MyMenu("Gestione esami", E_OPZIONI);
@@ -1366,7 +1400,7 @@ public class CSMain{
 					}
 				}while(scelta3 != 0);
 				break;
-			case 3:
+			case 3://Modifica visualizza malattia
 				int scelta4 = 0;
 				do{
 					MyMenu menuMalattia = new MyMenu("Gestione malattia", M_OPZIONI);
