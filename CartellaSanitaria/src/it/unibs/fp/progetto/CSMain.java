@@ -69,8 +69,9 @@ public class CSMain{
 	private static final String E_MEX_PIU_ESAMI = "Attenzione, sono presenti piu' esami di questo tipo: ";
 	private static final String E_MEX_CANCELLA_DATA = "Inserire la data dell'esame da cancellare: ";
 	private static final String E_MEX_CERCA = "Inserire il nome dell'esame che si desidera cercare: ";
-	private static final String E_MEX_CREA_CERCA = "Si desidera creare un esame o cercarne uno già esistente?";
-	private static final String E_MEX_TIPO = "Si desidera inserire un nuovo Esame Effettuato Diagnostico o Periodico Misurabile?";
+	
+	private static final String E_SCELTA_CREA_CERCA = "Si desidera creare un esame o cercarne uno già esistente?";
+	private static final String E_SCELTA_TIPO = "Si desidera inserire un nuovo Esame Effettuato Diagnostico o Periodico Misurabile?";
 	
 	// Inserimento Malattia
 	private static final String M_MEX_INS_NOME = "Inserisci il nome della malattia: ";
@@ -874,14 +875,14 @@ public class CSMain{
 	 */
 	public static void aggiungiEffettuato(CartellaSanitaria CS, ListaEsame listaE, ArrayList<Malattia> listaM){
 		int scelta = 0;
-		MyMenu creaCerca = new MyMenu(E_MEX_CREA_CERCA, E_OPZIONI_CREA_CERCA);
+		MyMenu creaCerca = new MyMenu(E_SCELTA_CREA_CERCA, E_OPZIONI_CREA_CERCA);
 		scelta = creaCerca.scegli();
 		
 		do{
 			switch(scelta){
 				case 1:
 					int scelta2 = 0;
-					MyMenu scegliTipo = new MyMenu(E_MEX_TIPO, E_OPZIONI_SCEGLI_TIPO);
+					MyMenu scegliTipo = new MyMenu(E_SCELTA_TIPO, E_OPZIONI_SCEGLI_TIPO);
 					scelta2 = scegliTipo.scegli();
 				
 					switch(scelta2){
