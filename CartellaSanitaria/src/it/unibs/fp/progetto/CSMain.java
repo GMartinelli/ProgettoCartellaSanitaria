@@ -1096,41 +1096,6 @@ public class CSMain{
 		}while(scelta != 0);
 	}
 	
-	// Visualizza
-	/**
-	 * Permette la visualizzazione completa dei dati di una cartella sanitaria
-	 * 
-	 * @param CS la cartella sanitaria di cui visualizzare i dati
-	 *
-	 * @author Valtulini Claudio
-	 */
-	public static void visualizzaCartellaSanitariaCompleto(CartellaSanitaria CS){
-		String stringaDescrittivaCompleta = CS.toStringCompleto();
-		stampaMex(stringaDescrittivaCompleta);
-	}
-	
-	/**
-	 * Permette la visualizzazione competa dei dati di un EsameEffettuato
-	 * @param esame l'esame di cui visualizzare i dati
-	 * 
-	 * @author Valtulini Claudio
-	 */
-	public static void visualizzaEsameCompleto(EsameEffettuato esame){
-		String stringaDescrittivaCompleta = esame.toStringCompleto();
-		stampaMex(stringaDescrittivaCompleta);
-	}
-	
-	/**
-	 * Permette la visualizzazione completa dei dati di una malattia
-	 * @param malattia la malattia di cui visualizzare i dati
-	 * 
-	 * @author Valtulini Claudio
-	 */
-	public static void visualizzaMalattiaCompleto(Malattia malattia){
-		String stringaDescrittivaCompleta = malattia.toStringCompleto();
-		stampaMex(stringaDescrittivaCompleta);
-	}
-	
 	// Statistiche Periodico Misurabile FORSE da spostare in EsamEffettuato / EPeriodicoEffettuato ?
 	/**
 	 * Partendo da un ArrayList (che dovrebbe essere di esami della stessa tipologia) restituisce un ArrayList di EsameEffettuato
@@ -1301,7 +1266,7 @@ public class CSMain{
 			
 			switch(scelta){
 				case 1:
-					visualizzaCartellaSanitariaCompleto(CS);
+					stampaMex(CS.toStringCompleto());
 					break;
 				case 2:
 					//scelgo e visualizzo esame
@@ -1374,7 +1339,7 @@ public class CSMain{
 				stampaMex(CS.toString());
 				break;
 			case 3:
-				visualizzaCartellaSanitariaCompleto(CS);
+				stampaMex(CS.toStringCompleto());
 				break;
 			default:
 				stampaMex(ERRORE_INS);
