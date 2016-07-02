@@ -191,7 +191,21 @@ public class Malattia {
 		this.terapia = terapia;
 	}
 	
-	//metodi
+	//metodi	
+	/**
+	 * Metodo che, dato il nome di un esame, permette di sapere se questo è presente nella lista di esami associati ad una malattia
+	 * 
+	 * @param nomeEsame il nome dell'esame da cercare
+	 * @return true se l'esame è presente nell'elenco di esami associati, false altrimenti
+	 */
+	public boolean isAssociato(String nomeEsame){
+		for(Esame elemento: elencoEsamiAssociati){
+			if(elemento.getNome()==nomeEsame)
+				return true;
+		}
+		return false;
+	}
+	
 	/**
 	 * Ritorna una rappresentazione della malattia data da:
 	 * Nome, dataInizio, (se presente) dataTermine
@@ -205,17 +219,24 @@ public class Malattia {
 		return descrizione;
 	}
 	
-	/**
-	 * Metodo che, dato il nome di un esame, permette di sapere se questo è presente nella lista di esami associati ad una malattia
-	 * 
-	 * @param nomeEsame il nome dell'esame da cercare
-	 * @return true se l'esame è presente nell'elenco di esami associati, false altrimenti
-	 */
-	public boolean isAssociato(String nomeEsame){
-		for(Esame elemento: elencoEsamiAssociati){
-			if(elemento.getNome()==nomeEsame)
-				return true;
-		}
-		return false;
+	public String toStringCompleto(){
+		String stringaDescrittivaCompleta =
+				this.toString() + "%n";
+			if(this.getSintomi() != null){ stringaDescrittivaCompleta +=
+				"  Sintomi: " + this.getSintomi();
+			}
+			if(this.getDiagnosi() != null){ stringaDescrittivaCompleta +=
+				" Diagnosi: "+ this.getDiagnosi();
+			}
+			if(this.getElencoEsamiAssociati().size() > 0){ stringaDescrittivaCompleta +=
+				"  Elenco delle tipologie di esame associate: " + "%n";
+				for(Esame elemento: this.getElencoEsamiAssociati()){ stringaDescrittivaCompleta +=
+				"   " + elemento.toString();
+				}
+			}
+			if(this.getTerapia() != null){ stringaDescrittivaCompleta +=
+				"  Terapia: " + this.getTerapia();
+			}
+		return stringaDescrittivaCompleta;
 	}
 }

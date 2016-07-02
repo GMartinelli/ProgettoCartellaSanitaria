@@ -262,22 +262,6 @@ public class CartellaSanitaria {
 
 	/*Metodi*/
 	/**
-	 * Metodo che restituisce una descrizione ridotta in forma di stringa della classe
-	 * @return descrizione della cartella sanitaria in forma ridotta (nome, cognome, esami effettuati e malattie)
-	 * 
-	 * @author Martinelli Giuseppe
-	 */
-	public String toString(){
-		String descrizione="Nome: " + nome + "%nCognome: " + cognome + "%nElenco esami: %n";
-		for(int i=0; i<esamiEffettuati.size();i++)
-			descrizione+=esamiEffettuati.get(i).toString()+"%n";
-		descrizione+="Elenco malattie: %n";
-		for(int i=0; i<elencoMalattia.size();i++)
-			descrizione+=elencoMalattia.get(i).toString()+"%n";
-		return descrizione;
-	}
-	
-	/**
 	 * Dato un carattere in ingresso ritorna il valore booleano assegnabile al genere per quel carattere
 	 * @param dato il carattere da passare al metodo
 	 * @return <strong>false</strong> se e' stato inserito M/m <strong>true</strong> se e' stato inserito F/f
@@ -646,5 +630,57 @@ public class CartellaSanitaria {
 				return elemento;
 		}
 		return null;
+	}
+	
+	/**
+	 * Metodo che restituisce una descrizione ridotta in forma di stringa della classe
+	 * @return descrizione della cartella sanitaria in forma ridotta (nome, cognome, esami effettuati e malattie)
+	 * 
+	 * @author Martinelli Giuseppe
+	 */
+	public String toString(){
+		String descrizione="Nome: " + nome + "%nCognome: " + cognome + "%nElenco esami: %n";
+		for(int i=0; i<esamiEffettuati.size();i++)
+			descrizione+=esamiEffettuati.get(i).toString()+"%n";
+		descrizione+="Elenco malattie: %n";
+		for(int i=0; i<elencoMalattia.size();i++)
+			descrizione+=elencoMalattia.get(i).toString()+"%n";
+		return descrizione;
+	}
+	
+	/**
+	 * Metodo che restituisce una descrizione completa in forma di stringa della classe
+	 * @return descrizione della cartella sanitaria in forma completa (esami effettuati e malattie sono riportati in forma ridotta)
+	 * 
+	 * @author Valtulini Claudio
+	 */
+	public String toStringCompleto(){
+		String stringaDescrittivaCompleta = "Cartella sanitaria di " + this.getNome() + " " + this.getCognome() + "%n" +
+				"Residente in: " + this.getIndirizzo() + "%n" +
+				"Contatti: " + "%n" +
+				"  Numero Telefonico: " + this.getTelefono() + "%n";
+			if(this.getEmail() != null){ stringaDescrittivaCompleta += 
+				"  Indirizzo E-Mail: " + this.getEmail() + "%n";
+			}
+			stringaDescrittivaCompleta +=
+				"Nato il: " + this.getDataNascita().toString() + "%n" +
+				"A: " + this.getLuogoNascita() + "%n" +
+				"Genere: " + this.getStringaGenere() + "%n" +
+				"Gruppo Sanguigno: " + this.getGruppoSanguigno() + "%n" +
+				"Codice Fiscale: " + this.getCodiceFiscale() + "%n";
+			this.generaCodiceSanitario();
+			stringaDescrittivaCompleta +=
+				"Codice Sanitario: " + this.getCodiceSanitario() + "%n" +
+				"Esami Effettuati: " + "%n";
+			for(EsameEffettuato elemento: this.getEsamiEffettuati()){ stringaDescrittivaCompleta +=
+				"  " + elemento.toString();
+			}
+			stringaDescrittivaCompleta +=
+				"Malattie: " + "%n";
+			for(Malattia elemento: this.getElencoMalattia()){ stringaDescrittivaCompleta +=
+				"  " + elemento.toString();
+			}
+			
+			return stringaDescrittivaCompleta;
 	}
 }

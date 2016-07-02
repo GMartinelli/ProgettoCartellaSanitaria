@@ -124,104 +124,8 @@ public class CSMain{
 			MyServizioFile.salvaSingoloOggetto(file, daSalvare);
 		}
 	}
-	
-	/*Metodo che crea la cartella sanitaria*/
-	/**
-	 * Metodo che crea un oggetto della classe cartellaSanitaria
-	 * @return oggetto della classe cartella sanitaria
-	 * 
-	 * @author Martinelli Giuseppe 
-	 */
-	private static CartellaSanitaria creaCartellaSanitaria(){
-		String nome = MyInput.leggiStringaNonVuota(P_MEX_INS_NOME);
-		String cognome = MyInput.leggiStringaNonVuota(P_MEX_INS_COGNOME);
-		String indirizzo = MyInput.leggiStringaNonVuota(P_MEX_INS_INDIRIZZO);
-		
-		//Controllo se il numero di telefono inserito dall'utente risulta valido o meno
-		boolean valido = false;
-		String telefono = "";
-		do{
-			telefono = MyInput.leggiStringaNonVuota(P_MEX_INS_TELEFONO);
-			if(CartellaSanitaria.checkValiditaTelefono(telefono))
-				valido = true;
-			else{
-				stampaMex(ERRORE_INS);
-				stampaMex(" ");
-			}
-		}while(!valido);
-		
-		//Controlla se l'indirizzo e-mail inserito dall'utente risulta valido o meno
-		valido = false;
-		String mail = "";
-		do{
-			mail = MyInput.leggiStringaNonVuota(P_MEX_INS_MAIL);
-			if(CartellaSanitaria.checkValiditaEMail(mail))
-				valido = true;
-			else{
-				stampaMex(ERRORE_INS);
-				stampaMex(" ");
-			}
-		}while(!valido);
-		
-		String luogoN = MyInput.leggiStringaNonVuota(P_MEX_INS_LUOGON);
-		
-		//Controlla se la data di nascita inserita dall'utente risulta valida o meno
-		valido = false;
-		Date dataN = null;
-		do{
-			String data = MyInput.leggiStringaNonVuota(P_MEX_INS_DATAN);
-			MyTime.creaData(data);
-			if((dataN != null) && CartellaSanitaria.checkDataNascita(data))
-				valido = true;
-			else{
-				stampaMex(ERRORE_INS);
-				stampaMex(" ");
-			}
-		}while(!valido);
-		
-		//Controlla il genere inserito dall'utente
-		valido = false;
-		boolean genereP = false;
-		do{
-			try{
-				genereP = CartellaSanitaria.ritornaBoolGenere(MyInput.leggiChar(P_MEX_INS_GENERE));
-				valido = true;
-			}
-			catch(IllegalArgumentException e){
-				stampaMex(e.getMessage());
-			}
-		}while(!valido);
-		
-		//Controlla il codice fiscale
-		valido = false;
-		String codiceF = "";
-		do{
-			codiceF = MyInput.leggiStringaNonVuota(P_MEX_INS_CODICEF);
-			if(CartellaSanitaria.checkValiditaCF(codiceF))
-				valido = true;
-			else{
-				stampaMex(ERRORE_INS);
-				stampaMex(" ");
-			}
-		}while(!valido);
-		
-		//Controlla il gruppo sanguigno
-		valido = false;
-		String gruppoS = "";
-		do{
-			gruppoS = MyInput.leggiStringaNonVuota(P_MEX_INS_GSANGUIGNO);
-			if(CartellaSanitaria.checkValiditaCF(gruppoS))
-				valido = true;
-			else{
-				stampaMex(ERRORE_INS);
-				stampaMex(" ");
-			}
-		}while(!valido);
-		
-		CartellaSanitaria cs = new CartellaSanitaria(nome, cognome, indirizzo, telefono, mail, dataN, luogoN, genereP, codiceF, gruppoS);
-		return cs;
-	}
 
+	// Crea
 	/**
 	 * Metodo che crea un oggetto della classe esame in base alla tipologia scelta nel menu presente nel metodo
 	 * @return esame creato dall'utente
@@ -706,13 +610,296 @@ public class CSMain{
 		return new Malattia(nome, dataInizio, dataTermine, sintomi, diagnosi, listaAssociati, terapia);
 	}
 	
+	/**
+	 * Metodo che crea un oggetto della classe cartellaSanitaria
+	 * @return oggetto della classe cartella sanitaria
+	 * 
+	 * @author Martinelli Giuseppe 
+	 */
+	private static CartellaSanitaria creaCartellaSanitaria(){
+		String nome = MyInput.leggiStringaNonVuota(P_MEX_INS_NOME);
+		String cognome = MyInput.leggiStringaNonVuota(P_MEX_INS_COGNOME);
+		String indirizzo = MyInput.leggiStringaNonVuota(P_MEX_INS_INDIRIZZO);
+		
+		//Controllo se il numero di telefono inserito dall'utente risulta valido o meno
+		boolean valido = false;
+		String telefono = "";
+		do{
+			telefono = MyInput.leggiStringaNonVuota(P_MEX_INS_TELEFONO);
+			if(CartellaSanitaria.checkValiditaTelefono(telefono))
+				valido = true;
+			else{
+				stampaMex(ERRORE_INS);
+				stampaMex(" ");
+			}
+		}while(!valido);
+		
+		//Controlla se l'indirizzo e-mail inserito dall'utente risulta valido o meno
+		valido = false;
+		String mail = "";
+		do{
+			mail = MyInput.leggiStringaNonVuota(P_MEX_INS_MAIL);
+			if(CartellaSanitaria.checkValiditaEMail(mail))
+				valido = true;
+			else{
+				stampaMex(ERRORE_INS);
+				stampaMex(" ");
+			}
+		}while(!valido);
+		
+		String luogoN = MyInput.leggiStringaNonVuota(P_MEX_INS_LUOGON);
+		
+		//Controlla se la data di nascita inserita dall'utente risulta valida o meno
+		valido = false;
+		Date dataN = null;
+		do{
+			String data = MyInput.leggiStringaNonVuota(P_MEX_INS_DATAN);
+			MyTime.creaData(data);
+			if((dataN != null) && CartellaSanitaria.checkDataNascita(data))
+				valido = true;
+			else{
+				stampaMex(ERRORE_INS);
+				stampaMex(" ");
+			}
+		}while(!valido);
+		
+		//Controlla il genere inserito dall'utente
+		valido = false;
+		boolean genereP = false;
+		do{
+			try{
+				genereP = CartellaSanitaria.ritornaBoolGenere(MyInput.leggiChar(P_MEX_INS_GENERE));
+				valido = true;
+			}
+			catch(IllegalArgumentException e){
+				stampaMex(e.getMessage());
+			}
+		}while(!valido);
+		
+		//Controlla il codice fiscale
+		valido = false;
+		String codiceF = "";
+		do{
+			codiceF = MyInput.leggiStringaNonVuota(P_MEX_INS_CODICEF);
+			if(CartellaSanitaria.checkValiditaCF(codiceF))
+				valido = true;
+			else{
+				stampaMex(ERRORE_INS);
+				stampaMex(" ");
+			}
+		}while(!valido);
+		
+		//Controlla il gruppo sanguigno
+		valido = false;
+		String gruppoS = "";
+		do{
+			gruppoS = MyInput.leggiStringaNonVuota(P_MEX_INS_GSANGUIGNO);
+			if(CartellaSanitaria.checkValiditaCF(gruppoS))
+				valido = true;
+			else{
+				stampaMex(ERRORE_INS);
+				stampaMex(" ");
+			}
+		}while(!valido);
+		
+		CartellaSanitaria cs = new CartellaSanitaria(nome, cognome, indirizzo, telefono, mail, dataN, luogoN, genereP, codiceF, gruppoS);
+		return cs;
+	}
+	
+	// Modifica
+	/** 
+	 * Crea, mostra ed effettua le opzioni relative ad un menu' per la modifica dei dati di un esame
+	 * @param EsameEffettuato l'esame da modificare
+	 * @param listaE la lista delle tipologie di esame create
+	 * 
+	 * @author Martinelli Giuseppe
+	 */
+	public static void modificaEsame(Esame esame, ListaEsame listaE){
+		int scelta = 0;
+		MyMenu menuModificaEsame = new MyMenu(MODIFICA_INFO_E, E_OPZIONI_MODIFICA);
+		do{
+			scelta = menuModificaEsame.scegli();
+		
+			switch(scelta){
+				case 1:
+					String nomeMod = MyInput.leggiStringaNonVuota(E_MEX_INS_NOME);
+					esame.setNome(nomeMod);
+					break;
+				case 2:
+					String raccomandazioniMod = MyInput.leggiStringa(E_MEX_INS_RACCOMANDAZIONI);
+					esame.setNome(raccomandazioniMod);
+					break;
+				case 0:
+					break;
+				default:
+					stampaMex(ERRORE_INS);
+			}
+		}while(scelta != 0);
+	}
+	
+	/** 
+	 * Crea, mostra ed effettua le opzioni relative ad un menu' per la modifica dei dati di un esame effettuato
+	 * @param EsameEffettuato l'esame da modificare
+	 * @param listaE la lista delle tipologie di esame create
+	 * @param listaM la lista delle malattie create
+	 * 
+	 * @author Valtulini Claudio
+	 */
+	public static void modificaEsameEffettuato(EsameEffettuato esame, ListaEsame listaE, CartellaSanitaria CS){
+		int scelta = 0;
+		boolean valido = false;
+		MyMenu menuModificaEffettuato = new MyMenu(MODIFICA_INFO_E_EFFETTUATO, E_OPZIONI_MODIFICA_EFFETTUATO);
+		
+		do{
+			scelta = menuModificaEffettuato.scegli();
+		
+			switch(scelta){
+				case 1:
+					try{
+						String data = MyInput.leggiStringaNonVuota(E_MEX_INS_DATA);
+						esame.setData(MyTime.creaData(data));
+					}
+					catch(TooLateException e){
+						stampaMex(e.getMessage());
+					}
+					break;
+				case 2:
+					valido = false;
+					do{
+						try{
+							String nomeEsame = MyInput.leggiStringaNonVuota(P_MEX_INS_NOME);
+							if(listaE.isEsistente(nomeEsame)){
+								esame.setEsame(listaE.cercaEsame(nomeEsame));
+								valido = true;
+							}
+							else{
+								stampaMex(ERRORE_TIPOLOGIA_INESISTENTE);
+							}
+						}
+						catch(TooLateException e){
+							stampaMex(e.getMessage());
+							valido = true;
+						}
+						catch(IllegalArgumentException e){ //se l'esame non è coerente con la malattia
+							stampaMex(e.getMessage());
+						}
+					}while(valido = false);
+					break;
+				case 3:
+					try{
+						String luogo = MyInput.leggiStringaNonVuota(E_MEX_INS_LUOGO);
+						esame.setLuogo(luogo);
+					}
+					catch(TooLateException e){
+						stampaMex(e.getMessage());
+					}
+					break;
+				case 4:
+					valido = false;
+					do{
+						String nomeMalattia = MyInput.leggiStringaNonVuota(E_MEX_INS_MALATTIAN);
+						if(CS.isMalattiaEsistente(nomeMalattia)){
+							esame.setMalattia(CS.cercaMalattia(nomeMalattia));
+							valido = true;
+						}
+						else{
+							stampaMex(ERRORE_MALATTIA_INESISTENTE);
+						}
+					}while(valido == false);
+					break;
+				case 5:
+					try{
+						String ora = MyInput.leggiStringaNonVuota(E_MEX_INS_ORA);
+						esame.setOra(ora);
+					}
+					catch(TooLateException e){
+						stampaMex(e.getMessage());
+					}
+					break;
+				case 6:
+					if(esame instanceof EPeriodicoMisurabileEffettuato){
+						double esito = MyInput.leggiInteroNonNegativo(E_MEX_INS_ESITO_PERIODICO);
+						((EPeriodicoMisurabileEffettuato) esame).setEsito(esito);
+					}
+					else if(esame instanceof EDiagnosticoEffettuato){
+						String esito = MyInput.leggiStringaNonVuota(E_MEX_INS_ESITO_DIAGNOSTICO);
+						((EDiagnosticoEffettuato) esame).setEsito(esito);
+					}
+					break;
+				case 7:
+					if(esame instanceof EDiagnosticoEffettuato){
+						stampaMex(ERRORE_OPERAZIONE_ND_TIPO);
+					}
+					else if(esame instanceof EPeriodicoMisurabileEffettuato){
+						try{
+							stampaMex(NON_MODIFICA);
+							((EPeriodicoMisurabileEffettuato) esame).setAvvisi();
+							stampaMex(AVVISI_IMPOSTATI_CORRETTAMENTE);
+						}
+						catch(IllegalAccessException e){
+							stampaMex(e.getMessage());
+						}
+					}
+					break;
+				case 0:
+					break;
+				default:
+					stampaMex(ERRORE_INS);
+			}
+		}while(scelta != 0);
+	}
+	
+	/** 
+	 * Crea, mostra ed effettua le opzioni relative ad un menu' per la modifica dei dati di una malattia
+	 * @param malattia la malattia da modificare
+	 * 
+	 * @author Valtulini Claudio
+	 */
+	public static void modificaMalattia(Malattia malattia){
+		int scelta = 0;
+		//boolean valido = false;
+		MyMenu menuModificaMalattia = new MyMenu(MODIFICA_INFO_M, M_OPZIONI_MODIFICA);
+		do{
+			scelta = menuModificaMalattia.scegli();
+		
+			switch(scelta){
+				case 1:
+					String nome = MyInput.leggiStringaNonVuota(M_MEX_INS_NOME);
+					malattia.setNome(nome);
+					break;
+				case 2:
+					Date datai = MyInput.leggiData(M_MEX_INS_DATAI);
+					malattia.setDataInizio(datai);
+					break;
+				case 3:
+					Date datat = MyInput.leggiData(M_MEX_INS_DATAT);
+					malattia.setDataInizio(datat);
+					break;
+				case 4:
+					String sintomi = MyInput.leggiStringaNonVuota(M_MEX_INS_SINTOMI);
+					malattia.setSintomi(sintomi);
+					break;
+				case 5:
+					String diagnosi = MyInput.leggiStringaNonVuota(M_MEX_INS_DIAGNOSI);
+					malattia.setDiagnosi(diagnosi);
+					break;
+				case 6:
+					String terapia = MyInput.leggiStringaNonVuota(M_MEX_INS_TERAPIA);
+					malattia.setTerapia(terapia);
+					break;
+				default:
+					stampaMex(ERRORE_INS);
+			}
+		}while(scelta != 0);
+	}
+	
 	/** 
 	 * Crea, mostra ed effettua le opzioni relative ad un menu' per la modifica dei dati utente della cartella sanitaria
 	 * @param CS la cartella sanitaria da modificare
 	 * 
 	 * @author Valtulini Claudio
 	 */
-	public static void modificaDatiPaziente(CartellaSanitaria CS, ListaEsame listaE, ArrayList<Malattia> listaM){
+	public static void modificaCartellaSanitaria(CartellaSanitaria CS, ListaEsame listaE, ArrayList<Malattia> listaM){
 		int scelta = 0;
 		boolean valido = false;
 		MyMenu menuModificaPaziente = new MyMenu(MODIFICA_INFO_P, P_OPZIONI_MODIFICA);
@@ -856,6 +1043,7 @@ public class CSMain{
 		}while(scelta != 0);
 	}
 	
+	// Aggiungi
 	/**
 	 * Crea un oggetto di tipo EsameEffettuato e lo aggiunge alla lista di esami della cartella sanitaria passata come parametro
 	 * permette di scegliere se creare un esame diagnostico o periodico misurabile (effettuati) creando un nuovo oggetto Esame
@@ -908,192 +1096,7 @@ public class CSMain{
 		}while(scelta != 0);
 	}
 	
-	/** 
-	 * Crea, mostra ed effettua le opzioni relative ad un menu' per la modifica dei dati di un esame
-	 * @param EsameEffettuato l'esame da modificare
-	 * @param listaE la lista delle tipologie di esame create
-	 * 
-	 * @author Martinelli Giuseppe
-	 */
-	public static void modificaDatiEsame(Esame esame, ListaEsame listaE){
-		int scelta = 0;
-		MyMenu menuModificaEffettuato = new MyMenu(MODIFICA_INFO_E, E_OPZIONI_MODIFICA);
-		do{
-			scelta = menuModificaEffettuato.scegli();
-		
-			switch(scelta){
-				case 1:
-					String nomeMod = MyInput.leggiStringaNonVuota(E_MEX_INS_NOME);
-					esame.setNome(nomeMod);
-					break;
-				case 2:
-					String raccomandazioniMod = MyInput.leggiStringa(E_MEX_INS_RACCOMANDAZIONI);
-					esame.setNome(raccomandazioniMod);
-					break;
-				case 0:
-					break;
-				default:
-					stampaMex(ERRORE_INS);
-			}
-		}while(scelta != 0);
-	}
-	
-	/** 
-	 * Crea, mostra ed effettua le opzioni relative ad un menu' per la modifica dei dati di un esame effettuato
-	 * @param EsameEffettuato l'esame da modificare
-	 * @param listaE la lista delle tipologie di esame create
-	 * @param listaM la lista delle malattie create
-	 * 
-	 * @author Valtulini Claudio
-	 */
-	public static void modificaDatiEsameEffettuato(EsameEffettuato esame, ListaEsame listaE, CartellaSanitaria CS){
-		int scelta = 0;
-		boolean valido = false;
-		MyMenu menuModificaEffettuato = new MyMenu(MODIFICA_INFO_E_EFFETTUATO, E_OPZIONI_MODIFICA_EFFETTUATO);
-		
-		do{
-			scelta = menuModificaEffettuato.scegli();
-		
-			switch(scelta){
-				case 1:
-					try{
-						String data = MyInput.leggiStringaNonVuota(E_MEX_INS_DATA);
-						esame.setData(MyTime.creaData(data));
-					}
-					catch(TooLateException e){
-						stampaMex(e.getMessage());
-					}
-					break;
-				case 2:
-					valido = false;
-					do{
-						try{
-							String nomeEsame = MyInput.leggiStringaNonVuota(P_MEX_INS_NOME);
-							if(listaE.isEsistente(nomeEsame)){
-								esame.setEsame(listaE.cercaEsame(nomeEsame));
-								valido = true;
-							}
-							else{
-								stampaMex(ERRORE_TIPOLOGIA_INESISTENTE);
-							}
-						}
-						catch(TooLateException e){
-							stampaMex(e.getMessage());
-							valido = true;
-						}
-						catch(IllegalArgumentException e){ //se l'esame non è coerente con la malattia
-							stampaMex(e.getMessage());
-						}
-					}while(valido = false);
-					break;
-				case 3:
-					try{
-						String luogo = MyInput.leggiStringaNonVuota(E_MEX_INS_LUOGO);
-						esame.setLuogo(luogo);
-					}
-					catch(TooLateException e){
-						stampaMex(e.getMessage());
-					}
-					break;
-				case 4:
-					valido = false;
-					do{
-						String nomeMalattia = MyInput.leggiStringaNonVuota(E_MEX_INS_MALATTIAN);
-						if(CS.isMalattiaEsistente(nomeMalattia)){
-							esame.setMalattia(CS.cercaMalattia(nomeMalattia));
-							valido = true;
-						}
-						else{
-							stampaMex(ERRORE_MALATTIA_INESISTENTE);
-						}
-					}while(valido == false);
-					break;
-				case 5:
-					try{
-						String ora = MyInput.leggiStringaNonVuota(E_MEX_INS_ORA);
-						esame.setOra(ora);
-					}
-					catch(TooLateException e){
-						stampaMex(e.getMessage());
-					}
-					break;
-				case 6:
-					if(esame instanceof EPeriodicoMisurabileEffettuato){
-						double esito = MyInput.leggiInteroNonNegativo(E_MEX_INS_ESITO_PERIODICO);
-						((EPeriodicoMisurabileEffettuato) esame).setEsito(esito);
-					}
-					else if(esame instanceof EDiagnosticoEffettuato){
-						String esito = MyInput.leggiStringaNonVuota(E_MEX_INS_ESITO_DIAGNOSTICO);
-						((EDiagnosticoEffettuato) esame).setEsito(esito);
-					}
-					break;
-				case 7:
-					if(esame instanceof EDiagnosticoEffettuato){
-						stampaMex(ERRORE_OPERAZIONE_ND_TIPO);
-					}
-					else if(esame instanceof EPeriodicoMisurabileEffettuato){
-						try{
-							stampaMex(NON_MODIFICA);
-							((EPeriodicoMisurabileEffettuato) esame).setAvvisi();
-							stampaMex(AVVISI_IMPOSTATI_CORRETTAMENTE);
-						}
-						catch(IllegalAccessException e){
-							stampaMex(e.getMessage());
-						}
-					}
-					break;
-				case 0:
-					break;
-				default:
-					stampaMex(ERRORE_INS);
-			}
-		}while(scelta != 0);
-	}
-	
-	/** 
-	 * Crea, mostra ed effettua le opzioni relative ad un menu' per la modifica dei dati di una malattia
-	 * @param malattia la malattia da modificare
-	 * 
-	 * @author Valtulini Claudio
-	 */
-	public static void modificaDatiMalattia(Malattia malattia){
-		int scelta = 0;
-		//boolean valido = false;
-		MyMenu menuModificaMalattia = new MyMenu(MODIFICA_INFO_M, M_OPZIONI_MODIFICA);
-		do{
-			scelta = menuModificaMalattia.scegli();
-		
-			switch(scelta){
-				case 1:
-					String nome = MyInput.leggiStringaNonVuota(M_MEX_INS_NOME);
-					malattia.setNome(nome);
-					break;
-				case 2:
-					Date datai = MyInput.leggiData(M_MEX_INS_DATAI);
-					malattia.setDataInizio(datai);
-					break;
-				case 3:
-					Date datat = MyInput.leggiData(M_MEX_INS_DATAT);
-					malattia.setDataInizio(datat);
-					break;
-				case 4:
-					String sintomi = MyInput.leggiStringaNonVuota(M_MEX_INS_SINTOMI);
-					malattia.setSintomi(sintomi);
-					break;
-				case 5:
-					String diagnosi = MyInput.leggiStringaNonVuota(M_MEX_INS_DIAGNOSI);
-					malattia.setDiagnosi(diagnosi);
-					break;
-				case 6:
-					String terapia = MyInput.leggiStringaNonVuota(M_MEX_INS_TERAPIA);
-					malattia.setTerapia(terapia);
-					break;
-				default:
-					stampaMex(ERRORE_INS);
-			}
-		}while(scelta != 0);
-	}
-	
+	// Visualizza
 	/**
 	 * Permette la visualizzazione completa dei dati di una cartella sanitaria
 	 * 
@@ -1101,33 +1104,8 @@ public class CSMain{
 	 *
 	 * @author Valtulini Claudio
 	 */
-	public static void visualizzaDatiUtenteCompleta(CartellaSanitaria CS){
-		String stringaDescrittivaCompleta = "Cartella sanitaria di " + CS.getNome() + " " + CS.getCognome() + "%n" +
-			"Residente in: " + CS.getIndirizzo() + "%n" +
-			"Contatti: " + "%n" +
-			"  Numero Telefonico: " + CS.getTelefono() + "%n";
-		if(CS.getEmail() != null){ stringaDescrittivaCompleta += 
-			"  Indirizzo E-Mail: " + CS.getEmail() + "%n";
-		}
-		stringaDescrittivaCompleta +=
-			"Nato il: " + CS.getDataNascita().toString() + "%n" +
-			"A: " + CS.getLuogoNascita() + "%n" +
-			"Genere: " + CS.getStringaGenere() + "%n" +
-			"Gruppo Sanguigno: " + CS.getGruppoSanguigno() + "%n" +
-			"Codice Fiscale: " + CS.getCodiceFiscale() + "%n";
-		CS.generaCodiceSanitario();
-		stringaDescrittivaCompleta +=
-			"Codice Sanitario: " + CS.getCodiceSanitario() + "%n" +
-			"Esami Effettuati: " + "%n";
-		for(EsameEffettuato elemento: CS.getEsamiEffettuati()){ stringaDescrittivaCompleta +=
-			"  " + elemento.toString();
-		}
-		stringaDescrittivaCompleta +=
-			"Malattie: " + "%n";
-		for(Malattia elemento: CS.getElencoMalattia()){ stringaDescrittivaCompleta +=
-			"  " + elemento.toString();
-		}
-				
+	public static void visualizzaCartellaSanitariaCompleto(CartellaSanitaria CS){
+		String stringaDescrittivaCompleta = CS.toStringCompleto();
 		stampaMex(stringaDescrittivaCompleta);
 	}
 	
@@ -1137,9 +1115,8 @@ public class CSMain{
 	 * 
 	 * @author Valtulini Claudio
 	 */
-	public static void visualizzaEsameCompleta(EsameEffettuato esame){
-		String stringaDescrittivaCompleta =
-			esame.toStringCompleto();
+	public static void visualizzaEsameCompleto(EsameEffettuato esame){
+		String stringaDescrittivaCompleta = esame.toStringCompleto();
 		stampaMex(stringaDescrittivaCompleta);
 	}
 	
@@ -1149,28 +1126,12 @@ public class CSMain{
 	 * 
 	 * @author Valtulini Claudio
 	 */
-	public static void visualizzaMalattiaCompleta(Malattia malattia){
-		String stringaDescrittivaCompleta =
-			malattia.toString() + "%n";
-		if(malattia.getSintomi() != null){ stringaDescrittivaCompleta +=
-			"  Sintomi: " + malattia.getSintomi();
-		}
-		if(malattia.getDiagnosi() != null){ stringaDescrittivaCompleta +=
-			" Diagnosi: "+ malattia.getDiagnosi();
-		}
-		if(malattia.getElencoEsamiAssociati().size() > 0){ stringaDescrittivaCompleta +=
-			"  Elenco delle tipologie di esame associate: " + "%n";
-			for(Esame elemento: malattia.getElencoEsamiAssociati()){ stringaDescrittivaCompleta +=
-			"   " + elemento.toString();
-			}
-		}
-		if(malattia.getTerapia() != null){ stringaDescrittivaCompleta +=
-			"  Terapia: " + malattia.getTerapia();
-		}
-		
+	public static void visualizzaMalattiaCompleto(Malattia malattia){
+		String stringaDescrittivaCompleta = malattia.toStringCompleto();
 		stampaMex(stringaDescrittivaCompleta);
 	}
 	
+	// Statistiche Periodico Misurabile FORSE da spostare in EsamEffettuato / EPeriodicoEffettuato ?
 	/**
 	 * Partendo da un ArrayList (che dovrebbe essere di esami della stessa tipologia) restituisce un ArrayList di EsameEffettuato
 	 * contenente quello/quelli (se più di uno con lo stesso esito) con esito massimo
@@ -1282,7 +1243,7 @@ public class CSMain{
 	 * @author Valtulini Claudio
 	 */
 	//nome non molto significativo
-	public static ArrayList<EsameEffettuato> esameStessaTipologia(ArrayList<EsameEffettuato> listaEE, String nomeTipologia){
+	public static ArrayList<EsameEffettuato> esameRicercaTipologia(ArrayList<EsameEffettuato> listaEE, String nomeTipologia){
 		ArrayList<EsameEffettuato> listaStessaTipologia = new ArrayList<>();
 		
 		for(EsameEffettuato elemento: listaEE){
@@ -1292,34 +1253,6 @@ public class CSMain{
 		}
 		
 		return listaStessaTipologia;
-	}
-	
-	/**
-	 * Menu per la gestione delle info di utente Modifica/Visualizza/Visualizza Completo
-	 * @param CS la cartella sanitaria da gestire
-	 * @param listaE la lista delle tipologie di esami creati
-	 * @param listaM la lista delle malattie create
-	 * 
-	 * @author Martinelli Giuseppe
-	 */
-	// probabilmente da riscrivere secondo le richieste traccia
-	public static void gestioneInfoUtente(CartellaSanitaria CS, ListaEsame listaE, ArrayList<Malattia> listaM){
-		int scelta = 0;
-		MyMenu menuPaziente = new MyMenu("Gestione informazioni utente", P_OPZIONI);
-		scelta = menuPaziente.scegli();
-		switch(scelta){
-			case 1:
-				modificaDatiPaziente(CS, listaE, listaM);
-				break;
-			case 2:
-				stampaMex(CS.toString());
-				break;
-			case 3:
-				visualizzaDatiUtenteCompleta(CS);
-				break;
-			default:
-				stampaMex(ERRORE_INS);
-		}
 	}
 	
 	/* Oggetti da pre-creare salvati per esame
@@ -1368,7 +1301,7 @@ public class CSMain{
 			
 			switch(scelta){
 				case 1:
-					visualizzaDatiUtenteCompleta(CS);
+					visualizzaCartellaSanitariaCompleto(CS);
 					break;
 				case 2:
 					//scelgo e visualizzo esame
@@ -1396,7 +1329,7 @@ public class CSMain{
 					ArrayList<EsameEffettuato> simili = null;
 					do{
 						tipologia = MyInput.leggiStringaNonVuota(RICHIESTO_E_MEX_INS_TIPOLOGIA);
-						simili = esameStessaTipologia(CS.getEsamiEffettuati(), tipologia);
+						simili = esameRicercaTipologia(CS.getEsamiEffettuati(), tipologia);
 						if(simili.size() == 0){
 							stampaMex(ERRORE_TIPOLOGIA_INESISTENTE);
 						}
@@ -1418,6 +1351,34 @@ public class CSMain{
 					stampaMex(ERRORE_INS);
 			}
 		}while(scelta != 2);
+	}
+	
+	/**
+	 * Menu per la gestione delle info di utente Modifica/Visualizza/Visualizza Completo
+	 * @param CS la cartella sanitaria da gestire
+	 * @param listaE la lista delle tipologie di esami creati
+	 * @param listaM la lista delle malattie create
+	 * 
+	 * @author Martinelli Giuseppe
+	 */
+	// probabilmente da riscrivere secondo le richieste traccia
+	public static void gestioneInfoUtente(CartellaSanitaria CS, ListaEsame listaE, ArrayList<Malattia> listaM){
+		int scelta = 0;
+		MyMenu menuPaziente = new MyMenu("Gestione informazioni utente", P_OPZIONI);
+		scelta = menuPaziente.scegli();
+		switch(scelta){
+			case 1:
+				modificaCartellaSanitaria(CS, listaE, listaM);
+				break;
+			case 2:
+				stampaMex(CS.toString());
+				break;
+			case 3:
+				visualizzaCartellaSanitariaCompleto(CS);
+				break;
+			default:
+				stampaMex(ERRORE_INS);
+		}
 	}
 	
 	/*Main*/
