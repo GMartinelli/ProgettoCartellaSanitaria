@@ -639,12 +639,17 @@ public class CartellaSanitaria {
 	 * @author Martinelli Giuseppe
 	 */
 	public String toString(){
+		int c = 0;
 		String descrizione="Nome: " + nome + "%nCognome: " + cognome + "%nElenco esami: %n";
-		for(int i=0; i<esamiEffettuati.size();i++)
-			descrizione+=esamiEffettuati.get(i).toString()+"%n";
+		for(int i=0; i<esamiEffettuati.size();i++){
+			c = i + 1;
+			descrizione+= c + ". " + esamiEffettuati.get(i).toString()+"%n";
+		}
 		descrizione+="Elenco malattie: %n";
-		for(int i=0; i<elencoMalattia.size();i++)
-			descrizione+=elencoMalattia.get(i).toString()+"%n";
+		for(int i=0; i<elencoMalattia.size();i++){
+			c = i + 1;
+			descrizione+= c + ". " + elencoMalattia.get(i).toString()+"%n";
+		}
 		return descrizione;
 	}
 	
@@ -672,13 +677,17 @@ public class CartellaSanitaria {
 			stringaDescrittivaCompleta +=
 				"Codice Sanitario: " + this.getCodiceSanitario() + "%n" +
 				"Esami Effettuati: " + "%n";
+			int i = 1;
 			for(EsameEffettuato elemento: this.getEsamiEffettuati()){ stringaDescrittivaCompleta +=
-				"  " + elemento.toString();
+				"  " + i + ". " + elemento.toString();
+				i++;
 			}
 			stringaDescrittivaCompleta +=
 				"Malattie: " + "%n";
+			i = 1;
 			for(Malattia elemento: this.getElencoMalattia()){ stringaDescrittivaCompleta +=
-				"  " + elemento.toString();
+				"  " + i + ". " + elemento.toString();
+				i++;
 			}
 			
 			return stringaDescrittivaCompleta;

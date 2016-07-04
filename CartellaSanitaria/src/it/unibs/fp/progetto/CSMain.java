@@ -1184,18 +1184,54 @@ public class CSMain{
 	 */
 	 //Stessa cosa riguardante esito max e min
 	 //decidere se controllare se la dimensione dell'arraylist passato sia maggiore di 0
-	public static double esameEsitoMedio(ArrayList<EPeriodicoMisurabileEffettuato> listaEPME){
-		double somma = 0.0;
-		int nEsami = 0;
+	public static double esameEsitoMedio(ArrayList<EsameEffettuato> listaEPME){
+		if(listaEPME.get(0) instanceof EPeriodicoMisurabileEffettuato){
+			ArrayList<EPeriodicoMisurabileEffettuato> listaCopia = new ArrayList<>();
 		
-		for(EPeriodicoMisurabileEffettuato elemento: listaEPME){
-			somma += elemento.getEsito();
-			nEsami++;
+			for(EsameEffettuato elemento: listaEPME){
+				listaCopia.add((EPeriodicoMisurabileEffettuato) elemento);
+			}
+			
+			double somma = 0.0;
+			int nEsami = 0;
+		
+			for(EPeriodicoMisurabileEffettuato elemento: listaCopia){
+				somma += elemento.getEsito();
+				nEsami++;
+			}
+		
+			double vMedio = somma / nEsami;
+		
+			return vMedio;
 		}
+		else{
+			throw new IllegalArgumentException(ERRORE_TIPO);
+		}
+	}
+	
+	public static ArrayList<EPeriodicoMisurabileEffettuato> esameOltreSoglia(ArrayList<EsameEffettuato> listaEPME){
+		if(listaEPME.get(0) instanceof EPeriodicoMisurabileEffettuato){
+			ArrayList<EPeriodicoMisurabileEffettuato> listaSoglia = new ArrayList<>();
+			ArrayList<EPeriodicoMisurabileEffettuato> listaCopia = new ArrayList<>();
+			
+			for(EsameEffettuato elemento: listaEPME){
+				listaCopia.add((EPeriodicoMisurabileEffettuato) elemento);
+			}
+			
+			for(EPeriodicoMisurabileEffettuato elemento: listaCopia){
+				if(elemento.isOltreSogliaMin()){
+					listaSoglia.add(elemento);
+				}
+				else if(elemento.isOltreSogliaMax()){
+					listaSoglia.add(elemento);
+				}
+			}
 		
-		double vMedio = somma / nEsami;
-		
-		return vMedio;
+			return listaSoglia;
+		}
+		else{
+			throw new IllegalArgumentException(ERRORE_TIPO);
+		}
 	}
 	
 	/**
@@ -1254,6 +1290,9 @@ public class CSMain{
 	private static final String[] RICHIESTO_VISUALIZZA_OPZIONI = {"Visualizzazione completa dati anagrafici", "Visualizzazione completa di un esame tra quelli mostrati nella lista", "Visualizzazione completa di una malattia tra quelle mostrate nella lista"};
 	private static final String[] RICHIESTO_SI_NO = {"SI", "NO"};
 	private static final String RICHIESTO_E_MEX_INS_TIPOLOGIA = "Inserisci il nome della tipologia di cui visualizzare le statistiche: "; 
+	private static final String RICHIESTO_E_SCELTA_VISUALIZZA = "Quale esame vuoi visualizzare?";
+	private static final String RICHIESTO_M_SCELTA_VISUALIZZA = "Quale malattia vuoi visualizzare?";
+	
 	public static void richiesto(CartellaSanitaria CS, ListaEsame listaE, ArrayList<Malattia> listaM){
 		stampaMex(MEX_BENVENUTO);
 		CS.toString();
@@ -1270,9 +1309,23 @@ public class CSMain{
 					break;
 				case 2:
 					//scelgo e visualizzo esame
+					int visualizzaE = MyInput.leggiInteroConMinimo(RICHIESTO_E_SCELTA_VISUALIZZA, 1);
+					if((visualizzaE - 1) < CS.getEsamiEffettuati().size()){
+						CS.getEsamiEffettuati().get(visualizzaE - 1).toStringCompleto();
+					}
+					else{
+						stampaMex(ERRORE_INS);
+					}
 					break;
 				case 3:
 					//scelgo e visualizzo malattia
+					int visualizzaM = MyInput.leggiInteroConMinimo(RICHIESTO_M_SCELTA_VISUALIZZA, 1);
+					if((visualizzaM - 1) < CS.getElencoMalattia().size()){
+						CS.getElencoMalattia().get(visualizzaM - 1).toStringCompleto();
+					}
+					else{
+						stampaMex(ERRORE_INS);
+					}
 					break;
 				case 0:
 					break;
@@ -1300,15 +1353,24 @@ public class CSMain{
 						}
 					}while(simili.size() == 0);
 					
+					//+ date i seguenti ?? ( se si visualizzano le date)
+					stampaMex("Esito massimo: ");
 					for(EPeriodicoMisurabileEffettuato elemento: esameEsitoMax(simili)){
-						elemento.toString();
+						stampaMex(elemento.toString());
 					}
 					
+					stampaMex("Esito minimo: ");
 					for(EPeriodicoMisurabileEffettuato elemento: esameEsitoMin(simili)){
-						elemento.toString();
+						stampaMex(elemento.toString());
 					}
-					//visualizzo max min soglia + date
-					//visualizzo valore medio
+					
+					stampaMex("Esami con esito oltre soglia: ");
+					for(EPeriodicoMisurabileEffettuato elemento: esameOltreSoglia(simili)){
+						stampaMex(elemento.toString());
+					}
+					
+					stampaMex("Esito Medio: " + esameEsitoMedio(simili));
+					
 					break;
 				case 2:
 					break;
