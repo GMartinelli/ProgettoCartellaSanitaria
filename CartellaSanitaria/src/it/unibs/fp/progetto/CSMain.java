@@ -185,7 +185,7 @@ public class CSMain{
 		String nome = MyInput.leggiStringaNonVuota(P_MEX_INS_NOME);
 		String raccomandazioni = MyInput.leggiStringa(E_MEX_INS_RACCOMANDAZIONI);
 		
-		MyMenu menuTipo = new MyMenu("Tipo esame", E_OPZIONI_SCEGLI_TIPO);
+		//MyMenu menuTipo = new MyMenu("Tipo esame", E_OPZIONI_SCEGLI_TIPO);
 		switch(scelta){
 			case 1:
 				String areaInteressata = MyInput.leggiStringaNonVuota(E_MEX_INS_AREAI);
@@ -356,7 +356,7 @@ public class CSMain{
 	 */
 	public static EsameEffettuato creaEsameEffettuato(ListaEsame listaE, ArrayList<Malattia> listaM, int scelta){
 		boolean valido = false;
-		MyMenu menuEffettuato = new MyMenu("Tipologia di esame", E_OPZIONI_SCEGLI_TIPO);
+		//MyMenu menuEffettuato = new MyMenu("Tipologia di esame", E_OPZIONI_SCEGLI_TIPO);
 		
 		switch(scelta){
 			case 1:	//Diagnostico
@@ -1190,7 +1190,7 @@ public class CSMain{
 					ArrayList<EsameEffettuato> simili = null;
 					do{
 						tipologia = MyInput.leggiStringaNonVuota(RICHIESTO_E_MEX_INS_TIPOLOGIA);
-						simili = EsameEffettuato.selezionaTipologia(CS.getEsamiEffettuati(), tipologia);
+						simili = EsameEffettuato.selezionaTipologiaEsame(CS.getEsamiEffettuati(), tipologia);
 						if(simili.size() == 0){
 							stampaMex(ERRORE_TIPOLOGIA_INESISTENTE);
 						}
@@ -1212,7 +1212,7 @@ public class CSMain{
 						stampaMex(elemento.toString());
 					}
 					
-					stampaMex("Esito Medio: " + EsameEffettuato.esameEsitoMedio(simili));
+					stampaMex("Esito Medio: " + EPeriodicoMisurabileEffettuato.esameEsitoMedio(simili));
 					
 					break;
 				case 2:
