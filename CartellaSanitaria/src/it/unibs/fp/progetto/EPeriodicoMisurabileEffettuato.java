@@ -7,6 +7,8 @@ package it.unibs.fp.progetto;
  */
 
 import it.unibs.fp.mylib.*;
+
+import java.util.ArrayList;
 import java.util.Date;
 
 
@@ -22,6 +24,7 @@ public class EPeriodicoMisurabileEffettuato extends EsameEffettuato{
 	private final static String INFERIORE = "Attenzione! L'esito dell'esame e' inferiore al valore massimo accettabile";
 	private final static String SOGLIA_SUPERIORE = "URGENZA! L'esito dell'esame e' MOLTO superiore al valore massimo accettabile";
 	private final static String SOGLIA_INFERIORE = "URGENZA! L'esito dell'esame e' MOLTO inferiore al valore massimo accettabile";
+	private static final String ERRORE_TIPO = "Attenzione! Il tipo di esame passato non e' corretto!";
 	
 	//attributi
 	private EsamePeriodicoMisurabile esame;
@@ -104,6 +107,116 @@ public class EPeriodicoMisurabileEffettuato extends EsameEffettuato{
 			 * Non si sta ignorando l'eccezione,
 			 * so che esito è già stato settato quindi non corro il rischio che venga lanciata l'eccezione
 			 */
+		}
+	}
+	
+	//Metodi trasferiti dal main
+	/**
+	 * Partendo da un ArrayList (che dovrebbe essere di esami della stessa tipologia) restituisce un ArrayList di EsameEffettuato
+	 * contenente quello/quelli (se più di uno con lo stesso esito) con esito minimo
+	 * 
+	 * @param listaEPME la lista di esami in cui cercare quello con esito minore
+	 * @return una lista di esami contenente quelli con esito minimo
+	 * 
+	 * @author Valtulini Claudio
+	 */
+	public static ArrayList<EPeriodicoMisurabileEffettuato> esameEsitoMin(ArrayList<EsameEffettuato> listaEPME){
+		if(listaEPME.get(0) instanceof EPeriodicoMisurabileEffettuato){
+			ArrayList<EPeriodicoMisurabileEffettuato> listaMin = new ArrayList<>();
+			ArrayList<EPeriodicoMisurabileEffettuato> listaCopia = new ArrayList<>();
+			
+			for(EsameEffettuato elemento: listaEPME){
+				listaCopia.add((EPeriodicoMisurabileEffettuato) elemento);
+			}
+			
+			listaMin.add(listaCopia.get(0));
+			
+			for(EPeriodicoMisurabileEffettuato elemento: listaCopia){
+				if(Double.compare(elemento.getEsito(), listaMin.get(0).getEsito()) < 0){
+					listaMin.clear();
+					listaMin.add(elemento);
+				}
+				else if(Double.compare(elemento.getEsito(), listaMin.get(0).getEsito()) == 0){
+					listaMin.add(elemento);
+				}
+			}
+		
+			return listaMin;
+		}
+		else{
+			throw new IllegalArgumentException(ERRORE_TIPO);
+		}
+	}
+	
+	/**
+	 * Partendo da un ArrayList (che dovrebbe essere di esami della stessa tipologia) restituisce un ArrayList di EsameEffettuato
+	 * contenente quello/quelli (se più di uno con lo stesso esito) con esito massimo
+	 * 
+	 * @param listaEPME la lista di esami in cui cercare quello con esito maggiore
+	 * @return una lista di esami contenente quelli con esito massimo
+	 * 
+	 * @author Valtulini Claudio
+	 */
+	//da decidere se ignorare i valori oltre soglia, in tal caso va modificato
+	public static ArrayList<EPeriodicoMisurabileEffettuato> esameEsitoMax(ArrayList<EsameEffettuato> listaEPME){
+		if(listaEPME.get(0) instanceof EPeriodicoMisurabileEffettuato){
+			ArrayList<EPeriodicoMisurabileEffettuato> listaMax = new ArrayList<>();
+			ArrayList<EPeriodicoMisurabileEffettuato> listaCopia = new ArrayList<>();
+			
+			for(EsameEffettuato elemento: listaEPME){
+				listaCopia.add((EPeriodicoMisurabileEffettuato) elemento);
+			}
+			
+			listaMax.add(listaCopia.get(0));
+		
+			for(EPeriodicoMisurabileEffettuato elemento: listaCopia){
+				if(Double.compare(elemento.getEsito(), listaMax.get(0).getEsito()) > 0){
+					listaMax.clear();
+					listaMax.add(elemento);
+				}
+				else if(Double.compare(elemento.getEsito(), listaMax.get(0).getEsito()) == 0){
+					listaMax.add(elemento);
+				}
+			}
+
+			return listaMax;
+		}
+		else{
+			throw new IllegalArgumentException(ERRORE_TIPO);
+		}
+	}
+	
+	/**
+	 * Partendo da un ArrayList (che dovrebbe essere di esami della stessa tipologia) restituisce un ArrayList di EsameEffettuato
+	 * contenente quello/quelli (se più di uno con lo stesso esito) oltre soglia
+	 * 
+	 * @param listaEPME la lista di esami in cui cercare quello con esito maggiore
+	 * @return una lista di esami contenente quelli con esito massimo
+	 * 
+	 * @author Valtulini Claudio
+	 */
+	public static ArrayList<EPeriodicoMisurabileEffettuato> esameOltreSoglia(ArrayList<EsameEffettuato> listaEPME){
+		if(listaEPME.get(0) instanceof EPeriodicoMisurabileEffettuato){
+			ArrayList<EPeriodicoMisurabileEffettuato> listaSoglia = new ArrayList<>();
+			ArrayList<EPeriodicoMisurabileEffettuato> listaCopia = new ArrayList<>();
+			
+			for(EsameEffettuato elemento: listaEPME){
+				listaCopia.add((EPeriodicoMisurabileEffettuato) elemento);
+			}
+			
+			for(EPeriodicoMisurabileEffettuato elemento: listaCopia){
+				if(elemento.isOltreSogliaMin()){
+					listaSoglia.add(elemento);
+				}
+				else if(elemento.isOltreSogliaMax()){
+					listaSoglia.add(elemento);
+				}
+			}
+		
+			return listaSoglia;
+		}
+		else{
+			throw new IllegalArgumentException(ERRORE_TIPO);
 		}
 	}
 	

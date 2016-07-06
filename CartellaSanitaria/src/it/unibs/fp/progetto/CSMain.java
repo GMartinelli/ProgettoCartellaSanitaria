@@ -1097,164 +1097,7 @@ public class CSMain{
 	}
 	
 	// Statistiche Periodico Misurabile FORSE da spostare in EsamEffettuato / EPeriodicoEffettuato ?
-	/**
-	 * Partendo da un ArrayList (che dovrebbe essere di esami della stessa tipologia) restituisce un ArrayList di EsameEffettuato
-	 * contenente quello/quelli (se più di uno con lo stesso esito) con esito massimo
-	 * 
-	 * @param listaEPME la lista di esami in cui cercare quello con esito maggiore
-	 * @return una lista di esami contenente quelli con esito massimo
-	 * 
-	 * @author Valtulini Claudio
-	 */
-	//da decidere se ignorare i valori oltre soglia, in tal caso va modificato
-	public static ArrayList<EPeriodicoMisurabileEffettuato> esameEsitoMax(ArrayList<EsameEffettuato> listaEPME){
-		if(listaEPME.get(0) instanceof EPeriodicoMisurabileEffettuato){
-			ArrayList<EPeriodicoMisurabileEffettuato> listaMax = new ArrayList<>();
-			ArrayList<EPeriodicoMisurabileEffettuato> listaCopia = new ArrayList<>();
-			
-			for(EsameEffettuato elemento: listaEPME){
-				listaCopia.add((EPeriodicoMisurabileEffettuato) elemento);
-			}
-			
-			listaMax.add(listaCopia.get(0));
-		
-			for(EPeriodicoMisurabileEffettuato elemento: listaCopia){
-				if(Double.compare(elemento.getEsito(), listaMax.get(0).getEsito()) > 0){
-					listaMax.clear();
-					listaMax.add(elemento);
-				}
-				else if(Double.compare(elemento.getEsito(), listaMax.get(0).getEsito()) == 0){
-					listaMax.add(elemento);
-				}
-			}
-
-			return listaMax;
-		}
-		else{
-			throw new IllegalArgumentException(ERRORE_TIPO);
-		}
-	}
 	
-	/**
-	 * Partendo da un ArrayList (che dovrebbe essere di esami della stessa tipologia) restituisce un ArrayList di EsameEffettuato
-	 * contenente quello/quelli (se più di uno con lo stesso esito) con esito minimo
-	 * 
-	 * @param listaEPME la lista di esami in cui cercare quello con esito minore
-	 * @return una lista di esami contenente quelli con esito minimo
-	 * 
-	 * @author Valtulini Claudio
-	 */
-	//come sopra
-	public static ArrayList<EPeriodicoMisurabileEffettuato> esameEsitoMin(ArrayList<EsameEffettuato> listaEPME){
-		if(listaEPME.get(0) instanceof EPeriodicoMisurabileEffettuato){
-			ArrayList<EPeriodicoMisurabileEffettuato> listaMin = new ArrayList<>();
-			ArrayList<EPeriodicoMisurabileEffettuato> listaCopia = new ArrayList<>();
-			
-			for(EsameEffettuato elemento: listaEPME){
-				listaCopia.add((EPeriodicoMisurabileEffettuato) elemento);
-			}
-			
-			listaMin.add(listaCopia.get(0));
-			
-			for(EPeriodicoMisurabileEffettuato elemento: listaCopia){
-				if(Double.compare(elemento.getEsito(), listaMin.get(0).getEsito()) < 0){
-					listaMin.clear();
-					listaMin.add(elemento);
-				}
-				else if(Double.compare(elemento.getEsito(), listaMin.get(0).getEsito()) == 0){
-					listaMin.add(elemento);
-				}
-			}
-		
-			return listaMin;
-		}
-		else{
-			throw new IllegalArgumentException(ERRORE_TIPO);
-		}
-	}
-	
-	/**
-	 * Partendo da un ArrayList (che dovrebbe essere di esami della stessa tipologia) restituisce un double contenente il valore
-	 * medio degli esiti
-	 * 
-	 * @param listaEPME la lista di esami dei quali trovare l'esito medio
-	 * @return vMedio il valore medio degli esiti
-	 * 
-	 * @author Valtulini Claudio
-	 */
-	 //Stessa cosa riguardante esito max e min
-	 //decidere se controllare se la dimensione dell'arraylist passato sia maggiore di 0
-	public static double esameEsitoMedio(ArrayList<EsameEffettuato> listaEPME){
-		if(listaEPME.get(0) instanceof EPeriodicoMisurabileEffettuato){
-			ArrayList<EPeriodicoMisurabileEffettuato> listaCopia = new ArrayList<>();
-		
-			for(EsameEffettuato elemento: listaEPME){
-				listaCopia.add((EPeriodicoMisurabileEffettuato) elemento);
-			}
-			
-			double somma = 0.0;
-			int nEsami = 0;
-		
-			for(EPeriodicoMisurabileEffettuato elemento: listaCopia){
-				somma += elemento.getEsito();
-				nEsami++;
-			}
-		
-			double vMedio = somma / nEsami;
-		
-			return vMedio;
-		}
-		else{
-			throw new IllegalArgumentException(ERRORE_TIPO);
-		}
-	}
-	
-	public static ArrayList<EPeriodicoMisurabileEffettuato> esameOltreSoglia(ArrayList<EsameEffettuato> listaEPME){
-		if(listaEPME.get(0) instanceof EPeriodicoMisurabileEffettuato){
-			ArrayList<EPeriodicoMisurabileEffettuato> listaSoglia = new ArrayList<>();
-			ArrayList<EPeriodicoMisurabileEffettuato> listaCopia = new ArrayList<>();
-			
-			for(EsameEffettuato elemento: listaEPME){
-				listaCopia.add((EPeriodicoMisurabileEffettuato) elemento);
-			}
-			
-			for(EPeriodicoMisurabileEffettuato elemento: listaCopia){
-				if(elemento.isOltreSogliaMin()){
-					listaSoglia.add(elemento);
-				}
-				else if(elemento.isOltreSogliaMax()){
-					listaSoglia.add(elemento);
-				}
-			}
-		
-			return listaSoglia;
-		}
-		else{
-			throw new IllegalArgumentException(ERRORE_TIPO);
-		}
-	}
-	
-	/**
-	 * Passata una lista di EsamiEffettuati ne trova quelli il cui nome dell'esame corrispondente equivale a quello della stringa passata
-	 * 
-	 * @param listaEE la lista di EsamiEffettuati
-	 * @param nomeTipologia una stringa contenente il nome della tipologia di esami che si vuole isolare
-	 * @return listaStessaTipologia un ArrayList di esami effettuati tutti della stessa tipologia
-	 * 
-	 * @author Valtulini Claudio
-	 */
-	//nome non molto significativo
-	public static ArrayList<EsameEffettuato> esameRicercaTipologia(ArrayList<EsameEffettuato> listaEE, String nomeTipologia){
-		ArrayList<EsameEffettuato> listaStessaTipologia = new ArrayList<>();
-		
-		for(EsameEffettuato elemento: listaEE){
-			if(elemento.getEsame().getNome() == nomeTipologia){
-				listaStessaTipologia.add(elemento);
-			}
-		}
-		
-		return listaStessaTipologia;
-	}
 	
 	/* Oggetti da pre-creare salvati per esame
 	 * 4 tipologie di esami
@@ -1347,7 +1190,7 @@ public class CSMain{
 					ArrayList<EsameEffettuato> simili = null;
 					do{
 						tipologia = MyInput.leggiStringaNonVuota(RICHIESTO_E_MEX_INS_TIPOLOGIA);
-						simili = esameRicercaTipologia(CS.getEsamiEffettuati(), tipologia);
+						simili = EsameEffettuato.selezionaTipologia(CS.getEsamiEffettuati(), tipologia);
 						if(simili.size() == 0){
 							stampaMex(ERRORE_TIPOLOGIA_INESISTENTE);
 						}
@@ -1355,21 +1198,21 @@ public class CSMain{
 					
 					//+ date i seguenti ?? ( se si visualizzano le date)
 					stampaMex("Esito massimo: ");
-					for(EPeriodicoMisurabileEffettuato elemento: esameEsitoMax(simili)){
+					for(EPeriodicoMisurabileEffettuato elemento: EPeriodicoMisurabileEffettuato.esameEsitoMax(simili)){
 						stampaMex(elemento.toString());
 					}
 					
 					stampaMex("Esito minimo: ");
-					for(EPeriodicoMisurabileEffettuato elemento: esameEsitoMin(simili)){
+					for(EPeriodicoMisurabileEffettuato elemento: EPeriodicoMisurabileEffettuato.esameEsitoMin(simili)){
 						stampaMex(elemento.toString());
 					}
 					
 					stampaMex("Esami con esito oltre soglia: ");
-					for(EPeriodicoMisurabileEffettuato elemento: esameOltreSoglia(simili)){
+					for(EPeriodicoMisurabileEffettuato elemento: EPeriodicoMisurabileEffettuato.esameOltreSoglia(simili)){
 						stampaMex(elemento.toString());
 					}
 					
-					stampaMex("Esito Medio: " + esameEsitoMedio(simili));
+					stampaMex("Esito Medio: " + EsameEffettuato.esameEsitoMedio(simili));
 					
 					break;
 				case 2:

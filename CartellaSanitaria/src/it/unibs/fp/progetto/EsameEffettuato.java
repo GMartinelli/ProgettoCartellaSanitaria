@@ -1,5 +1,7 @@
 package it.unibs.fp.progetto;
 
+import java.util.ArrayList;
+
 /**
  * EsameEffettuato fornisce lo scheletro per costruire un oggetto che contiene i dati di un esame da effettuare/effettuato
  * 
@@ -16,6 +18,7 @@ public class EsameEffettuato {
 	public static final String ESITO_MANCANTE = "Non è ancora stato impostato un esito";
 	private static final String ES_MAL_NON_COERENTE = "L'esame richiesto non è coerente con la malattia indicata";
 	private static final String MALATTIA_NON_IMPOSTATA = "Il valore di malattia non e' stato impostato";
+	private static final String ERRORE_TIPO = "Attenzione! Il tipo di esame passato non e' corretto!";
 	
 	//attributi
 	private Esame esame;
@@ -23,6 +26,66 @@ public class EsameEffettuato {
 	private String ora;
 	private String luogo;
 	private Malattia malattia;
+	
+	//Metodi importati da main
+	/**
+	 * Partendo da un ArrayList (che dovrebbe essere di esami della stessa tipologia) restituisce un double contenente il valore
+	 * medio degli esiti
+	 * 
+	 * @param listaEPME la lista di esami dei quali trovare l'esito medio
+	 * @return vMedio il valore medio degli esiti
+	 * 
+	 * @author Valtulini Claudio
+	 */
+	 //Stessa cosa riguardante esito max e min
+	 //decidere se controllare se la dimensione dell'arraylist passato sia maggiore di 0
+	 public static double esameEsitoMedio(ArrayList<EsameEffettuato> listaEPME){
+		if(listaEPME.get(0) instanceof EPeriodicoMisurabileEffettuato){
+			ArrayList<EPeriodicoMisurabileEffettuato> listaCopia = new ArrayList<>();
+		
+			for(EsameEffettuato elemento: listaEPME){
+				listaCopia.add((EPeriodicoMisurabileEffettuato) elemento);
+			}
+			
+			double somma = 0.0;
+			int nEsami = 0;
+		
+			for(EPeriodicoMisurabileEffettuato elemento: listaCopia){
+				somma += elemento.getEsito();
+				nEsami++;
+			}
+		
+			double vMedio = somma / nEsami;
+		
+			return vMedio;
+		}
+		else{
+			throw new IllegalArgumentException(ERRORE_TIPO);
+		}
+	}
+	
+	/**
+	 * Passata una lista di EsamiEffettuati ne trova quelli il cui nome dell'esame corrispondente equivale a quello della stringa passata
+	 * 
+	 * @param listaEE la lista di EsamiEffettuati
+	 * @param nomeTipologia una stringa contenente il nome della tipologia di esami che si vuole isolare
+	 * @return listaStessaTipologia un ArrayList di esami effettuati tutti della stessa tipologia
+	 * 
+	 * @author Valtulini Claudio
+	 */
+	//nome non molto significativo
+	public static ArrayList<EsameEffettuato> selezionaTipologia(ArrayList<EsameEffettuato> listaEE, String nomeTipologia){
+		ArrayList<EsameEffettuato> listaStessaTipologia = new ArrayList<>();
+		
+		for(EsameEffettuato elemento: listaEE){
+			if(elemento.getEsame().getNome() == nomeTipologia){
+				listaStessaTipologia.add(elemento);
+			}
+		}
+		
+		return listaStessaTipologia;
+	}
+	
 	
 	//costruttori
 	/**
