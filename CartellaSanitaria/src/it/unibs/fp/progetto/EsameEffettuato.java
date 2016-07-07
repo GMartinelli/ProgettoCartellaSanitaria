@@ -18,7 +18,7 @@ public class EsameEffettuato {
 	public static final String ESITO_MANCANTE = "Non è ancora stato impostato un esito";
 	private static final String ES_MAL_NON_COERENTE = "L'esame richiesto non è coerente con la malattia indicata";
 	private static final String MALATTIA_NON_IMPOSTATA = "Il valore di malattia non e' stato impostato";
-	private static final String ERRORE_TIPO = "Attenzione! Il tipo di esame passato non e' corretto!";
+	//private static final String ERRORE_TIPO = "Attenzione! Il tipo di esame passato non e' corretto!";
 	
 	//attributi
 	private Esame esame;
