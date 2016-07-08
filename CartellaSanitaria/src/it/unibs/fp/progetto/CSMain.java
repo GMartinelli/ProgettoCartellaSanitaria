@@ -1272,7 +1272,8 @@ public class CSMain{
 			// Il file esiste, devo caricare le informazioni contenute
 		}
 		else{
-			//a seconda se sto creando la cartella o caricandola
+			//se sto cercando di crearla ma esiste gia' do' errore
+			//altrimenti tutto ok e creo
 			
 			MyServizioFile.creaFile(PATH);
 			CS = creaCartellaSanitaria();
@@ -1300,7 +1301,7 @@ public class CSMain{
 										Esame e = creaEsame();
 										listaE.aggiungiEsame(e);
 										break;
-									case 2: /*Esame effettauto*/
+									case 2: /*Esame effettuato*/
 										aggiungiEffettuato(CS, listaE, listaM);
 										break;
 									case 3: /*Malattia*/
