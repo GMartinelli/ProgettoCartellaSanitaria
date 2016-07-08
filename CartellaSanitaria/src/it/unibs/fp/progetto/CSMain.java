@@ -17,12 +17,16 @@ public class CSMain{
 	private static final String MODIFICA_INFO_E = "Modifica informazioni esame effettuato";
 	
 	// Opzioni menu'
-	private static final String[] G_OPZIONI = {"Gestione dati paziente","Gestione esami","Gestione malattie"}; // G = GESTIONE
+	private static final String[] OPZIONI_I={"Operazioni su oggetti", "Visualizza"};
+	private static final String[] OPZIONI_D={"Aggiungi", "Modifica", "Elimina"};
+	private static final String[] OPZIONI_OGG={"Esame", "Esame Effettuato", "Malattia"};
+	private static final String[] OPZIONI_OGG_2={"Esame", "Esame Effettuato", "Malattia", "Cartella Sanitaria"};
 	
 	private static final String[] P_OPZIONI = {"Modifica dati paziente","Visualizzazione sintetica dati paziente","Visualizzazione completa dati paziente"};
 	private static final String[] P_OPZIONI_MODIFICA = {"Modifica nome","Modifica cognome","Modifica indirizzo","Modifica telefono","Modifica email", "Modifica luogo di nascita", "Modifica data di nascita", "Modifica genere", "Modifica codice fiscale", "Modifica gruppo sanguigno", "Aggiungi esame effettuato", "Aggiungi malattia", "Rimuovi esame effettuato", "Rimuovi malattia"};
 	
-	private static final String[] E_OPZIONI = {"Inserisci esame","Modifica esame","Visualizza esame","Visualizza lista esami"};
+	
+	private static final String E_MEX_MOD="Inserisci il nome dell'esame che vuoi modificare: ";
 	private static final String[] E_OPZIONI_MODIFICA = {"Modifica nome", "Modifica raccomandazioni"};
 	private static final String[] E_OPZIONI_MODIFICA_DIAGNOSTICO = {"Modifica nome", "Modifica raccomandazioni", "Modifica area interessata"};
 	private static final String[] E_OPZIONI_MODIFICA_PERIODICO = {"Modifica nome", "Modifica raccomandazioni", "Modifica valore minimo", "Modifica valore massimo","Modifica soglia errore"};
@@ -31,7 +35,6 @@ public class CSMain{
 	private static final String[] E_OPZIONI_SELEZIONE = {"Tutti","Diagnostici","Periodici misurabili"};
 	private static final String[] E_OPZIONI_CREA_CERCA = {"Crea un nuovo esame", "Cerca un esame esistente"};
 	
-	private static final String[] M_OPZIONI = {"Inserisci malattia","Modifica malattia","Visualizza malattia","Visualizza lista malattie"};
 	private static final String[] M_OPZIONI_MODIFICA = {"Modifica nome", "Modifica data di inizio", "Modifica data di termine", "Modifica sintomi", "Modifica diagnosi", "Modifica terapia"};
 	
 	// Gestione File
@@ -1231,7 +1234,7 @@ public class CSMain{
 	 * 
 	 * @author Martinelli Giuseppe
 	 */
-	// probabilmente da riscrivere secondo le richieste traccia
+	// PROBABILMENTE INUTILE VISTO LA NUOVA DISPOSIZIONE DEL MENU'
 	public static void gestioneInfoUtente(CartellaSanitaria CS, ListaEsame listaE, ArrayList<Malattia> listaM){
 		int scelta = 0;
 		MyMenu menuPaziente = new MyMenu("Gestione informazioni utente", P_OPZIONI);
@@ -1263,6 +1266,8 @@ public class CSMain{
 		ListaEsame listaE = new ListaEsame(lista);
 
 		File file = new File(PATH);
+		
+		/*PRIMA OPERAZIONE DA EFFETTUARE: CONTROLLO SE ESISTE GIA' UN FILE OPPURE NO*/
 		if (file.exists()){
 			// Il file esiste, devo caricare le informazioni contenute
 		}
@@ -1273,6 +1278,96 @@ public class CSMain{
 			CS = creaCartellaSanitaria();
 		}
 		
+		/*INIZIO CON I MENU: PRIMO MENU PER SCEGLIERE SE AGGIUNGERE OGGETTI O FARE RICHIESTE TRACCIA (VISUALIZZAZIONE) */
+		int sceltaI=0;
+		do{
+			MyMenu menuGenerale = new MyMenu("Cartella Sanitaria", OPZIONI_I);
+			sceltaI = menuGenerale.scegli();
+			switch(sceltaI){
+			case 1:	/*SCELTA TRA AGGIUNGI / MODIFICA / ELIMINA???*/
+				int sceltaD=0;
+				do{
+					MyMenu menuD = new MyMenu("Operazioni possibili", OPZIONI_D);
+					sceltaD = menuD.scegli();
+					switch(sceltaD){
+						case 1:	/*AGGIUNGI*/
+							int sceltaA=0;
+							do{
+								MyMenu menuA = new MyMenu("Cosa desideri creare/aggiungere?", OPZIONI_OGG);
+								sceltaA = menuA.scegli();
+								switch(sceltaA){
+									case 1: /*Esame normale*/ 
+										Esame e = creaEsame();
+										listaE.aggiungiEsame(e);
+										break;
+									case 2: /*Esame effettauto*/
+										aggiungiEffettuato(CS, listaE, listaM);
+										break;
+									case 3: /*Malattia*/
+										Malattia m= creaMalattia(listaE);
+										listaM.add(m);
+										break;
+									default:
+										/*ERRORE*/
+								}
+							}while(sceltaA!=0);
+							break;
+						case 2:	/*MODIFICA*/
+							int sceltaM=0;
+							do{
+								MyMenu menuM = new MyMenu("Cosa desideri modificare?", OPZIONI_OGG_2);
+								sceltaM = menuM.scegli();
+								switch(sceltaM){
+									case 1: /*Esame normale*/ 
+										String nomeEsame = MyInput.leggiStringa(E_MEX_MOD);
+										Esame e = listaE.cercaEsame(nomeEsame);
+										modificaEsame(e,listaE);
+										break;
+									case 2: /*Esame effettauto*/
+										break;
+									case 3: /*Malattia*/
+										
+										break;
+									case 4: /*Cartella Sanitaria*/
+										break;
+									default:
+										/*ERRORE*/
+								}
+							}while(sceltaM!=0);
+							break;
+						case 3:	/*ELIMINA???*/
+							int sceltaE=0;
+							do{
+								MyMenu menuE = new MyMenu("Cosa desideri modificare?", OPZIONI_OGG);
+								sceltaE = menuE.scegli();
+								switch(sceltaE){
+									case 1: /*Esame normale*/ 
+										break;
+									case 2: /*Esame effettauto*/
+										break;
+									case 3: /*Malattia*/
+										break;
+									default:
+										/*ERRORE*/
+								}
+							}while(sceltaE!=0);
+							break;
+						default:
+							/*ERRORE*/
+					}
+				}while(sceltaD!=0);
+				break;
+			case 2:	/*RICHIESTE TRACCIA*/
+				richiesto(CS, listaE, listaM);
+				break;
+			default:
+				/*ERRORE SCELTA NON VALIDA*/
+			}
+		}while(sceltaI!=0);
+		stampaMex(MEX_USCITA);
+		
+		
+		/*Vecchio Menu Main
 		int scelta = 0;
 		do{
 			MyMenu menuGenerale = new MyMenu("Cartella Sanitaria", G_OPZIONI);
@@ -1337,7 +1432,9 @@ public class CSMain{
 				stampaMex(ERRORE_INS);
 			}
 			stampaMex(" ");
-		}while(scelta != 0);
-		stampaMex(MEX_USCITA);
+		}while(scelta != 0);*/
+		
+		
+		
 	}
 }
