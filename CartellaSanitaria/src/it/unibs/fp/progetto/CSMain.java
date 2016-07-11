@@ -54,7 +54,7 @@ public class CSMain{
 	private static final String P_MEX_INS_LUOGON = "Inserisci il luogo di nascita del paziente: ";
 	private static final String P_MEX_INS_CODICEF = "Inserisci il codice fiscale del paziente: ";
 	private static final String P_MEX_INS_GENERE = "Inserisci il genere del paziente: ";
-	private static final String P_MEX_INS_GSANGUIGNO = "Inserisci il guppo sanguigno del paziente: ";
+	private static final String P_MEX_INS_GSANGUIGNO = "Inserisci il gruppo sanguigno del paziente: ";
 	
 	// Inserimento Esame
 	private static final String E_MEX_INS_NOME = "Inserisci il nome dell'esame: ";
@@ -1259,8 +1259,8 @@ public class CSMain{
 						// FILE ESISTENTE, CHIEDO SE SI VUOLE SOVRASCRIVERE OPPURE CARICARE I DATI PRECEDENTI
 						boolean scelta = MyInput.yesOrNo(MEX_SOVRASCIVERE);
 						if(scelta){	//SOVRASCIVO
-							//ELIMINO IL VECCHIO FILE
-							MyServizioFile.eliminaFile(PATH);
+							//SOVRASCRIVO IL VECCHIO FILE CON UNA STRINGA VUOTA
+							MyServizioFile.scriviFile(PATH, "");
 							//NE CREO UNO NUOVO
 							MyServizioFile.creaFile(PATH);
 							CS = creaCartellaSanitaria();
@@ -1278,81 +1278,86 @@ public class CSMain{
 					break;
 				case 2:	/*PRIMA VISUALIZZA SECONDO LE RICHIESTE, POI PERMETTO LA SCELTA TRA AGGIUNGI / MODIFICA / ELIMINA???*/
 					int sceltaD=0;
+					richiesteCartellaSanitaria(CS, listaE, listaM);
+					
+					/*
+					MENU CHE VERRA' SPOSTATO DA VALTU
 					do{
 						richiesteCartellaSanitaria(CS, listaE, listaM);
 						MyMenu menuD = new MyMenu("Operazioni possibili", OPZIONI_D);
 						sceltaD = menuD.scegli();
 						switch(sceltaD){
-							case 1:	/*AGGIUNGI*/
+							case 1:	//AGGIUNGI
 								int sceltaA=0;
 								do{
 									MyMenu menuA = new MyMenu("Cosa desideri creare/aggiungere?", OPZIONI_OGG);
 									sceltaA = menuA.scegli();
 									switch(sceltaA){
-										case 1: /*Esame normale*/ 
+										case 1: //Esame normale 
 											Esame e = creaEsame();
 											listaE.aggiungiEsame(e);
 											break;
-										case 2: /*Esame effettuato*/
+										case 2: //Esame effettuato
 											aggiungiEffettuato(CS, listaE, listaM);
 											break;
-										case 3: /*Malattia*/
+										case 3: //Malattia
 											Malattia m= creaMalattia(listaE);
 											listaM.add(m);
 											break;
 										default:
-											/*ERRORE*/
+											//ERRORE
 											stampaMex(ERRORE_INS);
 									}
 								}while(sceltaA!=0);
 								break;
-							case 2:	/*MODIFICA*/
+							case 2:	//MODIFICA
 								int sceltaM=0;
 								do{
 									MyMenu menuM = new MyMenu("Cosa desideri modificare?", OPZIONI_OGG_2);
 									sceltaM = menuM.scegli();
 									switch(sceltaM){
-										case 1: /*tipologia Esame*/ 
+										case 1: //tipologia Esame 
 											String nomeEsame = MyInput.leggiStringa(E_MEX_MOD);
 											Esame e = listaE.cercaEsame(nomeEsame);
 											modificaEsame(e,listaE);
 											break;
-										case 2: /*togliere Esame effettauto*/
+										case 2: //togliere Esame effettauto
 											break;
-										case 3: /*togliere Malattia*/
+										case 3: //togliere Malattia
 											
 											break;
-										case 4: /*(modifica cartella) Cartella Sanitaria*/
+										case 4: //(modifica cartella) Cartella Sanitaria
 											break;
 										default:
-											/*ERRORE*/
+											//ERRORE
 											stampaMex(ERRORE_INS);
 									}
 								}while(sceltaM!=0);
 								break;
-							case 3:	/*ELIMINA???*/
+							case 3:	//ELIMINA???
 								int sceltaE=0;
 								do{
 									MyMenu menuE = new MyMenu("Cosa desideri modificare?", OPZIONI_OGG);
 									sceltaE = menuE.scegli();
 									switch(sceltaE){
-										case 1: /*Esame normale*/ 
+										case 1: //Esame normale
 											break;
-										case 2: /*Esame effettauto*/
+										case 2: //Esame effettauto
 											break;
-										case 3: /*Malattia*/
+										case 3: //Malattia
 											break;
 										default:
-											/*ERRORE*/
+											//ERRORE
 											stampaMex(ERRORE_INS);
 									}
 								}while(sceltaE!=0);
 								break;
 							default:
-								/*ERRORE*/
+								//ERRORE
 								stampaMex(ERRORE_INS);
 						}
 					}while(sceltaD!=0);
+		*/
 					break;
 				default:
 					/*ERRORE SCELTA NON VALIDA*/
