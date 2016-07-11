@@ -1139,7 +1139,7 @@ public class CSMain{
 	private static final String RICHIESTO_E_SCELTA_VISUALIZZA = "Quale esame vuoi visualizzare?";
 	private static final String RICHIESTO_M_SCELTA_VISUALIZZA = "Quale malattia vuoi visualizzare?";
 	
-	public static void richiesto(CartellaSanitaria CS, ListaEsame listaE, ArrayList<Malattia> listaM){
+	public static void visualizzaInfoUtente(CartellaSanitaria CS, ListaEsame listaE, ArrayList<Malattia> listaM){
 		stampaMex(MEX_BENVENUTO);
 		CS.toString();
 		
@@ -1267,103 +1267,108 @@ public class CSMain{
 
 		File file = new File(PATH);
 		
-		/*PRIMA OPERAZIONE DA EFFETTUARE: CONTROLLO SE ESISTE GIA' UN FILE OPPURE NO*/
-		if (file.exists()){
-			// Il file esiste, devo caricare le informazioni contenute
-		}
-		else{
-			//se sto cercando di crearla ma esiste gia' do' errore
-			//altrimenti tutto ok e creo
-			
-			MyServizioFile.creaFile(PATH);
-			CS = creaCartellaSanitaria();
-		}
-		
-		/*INIZIO CON I MENU: PRIMO MENU PER SCEGLIERE SE AGGIUNGERE OGGETTI O FARE RICHIESTE TRACCIA (VISUALIZZAZIONE) */
+		/*INIZIO CON I MENU: PRIMO MENU PER SCEGLIERE SE CREARE CARTELLA O FARE RICHIESTE TRACCIA (VISUALIZZAZIONE ECC.) */
 		int sceltaI=0;
 		do{
 			MyMenu menuGenerale = new MyMenu("Cartella Sanitaria", OPZIONI_I);
 			sceltaI = menuGenerale.scegli();
 			switch(sceltaI){
-			case 1:	/*SCELTA TRA AGGIUNGI / MODIFICA / ELIMINA???*/
-				int sceltaD=0;
-				do{
-					MyMenu menuD = new MyMenu("Operazioni possibili", OPZIONI_D);
-					sceltaD = menuD.scegli();
-					switch(sceltaD){
-						case 1:	/*AGGIUNGI*/
-							int sceltaA=0;
-							do{
-								MyMenu menuA = new MyMenu("Cosa desideri creare/aggiungere?", OPZIONI_OGG);
-								sceltaA = menuA.scegli();
-								switch(sceltaA){
-									case 1: /*Esame normale*/ 
-										Esame e = creaEsame();
-										listaE.aggiungiEsame(e);
-										break;
-									case 2: /*Esame effettuato*/
-										aggiungiEffettuato(CS, listaE, listaM);
-										break;
-									case 3: /*Malattia*/
-										Malattia m= creaMalattia(listaE);
-										listaM.add(m);
-										break;
-									default:
-										/*ERRORE*/
-								}
-							}while(sceltaA!=0);
-							break;
-						case 2:	/*MODIFICA*/
-							int sceltaM=0;
-							do{
-								MyMenu menuM = new MyMenu("Cosa desideri modificare?", OPZIONI_OGG_2);
-								sceltaM = menuM.scegli();
-								switch(sceltaM){
-									case 1: /*Esame normale*/ 
-										String nomeEsame = MyInput.leggiStringa(E_MEX_MOD);
-										Esame e = listaE.cercaEsame(nomeEsame);
-										modificaEsame(e,listaE);
-										break;
-									case 2: /*Esame effettauto*/
-										break;
-									case 3: /*Malattia*/
-										
-										break;
-									case 4: /*Cartella Sanitaria*/
-										break;
-									default:
-										/*ERRORE*/
-								}
-							}while(sceltaM!=0);
-							break;
-						case 3:	/*ELIMINA???*/
-							int sceltaE=0;
-							do{
-								MyMenu menuE = new MyMenu("Cosa desideri modificare?", OPZIONI_OGG);
-								sceltaE = menuE.scegli();
-								switch(sceltaE){
-									case 1: /*Esame normale*/ 
-										break;
-									case 2: /*Esame effettauto*/
-										break;
-									case 3: /*Malattia*/
-										break;
-									default:
-										/*ERRORE*/
-								}
-							}while(sceltaE!=0);
-							break;
-						default:
-							/*ERRORE*/
+				case 1:	/*CREARE CARTELLA SANITARIA*/
+					/*PRIMA OPERAZIONE DA EFFETTUARE: CONTROLLO SE ESISTE GIA' UN FILE OPPURE NO*/
+					if (file.exists()){
+						// FILE ESISTENTE, CHIEDO SE SI VUOLE SOVRASCRIVERE OPPURE CARICARE I DATI PRECEDENTI
 					}
-				}while(sceltaD!=0);
-				break;
-			case 2:	/*RICHIESTE TRACCIA*/
-				richiesto(CS, listaE, listaM);
-				break;
-			default:
-				/*ERRORE SCELTA NON VALIDA*/
-			}
+					else{
+						//se sto cercando di crearla ma esiste gia' do' errore
+						//altrimenti tutto ok e creo
+						
+						MyServizioFile.creaFile(PATH);
+						CS = creaCartellaSanitaria();
+					}
+					break;
+				case 2:	/*SCELTA TRA AGGIUNGI / MODIFICA / ELIMINA???/ VISUALIZZA*/
+					int sceltaD=0;
+					do{
+						MyMenu menuD = new MyMenu("Operazioni possibili", OPZIONI_D);
+						sceltaD = menuD.scegli();
+						switch(sceltaD){
+							case 1:	/*AGGIUNGI*/
+								int sceltaA=0;
+								do{
+									MyMenu menuA = new MyMenu("Cosa desideri creare/aggiungere?", OPZIONI_OGG);
+									sceltaA = menuA.scegli();
+									switch(sceltaA){
+										case 1: /*Esame normale*/ 
+											Esame e = creaEsame();
+											listaE.aggiungiEsame(e);
+											break;
+										case 2: /*Esame effettuato*/
+											aggiungiEffettuato(CS, listaE, listaM);
+											break;
+										case 3: /*Malattia*/
+											Malattia m= creaMalattia(listaE);
+											listaM.add(m);
+											break;
+										default:
+											/*ERRORE*/
+											stampaMex(ERRORE_INS);
+									}
+								}while(sceltaA!=0);
+								break;
+							case 2:	/*MODIFICA*/
+								int sceltaM=0;
+								do{
+									MyMenu menuM = new MyMenu("Cosa desideri modificare?", OPZIONI_OGG_2);
+									sceltaM = menuM.scegli();
+									switch(sceltaM){
+										case 1: /*Esame normale*/ 
+											String nomeEsame = MyInput.leggiStringa(E_MEX_MOD);
+											Esame e = listaE.cercaEsame(nomeEsame);
+											modificaEsame(e,listaE);
+											break;
+										case 2: /*Esame effettauto*/
+											break;
+										case 3: /*Malattia*/
+											
+											break;
+										case 4: /*Cartella Sanitaria*/
+											break;
+										default:
+											/*ERRORE*/
+											stampaMex(ERRORE_INS);
+									}
+								}while(sceltaM!=0);
+								break;
+							case 3:	/*ELIMINA???*/
+								int sceltaE=0;
+								do{
+									MyMenu menuE = new MyMenu("Cosa desideri modificare?", OPZIONI_OGG);
+									sceltaE = menuE.scegli();
+									switch(sceltaE){
+										case 1: /*Esame normale*/ 
+											break;
+										case 2: /*Esame effettauto*/
+											break;
+										case 3: /*Malattia*/
+											break;
+										default:
+											/*ERRORE*/
+											stampaMex(ERRORE_INS);
+									}
+								}while(sceltaE!=0);
+								break;
+							case 4: /*VISUALIZZA INFO UTENTE*/
+								visualizzaInfoUtente(CS, listaE, listaM);
+								break;
+							default:
+								/*ERRORE*/
+								stampaMex(ERRORE_INS);
+						}
+					}while(sceltaD!=0);
+					break;
+				default:
+					/*ERRORE SCELTA NON VALIDA*/
+				}
 		}while(sceltaI!=0);
 		stampaMex(MEX_USCITA);
 		
