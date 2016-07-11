@@ -39,6 +39,7 @@ public class CSMain{
 	
 	// Gestione File
 	private static final String PATH = "cartella_sanitaria.txt";
+	private static final String MEX_SOVRASCIVERE="E' gia' presente una cartella sanitaria, desidera sovrasciverla e crearne una nuova?";
 	
 	// Inserimento Paziente
 	private static final String P_MEX_INS_NOME = "Inserisci il nome del paziente: ";
@@ -1277,11 +1278,23 @@ public class CSMain{
 					/*PRIMA OPERAZIONE DA EFFETTUARE: CONTROLLO SE ESISTE GIA' UN FILE OPPURE NO*/
 					if (file.exists()){
 						// FILE ESISTENTE, CHIEDO SE SI VUOLE SOVRASCRIVERE OPPURE CARICARE I DATI PRECEDENTI
+						boolean scelta = MyInput.yesOrNo(MEX_SOVRASCIVERE);
+						if(scelta){	//SOVRASCIVO
+							//ELIMINO IL VECCHIO FILE
+							MyServizioFile.eliminaFile(PATH);
+							//NE CREO UNO NUOVO
+							MyServizioFile.creaFile(PATH);
+							CS = creaCartellaSanitaria();
+							//FINITO DI CREARE SALVO SUBITO IL FILE
+							MyServizioFile.salvaSingoloOggetto(file, CS);
+						}
+						else{//CARICO I DATI PRECEDENTI
+							
+						}
 					}
 					else{
 						//se sto cercando di crearla ma esiste gia' do' errore
 						//altrimenti tutto ok e creo
-						
 						MyServizioFile.creaFile(PATH);
 						CS = creaCartellaSanitaria();
 					}
