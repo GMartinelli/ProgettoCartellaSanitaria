@@ -695,7 +695,7 @@ public class CSMain{
 		String gruppoS = "";
 		do{
 			gruppoS = MyInput.leggiStringaNonVuota(P_MEX_INS_GSANGUIGNO);
-			if(CartellaSanitaria.checkValiditaCF(gruppoS))
+			if(CartellaSanitaria.checkGruppoSanguigno(gruppoS))
 				valido = true;
 			else{
 				stampaMex(ERRORE_INS);
