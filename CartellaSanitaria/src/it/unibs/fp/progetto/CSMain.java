@@ -25,17 +25,13 @@ public class CSMain implements Serializable{
 	private static final String[] OPZIONI_OGG_2={"Esame", "Esame Effettuato", "Malattia", "Cartella Sanitaria"};
 	private static final String[] OPZIONI_RICHIESTE = {"Visualizzazione completa dati anagrafici", "Visualizzazione completa di un esame tra quelli mostrati nella lista", "Visualizzazione completa di una malattia tra quelle mostrate nella lista", "Scelta di una tipologia di esame di cui visualizzare le statistiche", "Modifica Cartella Sanitaria"};
 	
-	private static final String[] P_OPZIONI = {"Modifica dati paziente","Visualizzazione sintetica dati paziente","Visualizzazione completa dati paziente"};
 	private static final String[] P_OPZIONI_MODIFICA = {"Modifica nome","Modifica cognome","Modifica indirizzo","Modifica telefono","Modifica email", "Modifica luogo di nascita", "Modifica data di nascita", "Modifica genere", "Modifica codice fiscale", "Modifica gruppo sanguigno", "Aggiungi esame effettuato", "Aggiungi malattia", "Modifica esame effettuato", "Modifica malattia","Rimuovi esame effettuato", "Rimuovi malattia"};
 	
-	
+	// Esame
 	private static final String E_MEX_MOD="Inserisci il nome dell'esame che vuoi modificare: ";
 	private static final String[] E_OPZIONI_MODIFICA = {"Modifica nome", "Modifica raccomandazioni"};
-	private static final String[] E_OPZIONI_MODIFICA_DIAGNOSTICO = {"Modifica nome", "Modifica raccomandazioni", "Modifica area interessata"};
-	private static final String[] E_OPZIONI_MODIFICA_PERIODICO = {"Modifica nome", "Modifica raccomandazioni", "Modifica valore minimo", "Modifica valore massimo","Modifica soglia errore"};
 	private static final String[] E_OPZIONI_MODIFICA_EFFETTUATO = {"Modifica data", "Modifica esame", "Modifica luogo", "Modifica malattia", "Modifica ora", "Modifica esito", "Modifica avvisi (se l'esame e' di tipologia misurabile"};
 	private static final String[] E_OPZIONI_SCEGLI_TIPO = {"Diagnostico", "Periodico Misurabile"};
-	private static final String[] E_OPZIONI_SELEZIONE = {"Tutti","Diagnostici","Periodici misurabili"};
 	private static final String[] E_OPZIONI_CREA_CERCA = {"Crea un nuovo esame", "Cerca un esame esistente"};
 	
 	private static final String[] M_OPZIONI_MODIFICA = {"Modifica nome", "Modifica data di inizio", "Modifica data di termine", "Modifica sintomi", "Modifica diagnosi", "Modifica terapia"};
@@ -70,8 +66,7 @@ public class CSMain implements Serializable{
 	private static final String E_MEX_INS_VALORE_MAX = "Inserisci il valore massimo: ";
 	private static final String E_MEX_INS_SOGLIA = "Inserisci la soglia di errore: ";
 	private static final String E_MEX_INS_ESITO = "Inserisci un esito: ";
-	private static final String E_MEX_INS_ERELATIVO = "Inserisci il nome dell'esame a cui e' associato: ";
-	private static final String E_MEX_INS_MRELATIVO = "Inserisci il nome della malttia a cui e' associato: ";
+	private static final String E_MEX_INS_MRELATIVO = "Inserisci il nome della malattia a cui e' associato: ";
 	private static final String E_MEX_CANCELLA_NOME = "Inserisci il nome dell'esame da cancellare: ";
 	private static final String E_MEX_PIU_ESAMI = "Attenzione, sono presenti piu' esami di questo tipo: ";
 	private static final String E_MEX_CANCELLA_DATA = "Inserire la data dell'esame da cancellare: ";
@@ -103,10 +98,8 @@ public class CSMain implements Serializable{
 	private static final String AVVISI_IMPOSTATI_CORRETTAMENTE = "Gli avvisi sono stati impostati correttamente. Operazione finita.";
 	
 	// Errori
-	private static final String ERRORE_FILE_ESISTENTE = "Attenzione, esiste gia' un file con questo nome.";
 	private static final String ERRORE_INS = "Errore! Dato inserito non valido!";
 	private static final String ERRORE_TIPOLOGIA_INESISTENTE = "Attenzione! La tipologia di esame specificata non esiste!";
-	private static final String ERRORE_TIPO = "Attenzione! Il tipo di esame passato non e' corretto!";
 	private static final String ERRORE_MALATTIA_INESISTENTE = "Attenzione! La malattia specificata non esiste!";
 	private static final String ERRORE_OPERAZIONE_ND_TIPO = "Attenzione, operazione non disponibile per il tipo di esame scelto."; //ND = NON DISPONIBILE
 	private static final String ERRORE_ESAME_NON_TROVATO = "Attenzione! Non e' presente alcun esame con quel nome!";
@@ -129,7 +122,7 @@ public class CSMain implements Serializable{
 	// Crea
 	/**
 	 * Metodo che crea un oggetto della classe esame in base alla tipologia scelta nel menu presente nel metodo
-	 * @return esame creato dall'utente
+	 * @return l'<strong>esame</strong> creato dall'utente
 	 * 
 	 * @author Martinelli Giuseppe
 	 */
@@ -180,13 +173,12 @@ public class CSMain implements Serializable{
 	 * tipologia di esame da creare
 	 * 
 	 * @param scelta <strong>1</strong> se si preimposta di creare un esame diagnostico <strong>2</strong> se periodico misurabile
-	 * @return l'esame creato
+	 * @return l'<strong>esame</strong> creato
 	 */
 	public static Esame creaEsame(int scelta){
 		String nome = MyInput.leggiStringaNonVuota(P_MEX_INS_NOME);
 		String raccomandazioni = MyInput.leggiStringa(E_MEX_INS_RACCOMANDAZIONI);
 		
-		//MyMenu menuTipo = new MyMenu("Tipo esame", E_OPZIONI_SCEGLI_TIPO);
 		switch(scelta){
 			case 1:
 				String areaInteressata = MyInput.leggiStringaNonVuota(E_MEX_INS_AREAI);
@@ -221,10 +213,10 @@ public class CSMain implements Serializable{
 	
 	/** 
 	 * Crea, mostra ed effettua le opzioni relative ad un menu' per la creazione di un esame effettuato
-	 * @param listaE la lista delle tipologie di esame create
-	 * @param listaM la lista delle malattie create
+	 * @param <strong>listaE</strong> la lista delle tipologie di esame create
+	 * @param <strong>listaM</strong> la lista delle malattie dell'utente
 	 * 
-	 * @return EsameEffettuato se non si incontrano eccezioni, altrimenti null
+	 * @return <strong>EsameEffettuato</strong> se non si incontrano eccezioni, <strong>null</strong> altrimenti
 	 * @author Martinelli Giuseppe
 	 */
 	public static EsameEffettuato creaEsameEffettuato(ListaEsame listaE, ArrayList<Malattia> listaM){
@@ -350,14 +342,14 @@ public class CSMain implements Serializable{
 	 * Overload di creaEsameEffettuato che permette di essere chiamato da altri metodi o dall'utente preimpostando la scelta della
 	 * tipologia di esame da creare
 	 * 
-	 * @param listaE la lista delle tipologie di esame create
-	 * @param listaM la lista delle malattie create
+	 * @param <strong>listaE</strong> la lista delle tipologie di esame create
+	 * @param <strong>listaM</strong> la lista delle malattie create
 	 * @param scelta <strong>1</strong> se si preimposta di creare un esame diagnostico <strong>2</strong> se periodico misurabile
-	 * @return l'esame creato se non si generano eccezioni, altrimenti null
+	 * 
+	 * @return l'<strong>esame</strong> creato se non si generano eccezioni, <strong>null</strong> altrimenti
 	 */
 	public static EsameEffettuato creaEsameEffettuato(ListaEsame listaE, ArrayList<Malattia> listaM, int scelta){
 		boolean valido = false;
-		//MyMenu menuEffettuato = new MyMenu("Tipologia di esame", E_OPZIONI_SCEGLI_TIPO);
 		
 		switch(scelta){
 			case 1:	//Diagnostico
@@ -474,9 +466,9 @@ public class CSMain implements Serializable{
 	/**
 	 * Overload di creaEsameEffettuato che crea un oggetto EsameEffettuato di tipo basato su quello dell'oggetto Esame 
 	 *
-	 * @param esame il tipo di esame
-	 * @param listaM la lista delle malattie create
-	 * @return l'esame effettuato se non si generano eccezioni, altrimenti null
+	 * @param <strong>esame</strong> il tipo di esame
+	 * @param <strong>listaM</strong> la lista delle malattie create
+	 * @return l'<strong>esame effettuato</strong> se non si generano eccezioni, <strong>null</strong> altrimenti
 	 */
 	//modificato non so se funziona
 	public static EsameEffettuato creaEsameEffettuato(Esame esame, ArrayList<Malattia> listaM){
@@ -571,8 +563,8 @@ public class CSMain implements Serializable{
 	/**
 	 * Metodo che crea un oggetto di tipo Malattia permettendo all'utente di inserire i dati desiderati
 	 * 
-	 * @param listaE la lista delle tipologie di esame create
-	 * @return la malattia creata
+	 * @param <strong>listaE</strong> la lista delle tipologie di esame create
+	 * @return la <strong>malattia</strong> creata
 	 * 
 	 * @author Valtulini Claudio
 	 */
@@ -613,7 +605,7 @@ public class CSMain implements Serializable{
 	
 	/**
 	 * Metodo che crea un oggetto della classe cartellaSanitaria
-	 * @return oggetto della classe cartella sanitaria
+	 * @return la <strong>Cartella Sanitaria</strong> creata
 	 * 
 	 * @author Martinelli Giuseppe 
 	 */
@@ -709,9 +701,9 @@ public class CSMain implements Serializable{
 	
 	// Modifica
 	/** 
-	 * Crea, mostra ed effettua le opzioni relative ad un menu' per la modifica dei dati di un esame
-	 * @param EsameEffettuato l'esame da modificare
-	 * @param listaE la lista delle tipologie di esame create
+	 * Crea, mostra ed esegue le opzioni relative ad un menu' per la modifica dei dati di un esame
+	 * @param <strong>esame</strong> l'esame da modificare
+	 * @param <strong>listaE</strong> la lista delle tipologie di esame create
 	 * 
 	 * @author Martinelli Giuseppe
 	 */
@@ -740,9 +732,9 @@ public class CSMain implements Serializable{
 	
 	/** 
 	 * Crea, mostra ed effettua le opzioni relative ad un menu' per la modifica dei dati di un esame effettuato
-	 * @param EsameEffettuato l'esame da modificare
-	 * @param listaE la lista delle tipologie di esame create
-	 * @param listaM la lista delle malattie create
+	 * @param <strong>esame</strong> l'esame effettuato da modificare
+	 * @param <strong>listaE</strong> la lista delle tipologie di esame create
+	 * @param <strong>CS</strong> la cartella sanitaria della quale fa parte l'esame
 	 * 
 	 * @author Valtulini Claudio
 	 */
@@ -852,7 +844,7 @@ public class CSMain implements Serializable{
 	
 	/** 
 	 * Crea, mostra ed effettua le opzioni relative ad un menu' per la modifica dei dati di una malattia
-	 * @param malattia la malattia da modificare
+	 * @param <strong>malattia</strong> la malattia da modificare
 	 * 
 	 * @author Valtulini Claudio
 	 */
@@ -896,11 +888,13 @@ public class CSMain implements Serializable{
 	
 	/** 
 	 * Crea, mostra ed effettua le opzioni relative ad un menu' per la modifica dei dati utente della cartella sanitaria
-	 * @param CS la cartella sanitaria da modificare
+	 * che permette di modificare tutti i dati anagrafici ma anche di aggiungere/modificare/togliere un esame effettuato o una malattia
+	 * 
+	 * @param <strong>CS</strong> la cartella sanitaria da modificare
 	 * 
 	 * @author Valtulini Claudio
 	 */
-	public static void modificaCartellaSanitaria(CartellaSanitaria CS, ListaEsame listaE, ArrayList<Malattia> listaM){
+	public static void modificaCartellaSanitaria(CartellaSanitaria CS, ListaEsame listaE){
 		int scelta = 0;
 		boolean valido = false;
 		MyMenu menuModificaPaziente = new MyMenu(MODIFICA_INFO_P, P_OPZIONI_MODIFICA);
@@ -1006,7 +1000,7 @@ public class CSMain implements Serializable{
 					CS.setGruppoSanguigno(gruppoS);
 					break;
 				case 11: //aggiungi effettuato
-					aggiungiEffettuato(CS, listaE, listaM);
+					aggiungiEffettuato(CS, listaE);
 					break;
 				case 12: //aggiungi malattia
 					creaMalattia(listaE);
@@ -1074,13 +1068,12 @@ public class CSMain implements Serializable{
 	 * permette di scegliere se creare un esame diagnostico o periodico misurabile (effettuati) creando un nuovo oggetto Esame
 	 * o cercandolo tra quelli esistenti
 	 * 
-	 * @param CS la cartella sanitaria alla quale va aggiunto l'esame effettuato
-	 * @param listaE la lista di tipologie di esame create
-	 * @param listaM la lista di malattie create
+	 * @param <strong>CS</strong> la cartella sanitaria alla quale va aggiunto l'esame effettuato
+	 * @param <strong>listaE</strong> la lista di tipologie di esame create
 	 * 
 	 * @author Valtulini Claudio
 	 */
-	public static void aggiungiEffettuato(CartellaSanitaria CS, ListaEsame listaE, ArrayList<Malattia> listaM){
+	public static void aggiungiEffettuato(CartellaSanitaria CS, ListaEsame listaE){
 		int scelta = 0;
 		MyMenu creaCerca = new MyMenu(E_SCELTA_CREA_CERCA, E_OPZIONI_CREA_CERCA);
 		scelta = creaCerca.scegli();
@@ -1094,10 +1087,10 @@ public class CSMain implements Serializable{
 				
 					switch(scelta2){
 						case 1:
-							CS.getEsamiEffettuati().add(creaEsameEffettuato(listaE, listaM, scelta2));
+							CS.getEsamiEffettuati().add(creaEsameEffettuato(listaE, CS.getElencoMalattia(), scelta2));
 							break;
 						case 2:
-							CS.getEsamiEffettuati().add(creaEsameEffettuato(listaE, listaM, scelta2));
+							CS.getEsamiEffettuati().add(creaEsameEffettuato(listaE, CS.getElencoMalattia(), scelta2));
 							break;
 						default:
 							stampaMex(ERRORE_INS);
@@ -1111,7 +1104,7 @@ public class CSMain implements Serializable{
 						esame = listaE.cercaEsame(daCercare);
 					}while(esame == null);
 				
-					CS.getEsamiEffettuati().add(creaEsameEffettuato(esame, listaM));
+					CS.getEsamiEffettuati().add(creaEsameEffettuato(esame, CS.getElencoMalattia()));
 					break;
 				case 0:
 					break;
@@ -1226,7 +1219,7 @@ public class CSMain implements Serializable{
 					stampaMex("Esito Medio: " + EPeriodicoMisurabileEffettuato.esameEsitoMedio(simili));
 					break;
 				case 5:
-					modificaCartellaSanitaria(CS, listaE, listaM);
+					modificaCartellaSanitaria(CS, listaE);
 					break;
 				case 0:
 					break;
