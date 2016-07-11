@@ -1260,14 +1260,12 @@ public class CSMain implements Serializable{
 			switch(sceltaI){
 				case 1:	/*CREARE CARTELLA SANITARIA*/
 					/*PRIMA OPERAZIONE DA EFFETTUARE: CONTROLLO SE ESISTE GIA' UN FILE OPPURE NO*/
-					if (file.exists()){
+					if (CS != null){
 						// FILE ESISTENTE, CHIEDO SE SI VUOLE SOVRASCRIVERE OPPURE CARICARE I DATI PRECEDENTI
 						boolean scelta = MyInput.yesOrNo(MEX_SOVRASCIVERE);
 						if(scelta){	//SOVRASCIVO
-							//SOVRASCRIVO IL VECCHIO FILE CON UNA STRINGA VUOTA
-							MyServizioFile.scriviFile(PATH, "");
 							CS = creaCartellaSanitaria();
-							//FINITO DI RICREARE SALVO SUBITO IL FILE
+							//FINITO DI RICREARE IL FILE
 							MyServizioFile.salvaSingoloOggetto(file, CS);
 						}
 						else{//CARICO I DATI PRECEDENTI
