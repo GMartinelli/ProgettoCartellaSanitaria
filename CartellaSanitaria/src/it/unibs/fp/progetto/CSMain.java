@@ -23,7 +23,7 @@ public class CSMain{
 	private static final String[] OPZIONI_D={"Aggiungi", "Modifica", "Elimina"};
 	private static final String[] OPZIONI_OGG={"Esame", "Esame Effettuato", "Malattia"};
 	private static final String[] OPZIONI_OGG_2={"Esame", "Esame Effettuato", "Malattia", "Cartella Sanitaria"};
-	private static final String[] OPZIONI_VISUALIZZA = {"Visualizzazione completa dati anagrafici", "Visualizzazione completa di un esame tra quelli mostrati nella lista", "Visualizzazione completa di una malattia tra quelle mostrate nella lista", "Scelta di una tipologia di esame di cui visualizzare le statistiche"};
+	private static final String[] OPZIONI_RICHIESTE = {"Visualizzazione completa dati anagrafici", "Visualizzazione completa di un esame tra quelli mostrati nella lista", "Visualizzazione completa di una malattia tra quelle mostrate nella lista", "Scelta di una tipologia di esame di cui visualizzare le statistiche", "Modifica Cartella Sanitaria"};
 	
 	private static final String[] P_OPZIONI = {"Modifica dati paziente","Visualizzazione sintetica dati paziente","Visualizzazione completa dati paziente"};
 	private static final String[] P_OPZIONI_MODIFICA = {"Modifica nome","Modifica cognome","Modifica indirizzo","Modifica telefono","Modifica email", "Modifica luogo di nascita", "Modifica data di nascita", "Modifica genere", "Modifica codice fiscale", "Modifica gruppo sanguigno", "Aggiungi esame effettuato", "Aggiungi malattia", "Modifica esame effettuato", "Modifica malattia","Rimuovi esame effettuato", "Rimuovi malattia"};
@@ -1138,24 +1138,26 @@ public class CSMain{
 	 * 	con elenco malattie
 	 * 
 	 * Dopo chiedo se
-	 * 	visualizzare tutti i dati anagrafici
-	 * 		visualizzacompleto()
-	 *  scegliere un esame e visualizzarlo completamente
-	 *  	visualizzacompleto()
-	 *  scegliere una malattia e visualizzarla completamente
-	 *  	visualizzacompleto()
-	 * 	Scegliere una tipologia di esame e
-	 * 		visualizzare tutte le misurazioni data + esito
-	 * 		visualizzare valore max e min e superamenti di soglia + date
-	 * 			gestire max e min multipli (presumo si intenda più valori uguali in date diverse)
-	 * 		visualizzare valore medio (media dei valori o valore più vicino alla media? presumo la prima)
-	 * 		altre statistiche a scelta (ci si può non incasinare ed evitare)
-	 *  Modifica Cartella
-	 *  	Aggiungi/Modifica/Rimuovi Effettuato
-	 *  	Aggiungi/Modifica/Rimuovi Malattia
-	 *  Aggiungi Tipologia Esame
-	 *  Modifica Tipologia Esame
-	 *  Rimuovi Tipologia Esame
+	 * 	Main
+	 * 		Richieste Cartella
+	 * 			visualizzare tutti i dati anagrafici
+	 * 				visualizzacompleto()
+	 *  		scegliere un esame e visualizzarlo completamente
+	 *  			visualizzacompleto()
+	 *  		scegliere una malattia e visualizzarla completamente
+	 *  			visualizzacompleto()
+	 * 			Scegliere una tipologia di esame e
+	 * 				visualizzare tutte le misurazioni data + esito
+	 * 				visualizzare valore max e min e superamenti di soglia + date
+	 * 					gestire max e min multipli (presumo si intenda più valori uguali in date diverse) (fatto)
+	 * 				visualizzare valore medio (media dei valori o valore più vicino alla media? presumo la prima)
+	 *  		Modifica Cartella
+	 *  			Aggiungi/Modifica/Rimuovi Effettuato
+	 *  			Aggiungi/Modifica/Rimuovi Malattia
+	 *  Main
+	 *  	Aggiungi Tipologia Esame
+	 *  	Modifica Tipologia Esame
+	 *  	Rimuovi Tipologia Esame
 	 * 
 	 */
 	
@@ -1164,10 +1166,10 @@ public class CSMain{
 		CS.toString();
 		
 		int scelta = 0;
-		MyMenu menuRichiestaVisualizzazioniComplete = new MyMenu("Cosa si desidera fare?", OPZIONI_VISUALIZZA);
+		MyMenu menuRichieste = new MyMenu("Cosa si desidera fare?", OPZIONI_RICHIESTE);
 		
 		do{
-			scelta = menuRichiestaVisualizzazioniComplete.scegli();
+			scelta = menuRichieste.scegli();
 			
 			switch(scelta){
 				case 1:
@@ -1223,6 +1225,9 @@ public class CSMain{
 					
 					stampaMex("Esito Medio: " + EPeriodicoMisurabileEffettuato.esameEsitoMedio(simili));
 					break;
+				case 5:
+					modificaCartellaSanitaria(CS, listaE, listaM);
+					break;
 				case 0:
 					break;
 				default:
@@ -1238,8 +1243,6 @@ public class CSMain{
 
 		ArrayList<Esame> lista = new ArrayList<Esame>();
 		ArrayList<Malattia> listaM = new ArrayList<Malattia>();
-		ArrayList<EsameEffettuato> listaEffettuati = new ArrayList<EsameEffettuato>();
-		
 		ListaEsame listaE = new ListaEsame(lista);
 
 		File file = new File(PATH);
