@@ -26,7 +26,7 @@ public class CSMain{
 	private static final String[] OPZIONI_VISUALIZZA = {"Visualizzazione completa dati anagrafici", "Visualizzazione completa di un esame tra quelli mostrati nella lista", "Visualizzazione completa di una malattia tra quelle mostrate nella lista", "Scelta di una tipologia di esame di cui visualizzare le statistiche"};
 	
 	private static final String[] P_OPZIONI = {"Modifica dati paziente","Visualizzazione sintetica dati paziente","Visualizzazione completa dati paziente"};
-	private static final String[] P_OPZIONI_MODIFICA = {"Modifica nome","Modifica cognome","Modifica indirizzo","Modifica telefono","Modifica email", "Modifica luogo di nascita", "Modifica data di nascita", "Modifica genere", "Modifica codice fiscale", "Modifica gruppo sanguigno", "Aggiungi esame effettuato", "Aggiungi malattia", "Rimuovi esame effettuato", "Rimuovi malattia"};
+	private static final String[] P_OPZIONI_MODIFICA = {"Modifica nome","Modifica cognome","Modifica indirizzo","Modifica telefono","Modifica email", "Modifica luogo di nascita", "Modifica data di nascita", "Modifica genere", "Modifica codice fiscale", "Modifica gruppo sanguigno", "Aggiungi esame effettuato", "Aggiungi malattia", "Modifica esame effettuato", "Modifica malattia","Rimuovi esame effettuato", "Rimuovi malattia"};
 	
 	
 	private static final String E_MEX_MOD="Inserisci il nome dell'esame che vuoi modificare: ";
@@ -1005,41 +1005,65 @@ public class CSMain{
 					}while(!valido);
 					CS.setGruppoSanguigno(gruppoS);
 					break;
-					case 11: //aggiungi esame
-						aggiungiEffettuato(CS, listaE, listaM);
-						break;
-					case 12: //aggiungi malattia
-						creaMalattia(listaE);
-						break;
-					case 13: //rimuovi effettuato
-						//Forse non corretto non sono convinto del confronto della data nel metodo cerca con i due parametri
-						String nomeEsame = MyInput.leggiStringaNonVuota(E_MEX_CANCELLA_NOME);
-						if(CS.isEsameEsistente(nomeEsame)){
-							if(CS.contaEsame(nomeEsame) > 1){
-								Date dataEsame = MyInput.leggiData(E_MEX_PIU_ESAMI + " " + E_MEX_CANCELLA_DATA);
-								CS.getEsamiEffettuati().remove(CS.cercaEsame(nomeEsame, dataEsame));
-							}
-							else{
-								CS.getEsamiEffettuati().remove(CS.cercaEsame(nomeEsame));
-							}
+				case 11: //aggiungi effettuato
+					aggiungiEffettuato(CS, listaE, listaM);
+					break;
+				case 12: //aggiungi malattia
+					creaMalattia(listaE);
+					break;
+				case 13: //modifica effettuato
+					String nomeModificaE = MyInput.leggiStringaNonVuota(E_MEX_CANCELLA_NOME);
+					if(CS.isEsameEsistente(nomeModificaE)){
+						if(CS.contaEsame(nomeModificaE) > 1){
+							Date dataEsame = MyInput.leggiData(E_MEX_PIU_ESAMI + " " + E_MEX_CANCELLA_DATA);
+							modificaEsameEffettuato(CS.cercaEsame(nomeModificaE, dataEsame), listaE, CS);
 						}
-						break;
-					case 14: //rimuovi malattia
-						String nomeMalattia = MyInput.leggiStringaNonVuota(M_MEX_CANCELLA);
-						if(CS.isMalattiaEsistente(nomeMalattia)){
-							if(CS.contaMalattiaEsistente(nomeMalattia) > 1){
-								Date dataInizio = MyInput.leggiData(M_MEX_PIU_MALATTIE + " " + M_MEX_CANCELLA_DATAI);
-								CS.getElencoMalattia().remove(CS.cercaMalattia(nomeMalattia, dataInizio));
-							}
-							else{
-								CS.getElencoMalattia().remove(CS.cercaMalattia(nomeMalattia));
-							}
+						else{
+							modificaEsameEffettuato(CS.cercaEsame(nomeModificaE), listaE, CS);
 						}
-						break;
-					case 0:
-						break;
-					default:
-						stampaMex(ERRORE_INS);
+					}
+					break;
+				case 14: //modifica malattia
+					String nomeModificaM = MyInput.leggiStringaNonVuota(M_MEX_CANCELLA);
+					if(CS.isMalattiaEsistente(nomeModificaM)){
+						if(CS.contaMalattiaEsistente(nomeModificaM) > 1){
+							Date dataInizio = MyInput.leggiData(M_MEX_PIU_MALATTIE + " " + M_MEX_CANCELLA_DATAI);
+							modificaMalattia(CS.cercaMalattia(nomeModificaM, dataInizio));
+						}
+						else{
+							modificaMalattia(CS.cercaMalattia(nomeModificaM));
+						}
+					}
+					break;
+				case 15: //rimuovi effettuato
+					//Forse non corretto non sono convinto del confronto della data nel metodo cerca con i due parametri
+					String nomeEsame = MyInput.leggiStringaNonVuota(E_MEX_CANCELLA_NOME);
+					if(CS.isEsameEsistente(nomeEsame)){
+						if(CS.contaEsame(nomeEsame) > 1){
+							Date dataEsame = MyInput.leggiData(E_MEX_PIU_ESAMI + " " + E_MEX_CANCELLA_DATA);
+							CS.getEsamiEffettuati().remove(CS.cercaEsame(nomeEsame, dataEsame));
+						}
+						else{
+							CS.getEsamiEffettuati().remove(CS.cercaEsame(nomeEsame));
+						}
+					}
+					break;
+				case 16: //rimuovi malattia
+					String nomeMalattia = MyInput.leggiStringaNonVuota(M_MEX_CANCELLA);
+					if(CS.isMalattiaEsistente(nomeMalattia)){
+						if(CS.contaMalattiaEsistente(nomeMalattia) > 1){
+							Date dataInizio = MyInput.leggiData(M_MEX_PIU_MALATTIE + " " + M_MEX_CANCELLA_DATAI);
+							CS.getElencoMalattia().remove(CS.cercaMalattia(nomeMalattia, dataInizio));
+						}
+						else{
+							CS.getElencoMalattia().remove(CS.cercaMalattia(nomeMalattia));
+						}
+					}
+				break;
+			case 0:
+				break;
+			default:
+				stampaMex(ERRORE_INS);
 			}
 		}while(scelta != 0);
 	}
@@ -1135,7 +1159,7 @@ public class CSMain{
 	 * 
 	 */
 	
-	public static void visualizzaCartellaSanitaria(CartellaSanitaria CS, ListaEsame listaE, ArrayList<Malattia> listaM){
+	public static void richiesteCartellaSanitaria(CartellaSanitaria CS, ListaEsame listaE, ArrayList<Malattia> listaM){
 		stampaMex(MEX_BENVENUTO);
 		CS.toString();
 		
@@ -1206,35 +1230,7 @@ public class CSMain{
 			}
 		}while(scelta != 0);
 	}
-	
-	/**
-	 * Menu per la gestione delle info di utente Modifica/Visualizza/Visualizza Completo
-	 * @param CS la cartella sanitaria da gestire
-	 * @param listaE la lista delle tipologie di esami creati
-	 * @param listaM la lista delle malattie create
-	 * 
-	 * @author Martinelli Giuseppe
-	 */
-	// PROBABILMENTE INUTILE VISTO LA NUOVA DISPOSIZIONE DEL MENU'
-	public static void gestioneCartellaSanitaria(CartellaSanitaria CS, ListaEsame listaE, ArrayList<Malattia> listaM){
-		int scelta = 0;
-		MyMenu menuPaziente = new MyMenu("Gestione informazioni utente", P_OPZIONI);
-		scelta = menuPaziente.scegli();
-		switch(scelta){
-			case 1:
-				modificaCartellaSanitaria(CS, listaE, listaM);
-				break;
-			case 2:
-				stampaMex(CS.toString());
-				break;
-			case 3:
-				stampaMex(CS.toStringCompleto());
-				break;
-			default:
-				stampaMex(ERRORE_INS);
-		}
-	}
-	
+		
 	/*Main*/
 	public static void main(String[] args) {
 		stampaMex(MEX_BENVENUTO);
@@ -1279,11 +1275,12 @@ public class CSMain{
 					break;
 				case 2:	/*PRIMA VISUALIZZA SECONDO LE RICHIESTE, POI PERMETTO LA SCELTA TRA AGGIUNGI / MODIFICA / ELIMINA???*/
 					int sceltaD=0;
-					visualizzaCartellaSanitaria(CS, listaE, listaM);
+					richiesteCartellaSanitaria(CS, listaE, listaM);
 					
 					/*
 					MENU CHE VERRA' SPOSTATO DA VALTU
 					do{
+						richiesteCartellaSanitaria(CS, listaE, listaM);
 						MyMenu menuD = new MyMenu("Operazioni possibili", OPZIONI_D);
 						sceltaD = menuD.scegli();
 						switch(sceltaD){
