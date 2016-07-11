@@ -1234,7 +1234,7 @@ public class CSMain{
 	/*Main*/
 	public static void main(String[] args) {
 		stampaMex(MEX_BENVENUTO);
-		CartellaSanitaria CS = null; //momentaneo per non ricevere errori dall'editor
+		CartellaSanitaria CS = null;
 
 		ArrayList<Esame> lista = new ArrayList<Esame>();
 		ArrayList<Malattia> listaM = new ArrayList<Malattia>();
@@ -1258,14 +1258,12 @@ public class CSMain{
 						if(scelta){	//SOVRASCIVO
 							//SOVRASCRIVO IL VECCHIO FILE CON UNA STRINGA VUOTA
 							MyServizioFile.scriviFile(PATH, "");
-							//NE CREO UNO NUOVO
-							MyServizioFile.creaFile(PATH);
 							CS = creaCartellaSanitaria();
-							//FINITO DI CREARE SALVO SUBITO IL FILE
+							//FINITO DI RICREARE SALVO SUBITO IL FILE
 							MyServizioFile.salvaSingoloOggetto(file, CS);
 						}
 						else{//CARICO I DATI PRECEDENTI
-							
+							CS = (CartellaSanitaria) MyServizioFile.caricaSingoloOggetto(file);
 						}
 					}
 					else{
