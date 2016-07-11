@@ -1159,7 +1159,7 @@ public class CSMain{
 	 * 
 	 */
 	
-	public static void visualizzaCartellaSanitaria(CartellaSanitaria CS, ListaEsame listaE, ArrayList<Malattia> listaM){
+	public static void richiesteCartellaSanitaria(CartellaSanitaria CS, ListaEsame listaE, ArrayList<Malattia> listaM){
 		stampaMex(MEX_BENVENUTO);
 		CS.toString();
 		
@@ -1304,7 +1304,7 @@ public class CSMain{
 				case 2:	/*PRIMA VISUALIZZA SECONDO LE RICHIESTE, POI PERMETTO LA SCELTA TRA AGGIUNGI / MODIFICA / ELIMINA???*/
 					int sceltaD=0;
 					do{
-						visualizzaCartellaSanitaria(CS, listaE, listaM);
+						richiesteCartellaSanitaria(CS, listaE, listaM);
 						MyMenu menuD = new MyMenu("Operazioni possibili", OPZIONI_D);
 						sceltaD = menuD.scegli();
 						switch(sceltaD){
