@@ -1,5 +1,6 @@
 package it.unibs.fp.progetto;
 
+import java.io.Serializable;
 import java.text.*;
 import it.unibs.fp.mylib.*;
 import java.util.ArrayList;
@@ -29,7 +30,7 @@ import java.util.Date;
  */
 
 
-public class CartellaSanitaria {
+public class CartellaSanitaria implements Serializable{
 	/*Costanti*/
 	private static final String CHAR_NON_VALIDO= "Il carattere inserito deve essere M/m o F/f";
 	

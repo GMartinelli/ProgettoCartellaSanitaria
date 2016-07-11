@@ -1,4 +1,5 @@
 package it.unibs.fp.progetto;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -18,7 +19,7 @@ import it.unibs.fp.mylib.MyTime;
  *
  */
 
-public class Malattia {
+public class Malattia  implements Serializable{
 	//attributi
 	private String nome;
 	private Date dataInizio;

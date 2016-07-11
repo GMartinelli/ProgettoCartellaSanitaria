@@ -1,5 +1,6 @@
 package it.unibs.fp.progetto;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import it.unibs.fp.mylib.MyTime;
 
-public class EsameEffettuato {
+public class EsameEffettuato implements Serializable{
 	//costanti
 	public static final String GIA_EFFETTUATO = "Impossibile modificare il dato, l'esame è già stato effettuato"; 
 	public static final String ESITO_MANCANTE = "Non è ancora stato impostato un esito";

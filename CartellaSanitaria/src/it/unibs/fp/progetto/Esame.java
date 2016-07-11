@@ -1,4 +1,7 @@
 package it.unibs.fp.progetto;
+
+import java.io.Serializable;
+
 /**
  * Classe Esame che definisce un <u>esame</u>.
  * 
@@ -8,7 +11,7 @@ package it.unibs.fp.progetto;
  * 
  * @author Manenti Gabriele
  */
-public class Esame {
+public class Esame  implements Serializable{
 	//Attributi
 	private String nome;
 	private String raccomandazioni;
