@@ -9,6 +9,8 @@ public class CSMain{
 	// Costanti
 	private static final String MEX_BENVENUTO = "Benvenuto nell'applicazione per la gestione della cartella sanitaria di un paziente";
 	private static final String MEX_USCITA = "Grazie per avere utilizzato la nostra applicazione! Arrivederci!";
+	
+	private static final String[] SI_NO = {"SI", "NO"};
 
 	//Intestazioni menu'
 	private static final String MODIFICA_INFO_P = "Modifica informazioni utente";
@@ -21,6 +23,7 @@ public class CSMain{
 	private static final String[] OPZIONI_D={"Aggiungi", "Modifica", "Elimina"};
 	private static final String[] OPZIONI_OGG={"Esame", "Esame Effettuato", "Malattia"};
 	private static final String[] OPZIONI_OGG_2={"Esame", "Esame Effettuato", "Malattia", "Cartella Sanitaria"};
+	private static final String[] OPZIONI_VISUALIZZA = {"Visualizzazione completa dati anagrafici", "Visualizzazione completa di un esame tra quelli mostrati nella lista", "Visualizzazione completa di una malattia tra quelle mostrate nella lista"};
 	
 	private static final String[] P_OPZIONI = {"Modifica dati paziente","Visualizzazione sintetica dati paziente","Visualizzazione completa dati paziente"};
 	private static final String[] P_OPZIONI_MODIFICA = {"Modifica nome","Modifica cognome","Modifica indirizzo","Modifica telefono","Modifica email", "Modifica luogo di nascita", "Modifica data di nascita", "Modifica genere", "Modifica codice fiscale", "Modifica gruppo sanguigno", "Aggiungi esame effettuato", "Aggiungi malattia", "Rimuovi esame effettuato", "Rimuovi malattia"};
@@ -73,9 +76,11 @@ public class CSMain{
 	private static final String E_MEX_PIU_ESAMI = "Attenzione, sono presenti piu' esami di questo tipo: ";
 	private static final String E_MEX_CANCELLA_DATA = "Inserire la data dell'esame da cancellare: ";
 	private static final String E_MEX_CERCA = "Inserire il nome dell'esame che si desidera cercare: ";
+	private static final String E_MEX_INS_TIPOLOGIA = "Inserisci il nome della tipologia di cui visualizzare le statistiche: ";
 	
 	private static final String E_SCELTA_CREA_CERCA = "Si desidera creare un esame o cercarne uno già esistente?";
 	private static final String E_SCELTA_TIPO = "Si desidera inserire un nuovo Esame Effettuato Diagnostico o Periodico Misurabile?";
+	private static final String E_SCELTA_VISUALIZZA = "Quale esame vuoi visualizzare?";
 	
 	// Inserimento Malattia
 	private static final String M_MEX_INS_NOME = "Inserisci il nome della malattia: ";
@@ -91,6 +96,7 @@ public class CSMain{
 	private static final String M_SCELTA_INS_DATAT = "Si desidera inserire una data di termine?";
 	private static final String M_SCELTA_INS_ASSOCIATO = "Si desidera inserire un esame associato?";
 	private static final String M_SCELTA_INS_ALTRO_ASSOCIATO = "Si desidera inserire un altro esame associato?";
+	private static final String M_SCELTA_VISUALIZZA = "Quale malattia vuoi visualizzare?";
 	
 	// Avvisi
 	private static final String NON_MODIFICA = "Attenzione, non verrà chiesto di inserire alcun dato.";
@@ -106,6 +112,7 @@ public class CSMain{
 	private static final String ERRORE_ESAME_NON_TROVATO = "Attenzione! Non e' presente alcun esame con quel nome!";
 	private static final String ERRORE_MALATTIA_NON_TROVATA = "Attenzione! Non e' presente alcuna malattia con quel nome!";
 	
+	//metodi
 	/**
 	 * Stampa un messaggio nella console attraverso System.out.println
 	 * Usato per poter modificare velocemente la visualizzazione di un messaggio se per esempio nel progetto venisse implementata
@@ -117,16 +124,6 @@ public class CSMain{
 	 */
 	public static void stampaMex(String messaggio){
 		System.out.println(messaggio);
-	}
-	
-	public void salvaOggetto(Object daSalvare, String nomeFile){
-		File file = new File(nomeFile);
-		if(file.exists()){
-			stampaMex(ERRORE_FILE_ESISTENTE + " L'oggetto non verra'� salvato.");
-		}
-		else{
-			MyServizioFile.salvaSingoloOggetto(file, daSalvare);
-		}
 	}
 
 	// Crea
@@ -1138,18 +1135,12 @@ public class CSMain{
 	 * 
 	 */
 	
-	private static final String[] VISUALIZZA_OPZIONI = {"Visualizzazione completa dati anagrafici", "Visualizzazione completa di un esame tra quelli mostrati nella lista", "Visualizzazione completa di una malattia tra quelle mostrate nella lista"};
-	private static final String[] SI_NO = {"SI", "NO"};
-	private static final String RICHIESTO_E_MEX_INS_TIPOLOGIA = "Inserisci il nome della tipologia di cui visualizzare le statistiche: "; 
-	private static final String RICHIESTO_E_SCELTA_VISUALIZZA = "Quale esame vuoi visualizzare?";
-	private static final String RICHIESTO_M_SCELTA_VISUALIZZA = "Quale malattia vuoi visualizzare?";
-	
 	public static void visualizzaCartellaSanitaria(CartellaSanitaria CS, ListaEsame listaE, ArrayList<Malattia> listaM){
 		stampaMex(MEX_BENVENUTO);
 		CS.toString();
 		
 		int scelta = 0;
-		MyMenu menuRichiestaVisualizzazioniComplete = new MyMenu("Cosa si desidera fare?", VISUALIZZA_OPZIONI);
+		MyMenu menuRichiestaVisualizzazioniComplete = new MyMenu("Cosa si desidera fare?", OPZIONI_VISUALIZZA);
 		
 		do{
 			scelta = menuRichiestaVisualizzazioniComplete.scegli();
@@ -1160,7 +1151,7 @@ public class CSMain{
 					break;
 				case 2:
 					//scelgo e visualizzo esame
-					int visualizzaE = MyInput.leggiInteroConMinimo(RICHIESTO_E_SCELTA_VISUALIZZA, 1);
+					int visualizzaE = MyInput.leggiInteroConMinimo(E_SCELTA_VISUALIZZA, 1);
 					if((visualizzaE - 1) < CS.getEsamiEffettuati().size()){
 						CS.getEsamiEffettuati().get(visualizzaE - 1).toStringCompleto();
 					}
@@ -1170,7 +1161,7 @@ public class CSMain{
 					break;
 				case 3:
 					//scelgo e visualizzo malattia
-					int visualizzaM = MyInput.leggiInteroConMinimo(RICHIESTO_M_SCELTA_VISUALIZZA, 1);
+					int visualizzaM = MyInput.leggiInteroConMinimo(M_SCELTA_VISUALIZZA, 1);
 					if((visualizzaM - 1) < CS.getElencoMalattia().size()){
 						CS.getElencoMalattia().get(visualizzaM - 1).toStringCompleto();
 					}
@@ -1197,14 +1188,14 @@ public class CSMain{
 					String tipologia = null;
 					ArrayList<EsameEffettuato> simili = null;
 					do{
-						tipologia = MyInput.leggiStringaNonVuota(RICHIESTO_E_MEX_INS_TIPOLOGIA);
+						tipologia = MyInput.leggiStringaNonVuota(E_MEX_INS_TIPOLOGIA);
 						simili = EsameEffettuato.selezionaTipologiaEsame(CS.getEsamiEffettuati(), tipologia);
 						if(simili.size() == 0){
 							stampaMex(ERRORE_TIPOLOGIA_INESISTENTE);
 						}
 					}while(simili.size() == 0);
 					
-					//+ date i seguenti ?? ( se si visualizzano le date)
+					//+ date i seguenti ?? (controllare se si visualizzano le date)
 					stampaMex("Esito massimo: ");
 					for(EPeriodicoMisurabileEffettuato elemento: EPeriodicoMisurabileEffettuato.esameEsitoMax(simili)){
 						stampaMex(elemento.toString());
@@ -1337,17 +1328,17 @@ public class CSMain{
 									MyMenu menuM = new MyMenu("Cosa desideri modificare?", OPZIONI_OGG_2);
 									sceltaM = menuM.scegli();
 									switch(sceltaM){
-										case 1: /*Esame normale*/ 
+										case 1: /*tipologia Esame*/ 
 											String nomeEsame = MyInput.leggiStringa(E_MEX_MOD);
 											Esame e = listaE.cercaEsame(nomeEsame);
 											modificaEsame(e,listaE);
 											break;
-										case 2: /*Esame effettauto*/
+										case 2: /*togliere Esame effettauto*/
 											break;
-										case 3: /*Malattia*/
+										case 3: /*togliere Malattia*/
 											
 											break;
-										case 4: /*Cartella Sanitaria*/
+										case 4: /*(modifica cartella) Cartella Sanitaria*/
 											break;
 										default:
 											/*ERRORE*/
