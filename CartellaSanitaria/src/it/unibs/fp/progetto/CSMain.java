@@ -1230,35 +1230,7 @@ public class CSMain{
 			}
 		}while(scelta != 0);
 	}
-	
-	/**
-	 * Menu per la gestione delle info di utente Modifica/Visualizza/Visualizza Completo
-	 * @param CS la cartella sanitaria da gestire
-	 * @param listaE la lista delle tipologie di esami creati
-	 * @param listaM la lista delle malattie create
-	 * 
-	 * @author Martinelli Giuseppe
-	 */
-	// PROBABILMENTE INUTILE VISTO LA NUOVA DISPOSIZIONE DEL MENU'
-	public static void gestioneCartellaSanitaria(CartellaSanitaria CS, ListaEsame listaE, ArrayList<Malattia> listaM){
-		int scelta = 0;
-		MyMenu menuPaziente = new MyMenu("Gestione informazioni utente", P_OPZIONI);
-		scelta = menuPaziente.scegli();
-		switch(scelta){
-			case 1:
-				modificaCartellaSanitaria(CS, listaE, listaM);
-				break;
-			case 2:
-				stampaMex(CS.toString());
-				break;
-			case 3:
-				stampaMex(CS.toStringCompleto());
-				break;
-			default:
-				stampaMex(ERRORE_INS);
-		}
-	}
-	
+		
 	/*Main*/
 	public static void main(String[] args) {
 		stampaMex(MEX_BENVENUTO);
