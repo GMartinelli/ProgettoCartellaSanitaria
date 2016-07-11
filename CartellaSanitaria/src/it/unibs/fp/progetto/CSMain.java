@@ -17,7 +17,7 @@ public class CSMain{
 	private static final String MODIFICA_INFO_E = "Modifica informazioni esame effettuato";
 	
 	// Opzioni menu'
-	private static final String[] OPZIONI_I={"Operazioni su oggetti", "Visualizza"};
+	private static final String[] OPZIONI_I={"Crea Cartella Sanitaria", "Visualizzazione e operazioni su oggetti"};
 	private static final String[] OPZIONI_D={"Aggiungi", "Modifica", "Elimina"};
 	private static final String[] OPZIONI_OGG={"Esame", "Esame Effettuato", "Malattia"};
 	private static final String[] OPZIONI_OGG_2={"Esame", "Esame Effettuato", "Malattia", "Cartella Sanitaria"};
@@ -48,7 +48,7 @@ public class CSMain{
 	private static final String P_MEX_INS_TELEFONO = "Inserisci il numero di telefono del paziente: ";
 	private static final String P_MEX_INS_MAIL = "Inserisci l'indirizzo e-mail del paziente: ";
 	private static final String P_MEX_INS_DATAN = "Inserisci la data di nascita del paziente nel formato gg/mm/aaaa: ";
-	private static final String P_MEX_INS_LUOGON = "Inserisci il lugo di nascita del paziente: ";
+	private static final String P_MEX_INS_LUOGON = "Inserisci il luogo di nascita del paziente: ";
 	private static final String P_MEX_INS_CODICEF = "Inserisci il codice fiscale del paziente: ";
 	private static final String P_MEX_INS_GENERE = "Inserisci il genere del paziente: ";
 	private static final String P_MEX_INS_GSANGUIGNO = "Inserisci il guppo sanguigno del paziente: ";
@@ -1304,7 +1304,7 @@ public class CSMain{
 						CS = creaCartellaSanitaria();
 					}
 					break;
-				case 2:	/*SCELTA TRA AGGIUNGI / MODIFICA / ELIMINA???/ VISUALIZZA*/
+				case 2:	/*PRIMA VISUALIZZA SECONDO LE RICHIESTE, POI PERMETTO LA SCELTA TRA AGGIUNGI / MODIFICA / ELIMINA???*/
 					int sceltaD=0;
 					do{
 						visualizzaCartellaSanitaria(CS, listaE, listaM);
@@ -1387,76 +1387,6 @@ public class CSMain{
 				}
 		}while(sceltaI!=0);
 		stampaMex(MEX_USCITA);
-		
-		
-		/*Vecchio Menu Main
-		int scelta = 0;
-		do{
-			MyMenu menuGenerale = new MyMenu("Cartella Sanitaria", G_OPZIONI);
-			scelta = menuGenerale.scegli();
-			switch(scelta){
-			case 1: //Modifica Visualizza utente
-				gestioneInfoUtente(CS, listaE, listaM);
-				break;
-			case 2: //Modifica visualizza esame
-				int scelta3 = 0;
-				do{
-					MyMenu menuEsame = new MyMenu("Gestione esami", E_OPZIONI);
-					scelta3 = menuEsame.scegli();
-					switch(scelta3){
-					case 1:	//Si vuole inserire un nuovo esame
-						int scelta4 = 0; 
-						do{
-							MyMenu menuTipo = new MyMenu("Tipo esame", E_OPZIONI_SCEGLI_TIPO);
-							scelta4 = menuTipo.scegli();
-							switch(scelta4){	//Faccio scegliere se inserire un nuovo esame o un nuovo esame effettuato
-							case 1:		//Esame 
-								Esame esame = creaEsame();
-								if(esame != null)
-									listaE.aggiungiEsame(esame);
-								scelta4 = 0;	//Scelta valida, posso uscire dal ciclo
-								break;
-							case 2:		//EsameEffettuato
-								EsameEffettuato eF = creaEsameEffettuato(listaE, listaM);
-								if(eF != null)
-									listaEffettuati.add(eF);
-								
-								scelta4 = 0;	//Scelta valida, posso uscire dal ciclo
-								break;
-							case 0:
-								break;
-							default:
-								stampaMex(ERRORE_INS);
-							}
-						}while(scelta4 != 0);
-						break;
-					case 2:
-						break;
-					case 3:
-						break;
-					case 4:
-						break;
-					default:
-						stampaMex(ERRORE_INS);
-					}
-				}while(scelta3 != 0);
-				break;
-			case 3://Modifica visualizza malattia
-				int scelta4 = 0;
-				do{
-					MyMenu menuMalattia = new MyMenu("Gestione malattia", M_OPZIONI);
-					scelta4 = menuMalattia.scegli();
-				}while(scelta4 != 0);
-				break;
-			case 0:
-				break;
-			default:
-				stampaMex(ERRORE_INS);
-			}
-			stampaMex(" ");
-		}while(scelta != 0);*/
-		
-		
 		
 	}
 }
