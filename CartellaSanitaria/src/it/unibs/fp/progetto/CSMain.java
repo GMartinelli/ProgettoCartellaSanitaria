@@ -1235,7 +1235,7 @@ public class CSMain implements Serializable{
 			}
 		}while(scelta != 0);
 	}
-		
+	
 	/*Main*/
 	public static void main(String[] args) {
 		stampaMex(MEX_BENVENUTO);
@@ -1286,69 +1286,10 @@ public class CSMain implements Serializable{
 						sceltaD = menuD.scegli();
 						switch(sceltaD){
 							case 1:	/*AGGIUNGI*/
-								int sceltaA=0;
-								do{
-									MyMenu menuA = new MyMenu("Cosa desideri creare/aggiungere?", OPZIONI_OGG);
-									sceltaA = menuA.scegli();
-									switch(sceltaA){
-										case 1: /*Esame normale*/ 
-											Esame e = creaEsame();
-											listaE.aggiungiEsame(e);
-											break;
-										case 2: /*Esame effettuato*/
-											aggiungiEffettuato(CS, listaE, listaM);
-											break;
-										case 3: /*Malattia*/
-											Malattia m= creaMalattia(listaE);
-											listaM.add(m);
-											break;
-										default:
-											/*ERRORE*/
-											stampaMex(ERRORE_INS);
-									}
-								}while(sceltaA!=0);
 								break;
-							case 2:	/*MODIFICA*/
-								int sceltaM=0;
-								do{
-									MyMenu menuM = new MyMenu("Cosa desideri modificare?", OPZIONI_OGG_2);
-									sceltaM = menuM.scegli();
-									switch(sceltaM){
-										case 1: /*tipologia Esame*/ 
-											String nomeEsame = MyInput.leggiStringa(E_MEX_MOD);
-											Esame e = listaE.cercaEsame(nomeEsame);
-											modificaEsame(e,listaE);
-											break;
-										case 2: /*togliere Esame effettauto*/
-											break;
-										case 3: /*togliere Malattia*/
-											
-											break;
-										case 4: /*(modifica cartella) Cartella Sanitaria*/
-											break;
-										default:
-											/*ERRORE*/
-											stampaMex(ERRORE_INS);
-									}
-								}while(sceltaM!=0);
+							case 2: //MODIFICA
 								break;
-							case 3:	/*ELIMINA???*/
-								int sceltaE=0;
-								do{
-									MyMenu menuE = new MyMenu("Cosa desideri modificare?", OPZIONI_OGG);
-									sceltaE = menuE.scegli();
-									switch(sceltaE){
-										case 1: /*Esame normale*/ 
-											break;
-										case 2: /*Esame effettauto*/
-											break;
-										case 3: /*Malattia*/
-											break;
-										default:
-											/*ERRORE*/
-											stampaMex(ERRORE_INS);
-									}
-								}while(sceltaE!=0);
+							case 3: //ELIMINA
 								break;
 							default:
 								/*ERRORE*/
