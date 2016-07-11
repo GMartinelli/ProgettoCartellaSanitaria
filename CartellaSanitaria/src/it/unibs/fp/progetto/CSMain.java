@@ -1123,13 +1123,18 @@ public class CSMain{
 	 *  	visualizzacompleto()
 	 *  scegliere una malattia e visualizzarla completamente
 	 *  	visualizzacompleto()
-	 *  
-	 * Scegliere una tipologia di esame e
-	 * 	visualizzare tutte le misurazioni data + esito
-	 * 	visualizzare valore max e min e superamenti di soglia + date
-	 * 		gestire max e min multipli (presumo si intenda più valori uguali in date diverse)
-	 * 	visualizzare valore medio (media dei valori o valore più vicino alla media? presumo la prima)
-	 * 	altre statistiche a scelta (ci si può non incasinare ed evitare)
+	 * 	Scegliere una tipologia di esame e
+	 * 		visualizzare tutte le misurazioni data + esito
+	 * 		visualizzare valore max e min e superamenti di soglia + date
+	 * 			gestire max e min multipli (presumo si intenda più valori uguali in date diverse)
+	 * 		visualizzare valore medio (media dei valori o valore più vicino alla media? presumo la prima)
+	 * 		altre statistiche a scelta (ci si può non incasinare ed evitare)
+	 *  Modifica Cartella
+	 *  	Aggiungi/Modifica/Rimuovi Effettuato
+	 *  	Aggiungi/Modifica/Rimuovi Malattia
+	 *  Aggiungi Tipologia Esame
+	 *  Modifica Tipologia Esame
+	 *  Rimuovi Tipologia Esame
 	 * 
 	 *  QUI SOTTO METODO BASATO SU QUESTA DESCRIZIONE (POTREBBE ESSERE NON COMPLETO)
 	 */
@@ -1140,7 +1145,7 @@ public class CSMain{
 	private static final String RICHIESTO_E_SCELTA_VISUALIZZA = "Quale esame vuoi visualizzare?";
 	private static final String RICHIESTO_M_SCELTA_VISUALIZZA = "Quale malattia vuoi visualizzare?";
 	
-	public static void visualizzaInfoUtente(CartellaSanitaria CS, ListaEsame listaE, ArrayList<Malattia> listaM){
+	public static void visualizzaCartellaSanitaria(CartellaSanitaria CS, ListaEsame listaE, ArrayList<Malattia> listaM){
 		stampaMex(MEX_BENVENUTO);
 		CS.toString();
 		
@@ -1236,7 +1241,7 @@ public class CSMain{
 	 * @author Martinelli Giuseppe
 	 */
 	// PROBABILMENTE INUTILE VISTO LA NUOVA DISPOSIZIONE DEL MENU'
-	public static void gestioneInfoUtente(CartellaSanitaria CS, ListaEsame listaE, ArrayList<Malattia> listaM){
+	public static void gestioneCartellaSanitaria(CartellaSanitaria CS, ListaEsame listaE, ArrayList<Malattia> listaM){
 		int scelta = 0;
 		MyMenu menuPaziente = new MyMenu("Gestione informazioni utente", P_OPZIONI);
 		scelta = menuPaziente.scegli();
@@ -1371,7 +1376,7 @@ public class CSMain{
 								}while(sceltaE!=0);
 								break;
 							case 4: /*VISUALIZZA INFO UTENTE*/
-								visualizzaInfoUtente(CS, listaE, listaM);
+								visualizzaCartellaSanitaria(CS, listaE, listaM);
 								break;
 							default:
 								/*ERRORE*/
