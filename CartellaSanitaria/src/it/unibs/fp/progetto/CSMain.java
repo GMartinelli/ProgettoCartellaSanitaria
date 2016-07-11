@@ -658,7 +658,7 @@ public class CSMain{
 		Date dataN = null;
 		do{
 			String data = MyInput.leggiStringaNonVuota(P_MEX_INS_DATAN);
-			MyTime.creaData(data);
+			dataN = MyTime.creaData(data);
 			if((dataN != null) && CartellaSanitaria.checkDataNascita(data))
 				valido = true;
 			else{
@@ -1307,6 +1307,7 @@ public class CSMain{
 				case 2:	/*SCELTA TRA AGGIUNGI / MODIFICA / ELIMINA???/ VISUALIZZA*/
 					int sceltaD=0;
 					do{
+						visualizzaCartellaSanitaria(CS, listaE, listaM);
 						MyMenu menuD = new MyMenu("Operazioni possibili", OPZIONI_D);
 						sceltaD = menuD.scegli();
 						switch(sceltaD){
@@ -1374,9 +1375,6 @@ public class CSMain{
 											stampaMex(ERRORE_INS);
 									}
 								}while(sceltaE!=0);
-								break;
-							case 4: /*VISUALIZZA INFO UTENTE*/
-								visualizzaCartellaSanitaria(CS, listaE, listaM);
 								break;
 							default:
 								/*ERRORE*/
