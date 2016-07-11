@@ -1155,8 +1155,6 @@ public class CSMain implements Serializable{
 	 */
 	
 	public static void richiesteCartellaSanitaria(CartellaSanitaria CS, ListaEsame listaE, ArrayList<Malattia> listaM){
-		stampaMex(MEX_BENVENUTO);
-		CS.toString();
 		
 		int scelta = 0;
 		MyMenu menuRichieste = new MyMenu("Cosa si desidera fare?", OPZIONI_RICHIESTE);
@@ -1232,6 +1230,8 @@ public class CSMain implements Serializable{
 	/*Main*/
 	public static void main(String[] args) {
 		stampaMex(MEX_BENVENUTO);
+		
+		boolean visualizzato = false;
 		CartellaSanitaria CS = null;
 
 		ArrayList<Esame> lista = new ArrayList<Esame>();
@@ -1247,6 +1247,7 @@ public class CSMain implements Serializable{
 		
 		/*INIZIO CON I MENU: PRIMO MENU PER SCEGLIERE SE CREARE CARTELLA O FARE RICHIESTE TRACCIA (VISUALIZZAZIONE ECC.) */
 		int sceltaI=0;
+		
 		do{
 			MyMenu menuGenerale = new MyMenu("Cartella Sanitaria", OPZIONI_I);
 			sceltaI = menuGenerale.scegli();
@@ -1271,18 +1272,28 @@ public class CSMain implements Serializable{
 					}
 					break;
 					
-				case 2:	/*PRIMA VISUALIZZA SECONDO LE RICHIESTE, POI PERMETTO LA SCELTA TRA AGGIUNGI / MODIFICA / ELIMINA???*/
-					int sceltaD=0;
-					richiesteCartellaSanitaria(CS, listaE, listaM);
+				case 2:	/*RICHIESTE/ (Tipologia Esame) AGGIUNGI / MODIFICA / ELIMINA*/
+					int sceltaD = 0;
+					
 					do{
+						if(CS != null && !visualizzato){
+							CS.toString();
+							visualizzato = true;
+						}
+						
 						MyMenu menuD = new MyMenu("Operazioni possibili", OPZIONI_D);
 						sceltaD = menuD.scegli();
 						switch(sceltaD){
-							case 1:	/*AGGIUNGI*/
+							case 1: //richieste
+								richiesteCartellaSanitaria(CS, listaE, listaM);
 								break;
-							case 2: //MODIFICA
+							case 2:	/*AGGIUNGI tipologia esame*/
 								break;
-							case 3: //ELIMINA
+							case 3: /*Modifica tipologia esame*/
+								break;
+							case 4: /*ELIMINA tipologia esame*/
+								break;
+							case 0:
 								break;
 							default:
 								/*ERRORE*/
