@@ -1136,11 +1136,10 @@ public class CSMain{
 	 *  Modifica Tipologia Esame
 	 *  Rimuovi Tipologia Esame
 	 * 
-	 *  QUI SOTTO METODO BASATO SU QUESTA DESCRIZIONE (POTREBBE ESSERE NON COMPLETO)
 	 */
 	
-	private static final String[] RICHIESTO_VISUALIZZA_OPZIONI = {"Visualizzazione completa dati anagrafici", "Visualizzazione completa di un esame tra quelli mostrati nella lista", "Visualizzazione completa di una malattia tra quelle mostrate nella lista"};
-	private static final String[] RICHIESTO_SI_NO = {"SI", "NO"};
+	private static final String[] VISUALIZZA_OPZIONI = {"Visualizzazione completa dati anagrafici", "Visualizzazione completa di un esame tra quelli mostrati nella lista", "Visualizzazione completa di una malattia tra quelle mostrate nella lista"};
+	private static final String[] SI_NO = {"SI", "NO"};
 	private static final String RICHIESTO_E_MEX_INS_TIPOLOGIA = "Inserisci il nome della tipologia di cui visualizzare le statistiche: "; 
 	private static final String RICHIESTO_E_SCELTA_VISUALIZZA = "Quale esame vuoi visualizzare?";
 	private static final String RICHIESTO_M_SCELTA_VISUALIZZA = "Quale malattia vuoi visualizzare?";
@@ -1150,7 +1149,7 @@ public class CSMain{
 		CS.toString();
 		
 		int scelta = 0;
-		MyMenu menuRichiestaVisualizzazioniComplete = new MyMenu("Cosa si desidera fare?", RICHIESTO_VISUALIZZA_OPZIONI);
+		MyMenu menuRichiestaVisualizzazioniComplete = new MyMenu("Cosa si desidera fare?", VISUALIZZA_OPZIONI);
 		
 		do{
 			scelta = menuRichiestaVisualizzazioniComplete.scegli();
@@ -1187,7 +1186,7 @@ public class CSMain{
 		}while(scelta != 0);
 		
 		scelta = 0;
-		MyMenu menuRichiestoVisualizzaTipologia = new MyMenu("Si desidera scegliere una tipologia di esame di cui visualizzare le statistiche?", RICHIESTO_SI_NO);
+		MyMenu menuRichiestoVisualizzaTipologia = new MyMenu("Si desidera scegliere una tipologia di esame di cui visualizzare le statistiche?", SI_NO);
 		
 		do{
 			scelta = menuRichiestoVisualizzaTipologia.scegli();
@@ -1298,8 +1297,6 @@ public class CSMain{
 						}
 					}
 					else{
-						//se sto cercando di crearla ma esiste gia' do' errore
-						//altrimenti tutto ok e creo
 						MyServizioFile.creaFile(PATH);
 						CS = creaCartellaSanitaria();
 					}
