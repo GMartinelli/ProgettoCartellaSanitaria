@@ -23,7 +23,7 @@ public class CSMain{
 	private static final String[] OPZIONI_D={"Aggiungi", "Modifica", "Elimina"};
 	private static final String[] OPZIONI_OGG={"Esame", "Esame Effettuato", "Malattia"};
 	private static final String[] OPZIONI_OGG_2={"Esame", "Esame Effettuato", "Malattia", "Cartella Sanitaria"};
-	private static final String[] OPZIONI_VISUALIZZA = {"Visualizzazione completa dati anagrafici", "Visualizzazione completa di un esame tra quelli mostrati nella lista", "Visualizzazione completa di una malattia tra quelle mostrate nella lista"};
+	private static final String[] OPZIONI_VISUALIZZA = {"Visualizzazione completa dati anagrafici", "Visualizzazione completa di un esame tra quelli mostrati nella lista", "Visualizzazione completa di una malattia tra quelle mostrate nella lista", "Scelta di una tipologia di esame di cui visualizzare le statistiche"};
 	
 	private static final String[] P_OPZIONI = {"Modifica dati paziente","Visualizzazione sintetica dati paziente","Visualizzazione completa dati paziente"};
 	private static final String[] P_OPZIONI_MODIFICA = {"Modifica nome","Modifica cognome","Modifica indirizzo","Modifica telefono","Modifica email", "Modifica luogo di nascita", "Modifica data di nascita", "Modifica genere", "Modifica codice fiscale", "Modifica gruppo sanguigno", "Aggiungi esame effettuato", "Aggiungi malattia", "Rimuovi esame effettuato", "Rimuovi malattia"};
@@ -1169,22 +1169,8 @@ public class CSMain{
 						stampaMex(ERRORE_INS);
 					}
 					break;
-				case 0:
-					break;
-				default:
-					stampaMex(ERRORE_INS);
-			}
-		}while(scelta != 0);
-		
-		scelta = 0;
-		MyMenu menuRichiestoVisualizzaTipologia = new MyMenu("Si desidera scegliere una tipologia di esame di cui visualizzare le statistiche?", SI_NO);
-		
-		do{
-			scelta = menuRichiestoVisualizzaTipologia.scegli();
-			
-			//controllare i toString se visualizzano le richieste
-			switch(scelta){
-				case 1:
+				case 4:
+					//controllare i toString se visualizzano le richieste
 					String tipologia = null;
 					ArrayList<EsameEffettuato> simili = null;
 					do{
@@ -1212,14 +1198,13 @@ public class CSMain{
 					}
 					
 					stampaMex("Esito Medio: " + EPeriodicoMisurabileEffettuato.esameEsitoMedio(simili));
-					
 					break;
-				case 2:
+				case 0:
 					break;
 				default:
 					stampaMex(ERRORE_INS);
 			}
-		}while(scelta != 2);
+		}while(scelta != 0);
 	}
 	
 	/**
