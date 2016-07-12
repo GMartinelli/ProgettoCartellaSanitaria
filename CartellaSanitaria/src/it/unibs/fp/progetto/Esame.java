@@ -1,6 +1,7 @@
 package it.unibs.fp.progetto;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * Classe Esame che definisce un <u>esame</u>.
@@ -105,6 +106,5 @@ public class Esame  implements Serializable{
 	public String toString(){
 		return nome;
 	}
-	
 
 }

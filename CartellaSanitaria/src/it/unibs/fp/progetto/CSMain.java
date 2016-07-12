@@ -560,6 +560,111 @@ public class CSMain implements Serializable{
 		return null;
 	}
 	
+	/** 
+	 * Crea, mostra ed effettua le opzioni relative ad un menu' per la creazione di un esame prenotato (effettuato senza esito)
+	 * @param <strong>listaE</strong> la lista delle tipologie di esame create
+	 * @param <strong>listaM</strong> la lista delle malattie dell'utente
+	 * 
+	 * @return <strong>Esame Prenotato</strong> se non si incontrano eccezioni, <strong>null</strong> altrimenti
+	 * @author Martinelli Giuseppe
+	 */
+	public static EsameEffettuato creaEsamePrenotato(ListaEsame listaE, ArrayList<Malattia> listaM){
+		int scelta = 0;
+		boolean valido = false;
+		MyMenu menuEffettuato = new MyMenu("Tipologia di esame", E_OPZIONI_SCEGLI_TIPO);
+		scelta = menuEffettuato.scegli();
+		
+		switch(scelta){
+			case 1:	//Diagnostico
+				valido = false;
+				EsameDiagnostico eAss = null;
+				do{
+					String nomeEsameAss = MyInput.leggiStringaNonVuota(E_MEX_INS_MRELATIVO);
+					if(listaE.isEsistente(nomeEsameAss)){
+						eAss = (EsameDiagnostico) listaE.cercaEsame(nomeEsameAss);
+						valido = true;
+					}
+					else{
+						stampaMex(ERRORE_MALATTIA_NON_TROVATA);
+					}
+				}while(!valido);
+				valido = false;
+				Malattia mAss = null;
+				do{
+					String nomeMalattiaAss = MyInput.leggiStringaNonVuota(E_MEX_INS_MRELATIVO);
+					for(int i = 0; i < listaM.size() && valido == false; i++){
+						if(listaM.get(i).getNome().equals(nomeMalattiaAss)){
+							mAss = listaM.get(i);
+							valido = true;
+						}
+					}
+					if(!valido){
+						stampaMex(ERRORE_MALATTIA_NON_TROVATA);
+					}
+				}while(!valido);
+				
+				String luogo = MyInput.leggiStringaNonVuota(E_MEX_INS_LUOGO);
+				Date data = MyInput.leggiData(E_MEX_INS_DATA);
+				String ora = MyInput.leggiStringaNonVuota(E_MEX_INS_ORA);
+				String esito = MyInput.leggiStringaNonVuota(E_MEX_INS_ESITO);
+				
+				EDiagnosticoEffettuato ed1 = null;
+				try{
+					ed1 = new EDiagnosticoEffettuato(eAss, mAss, luogo, data, ora, esito);
+				}
+				catch(IllegalAccessException e){
+					e.printStackTrace();
+					return null;
+				}
+				return ed1;
+			case 2:	//Periodico Misurabile
+				valido = false;
+				EsamePeriodicoMisurabile eAssP=null;
+				do{
+					String nomeEsameAss = MyInput.leggiStringaNonVuota(E_MEX_INS_MRELATIVO);
+					if(listaE.isEsistente(nomeEsameAss)){
+						eAssP = (EsamePeriodicoMisurabile) listaE.cercaEsame(nomeEsameAss);
+						valido = true;
+					}
+					else{
+						stampaMex(ERRORE_MALATTIA_NON_TROVATA);
+					}
+				}while(!valido);
+				valido = false;
+				Malattia mAssP = null;
+				do{
+					String nomeMalattiaAss = MyInput.leggiStringaNonVuota(E_MEX_INS_MRELATIVO);
+					for(int i = 0; i<listaM.size() && valido == false; i++){
+						if(listaM.get(i).getNome().equals(nomeMalattiaAss)){
+							mAssP = listaM.get(i);
+							valido = true;
+						}
+					}
+					if(!valido){
+						stampaMex(ERRORE_MALATTIA_NON_TROVATA);
+					}
+				}while(!valido);
+				
+				String luogoP = MyInput.leggiStringaNonVuota(E_MEX_INS_LUOGO);
+				Date dataP = MyInput.leggiData(E_MEX_INS_DATA);
+				String oraP = MyInput.leggiStringaNonVuota(E_MEX_INS_ORA);
+				double esitoP = MyInput.leggiDoubleConMinimo(E_MEX_INS_ESITO,0);
+				
+				EPeriodicoMisurabileEffettuato ep1 = null;
+				try{
+					ep1 = new EPeriodicoMisurabileEffettuato(eAssP, mAssP, luogoP, dataP, oraP, esitoP);
+				}
+				catch(IllegalAccessException e){
+					e.printStackTrace();
+					return null;
+				}
+				return ep1;
+			default:
+				stampaMex(ERRORE_INS);
+		}
+		return null;
+	}
+	
 	/**
 	 * Metodo che crea un oggetto di tipo Malattia permettendo all'utente di inserire i dati desiderati
 	 * 
@@ -1123,6 +1228,120 @@ public class CSMain implements Serializable{
 	 * 3 esami diagnostici dello stesso tipo (3 effettuati)
 	 * 3 esami prenotati (senza esito)
 	*/
+	/**
+	 * Creazione guidata di 4 tipologie di esami, 6 esami misurabili effettuati dello stesso tipo, 3 esami diagnostici effettuuati dello stesso tipo, 3 esami prenotati nella cartella sanitaria
+	 * @param CS Cartella Sanitaria nella quale verrano prese le informazioni degli utenti
+	 * @param listaE lista tipologie esami
+	 * @param listaEE lista esami effettuati/prenotati
+	 * @param listaM lista malattia
+	 */
+	public static void creazioneGuidata(CartellaSanitaria CS, ListaEsame listaE){
+		/*CREAZIONE 4 TIPOLOGIE ESAME*/
+		ArrayList<EsameEffettuato> listaEE = CS.getEsamiEffettuati();
+		ArrayList<Malattia> listaM = CS.getElencoMalattia();
+		for(int i=0; i<4; i++){
+			Esame e1 = creaEsame();
+			listaE.aggiungiEsame(e1);
+		}
+		
+		/*CREAZIONE 6 ESAMI MISURABILI EFFETTUATI DELLO STESSO TIPO EFFETTUATI*/
+		//Prima scelgo il tipo di esame su cui creare gli effettuati
+		ArrayList<EsamePeriodicoMisurabile> listaEPM = EsamePeriodicoMisurabile.selezionaEsamePMisurabili(listaE);
+		int DIM = listaEPM.size();
+		String[] nomiEsami = new String [DIM];
+		for(int i=0; i<listaEPM.size(); i++){
+			nomiEsami[i] = listaEPM.get(i).getNome();
+		}
+		MyMenu menuEME = new MyMenu("Scegli un esame misurabile di cui creare 6 esami effettuati", nomiEsami);
+		int sceltaEME = menuEME.scegli(); 
+		if(sceltaEME!=0){//E' stato scelto un esame misurabile su cui creare i 6 effettuati
+			EsamePeriodicoMisurabile esameScelto = listaEPM.get(sceltaEME);
+			for(int j=0; j<6; j++){
+				boolean valido = false;
+				Malattia mAss = null;
+				do{
+					String nomeMalattiaAss = MyInput.leggiStringaNonVuota(E_MEX_INS_MRELATIVO);
+					for(int i = 0; i < listaM.size() && valido == false; i++){
+						if(listaM.get(i).getNome().equals(nomeMalattiaAss)){
+							mAss = listaM.get(i);
+							valido = true;
+						}
+					}
+					if(!valido){
+						stampaMex(ERRORE_MALATTIA_NON_TROVATA);
+					}
+				}while(!valido);
+				
+				String luogo = MyInput.leggiStringaNonVuota(E_MEX_INS_LUOGO);
+				Date data = MyInput.leggiData(E_MEX_INS_DATA);
+				String ora = MyInput.leggiStringaNonVuota(E_MEX_INS_ORA);
+				double esito = MyInput.leggiDoubleConMinimo(E_MEX_INS_ESITO,0);
+				
+				try{
+					EPeriodicoMisurabileEffettuato eInserito= new EPeriodicoMisurabileEffettuato(esameScelto, mAss, luogo, data, ora, esito);
+					//EPM CREATO, ADESSO LO AGGIUNGO ALLA LISTA DEGLI ESAMI
+					listaEE.add(eInserito);
+				}
+				catch(IllegalAccessException e){
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		
+		/*CREAZIONE 3 ESAMI DIAGNOSTICI EFFETTUATI DELLO STESSO TIPO EFFETTUATI*/
+		//Prima scelgo il tipo di esame su cui creare gli effettuati
+				ArrayList<EsameDiagnostico> listaD = EsameDiagnostico.selezionaEsameDiagnostico(listaE);
+				int DIMD = listaD.size();
+				String[] nomiEsamiD = new String [DIMD];
+				for(int i=0; i<listaD.size(); i++){
+					nomiEsami[i] = listaD.get(i).getNome();
+				}
+				MyMenu menuED = new MyMenu("Scegli un esame diagnostico di cui creare 3 esami effettuati", nomiEsamiD);
+				int sceltaED = menuED.scegli(); 
+				if(sceltaED!=0){//E' stato scelto un esame misurabile su cui creare i 6 effettuati
+					EsameDiagnostico esameSceltoD = listaD.get(sceltaED);
+					for(int j=0; j<6; j++){
+						boolean valido = false;
+						Malattia mAss = null;
+						do{
+							String nomeMalattiaAss = MyInput.leggiStringaNonVuota(E_MEX_INS_MRELATIVO);
+							for(int i = 0; i < listaM.size() && valido == false; i++){
+								if(listaM.get(i).getNome().equals(nomeMalattiaAss)){
+									mAss = listaM.get(i);
+									valido = true;
+								}
+							}
+							if(!valido){
+								stampaMex(ERRORE_MALATTIA_NON_TROVATA);
+							}
+						}while(!valido);
+						
+						String luogo = MyInput.leggiStringaNonVuota(E_MEX_INS_LUOGO);
+						Date data = MyInput.leggiData(E_MEX_INS_DATA);
+						String ora = MyInput.leggiStringaNonVuota(E_MEX_INS_ORA);
+						String esito = MyInput.leggiStringaNonVuota(E_MEX_INS_ESITO);
+						try{
+							EDiagnosticoEffettuato eInserito = new EDiagnosticoEffettuato(esameSceltoD, mAss, luogo, data, ora, esito);
+							listaEE.add(eInserito);
+						}
+						catch(IllegalAccessException e){
+							e.printStackTrace();
+						}
+					}
+				}
+				
+		/*3 ESAMI PRENOTATI (SENZA ESITO)*/
+		for(int i=0; i<3;i++){
+			EsameEffettuato eIns = creaEsamePrenotato(listaE, listaM);
+			listaEE.add(eIns);
+		}
+		
+		//SALVO TUTTO NELLA CARELLA SANITARIA
+		CS.setElencoMalattia(listaM);
+		CS.setEsamiEffettuati(listaEE);
+	}
+	
 	/* Cosa si dovrebbe fare nel main secondo la traccia (mia interpretazione V)
 	 * (partendo dalla visualizzazione dell'utente, no scelte, no operazioni di caricamento)
 	 * Visualizzo nome e cognome
