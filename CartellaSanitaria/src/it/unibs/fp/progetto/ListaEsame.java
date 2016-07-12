@@ -98,4 +98,12 @@ public class ListaEsame implements Serializable{
 	public void rimuoviEsame(Esame esame){
 		lista.remove(esame);
 	}
+	
+	public int dimensione(){
+		return lista.size();
+	}
+	
+	public Esame getEsame(int pos){
+		return lista.get(pos);
+	}
 }
