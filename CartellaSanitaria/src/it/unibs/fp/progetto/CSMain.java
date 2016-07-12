@@ -9,8 +9,6 @@ public class CSMain implements Serializable{
 	// Costanti
 	private static final String MEX_BENVENUTO = "Benvenuto nell'applicazione per la gestione della cartella sanitaria di un paziente";
 	private static final String MEX_USCITA = "Grazie per avere utilizzato la nostra applicazione! Arrivederci!";
-	
-	private static final String[] SI_NO = {"SI", "NO"};
 
 	//Intestazioni menu'
 	private static final String MODIFICA_INFO_P = "Modifica informazioni utente";
@@ -20,19 +18,18 @@ public class CSMain implements Serializable{
 	
 	// Opzioni menu'
 	private static final String[] OPZIONI_I={"Crea Cartella Sanitaria", "Visualizzazione e operazioni su oggetti"};
-	private static final String[] OPZIONI_D={"Aggiungi", "Modifica", "Elimina"};
-	private static final String[] OPZIONI_OGG={"Esame", "Esame Effettuato", "Malattia"};
-	private static final String[] OPZIONI_OGG_2={"Esame", "Esame Effettuato", "Malattia", "Cartella Sanitaria"};
+	private static final String[] OPZIONI_D={"Visualizzazione completa cartella / Modifica dati cartella", "Aggiungi tipologia", "Modifica tipologia", "Elimina tipologia"};
 	private static final String[] OPZIONI_RICHIESTE = {"Visualizzazione completa dati anagrafici", "Visualizzazione completa di un esame tra quelli mostrati nella lista", "Visualizzazione completa di una malattia tra quelle mostrate nella lista", "Scelta di una tipologia di esame di cui visualizzare le statistiche", "Modifica Cartella Sanitaria"};
 	
 	private static final String[] P_OPZIONI_MODIFICA = {"Modifica nome","Modifica cognome","Modifica indirizzo","Modifica telefono","Modifica email", "Modifica luogo di nascita", "Modifica data di nascita", "Modifica genere", "Modifica codice fiscale", "Modifica gruppo sanguigno", "Aggiungi esame effettuato", "Aggiungi malattia", "Modifica esame effettuato", "Modifica malattia","Rimuovi esame effettuato", "Rimuovi malattia"};
 	
 	// Esame
-	private static final String E_MEX_MOD="Inserisci il nome dell'esame che vuoi modificare: ";
+	private static final String E_MEX_RIMUOVI_TIP="Inserisci la tipologia dell'esame che vuoi eliminare: ";
+	private static final String E_MEX_RIC_RIMUOVI="Esame trovato. Vuoi eliminare l'esame %s? ";
 	private static final String[] E_OPZIONI_MODIFICA = {"Modifica nome", "Modifica raccomandazioni"};
 	private static final String[] E_OPZIONI_MODIFICA_EFFETTUATO = {"Modifica data", "Modifica esame", "Modifica luogo", "Modifica malattia", "Modifica ora", "Modifica esito", "Modifica avvisi (se l'esame e' di tipologia misurabile"};
 	private static final String[] E_OPZIONI_SCEGLI_TIPO = {"Diagnostico", "Periodico Misurabile"};
-	private static final String[] E_OPZIONI_CREA_CERCA = {"Crea un nuovo esame", "Cerca un esame esistente"};
+	private static final String[] E_OPZIONI_CREA_CERCA = {"Crea una nuova tipologia di esame", "Cerca una tipologia esistente"};
 	
 	private static final String[] M_OPZIONI_MODIFICA = {"Modifica nome", "Modifica data di inizio", "Modifica data di termine", "Modifica sintomi", "Modifica diagnosi", "Modifica terapia"};
 	
@@ -73,7 +70,7 @@ public class CSMain implements Serializable{
 	private static final String E_MEX_CERCA = "Inserire il nome dell'esame che si desidera cercare: ";
 	private static final String E_MEX_INS_TIPOLOGIA = "Inserisci il nome della tipologia di cui visualizzare le statistiche: ";
 	
-	private static final String E_SCELTA_CREA_CERCA = "Si desidera creare un esame o cercarne uno già esistente?";
+	private static final String E_SCELTA_CREA_CERCA = "Si desidera creare una tipologia di esame o cercarne una già esistente?";
 	private static final String E_SCELTA_TIPO = "Si desidera inserire un nuovo Esame Effettuato Diagnostico o Periodico Misurabile?";
 	private static final String E_SCELTA_VISUALIZZA = "Quale esame vuoi visualizzare?";
 	
@@ -85,6 +82,7 @@ public class CSMain implements Serializable{
 	private static final String M_MEX_INS_DIAGNOSI = "Inserisci la diagnosi effettuata dal medico: ";
 	private static final String M_MEX_INS_TERAPIA = "Inserisci la terapia consigliata: ";
 	private static final String M_MEX_CANCELLA = "Inserisci il nome della malattia che desideri eliminare: ";
+	private static final String M_MEX_RIC_RIMUOVI="Malattia trovata. Vuoi eleiminare la malattia %s? ";
 	private static final String M_MEX_PIU_MALATTIE = "Attenzione, sono presenti piu' malattie con questo nome: ";
 	private static final String M_MEX_CANCELLA_DATAI = "Inserire la data di inizio della malattia da cancellare: ";
 	
@@ -104,6 +102,7 @@ public class CSMain implements Serializable{
 	private static final String ERRORE_OPERAZIONE_ND_TIPO = "Attenzione, operazione non disponibile per il tipo di esame scelto."; //ND = NON DISPONIBILE
 	private static final String ERRORE_ESAME_NON_TROVATO = "Attenzione! Non e' presente alcun esame con quel nome!";
 	private static final String ERRORE_MALATTIA_NON_TROVATA = "Attenzione! Non e' presente alcuna malattia con quel nome!";
+	private static final String ERRORE_MANCA_ESAME_MALATTIA = "Attenzione! Non ci sono esami o malattie nella cartella sanitaria!";
 	
 	//metodi
 	/**
@@ -418,6 +417,109 @@ public class CSMain implements Serializable{
 						stampaMex(ERRORE_MALATTIA_NON_TROVATA);
 					}
 				}while(!valido);
+				valido = false;
+				Malattia mAssP = null;
+				do{
+					String nomeMalattiaAss = MyInput.leggiStringaNonVuota(E_MEX_INS_MRELATIVO);
+					for(int i = 0; i < listaM.size() && valido == false; i++){
+						if(listaM.get(i).getNome().equals(nomeMalattiaAss)){
+							mAssP = listaM.get(i);
+							valido = true;
+						}
+					}
+					if(!valido){
+						stampaMex(ERRORE_MALATTIA_NON_TROVATA);
+					}
+				}while(!valido);
+				String luogoP = MyInput.leggiStringaNonVuota(E_MEX_INS_LUOGO);
+				Date dataP = MyInput.leggiData(E_MEX_INS_DATA);
+				String oraP = MyInput.leggiStringaNonVuota(E_MEX_INS_ORA);
+				double esitoP = MyInput.leggiDouble(E_MEX_INS_ESITO);
+				
+				EPeriodicoMisurabileEffettuato ep1 = null;
+				if(esitoP > 0){ //Ritengo l'esito inserito valido solo se >0, se <=0 lo considero come non inserito
+					try{
+						ep1 = new EPeriodicoMisurabileEffettuato(eAssP, mAssP, luogoP, dataP, oraP, esitoP);
+					}
+					catch(IllegalAccessException e){
+						e.printStackTrace();
+						return null;
+					}
+				}
+				else{
+					try{
+						ep1 = new EPeriodicoMisurabileEffettuato(eAssP,mAssP,luogoP,dataP,oraP);
+					}
+					catch(IllegalAccessException e){
+						e.printStackTrace();
+						return null;
+					}
+				}
+				return ep1;
+			default:
+				stampaMex(ERRORE_INS);
+		}
+		return null;
+	}
+	
+	/**
+	 * Overload di creaEsameEffettuato che permette di essere chiamato da altri metodi o dall'utente preimpostando la scelta della
+	 * tipologia di esame da creare e passando la tipologia di esame
+	 * 
+	 * @param <strong>listaE</strong> la lista delle tipologie di esame create
+	 * @param <strong>listaM</strong> la lista delle malattie create
+	 * @param scelta <strong>1</strong> se si preimposta di creare un esame diagnostico <strong>2</strong> se periodico misurabile
+	 * 
+	 * @return l'<strong>esame</strong> creato se non si generano eccezioni, <strong>null</strong> altrimenti
+	 */
+	public static EsameEffettuato creaEsameEffettuato(Esame esameTipo, ArrayList<Malattia> listaM, int scelta){
+		boolean valido = false;
+		
+		switch(scelta){
+			case 1:	//Diagnostico
+				EsameDiagnostico eAss = (EsameDiagnostico) esameTipo;
+				valido = false;
+				Malattia mAss = null;
+				do{
+					String nomeMalattiaAss = MyInput.leggiStringaNonVuota(E_MEX_INS_MRELATIVO);
+					for(int i = 0; i < listaM.size() && valido == false; i++){
+						if(listaM.get(i).getNome().equals(nomeMalattiaAss)){
+							mAss = listaM.get(i);
+							valido = true;
+						}
+					}
+					if(!valido){
+						stampaMex(ERRORE_MALATTIA_NON_TROVATA);
+					}
+				}while(!valido);
+				
+				String luogo = MyInput.leggiStringaNonVuota(E_MEX_INS_LUOGO);
+				Date data = MyInput.leggiData(E_MEX_INS_DATA);
+				String ora = MyInput.leggiStringaNonVuota(E_MEX_INS_ORA);
+				String esito = MyInput.leggiStringa(E_MEX_INS_ESITO);
+				
+				EDiagnosticoEffettuato ed1 = null;
+				if(esito != null || BelleStringhe.togliSpazi(esito) != ""){
+					try{
+						ed1 = new EDiagnosticoEffettuato(eAss, mAss, luogo, data, ora, esito);
+					}
+					catch(IllegalAccessException e){
+						e.printStackTrace();
+						return null;
+					}
+				}
+				else{
+					try{
+						ed1 = new EDiagnosticoEffettuato(eAss,mAss,luogo,data,ora);
+					}
+					catch(IllegalAccessException e){
+						e.printStackTrace();
+						return null;
+					}
+				}
+				return ed1;
+			case 2:	//Periodico Misurabile
+				EsamePeriodicoMisurabile eAssP = (EsamePeriodicoMisurabile) esameTipo;
 				valido = false;
 				Malattia mAssP = null;
 				do{
@@ -1191,11 +1293,15 @@ public class CSMain implements Serializable{
 					scelta2 = scegliTipo.scegli();
 				
 					switch(scelta2){
-						case 1:
-							CS.getEsamiEffettuati().add(creaEsameEffettuato(listaE, CS.getElencoMalattia(), scelta2));
+						case 1: //Diagnostico
+							EsameDiagnostico esameD = (EsameDiagnostico) creaEsame(scelta2);
+							listaE.aggiungiEsame(esameD);
+							CS.getEsamiEffettuati().add(creaEsameEffettuato(esameD, CS.getElencoMalattia(), scelta2));
 							break;
-						case 2:
-							CS.getEsamiEffettuati().add(creaEsameEffettuato(listaE, CS.getElencoMalattia(), scelta2));
+						case 2: //Periodico Misurabile
+							EsamePeriodicoMisurabile esamePM = (EsamePeriodicoMisurabile) creaEsame(scelta2);
+							listaE.aggiungiEsame(esamePM);
+							CS.getEsamiEffettuati().add(creaEsameEffettuato(esamePM, CS.getElencoMalattia(), scelta2));
 							break;
 						default:
 							stampaMex(ERRORE_INS);
@@ -1383,7 +1489,12 @@ public class CSMain implements Serializable{
 			
 			switch(scelta){
 				case 1:
-					stampaMex(CS.toStringCompleto());
+					if(CS.getEsamiEffettuati() != null && CS.getElencoMalattia() != null){
+						stampaMex(CS.toStringCompleto());
+					}
+					else{
+						stampaMex(ERRORE_MANCA_ESAME_MALATTIA);
+					}
 					break;
 				case 2:
 					//scelgo e visualizzo esame
@@ -1446,11 +1557,29 @@ public class CSMain implements Serializable{
 		}while(scelta != 0);
 	}
 	
+	/**
+	 * Metodo che elimina un'esame all'interno di una listaEsame ricercato per nome. Se inesistente viene viusalizzato un messaggio di errore
+	 * 
+	 * @param listaE la lista in cui ricercare l'esame da eliminare
+	 * 
+	 * @author Manenti Gabriele
+	 */
+	public static void eliminaEsame(ListaEsame listaE){
+		String nomeEsame = MyInput.leggiStringaNonVuota(E_MEX_CANCELLA_NOME);
+		if(listaE.isEsistente(nomeEsame)){
+			boolean rimuovi = MyInput.yesOrNo(String.format(E_MEX_RIC_RIMUOVI, nomeEsame));
+			if(rimuovi)
+				listaE.rimuoviEsame(listaE.cercaEsame(nomeEsame));
+		}else
+			System.out.println(ERRORE_ESAME_NON_TROVATO);
+	}
+
 	/*Main*/
 	public static void main(String[] args) {
 		stampaMex(MEX_BENVENUTO);
 		
 		boolean visualizzato = false;
+		boolean caricato = false;
 		CartellaSanitaria CS = null;
 
 		ArrayList<Esame> lista = new ArrayList<Esame>();
@@ -1462,6 +1591,7 @@ public class CSMain implements Serializable{
 		//SE ESISTE IL FILE LO CARICO
 		if (file.exists()){
 			CS = (CartellaSanitaria) MyServizioFile.caricaSingoloOggetto(file);
+			caricato = true;
 		}
 		
 		/*INIZIO CON I MENU: PRIMO MENU PER SCEGLIERE SE CREARE CARTELLA O FARE RICHIESTE TRACCIA (VISUALIZZAZIONE ECC.) */
@@ -1483,6 +1613,7 @@ public class CSMain implements Serializable{
 						}
 						else{//CARICO I DATI PRECEDENTI
 							CS = (CartellaSanitaria) MyServizioFile.caricaSingoloOggetto(file);
+							caricato = true;
 						}
 					}
 					else{
@@ -1495,9 +1626,12 @@ public class CSMain implements Serializable{
 					int sceltaD = 0;
 					
 					do{
-						if(CS != null && !visualizzato){
+						if((caricato == true) && (visualizzato == false) && ((CS.getEsamiEffettuati() != null) || (CS.getElencoMalattia() != null))){
 							CS.toString();
 							visualizzato = true;
+						}
+						else if((caricato == true) && !visualizzato && ((CS.getEsamiEffettuati() == null) || (CS.getElencoMalattia() == null))){
+							stampaMex(ERRORE_MANCA_ESAME_MALATTIA);
 						}
 						
 						MyMenu menuD = new MyMenu("Operazioni possibili", OPZIONI_D);
