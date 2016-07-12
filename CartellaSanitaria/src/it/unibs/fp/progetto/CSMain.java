@@ -20,7 +20,7 @@ public class CSMain implements Serializable{
 	
 	// Opzioni menu'
 	private static final String[] OPZIONI_I={"Crea Cartella Sanitaria", "Visualizzazione e operazioni su oggetti"};
-	private static final String[] OPZIONI_D={"Aggiungi", "Modifica", "Elimina"};
+	private static final String[] OPZIONI_D={"Visualizzazione completa cartella / Modifica dati cartella", "Aggiungi tipologia", "Modifica tipologia", "Elimina tipologia"};
 	private static final String[] OPZIONI_OGG={"Esame", "Esame Effettuato", "Malattia"};
 	private static final String[] OPZIONI_OGG_2={"Esame", "Esame Effettuato", "Malattia", "Cartella Sanitaria"};
 	private static final String[] OPZIONI_RICHIESTE = {"Visualizzazione completa dati anagrafici", "Visualizzazione completa di un esame tra quelli mostrati nella lista", "Visualizzazione completa di una malattia tra quelle mostrate nella lista", "Scelta di una tipologia di esame di cui visualizzare le statistiche", "Modifica Cartella Sanitaria"};
