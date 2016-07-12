@@ -29,6 +29,9 @@ public class CSMain implements Serializable{
 	
 	// Esame
 	private static final String E_MEX_MOD="Inserisci il nome dell'esame che vuoi modificare: ";
+	private static final String E_MEX_RIMUOVI="Inserisci il nome dell'esame che vuoi eliminare: ";
+	private static final String E_MEX_RIMUOVI_TIP="Inserisci la tipologia dell'esame che vuoi eliminare: ";
+	private static final String E_MEX_RIC_RIMUOVI="Esame trovato. Vuoi eleiminare l'esame %s? ";
 	private static final String[] E_OPZIONI_MODIFICA = {"Modifica nome", "Modifica raccomandazioni"};
 	private static final String[] E_OPZIONI_MODIFICA_EFFETTUATO = {"Modifica data", "Modifica esame", "Modifica luogo", "Modifica malattia", "Modifica ora", "Modifica esito", "Modifica avvisi (se l'esame e' di tipologia misurabile"};
 	private static final String[] E_OPZIONI_SCEGLI_TIPO = {"Diagnostico", "Periodico Misurabile"};
@@ -73,7 +76,7 @@ public class CSMain implements Serializable{
 	private static final String E_MEX_CERCA = "Inserire il nome dell'esame che si desidera cercare: ";
 	private static final String E_MEX_INS_TIPOLOGIA = "Inserisci il nome della tipologia di cui visualizzare le statistiche: ";
 	
-	private static final String E_SCELTA_CREA_CERCA = "Si desidera creare un esame o cercarne uno gi√† esistente?";
+	private static final String E_SCELTA_CREA_CERCA = "Si desidera creare un esame o cercarne uno gia'† esistente?";
 	private static final String E_SCELTA_TIPO = "Si desidera inserire un nuovo Esame Effettuato Diagnostico o Periodico Misurabile?";
 	private static final String E_SCELTA_VISUALIZZA = "Quale esame vuoi visualizzare?";
 	
@@ -85,6 +88,7 @@ public class CSMain implements Serializable{
 	private static final String M_MEX_INS_DIAGNOSI = "Inserisci la diagnosi effettuata dal medico: ";
 	private static final String M_MEX_INS_TERAPIA = "Inserisci la terapia consigliata: ";
 	private static final String M_MEX_CANCELLA = "Inserisci il nome della malattia che desideri eliminare: ";
+	private static final String M_MEX_RIC_RIMUOVI="Malattia trovata. Vuoi eleiminare la malattia %s? ";
 	private static final String M_MEX_PIU_MALATTIE = "Attenzione, sono presenti piu' malattie con questo nome: ";
 	private static final String M_MEX_CANCELLA_DATAI = "Inserire la data di inizio della malattia da cancellare: ";
 	
@@ -1226,7 +1230,78 @@ public class CSMain implements Serializable{
 			}
 		}while(scelta != 0);
 	}
+	/**
+	 * Metodo che elimina un'esame all'interno di una listaEsame ricercato per nome. Se inesistente viene viusalizzato un messaggio di errore
+	 * 
+	 * @param listaE la lista in cui ricercare l'esame da eliminare
+	 * 
+	 * @author Manenti Gabriele
+	 */
+	public static void eliminaEsame(ListaEsame listaE){
+		
+		String nomeEsame = MyInput.leggiStringaNonVuota(E_MEX_CANCELLA_NOME);
+		if(listaE.isEsistente(nomeEsame)){
+			boolean rimuovi = MyInput.yesOrNo(String.format(E_MEX_RIC_RIMUOVI, nomeEsame));
+			if(rimuovi)
+				listaE.rimuoviEsame(listaE.cercaEsame(nomeEsame));
+		}else
+			System.out.println(ERRORE_ESAME_NON_TROVATO);
+	}
+	/**
+	 * Metodo che elimina un'esameEffettuato all'interno di un ArrayList di EsameEffettuato ricercandolo prima per tipologia e poi per nome.
+	 * Se inesistente viene viusalizzato un messaggio di errore.
+	 * 
+	 * @param listaEE l'ArrayList in cui ricercare la tipologia di esame da eliminare
+	 * 
+	 * @author Manenti Gabriele
+	 */
+	public static void eliminaEsameEffettuato(ArrayList<EsameEffettuato> listaEE){
+		
+		String nomeTip = MyInput.leggiStringaNonVuota(E_MEX_RIMUOVI_TIP);
+		ArrayList<EsameEffettuato> listaProva = new ArrayList<EsameEffettuato>();
+		listaProva = EsameEffettuato.selezionaTipologiaEsame(listaEE, nomeTip);
+		
+		String [] listaEff = null;
+		for(int i = 0; i < listaProva.size();i++){
+			listaEff[i] = listaProva.get(i).toString();
+		}
+		
+		MyMenu menuLista = new MyMenu("Seleziona l'esame da Eliminare: ",listaEff);
+		
+			int scelta = menuLista.scegli();
+			boolean trovato = false;
+			if(scelta != 0)
+				for(int i = 0; i < listaEE.size();i++){
+					if(listaEE.get(i).equals(listaProva.get(scelta)))
+						trovato = true;
+						listaEE.remove(i);
+				}
+			if(!trovato)
+				System.out.println(ERRORE_ESAME_NON_TROVATO);
+	}	
 	
+	/**
+	 * Metodo che elimina una Malttia all'interno di un ArrayList di Malattia ricercandola per nome.
+	 * Se inesistente viene viusalizzato un messaggio di errore.
+	 * 
+	 * @param listaM l'ArrayList in cui ricercare la Malattia da eliminare
+	 * 
+	 * @author Manenti Gabriele
+	 */
+	public static void eliminaMalattia(ArrayList<Malattia> listaM){
+		
+		String nomeMalattia = MyInput.leggiStringaNonVuota(M_MEX_CANCELLA);
+		boolean trovata = false;
+		for(int i = 0; i<listaM.size(); i++){
+			if(listaM.get(i).getNome().equals(nomeMalattia)){
+				trovata = true;
+				boolean rimuovi = MyInput.yesOrNo(String.format(M_MEX_RIC_RIMUOVI, nomeMalattia));
+				if(rimuovi)
+					listaM.remove(i);
+			}
+		}if(!trovata)
+			System.out.println(ERRORE_MALATTIA_INESISTENTE);
+	}	
 	/*Main*/
 	public static void main(String[] args) {
 		stampaMex(MEX_BENVENUTO);

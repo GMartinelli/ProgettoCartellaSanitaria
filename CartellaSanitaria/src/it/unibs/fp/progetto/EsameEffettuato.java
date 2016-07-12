@@ -43,7 +43,7 @@ public class EsameEffettuato implements Serializable{
 	/**
 	 * Imposta i riferimenti di esame e malattia
 	 * 
-	 * Se l'esame non è presente nella lista degli esami effettuabili per la malattia specificata lancia IllegalArgumentException
+	 * Se l'esame non e' presente nella lista degli esami effettuabili per la malattia specificata lancia IllegalArgumentException
 	 * 
 	 * @param esame la tipologia di esame
 	 * @param malattia la malattia per cui l'esame è richiesto
