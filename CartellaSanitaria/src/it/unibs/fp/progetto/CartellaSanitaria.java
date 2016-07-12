@@ -301,8 +301,9 @@ public class CartellaSanitaria implements Serializable{
 	
 	/**
 	 * Controlla se la stringa passata e' un codice fiscale valido oppure no
+	 * 
 	 * @param codiceF stringa che rappresenta il codice fiscale che si vuole controllare
-	 * @return <strong>true</strong> se la stringa inserita rappresenta un codice fiscale valido, <strong>false</strong> se la stringa inserita non &egrave; un codice fiscale valido
+	 * @return <strong>true</strong> se la stringa inserita rappresenta un codice fiscale valido, <strong>false</strong> se la stringa inserita non rappresenta un codice fiscale valido
 	 * 
 	 * @author Martinelli Giuseppe
 	 */
@@ -354,8 +355,9 @@ public class CartellaSanitaria implements Serializable{
 	
 	/**
 	 * Controlla se la stringa passata e' un numero di telefono valido
+	 * 
 	 * @param nTelefono stringa che rappresenta il numero di telefono da controllare
-	 * @return <strong>true</strong> se la stringa inserita rappresenta un numero di telefono valido, <strong>false</strong> se la stringa inserita non &egrave; un codice fiscale valido
+	 * @return <strong>true</strong> se la stringa inserita rappresenta un numero di telefono valido, <strong>false</strong> se la stringa inserita non rappresenta un numero di telefono valido
 	 * 
 	 * @author Martinelli Giuseppe
 	 */
@@ -374,8 +376,9 @@ public class CartellaSanitaria implements Serializable{
 	
 	/**
 	 * Controlla se la stringa inserita e' un indirzzo e-mail valido
+	 * 
 	 * @param eMail indirizzo e-mail da controllare
-	 * @return <strong>true</strong> se la stringa inserita rappresenta un indirzzo e-mail valido, <strong>false</strong> se la stringa inserita non &egrave; un codice fiscale valido
+	 * @return <strong>true</strong> se la stringa inserita rappresenta un indirzzo e-mail valido, <strong>false</strong> se la stringa inserita non rappresenta un'email valida
 	 * 
 	 * @author Martinelli Giuseppe
 	 */
@@ -394,8 +397,9 @@ public class CartellaSanitaria implements Serializable{
 	
 	/**
 	 * Controlla se la data di nascita inserita e' valida nel formato utilizzato
+	 * 
 	 * @param dNascita data di nascita da controllare
-	 * @return <strong>true</strong> se la stringa inserita rappresenta una data di nascita valida, <strong>false</strong> se la stringa inserita non &egrave; una data di nascita valido
+	 * @return <strong>true</strong> se la stringa inserita rappresenta una data di nascita valida, <strong>false</strong> se la stringa inserita non rappresenta una data di nascita valida
 	 * 
 	 * @author Martinelli Giuseppe
 	 */
@@ -423,8 +427,9 @@ public class CartellaSanitaria implements Serializable{
 	
 	/**
 	 * Controlla se la stringa passata rappresenta un valido gruppo sanguigno
+	 * 
 	 * @param gSanguigno gruppo sanguigno da controllare
-	 * @return <strong>true</strong> se la stringa inserita rappresenta un gruppo sanguigno valido, <strong>false</strong> se la stringa inserita non &egrave; un gruppo sanguigno valido
+	 * @return <strong>true</strong> se la stringa inserita rappresenta un gruppo sanguigno valido, <strong>false</strong> se la stringa inserita non rappresenta un gruppo sanguigno valido
 	 *  
 	 * @author Martinelli Giuseppe
 	 */
@@ -474,6 +479,7 @@ public class CartellaSanitaria implements Serializable{
 	
 	/**
 	 * Metodo che genera il codice sanitario 
+	 * 
 	 * @return codice sanitario generato in base ai dati dell'utente
 	 * 
 	 * @author Martinelli Giuseppe 
@@ -603,7 +609,8 @@ public class CartellaSanitaria implements Serializable{
 	}
 	
 	/**
-	 *Metodo che cerca la malattia passata come argomento tra quelle del paziente 
+	 * Metodo che cerca la malattia passata come argomento tra quelle del paziente 
+	 * 
 	 * @param nomeMalattia nome della malattia da cercare
 	 * @return <strong>malattia</strong> se esiste una malattia il cui nome equivale alla stringa inserita, <strong>null</strong> in caso contrario
 	 * 
@@ -635,6 +642,7 @@ public class CartellaSanitaria implements Serializable{
 	
 	/**
 	 * Metodo che restituisce una descrizione ridotta in forma di stringa della classe
+	 * 
 	 * @return descrizione della cartella sanitaria in forma ridotta (nome, cognome, esami effettuati e malattie)
 	 * 
 	 * @author Martinelli Giuseppe
