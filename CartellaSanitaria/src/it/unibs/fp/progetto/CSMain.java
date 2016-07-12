@@ -25,7 +25,7 @@ public class CSMain implements Serializable{
 	
 	// Esame
 	private static final String E_MEX_RIMUOVI_TIP="Inserisci la tipologia dell'esame che vuoi eliminare: ";
-	private static final String E_MEX_RIC_RIMUOVI="Esame trovato. Vuoi eleiminare l'esame %s? ";
+	private static final String E_MEX_RIC_RIMUOVI="Esame trovato. Vuoi eliminare l'esame %s? ";
 	private static final String[] E_OPZIONI_MODIFICA = {"Modifica nome", "Modifica raccomandazioni"};
 	private static final String[] E_OPZIONI_MODIFICA_EFFETTUATO = {"Modifica data", "Modifica esame", "Modifica luogo", "Modifica malattia", "Modifica ora", "Modifica esito", "Modifica avvisi (se l'esame e' di tipologia misurabile"};
 	private static final String[] E_OPZIONI_SCEGLI_TIPO = {"Diagnostico", "Periodico Misurabile"};
