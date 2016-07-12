@@ -9,8 +9,6 @@ public class CSMain implements Serializable{
 	// Costanti
 	private static final String MEX_BENVENUTO = "Benvenuto nell'applicazione per la gestione della cartella sanitaria di un paziente";
 	private static final String MEX_USCITA = "Grazie per avere utilizzato la nostra applicazione! Arrivederci!";
-	
-	private static final String[] SI_NO = {"SI", "NO"};
 
 	//Intestazioni menu'
 	private static final String MODIFICA_INFO_P = "Modifica informazioni utente";
@@ -20,15 +18,14 @@ public class CSMain implements Serializable{
 	
 	// Opzioni menu'
 	private static final String[] OPZIONI_I={"Crea Cartella Sanitaria", "Visualizzazione e operazioni su oggetti"};
-	private static final String[] OPZIONI_D={"Aggiungi", "Modifica", "Elimina"};
-	private static final String[] OPZIONI_OGG={"Esame", "Esame Effettuato", "Malattia"};
-	private static final String[] OPZIONI_OGG_2={"Esame", "Esame Effettuato", "Malattia", "Cartella Sanitaria"};
+	private static final String[] OPZIONI_D={"Visualizzazione completa cartella / Modifica dati cartella", "Aggiungi tipologia", "Modifica tipologia", "Elimina tipologia"};
 	private static final String[] OPZIONI_RICHIESTE = {"Visualizzazione completa dati anagrafici", "Visualizzazione completa di un esame tra quelli mostrati nella lista", "Visualizzazione completa di una malattia tra quelle mostrate nella lista", "Scelta di una tipologia di esame di cui visualizzare le statistiche", "Modifica Cartella Sanitaria"};
 	
 	private static final String[] P_OPZIONI_MODIFICA = {"Modifica nome","Modifica cognome","Modifica indirizzo","Modifica telefono","Modifica email", "Modifica luogo di nascita", "Modifica data di nascita", "Modifica genere", "Modifica codice fiscale", "Modifica gruppo sanguigno", "Aggiungi esame effettuato", "Aggiungi malattia", "Modifica esame effettuato", "Modifica malattia","Rimuovi esame effettuato", "Rimuovi malattia"};
 	
 	// Esame
-	private static final String E_MEX_MOD="Inserisci il nome dell'esame che vuoi modificare: ";
+	private static final String E_MEX_RIMUOVI_TIP="Inserisci la tipologia dell'esame che vuoi eliminare: ";
+	private static final String E_MEX_RIC_RIMUOVI="Esame trovato. Vuoi eleiminare l'esame %s? ";
 	private static final String[] E_OPZIONI_MODIFICA = {"Modifica nome", "Modifica raccomandazioni"};
 	private static final String[] E_OPZIONI_MODIFICA_EFFETTUATO = {"Modifica data", "Modifica esame", "Modifica luogo", "Modifica malattia", "Modifica ora", "Modifica esito", "Modifica avvisi (se l'esame e' di tipologia misurabile"};
 	private static final String[] E_OPZIONI_SCEGLI_TIPO = {"Diagnostico", "Periodico Misurabile"};
@@ -85,6 +82,7 @@ public class CSMain implements Serializable{
 	private static final String M_MEX_INS_DIAGNOSI = "Inserisci la diagnosi effettuata dal medico: ";
 	private static final String M_MEX_INS_TERAPIA = "Inserisci la terapia consigliata: ";
 	private static final String M_MEX_CANCELLA = "Inserisci il nome della malattia che desideri eliminare: ";
+	private static final String M_MEX_RIC_RIMUOVI="Malattia trovata. Vuoi eleiminare la malattia %s? ";
 	private static final String M_MEX_PIU_MALATTIE = "Attenzione, sono presenti piu' malattie con questo nome: ";
 	private static final String M_MEX_CANCELLA_DATAI = "Inserire la data di inizio della malattia da cancellare: ";
 	
@@ -1340,6 +1338,23 @@ public class CSMain implements Serializable{
 		}while(scelta != 0);
 	}
 	
+	/**
+	 * Metodo che elimina un'esame all'interno di una listaEsame ricercato per nome. Se inesistente viene viusalizzato un messaggio di errore
+	 * 
+	 * @param listaE la lista in cui ricercare l'esame da eliminare
+	 * 
+	 * @author Manenti Gabriele
+	 */
+	public static void eliminaEsame(ListaEsame listaE){
+		String nomeEsame = MyInput.leggiStringaNonVuota(E_MEX_CANCELLA_NOME);
+		if(listaE.isEsistente(nomeEsame)){
+			boolean rimuovi = MyInput.yesOrNo(String.format(E_MEX_RIC_RIMUOVI, nomeEsame));
+			if(rimuovi)
+				listaE.rimuoviEsame(listaE.cercaEsame(nomeEsame));
+		}else
+			System.out.println(ERRORE_ESAME_NON_TROVATO);
+	}
+
 	/*Main*/
 	public static void main(String[] args) {
 		stampaMex(MEX_BENVENUTO);
