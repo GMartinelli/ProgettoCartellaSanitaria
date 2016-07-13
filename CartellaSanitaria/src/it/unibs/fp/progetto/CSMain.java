@@ -1356,6 +1356,7 @@ public class CSMain implements Serializable{
 	*/
 	/**
 	 * Creazione guidata di 4 tipologie di esami, 2 malattie, 6 esami misurabili effettuati dello stesso tipo, 3 esami diagnostici effettuuati dello stesso tipo, 3 esami prenotati nella cartella sanitaria
+	 * 
 	 * @param <strong>CS</strong> Cartella Sanitaria nella quale verrano prese le informazioni degli utenti
 	 * @param <strong>listaE</strong> lista tipologie esami
 	 * @param <strong>listaEE</strong> lista esami effettuati/prenotati
