@@ -1620,7 +1620,7 @@ public class CSMain implements Serializable{
 						// FILE ESISTENTE, CHIEDO SE SI VUOLE SOVRASCRIVERE OPPURE CARICARE I DATI PRECEDENTI
 						boolean scelta = MyInput.yesOrNo(MEX_SOVRASCIVERE);
 						if(scelta){	//SOVRASCIVO
-							CS = creaCartellaSanitaria();
+							creazioneGuidata(CS, listaE);
 							//FINITO DI RICREARE IL FILE
 							MyServizioFile.salvaSingoloOggetto(fileCS, CS);
 						}
