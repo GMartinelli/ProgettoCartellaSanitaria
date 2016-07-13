@@ -16,7 +16,6 @@ import it.unibs.fp.mylib.MyTime;
  * terapia
  * 
  * @author Valtulini Claudio
- *
  */
 
 public class Malattia  implements Serializable{
@@ -32,49 +31,70 @@ public class Malattia  implements Serializable{
 	//getters
 	/**
 	 * Ritorna la Stringa rappresentante l'attributo nome
-	 * @return nome il nome della malattia
+	 * 
+	 * @return <strong>nome</strong> il nome della malattia
+	 * 
+	 * @author Valtulini Claudio
 	 */
 	public String getNome() {
 		return nome;
 	}
 	/**
 	 * Ritorna l'attributo dataInizio
-	 * @return dataInizio la data in cui la malattia e' iniziata
+	 * 
+	 * @return <strong>dataInizio</strong> la data in cui la malattia e' iniziata
+	 * 
+	 * @author Valtulini Claudio
 	 */
 	public Date getDataInizio() {
 		return dataInizio;
 	}
 	/**
 	 * Ritorna l'attributo dataTermine
-	 * @return dataTermine la data (eventuale) in cui la malattia e' finita
+	 * 
+	 * @return <strong>dataTermine</strong> la data (eventuale) in cui la malattia e' finita
+	 * 
+	 * @author Valtulini Claudio
 	 */
 	public Date getDataTermine() {
 		return dataTermine;
 	}
 	/**
 	 * Ritorna la Stringa rappresentante l'attributo sintomi
-	 * @return sintomi i sintomi della malattia
+	 * 
+	 * @return <strong>sintomi</strong> i sintomi della malattia
+	 * 
+	 * @author Valtulini Claudio
 	 */
 	public String getSintomi() {
 		return sintomi;
 	}
 	/**
 	 * Ritorna la Stringa rappresentante l'attributo diagnosi
-	 * @return diagnosi la diagnosi fatta per la malattia
+	 * 
+	 * @return <strong>diagnosi</strong> la diagnosi fatta per la malattia
+	 * 
+	 * @author Valtulini Claudio
 	 */
 	public String getDiagnosi() {
 		return diagnosi;
 	}
 	/**
 	 * Ritorna l'ArrayList di oggetti della classe Esame contenente l'elenco degli esami associati alla malattia
-	 * @return elencoEsamiAssociati gli esami per cui la malattia può essere richiesta
+	 * 
+	 * @return <strong>elencoEsamiAssociati</strong> gli esami per cui la malattia può essere richiesta
+	 * 
+	 * @author Valtulini Claudio
 	 */
 	public ArrayList<Esame> getElencoEsamiAssociati() {
 		return elencoEsamiAssociati;
 	}
 	/**
 	 * Ritorna la Stringa contenente l'attributo terapia
-	 * @return terapia la terapia suggerita per guarire dalla malattia
+	 * 
+	 * @return <strong>terapia</strong> la terapia suggerita per guarire dalla malattia
+	 * 
+	 * @author Valtulini Claudio
 	 */
 	public String getTerapia() {
 		return terapia;
@@ -83,49 +103,70 @@ public class Malattia  implements Serializable{
 	//setters
 	/**
 	 * Permette di cambiare il nome della malattia
-	 * @param nome il nuovo nome da impostare
+	 * 
+	 * @param <strong>nome</strong> il nuovo nome da impostare
+	 * 
+	 * @author Valtulini Claudio
 	 */
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 	/**
 	 * Permette di cambiare la data di inizio della malattia
-	 * @param dataInizio la nuova data da impostare
+	 * 
+	 * @param <strong>dataInizio</strong> la nuova data da impostare
+	 * 
+	 * @author Valtulini Claudio
 	 */
 	public void setDataInizio(Date dataInizio) {
 		this.dataInizio = dataInizio;
 	}
 	/**
 	 * Permette di cambiare la data di termine della malattia
-	 * @param dataTermine la nuova data da impostare
+	 * 
+	 * @param <strong>dataTermine</strong> la nuova data da impostare
+	 * 
+	 * @author Valtulini Claudio
 	 */
 	public void setDataTermine(Date dataTermine) {
 		this.dataTermine = dataTermine;
 	}
 	/**
 	 * Permette di cambiare i sintomi della malattia
-	 * @param sintomi la stringa contenente i nuovi sintomi
+	 * 
+	 * @param <strong>sintomi</strong> la stringa contenente i nuovi sintomi
+	 * 
+	 * @author Valtulini Claudio
 	 */
 	public void setSintomi(String sintomi) {
 		this.sintomi = sintomi;
 	}
 	/**
 	 * Permette di cambiare la diagnosi della malattia
-	 * @param diagnosi la nuova diagnosi
+	 * 
+	 * @param <strong>diagnosi</strong> la nuova diagnosi
+	 * 
+	 * @author Valtulini Claudio
 	 */
 	public void setDiagnosi(String diagnosi) {
 		this.diagnosi = diagnosi;
 	}
 	/**
 	 * Permette di cambiare l'elenco di esami associati
-	 * @param elencoEsamiAssociati il nuovo elenco
+	 * 
+	 * @param <strong>elencoEsamiAssociati</strong> il nuovo elenco
+	 * 
+	 * @author Valtulini Claudio
 	 */
 	public void setElencoEsamiAssociati(ArrayList<Esame> elencoEsamiAssociati) {
 		this.elencoEsamiAssociati = elencoEsamiAssociati;
 	}
 	/**
 	 * Permette di cambiare la terapia consigliata
-	 * @param terapia la nuova terapia
+	 * 
+	 * @param <strong>terapia</strong> la nuova terapia
+	 * 
+	 * @author Valtulini Claudio
 	 */
 	public void setTerapia(String terapia) {
 		this.terapia = terapia;
@@ -133,13 +174,30 @@ public class Malattia  implements Serializable{
 	
 	//costruttori
 	/**
-	 * Permette di creare una nuova malattia
+	 * Costruttore vuoto che imposta tutti i riferimenti a null
 	 * 
-	 * @param nome il nome della malattia
-	 * @param dataInizio la data di inizio
-	 * @param sintomi i sintomi
-	 * @param diagnosi la diagnosi
-	 * @param terapia la terapia
+	 * @author Valtulini Claudio
+	 */
+	public Malattia(){
+		this.nome = null;
+		this.dataInizio = null;
+		this.dataTermine = null;
+		this.sintomi = null;
+		this.diagnosi = null;
+		this.terapia = null;
+		this.elencoEsamiAssociati = null;
+	}
+	
+	/**
+	 * Permette di creare una nuova malattia impostando i valori di nome, dataInizio, sintomi, diagnosi, terapia
+	 * 
+	 * @param <strong>nome</strong> il nome della malattia
+	 * @param <strong>dataInizio</strong> la data di inizio
+	 * @param <strong>sintomi</strong> i sintomi
+	 * @param <strong>diagnosi</strong> la diagnosi
+	 * @param <strong>terapia</strong> la terapia
+	 * 
+	 * @author Valtulini Claudio
 	 */
 	public Malattia(String nome, Date dataInizio, String sintomi, String diagnosi, String terapia){
 		this.nome = nome;
@@ -151,14 +209,16 @@ public class Malattia  implements Serializable{
 	}
 	
 	/**
-	 * Permette di creare una nuova malattia con elenco degli esami associati
+	 * Permette di creare una nuova malattia impostando i valori di nome, dataInizio, sintomi, diagnosi, terapia e l'elenco degli esami associati
 	 * 
-	 * @param nome il nome della malattia
-	 * @param dataInizio la data di inizio
-	 * @param sintomi i sintomi 
-	 * @param diagnosi la diagnosi
-	 * @param elencoEsamiAssociati l'elenco di esami che è possibile richiedere per questa malattia
-	 * @param terapia la terapia
+	 * @param <strong>nome</strong> il nome della malattia
+	 * @param <strong>dataInizio</strong> la data di inizio
+	 * @param <strong>sintomi</strong> i sintomi
+	 * @param <strong>diagnosi</strong> la diagnosi
+	 * @param <strong>elencoEsamiAssociati</strong> l'elenco di esami che è possibile richiedere per questa malattia
+	 * @param <strong>terapia</strong> la terapia
+	 * 
+	 * @author Valtulini Claudio
 	 */
 	public Malattia(String nome, Date dataInizio, String sintomi, String diagnosi, ArrayList<Esame> elencoEsamiAssociati, String terapia){
 		this.nome = nome;
@@ -172,14 +232,17 @@ public class Malattia  implements Serializable{
 	}
 	
 	/**
-	 * Permette di creare una nuova malattia con elenco degli esami associati e data di termine
-	 * @param nome il nome della malattia
-	 * @param dataInizio la data di inizio
-	 * @param dataTermine la data di termine
-	 * @param sintomi i sintomi 
-	 * @param diagnosi la diagnosi
-	 * @param elencoEsamiAssociati l'elenco di esami che è possibile richiedere per questa malattia
-	 * @param terapia la terapia
+	 * Permette di creare una nuova malattia impostando i valori di nome, dataInizio, dataTermine, sintomi, diagnosi, terapia e l'elenco degli esami associati
+	 * 
+	 * @param <strong>nome</strong> il nome della malattia
+	 * @param <strong>dataInizio</strong> la data di inizio
+	 * @param <strong>dataTermine</strong> la data di termine
+	 * @param <strong>sintomi</strong> i sintomi
+	 * @param <strong>diagnosi</strong> la diagnosi
+	 * @param <strong>elencoEsamiAssociati</strong> l'elenco di esami che è possibile richiedere per questa malattia
+	 * @param <strong>terapia</strong> la terapia
+	 * 
+	 * @author Valtulini Claudio
 	 */
 	public Malattia(String nome, Date dataInizio, Date dataTermine, String sintomi, String diagnosi, ArrayList<Esame> elencoEsamiAssociati, String terapia){
 		this.nome = nome;
@@ -196,8 +259,11 @@ public class Malattia  implements Serializable{
 	/**
 	 * Metodo che, dato il nome di un esame, permette di sapere se questo è presente nella lista di esami associati ad una malattia
 	 * 
-	 * @param nomeEsame il nome dell'esame da cercare
-	 * @return true se l'esame è presente nell'elenco di esami associati, false altrimenti
+	 * @param <strong>nomeEsame</strong> il nome dell'esame da cercare
+	 *
+	 * @return </strong>true se l'esame è presente nell'elenco di esami associati, <strong>false</strong> altrimenti
+	 *
+	 * @author Valtulini Claudio
 	 */
 	public boolean isAssociato(String nomeEsame){
 		for(Esame elemento: elencoEsamiAssociati){
@@ -209,17 +275,26 @@ public class Malattia  implements Serializable{
 	
 	/**
 	 * Ritorna una rappresentazione della malattia data da:
-	 * Nome, dataInizio, (se presente) dataTermine
 	 * 
-	 * @return descrizione la descrizione sintetica della malattia
+	 * @return <strong>descrizione</strong> la descrizione sintetica della malattia (Nome, dataInizio, (se presente) dataTermine)
+	 * 
+	 * @author Valtulini Claudio
 	 */
-	public String toString(){ /*Modificato Metodo to String nell'acquisizione data(aggiunto MyTime.toStringData)*/
+	public String toString(){
 		String descrizione = nome + "%n   Iniziata: " + MyTime.toStringData(dataInizio);
 		if(dataTermine != null) descrizione += ("%n   Terminata:  " + MyTime.toStringData(dataTermine)); 
 		
 		return descrizione;
 	}
 	
+	/**
+	 * Ritorna una rappresentazione completa della malattia
+	 * 
+	 * @return <strong>stringaDescrittivaCompleta</strong> formata da toString di Malattia, (se presenti) sintomi, diagnosi, elenco degli esami associati
+	 * terapia
+	 *
+	 * @author Valtulini Claudio
+	 */
 	public String toStringCompleto(){
 		String stringaDescrittivaCompleta =
 				this.toString() + "%n";
@@ -229,7 +304,7 @@ public class Malattia  implements Serializable{
 			if(this.getDiagnosi() != null){ stringaDescrittivaCompleta +=
 				" Diagnosi: "+ this.getDiagnosi();
 			}
-			if(this.getElencoEsamiAssociati().size() > 0){ stringaDescrittivaCompleta +=
+			if(this.getElencoEsamiAssociati().size() > 0 && this.getElencoEsamiAssociati() != null){ stringaDescrittivaCompleta +=
 				"  Elenco delle tipologie di esame associate: " + "%n";
 				for(Esame elemento: this.getElencoEsamiAssociati()){ stringaDescrittivaCompleta +=
 				"   " + elemento.toString();

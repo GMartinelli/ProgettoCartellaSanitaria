@@ -16,7 +16,8 @@ public class EsameEffettuato implements Serializable{
 	//costanti
 	public static final String GIA_EFFETTUATO = "Impossibile modificare il dato, l'esame è già stato effettuato"; 
 	public static final String ESITO_MANCANTE = "Non è ancora stato impostato un esito";
-	private static final String ES_MAL_NON_COERENTE = "L'esame richiesto non è coerente con la malattia indicata";
+	private static final String E_MAL_NON_COERENTE = "L'esame richiesto non è coerente con la malattia indicata";
+	private static final String M_ES_NON_COERENTE = "La malattia richiesta non è coerente con l'esame indicato";
 	private static final String MALATTIA_NON_IMPOSTATA = "Il valore di malattia non e' stato impostato";
 	//private static final String ERRORE_TIPO = "Attenzione! Il tipo di esame passato non e' corretto!";
 	
@@ -55,7 +56,7 @@ public class EsameEffettuato implements Serializable{
 		this.esame = esame;
 		this.malattia = malattia;
 		if(!isCoerenteMalattia()){
-			throw new IllegalArgumentException(ES_MAL_NON_COERENTE);
+			throw new IllegalArgumentException(E_MAL_NON_COERENTE);
 		}
 		data = null;
 		ora = null;
@@ -79,7 +80,7 @@ public class EsameEffettuato implements Serializable{
 		this.esame = esame;
 		this.malattia = malattia;
 		if(!isCoerenteMalattia()){
-			throw new IllegalArgumentException(ES_MAL_NON_COERENTE);
+			throw new IllegalArgumentException(E_MAL_NON_COERENTE);
 		}
 		this.data = data;
 		this.ora = ora;
@@ -152,13 +153,13 @@ public class EsameEffettuato implements Serializable{
 		try{
 			Esame oldEsame = this.esame;
 			this.esame = esame;
-			if(!isCoerenteMalattia()){
+			if(!isCoerenteMalattia()){ //se non coerente reimposto il valore precedente
 				this.esame = oldEsame;
-				throw new IllegalArgumentException(ES_MAL_NON_COERENTE);
+				throw new IllegalArgumentException(E_MAL_NON_COERENTE);
 			}
 		}
 		catch(IllegalAccessException e){
-			//ignoro perchè ho gia' reimpostato l'esame precedente
+			//ignoro perchè la malattia non e' impostata quindi non ci sono problemi di compatibilità
 		}
 	}
 	/**
@@ -196,19 +197,34 @@ public class EsameEffettuato implements Serializable{
 	 * 
 	 * @param <strong>malattia</strong> la malattia che si vuole impostare
 	 * 
+	 * @throws <strong>IllegalArgumentException</strong> se la malattia che si vuole inserire e la tipologia indicata non sono coerenti
+	 * 
 	 * @author Valtulini Claudio
 	 */
 	public void setMalattia(Malattia malattia) {
-		this.malattia = malattia;
+		try{
+			Malattia oldMalattia = this.malattia;
+			this.malattia = malattia;
+			if(!isCoerenteMalattia()){ //se non coerente reimposto il valore precedente
+				this.malattia = oldMalattia;
+				throw new IllegalArgumentException(E_MAL_NON_COERENTE);
+			}
+		}
+		catch(IllegalAccessException e){
+			/* Ignoro perche' non puo' essere lanciata dato che ho impostato la malattia prima che l'eccezione (che viene lanciata se la malattia non e' impostata)
+			 * venga lanciata */
+		}
 	}
 	
 	//metodi
 	/**
 	 * Controlla se l'esame richiesto è presente nella lista di quelli associati alla malattia
 	 *
-	 * @return true se l'esame è presente nella lista, false se l'esame non è nella lista
+	 * @return <strong>true</strong> se l'esame è presente nella lista, <strong>false</strong> se l'esame non è nella lista
 	 * 
-	 * @throws IllegalAccessException se la malattia non e' stata impostata
+	 * @throws <strong>IllegalAccessException</strong> se la malattia non e' stata impostata
+	 * 
+	 * @author Valtulini Claudio
 	 */
 	public boolean isCoerenteMalattia() throws IllegalAccessException{
 		if(malattia != null){
@@ -223,9 +239,10 @@ public class EsameEffettuato implements Serializable{
 	/**
 	 * Passata una lista di EsamiEffettuati ne trova quelli il cui nome dell'esame corrispondente equivale a quello della stringa passata
 	 * 
-	 * @param listaEE la lista di EsamiEffettuati
-	 * @param nomeTipologia una stringa contenente il nome della tipologia di esami che si vuole isolare
-	 * @return listaStessaTipologia un ArrayList di esami effettuati tutti della stessa tipologia
+	 * @param <strong>listaEE</strong> la lista di EsamiEffettuati
+	 * @param <strong>nomeTipologia</strong> una stringa contenente il nome della tipologia di esami che si vuole isolare
+	 * 
+	 * @return <strong>listaStessaTipologia</strong> un ArrayList di esami effettuati tutti della stessa tipologia
 	 * 
 	 * @author Valtulini Claudio
 	 */
@@ -242,16 +259,25 @@ public class EsameEffettuato implements Serializable{
 	}
 	
 	/**
-	 * Ritorna una stringa rappresentativa contenente il nome della tipologia di esame, data, ora e luogo
+	 * Ritorna una stringa rappresentativa dell'esame effettuato
+	 * 
+	 * @return <strong>descrizione</strong> stringa contenente il nome della tipologia di esame, la data, l'ora e il luogo
+	 * 
+	 * @author Valtulini Claudio
 	 */
 	public String toString(){/*Modificato Metodo to String nell'acquisizione data(aggiunto MyTime.toStringData)*/
-		return esame.getNome() + "%n   Data: " + MyTime.toStringData(data);
+		String descrizione = esame.getNome() + "%n   Data: " + MyTime.toStringData(data);
+		return descrizione;
 	}
 	
 	
 	/**
 	 * Ritorna una stringa contenente le informazioni complete relative all'esame effettuato
-	 * @return <strong>stringaDescrittivaCompleta</strong> la stringa contenente le informazioni
+	 * 
+	 * @return <strong>stringaDescrittivaCompleta</strong> la stringa contenente le informazioni (la tipologia dell'esame, le raccomandazioni
+	 * (se presenti) la data, l'ora, il luogo, la malattia
+	 *
+	 * @author Valtulini Claudio
 	 */
 	public String toStringCompleto(){/*Modificato Metodo to String nell'acquisizione data(aggiunto MyTime.toStringData)*/
 		String stringaDescrittivaCompleta =
