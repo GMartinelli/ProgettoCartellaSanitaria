@@ -663,6 +663,24 @@ public class CartellaSanitaria implements Serializable{
 	}
 	
 	/**
+	 * Metodo che restituisce una descrizione anagrafica in forma di stringa della classe
+	 * 
+	 * @return descrizione della cartella sanitaria in forma anagrafica (nome, cognome, indirizzo, telefono, email, data e luogo di nascita, genere, codice fiscale, gruppo sangugnio, codice sanitario)
+	 * 
+	 * @author Martinelli Giuseppe
+	 */
+	public String toStringAnagrafica(){
+		int c = 0;
+		String descrizione="Nome: " + nome + "\nCognome: " + cognome + "\nIndirizzo: " + indirizzo + "\nTelefono: " + telefono + "\n E-Mail: " + email + "\nData di nascita: " + dataNascita + "\nLuogo di nascita: " + luogoNascita + "\nGenere: ";
+		if(genere)
+			descrizione+="Uomo";
+		else
+			descrizione+="Donna";
+		descrizione+="\nCodice fiscale: "+ codiceFiscale + "\nGruppo Sanguigno: " + gruppoSanguigno + "\nCodiceSanitario: " + codiceSanitario;
+		return descrizione;
+	}
+	
+	/**
 	 * Metodo che restituisce una descrizione completa in forma di stringa della classe
 	 * @return descrizione della cartella sanitaria in forma completa (esami effettuati e malattie sono riportati in forma ridotta)
 	 * 
