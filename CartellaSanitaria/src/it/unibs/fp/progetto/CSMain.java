@@ -53,10 +53,10 @@ public class CSMain implements Serializable{
 	private static final String E_MEX_INS_NOME = "Inserisci il nome dell'esame: ";
 	private static final String E_MEX_INS_RACCOMANDAZIONI = "Inserisci eventuali raccomandazioni: ";
 	private static final String E_MEX_INS_AREAI = "Inserisci l'area interessata: ";
-	private static final String E_MEX_INS_DATA = "Inserisci la data in cui � stato effettuato l'esame nel formato gg/mm/aaaa: ";
-	private static final String E_MEX_INS_LUOGO = "Inserisci il nome del luogo in cui � stato effettuato l'esame: ";
+	private static final String E_MEX_INS_DATA = "Inserisci la data in cui e' stato effettuato l'esame nel formato gg/mm/aaaa: ";
+	private static final String E_MEX_INS_LUOGO = "Inserisci il nome del luogo in cui e' stato effettuato l'esame: ";
 	private static final String E_MEX_INS_MALATTIAN = "Inserisci il nome della malattia: ";
-	private static final String E_MEX_INS_ORA = "Inserisci l'ora in cui si � effettuato l'esame (hh:mm): ";
+	private static final String E_MEX_INS_ORA = "Inserisci l'ora in cui si e' effettuato l'esame (hh:mm): ";
 	private static final String E_MEX_INS_ESITO_PERIODICO = "Inserisci l'esito dell'esame (>= 0): ";
 	private static final String E_MEX_INS_ESITO_DIAGNOSTICO = "Inserisci l'esito dell'esame: ";
 	private static final String E_MEX_INS_VALORE_MIN = "Inserisci il valore minimo: ";
@@ -96,7 +96,7 @@ public class CSMain implements Serializable{
 	private static final String M_SCELTA_VISUALIZZA = "Quale malattia vuoi visualizzare?";
 	
 	// Avvisi
-	private static final String NON_MODIFICA = "Attenzione, non verr� chiesto di inserire alcun dato.";
+	private static final String NON_MODIFICA = "Attenzione, non verra' chiesto di inserire alcun dato.";
 	private static final String AVVISI_IMPOSTATI_CORRETTAMENTE = "Gli avvisi sono stati impostati correttamente. Operazione finita.";
 	
 	// Errori
@@ -286,8 +286,10 @@ public class CSMain implements Serializable{
 						ed1 = new EDiagnosticoEffettuato(eAss, mAss, luogo, data, ora, esito);
 					}
 					catch(IllegalAccessException e){
-						e.printStackTrace();
-						return null;
+						stampaMex(e.getMessage());
+					}
+					catch(IllegalArgumentException e){
+						stampaMex(e.getMessage());
 					}
 				}
 				else{
@@ -295,8 +297,10 @@ public class CSMain implements Serializable{
 						ed1 = new EDiagnosticoEffettuato(eAss, mAss, luogo, data, ora);
 					}
 					catch(IllegalAccessException e){
-						e.printStackTrace();
-						return null;
+						stampaMex(e.getMessage());
+					}
+					catch(IllegalArgumentException e){
+						stampaMex(e.getMessage());
 					}
 				}
 				return ed1;
@@ -339,8 +343,10 @@ public class CSMain implements Serializable{
 						ep1 = new EPeriodicoMisurabileEffettuato(eAssP, mAssP, luogoP, dataP, oraP, esitoP);
 					}
 					catch(IllegalAccessException e){
-						e.printStackTrace();
-						return null;
+						stampaMex(e.getMessage());
+					}
+					catch(IllegalArgumentException e){
+						stampaMex(e.getMessage());
 					}
 				}
 				else{
@@ -348,8 +354,10 @@ public class CSMain implements Serializable{
 						ep1 = new EPeriodicoMisurabileEffettuato(eAssP, mAssP, luogoP, dataP, oraP);
 					}
 					catch(IllegalAccessException e){
-						e.printStackTrace();
-						return null;
+						stampaMex(e.getMessage());
+					}
+					catch(IllegalArgumentException e){
+						stampaMex(e.getMessage());
 					}
 				}
 				return ep1;
@@ -412,8 +420,10 @@ public class CSMain implements Serializable{
 						ed1 = new EDiagnosticoEffettuato(eAss, mAss, luogo, data, ora, esito);
 					}
 					catch(IllegalAccessException e){
-						e.printStackTrace();
-						return null;
+						stampaMex(e.getMessage());
+					}
+					catch(IllegalArgumentException e){
+						stampaMex(e.getMessage());
 					}
 				}
 				else{
@@ -421,8 +431,10 @@ public class CSMain implements Serializable{
 						ed1 = new EDiagnosticoEffettuato(eAss,mAss,luogo,data,ora);
 					}
 					catch(IllegalAccessException e){
-						e.printStackTrace();
-						return null;
+						stampaMex(e.getMessage());
+					}
+					catch(IllegalArgumentException e){
+						stampaMex(e.getMessage());
 					}
 				}
 				return ed1;
@@ -464,8 +476,10 @@ public class CSMain implements Serializable{
 						ep1 = new EPeriodicoMisurabileEffettuato(eAssP, mAssP, luogoP, dataP, oraP, esitoP);
 					}
 					catch(IllegalAccessException e){
-						e.printStackTrace();
-						return null;
+						stampaMex(e.getMessage());
+					}
+					catch(IllegalArgumentException e){
+						stampaMex(e.getMessage());
 					}
 				}
 				else{
@@ -473,8 +487,10 @@ public class CSMain implements Serializable{
 						ep1 = new EPeriodicoMisurabileEffettuato(eAssP,mAssP,luogoP,dataP,oraP);
 					}
 					catch(IllegalAccessException e){
-						e.printStackTrace();
-						return null;
+						stampaMex(e.getMessage());
+					}
+					catch(IllegalArgumentException e){
+						stampaMex(e.getMessage());
 					}
 				}
 				return ep1;
@@ -526,8 +542,10 @@ public class CSMain implements Serializable{
 						ed1 = new EDiagnosticoEffettuato(eAss, mAss, luogo, data, ora, esito);
 					}
 					catch(IllegalAccessException e){
-						e.printStackTrace();
-						return null;
+						stampaMex(e.getMessage());
+					}
+					catch(IllegalArgumentException e){
+						stampaMex(e.getMessage());
 					}
 				}
 				else{
@@ -535,8 +553,10 @@ public class CSMain implements Serializable{
 						ed1 = new EDiagnosticoEffettuato(eAss,mAss,luogo,data,ora);
 					}
 					catch(IllegalAccessException e){
-						e.printStackTrace();
-						return null;
+						stampaMex(e.getMessage());
+					}
+					catch(IllegalArgumentException e){
+						stampaMex(e.getMessage());
 					}
 				}
 				return ed1;
@@ -567,8 +587,10 @@ public class CSMain implements Serializable{
 						ep1 = new EPeriodicoMisurabileEffettuato(eAssP, mAssP, luogoP, dataP, oraP, esitoP);
 					}
 					catch(IllegalAccessException e){
-						e.printStackTrace();
-						return null;
+						stampaMex(e.getMessage());
+					}
+					catch(IllegalArgumentException e){
+						stampaMex(e.getMessage());
 					}
 				}
 				else{
@@ -576,8 +598,10 @@ public class CSMain implements Serializable{
 						ep1 = new EPeriodicoMisurabileEffettuato(eAssP,mAssP,luogoP,dataP,oraP);
 					}
 					catch(IllegalAccessException e){
-						e.printStackTrace();
-						return null;
+						stampaMex(e.getMessage());
+					}
+					catch(IllegalArgumentException e){
+						stampaMex(e.getMessage());
 					}
 				}
 				return ep1;
@@ -624,8 +648,10 @@ public class CSMain implements Serializable{
 						ed1 = new EDiagnosticoEffettuato((EsameDiagnostico) esame, mAss, luogo, data, ora, esito);
 					}
 					catch(IllegalAccessException e){
-						e.printStackTrace();
-						return null;
+						stampaMex(e.getMessage());
+					}
+					catch(IllegalArgumentException e){
+						stampaMex(e.getMessage());
 					}
 				}
 				else{
@@ -633,8 +659,10 @@ public class CSMain implements Serializable{
 						ed1 = new EDiagnosticoEffettuato((EsameDiagnostico) esame, mAss, luogo, data, ora);
 					}
 					catch(IllegalAccessException e){
-						e.printStackTrace();
-						return null;
+						stampaMex(e.getMessage());
+					}
+					catch(IllegalArgumentException e){
+						stampaMex(e.getMessage());
 					}
 				}
 				return ed1;
@@ -666,8 +694,10 @@ public class CSMain implements Serializable{
 						ep1 = new EPeriodicoMisurabileEffettuato((EsamePeriodicoMisurabile) esame, mAssP, luogoP, dataP, oraP, esitoP);
 					}
 					catch(IllegalAccessException e){
-						e.printStackTrace();
-						return null;
+						stampaMex(e.getMessage());
+					}
+					catch(IllegalArgumentException e){
+						stampaMex(e.getMessage());
 					}
 				}
 				else{
@@ -675,8 +705,10 @@ public class CSMain implements Serializable{
 						ep1 = new EPeriodicoMisurabileEffettuato((EsamePeriodicoMisurabile) esame, mAssP, luogoP, dataP, oraP);
 					}
 					catch(IllegalAccessException e){
-						e.printStackTrace();
-						return null;
+						stampaMex(e.getMessage());
+					}
+					catch(IllegalArgumentException e){
+						stampaMex(e.getMessage());
 					}
 				}
 				return ep1;
@@ -740,10 +772,10 @@ public class CSMain implements Serializable{
 						valido = true;
 					}
 					catch(IllegalAccessException e){
-						e.getMessage();
+						stampaMex(e.getMessage());
 					}
 					catch(IllegalArgumentException e){
-						e.getMessage();
+						stampaMex(e.getMessage());
 					}
 				}while(!valido);	
 				return ed1;
@@ -788,10 +820,10 @@ public class CSMain implements Serializable{
 						valido = true;
 					}
 					catch(IllegalAccessException e){
-						e.getMessage();
+						stampaMex(e.getMessage());
 					}
 					catch(IllegalArgumentException e){
-						e.getMessage();
+						stampaMex(e.getMessage());
 					}
 				}while(!valido);
 				
