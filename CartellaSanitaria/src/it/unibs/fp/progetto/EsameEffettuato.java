@@ -266,7 +266,7 @@ public class EsameEffettuato implements Serializable{
 	 * @author Valtulini Claudio
 	 */
 	public String toString(){/*Modificato Metodo to String nell'acquisizione data(aggiunto MyTime.toStringData)*/
-		String descrizione = esame.getNome() + "%n   Data: " + MyTime.toStringData(data);
+		String descrizione = esame.getNome() + "\n   Data: " + MyTime.toStringData(data);
 		return descrizione;
 	}
 	
@@ -281,19 +281,19 @@ public class EsameEffettuato implements Serializable{
 	 */
 	public String toStringCompleto(){/*Modificato Metodo to String nell'acquisizione data(aggiunto MyTime.toStringData)*/
 		String stringaDescrittivaCompleta =
-			"Tipologia Esame: " + esame.getNome() + "%n" +
-			"Raccomandazioni: " + esame.getRaccomandazioni() + "%n";
+			"Tipologia Esame: " + esame.getNome() + "\n" +
+			"Raccomandazioni: " + esame.getRaccomandazioni() + "\n";
 		if(data != null){ stringaDescrittivaCompleta +=
-			"Data: " + MyTime.toStringData(data) + "%n";
+			"Data: " + MyTime.toStringData(data) + "\n";
 		}
 		if(ora != null){ stringaDescrittivaCompleta +=
-			"Ora: " + ora + "%n";
+			"Ora: " + ora + "\n";
 		}
 		if(luogo != null){ stringaDescrittivaCompleta +=
-			"Luogo: " + luogo + "%n";
+			"Luogo: " + luogo + "\n";
 		}
 		if(malattia != null){ stringaDescrittivaCompleta +=
-			"Malattia associata: " + malattia.toString() + "%n";
+			"Malattia associata: " + malattia.toString() + "\n";
 		}
 		return stringaDescrittivaCompleta;
 	}

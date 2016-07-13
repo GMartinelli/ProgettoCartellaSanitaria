@@ -649,15 +649,15 @@ public class CartellaSanitaria implements Serializable{
 	 */
 	public String toString(){
 		int c = 0;
-		String descrizione="Nome: " + nome + "%nCognome: " + cognome + "%nElenco esami: %n";
+		String descrizione="Nome: " + nome + "\nCognome: " + cognome + "\nElenco esami: \n";
 		for(int i=0; i<esamiEffettuati.size();i++){
 			c = i + 1;
-			descrizione+= c + ". " + esamiEffettuati.get(i).toString()+"%n";
+			descrizione+= c + ". " + esamiEffettuati.get(i).toString()+"\n";
 		}
-		descrizione+="Elenco malattie: %n";
+		descrizione+="Elenco malattie: \n";
 		for(int i=0; i<elencoMalattia.size();i++){
 			c = i + 1;
-			descrizione+= c + ". " + elencoMalattia.get(i).toString()+"%n";
+			descrizione+= c + ". " + elencoMalattia.get(i).toString()+"\n";
 		}
 		return descrizione;
 	}
@@ -687,30 +687,30 @@ public class CartellaSanitaria implements Serializable{
 	 * @author Valtulini Claudio
 	 */
 	public String toStringCompleto(){
-		String stringaDescrittivaCompleta = "Cartella sanitaria di " + this.getNome() + " " + this.getCognome() + "%n" +
-				"Residente in: " + this.getIndirizzo() + "%n" +
-				"Contatti: " + "%n" +
-				"  Numero Telefonico: " + this.getTelefono() + "%n";
+		String stringaDescrittivaCompleta = "Cartella sanitaria di " + this.getNome() + " " + this.getCognome() + "\n" +
+				"Residente in: " + this.getIndirizzo() + "\n" +
+				"Contatti: " + "\n" +
+				"  Numero Telefonico: " + this.getTelefono() + "\n";
 			if(this.getEmail() != null){ stringaDescrittivaCompleta += 
-				"  Indirizzo E-Mail: " + this.getEmail() + "%n";
+				"  Indirizzo E-Mail: " + this.getEmail() + "\n";
 			}
 			stringaDescrittivaCompleta +=
-				"Nato il: " + this.getDataNascita().toString() + "%n" +
-				"A: " + this.getLuogoNascita() + "%n" +
-				"Genere: " + this.getStringaGenere() + "%n" +
-				"Gruppo Sanguigno: " + this.getGruppoSanguigno() + "%n" +
-				"Codice Fiscale: " + this.getCodiceFiscale() + "%n";
+				"Nato il: " + this.getDataNascita().toString() + "\n" +
+				"A: " + this.getLuogoNascita() + "\n" +
+				"Genere: " + this.getStringaGenere() + "\n" +
+				"Gruppo Sanguigno: " + this.getGruppoSanguigno() + "\n" +
+				"Codice Fiscale: " + this.getCodiceFiscale() + "\n";
 			this.generaCodiceSanitario();
 			stringaDescrittivaCompleta +=
-				"Codice Sanitario: " + this.getCodiceSanitario() + "%n" +
-				"Esami Effettuati: " + "%n";
+				"Codice Sanitario: " + this.getCodiceSanitario() + "\n" +
+				"Esami Effettuati: " + "\n";
 			int i = 1;
 			for(EsameEffettuato elemento: this.getEsamiEffettuati()){ stringaDescrittivaCompleta +=
 				"  " + i + ". " + elemento.toString();
 				i++;
 			}
 			stringaDescrittivaCompleta +=
-				"Malattie: " + "%n";
+				"Malattie: " + "\n";
 			i = 1;
 			for(Malattia elemento: this.getElencoMalattia()){ stringaDescrittivaCompleta +=
 				"  " + i + ". " + elemento.toString();

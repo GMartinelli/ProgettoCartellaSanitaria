@@ -542,7 +542,7 @@ public class EPeriodicoMisurabileEffettuato extends EsameEffettuato{
 	 */
 	@Override
 	public String toString(){
-		String descrizione = super.toString() + "%n  Esito:" + this.esito;
+		String descrizione = super.toString() + "\n  Esito:" + this.esito;
 		return descrizione;
 	}
 		
@@ -556,12 +556,12 @@ public class EPeriodicoMisurabileEffettuato extends EsameEffettuato{
 	 */
 	public String toStringCompleto(){
 		String stringaDescrittivaCompleta = super.toStringCompleto() + 
-			"Valori di riferimento: " + "%n" +
-			"  -Minimo: " + esame.getValoreMin() + "%n" +
-			"  -Massimo: " + esame.getValoreMax() + "%n" +
-			"  -Soglia: " + esame.getSogliaErrore() + "%n";
+			"Valori di riferimento: " + "\n" +
+			"  -Minimo: " + esame.getValoreMin() + "\n" +
+			"  -Massimo: " + esame.getValoreMax() + "\n" +
+			"  -Soglia: " + esame.getSogliaErrore() + "\n";
 		if(Double.compare(esito, DEFAULT_NE) != 0){ stringaDescrittivaCompleta +=
-			"Esito: " + esito + "%n" + 
+			"Esito: " + esito + "\n" + 
 			"Avvisi: " + getAvvisi();
 		}
 		return stringaDescrittivaCompleta;
