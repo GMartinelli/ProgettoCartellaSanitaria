@@ -81,6 +81,8 @@ public class CartellaSanitaria implements Serializable{
 		this.codiceFiscale=codiceFiscale;
 		this.gruppoSanguigno=gruppoSanguigno;
 		this.codiceSanitario=null;
+		esamiEffettuati = new ArrayList<EsameEffettuato>();
+		elencoMalattia = new ArrayList<Malattia>();
 	}
 	
 	/*Getters*/
