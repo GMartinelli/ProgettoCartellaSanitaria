@@ -177,7 +177,7 @@ public class CSMain implements Serializable{
 	 * @return l'<strong>esame</strong> creato
 	 */
 	public static Esame creaEsame(int scelta){
-		String nome = MyInput.leggiStringaNonVuota(P_MEX_INS_NOME);
+		String nome = MyInput.leggiStringaNonVuota(E_MEX_INS_NOME);
 		String raccomandazioni = MyInput.leggiStringa(E_MEX_INS_RACCOMANDAZIONI);
 		
 		switch(scelta){
@@ -1344,7 +1344,7 @@ public class CSMain implements Serializable{
 	 * @param <strong>listaEE</strong> lista esami effettuati/prenotati
 	 * @param <strong>listaM</strong> lista malattia
 	 */
-	public static void Guidata(CartellaSanitaria CS, ListaEsame listaE){
+	public static void creazioneGuidata(CartellaSanitaria CS, ListaEsame listaE){
 		/*CREAZIONE 4 TIPOLOGIE ESAME*/
 		ArrayList<EsameEffettuato> listaEE = CS.getEsamiEffettuati();
 		ArrayList<Malattia> listaM = CS.getElencoMalattia();
@@ -1586,8 +1586,8 @@ public class CSMain implements Serializable{
 	public static void main(String[] args) {
 		stampaMex(MEX_BENVENUTO);
 		
-		boolean visualizzato = false;
-		boolean caricato = false;
+		boolean visualizzato = false;//controlla se il to string semplice della cartella è stato visualizzato
+		boolean caricato = false;//se la cartella e' stata caricata dal file
 		boolean valido = false;
 		CartellaSanitaria CS = null;
 
@@ -1620,6 +1620,7 @@ public class CSMain implements Serializable{
 						// FILE ESISTENTE, CHIEDO SE SI VUOLE SOVRASCRIVERE OPPURE CARICARE I DATI PRECEDENTI
 						boolean scelta = MyInput.yesOrNo(MEX_SOVRASCIVERE);
 						if(scelta){	//SOVRASCIVO
+							CS = creaCartellaSanitaria();
 							creazioneGuidata(CS, listaE);
 							//FINITO DI RICREARE IL FILE
 							MyServizioFile.salvaSingoloOggetto(fileCS, CS);
@@ -1632,6 +1633,7 @@ public class CSMain implements Serializable{
 					else{
 						MyServizioFile.creaFile(PATH_C);
 						CS = creaCartellaSanitaria();
+						creazioneGuidata(CS, listaE);
 					}
 					break;
 					
@@ -1678,6 +1680,8 @@ public class CSMain implements Serializable{
 							case 4: /*ELIMINA tipologia esame*/
 								eliminaEsame(listaE);
 								MyServizioFile.salvaSingoloOggetto(fileListaE, listaE);
+								break;
+							case 0:
 								break;
 							default:
 								/*ERRORE*/
