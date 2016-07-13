@@ -767,16 +767,16 @@ public class CSMain implements Serializable{
 					String esito = MyInput.leggiStringaNonVuota(E_MEX_INS_ESITO);
 					
 					valido = false;
-					try{
-						ed1 = new EDiagnosticoEffettuato(eAss, mAss, luogo, data, ora, esito);
-						valido = true;
-					}
-					catch(IllegalAccessException e){
-						stampaMex(e.getMessage());
-					}
-					catch(IllegalArgumentException e){
-						stampaMex(e.getMessage());
-					}
+						try{
+							ed1 = new EDiagnosticoEffettuato(eAss, mAss, luogo, data, ora, esito);
+							valido = true;
+						}
+						catch(IllegalAccessException e){
+							stampaMex(e.getMessage());
+						}
+						catch(IllegalArgumentException e){
+							stampaMex(e.getMessage());
+						}
 				}while(!valido);	
 				return ed1;
 			case 2:	//Periodico Misurabile
