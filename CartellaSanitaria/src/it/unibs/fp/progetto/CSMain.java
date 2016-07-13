@@ -1426,14 +1426,20 @@ public class CSMain implements Serializable{
 				String ora = MyInput.leggiStringaNonVuota(E_MEX_INS_ORA);
 				double esito = MyInput.leggiDoubleConMinimo(E_MEX_INS_ESITO,0);
 				
-				try{
-					EPeriodicoMisurabileEffettuato eInserito = new EPeriodicoMisurabileEffettuato(esameScelto, mAss, luogo, data, ora, esito);
-					//EPM CREATO, AGGIUNGO ALLA LISTA DEGLI ESAMI
-					listaEE.add(eInserito);
-				}
-				catch(IllegalAccessException e){
-					e.printStackTrace();
-				}
+				valido = false;
+				do{
+					try{
+						EPeriodicoMisurabileEffettuato eInserito = new EPeriodicoMisurabileEffettuato(esameScelto, mAss, luogo, data, ora, esito);
+						//EPM CREATO, AGGIUNGO ALLA LISTA DEGLI ESAMI
+						listaEE.add(eInserito);
+					}
+					catch(IllegalAccessException e){
+						e.getMessage();
+					}
+					catch(IllegalArgumentException e){
+						e.getMessage();
+					}
+				}while(!valido)
 			stampaMex("");
 			}
 		}
@@ -1481,7 +1487,10 @@ public class CSMain implements Serializable{
 						valido = true;
 					}
 					catch(IllegalAccessException e){
-						e.printStackTrace();
+						e.getMessage();
+					}
+					catch(IllegalArgumentException e){
+						e.getMessage();
 					}
 				}while(valido == false);
 			}
