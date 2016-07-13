@@ -53,10 +53,10 @@ public class CSMain implements Serializable{
 	private static final String E_MEX_INS_NOME = "Inserisci il nome dell'esame: ";
 	private static final String E_MEX_INS_RACCOMANDAZIONI = "Inserisci eventuali raccomandazioni: ";
 	private static final String E_MEX_INS_AREAI = "Inserisci l'area interessata: ";
-	private static final String E_MEX_INS_DATA = "Inserisci la data in cui è stato effettuato l'esame nel formato gg/mm/aaaa: ";
-	private static final String E_MEX_INS_LUOGO = "Inserisci il nome del luogo in cui è stato effettuato l'esame: ";
+	private static final String E_MEX_INS_DATA = "Inserisci la data in cui ï¿½ stato effettuato l'esame nel formato gg/mm/aaaa: ";
+	private static final String E_MEX_INS_LUOGO = "Inserisci il nome del luogo in cui ï¿½ stato effettuato l'esame: ";
 	private static final String E_MEX_INS_MALATTIAN = "Inserisci il nome della malattia: ";
-	private static final String E_MEX_INS_ORA = "Inserisci l'ora in cui si è effettuato l'esame (hh:mm): ";
+	private static final String E_MEX_INS_ORA = "Inserisci l'ora in cui si ï¿½ effettuato l'esame (hh:mm): ";
 	private static final String E_MEX_INS_ESITO_PERIODICO = "Inserisci l'esito dell'esame (>= 0): ";
 	private static final String E_MEX_INS_ESITO_DIAGNOSTICO = "Inserisci l'esito dell'esame: ";
 	private static final String E_MEX_INS_VALORE_MIN = "Inserisci il valore minimo: ";
@@ -794,6 +794,7 @@ public class CSMain implements Serializable{
 						e.getMessage();
 					}
 				}while(!valido);
+				
 				return ep1;
 			default:
 				stampaMex(ERRORE_INS);
