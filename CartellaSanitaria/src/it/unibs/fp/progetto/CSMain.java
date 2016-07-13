@@ -1472,13 +1472,18 @@ public class CSMain implements Serializable{
 				Date data = MyInput.leggiData(E_MEX_INS_DATA);
 				String ora = MyInput.leggiStringaNonVuota(E_MEX_INS_ORA);
 				String esito = MyInput.leggiStringaNonVuota(E_MEX_INS_ESITO);
-				try{
-					EDiagnosticoEffettuato eInserito = new EDiagnosticoEffettuato(esameSceltoD, mAss, luogo, data, ora, esito);
-					listaEE.add(eInserito);
-				}
-				catch(IllegalAccessException e){
-					e.printStackTrace();
-				}
+				
+				valido = false;
+				do{
+					try{
+						EDiagnosticoEffettuato eInserito = new EDiagnosticoEffettuato(esameSceltoD, mAss, luogo, data, ora, esito);
+						listaEE.add(eInserito);
+						valido = true;
+					}
+					catch(IllegalAccessException e){
+						e.printStackTrace();
+					}
+				while(valido == false);
 			}
 			stampaMex("");
 		}
