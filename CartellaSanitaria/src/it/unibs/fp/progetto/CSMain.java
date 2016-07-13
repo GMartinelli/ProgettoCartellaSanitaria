@@ -1646,8 +1646,6 @@ public class CSMain implements Serializable{
 								break;
 							case 4: /*ELIMINA tipologia esame*/
 								break;
-							case 0:
-								break;
 							default:
 								/*ERRORE*/
 								stampaMex(ERRORE_INS);
