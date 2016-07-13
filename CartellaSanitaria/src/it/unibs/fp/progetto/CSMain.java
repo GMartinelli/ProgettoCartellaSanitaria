@@ -44,9 +44,9 @@ public class CSMain implements Serializable{
 	private static final String P_MEX_INS_TELEFONO = "Inserisci il numero di telefono del paziente: ";
 	private static final String P_MEX_INS_MAIL = "Inserisci l'indirizzo e-mail del paziente: ";
 	private static final String P_MEX_INS_DATAN = "Inserisci la data di nascita del paziente nel formato gg/mm/aaaa: ";
-	private static final String P_MEX_INS_LUOGON = "Inserisci il luogo di nascita del paziente: ";
+	private static final String P_MEX_INS_LUOGON = "Inserisci il luogo di nascita del paziente ( Paese / (Provincia) ): ";
 	private static final String P_MEX_INS_CODICEF = "Inserisci il codice fiscale del paziente: ";
-	private static final String P_MEX_INS_GENERE = "Inserisci il genere del paziente: ";
+	private static final String P_MEX_INS_GENERE = "Inserisci il genere del paziente (m/f): ";
 	private static final String P_MEX_INS_GSANGUIGNO = "Inserisci il gruppo sanguigno del paziente: ";
 	
 	// Inserimento Esame
@@ -73,7 +73,7 @@ public class CSMain implements Serializable{
 	private static final String E_MEX_DIAGNOSTICO = "Esame diagnostico";
 	private static final String E_MEX_PERIODICO = "Esame periodico";
 	
-	private static final String E_SCELTA_CREA_CERCA = "Si desidera creare una tipologia di esame o cercarne una gi√† esistente?";
+	private static final String E_SCELTA_CREA_CERCA = "Si desidera creare una tipologia di esame o cercarne una gia'† esistente?";
 	private static final String E_SCELTA_TIPO = "Si desidera inserire un nuovo Esame Effettuato Diagnostico o Periodico Misurabile?";
 	private static final String E_SCELTA_VISUALIZZA = "Quale esame vuoi visualizzare?";
 	
@@ -94,7 +94,7 @@ public class CSMain implements Serializable{
 	private static final String M_SCELTA_VISUALIZZA = "Quale malattia vuoi visualizzare?";
 	
 	// Avvisi
-	private static final String NON_MODIFICA = "Attenzione, non verr√† chiesto di inserire alcun dato.";
+	private static final String NON_MODIFICA = "Attenzione, non verr‡ chiesto di inserire alcun dato.";
 	private static final String AVVISI_IMPOSTATI_CORRETTAMENTE = "Gli avvisi sono stati impostati correttamente. Operazione finita.";
 	
 	// Errori
@@ -1375,6 +1375,7 @@ public class CSMain implements Serializable{
 			else{
 				stampaMex(MEX_INS_TIPOLOGIA_P);
 				listaE.aggiungiEsame(creaEsame(2));
+				
 			}
 		}
 		stampaMex("");
