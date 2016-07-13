@@ -1366,8 +1366,8 @@ public class CSMain implements Serializable{
 		stampaMex(BEN_C_GUIDATA);
 		stampaMex("");
 		
-		ArrayList<EsameEffettuato> listaEE = CS.getEsamiEffettuati();
-		ArrayList<Malattia> listaM = CS.getElencoMalattia();
+		ArrayList<EsameEffettuato> listaEE = new ArrayList<EsameEffettuato>();
+		ArrayList<Malattia> listaM = new ArrayList<Malattia>();
 		for(int i = 0; i < 4; i++){
 			if(((i + 1) % 2) == 0){
 				stampaMex(MEX_INS_TIPOLOGIA_D);
@@ -1381,9 +1381,8 @@ public class CSMain implements Serializable{
 		stampaMex("");
 		stampaMex(MEX_INS_MALATTIA);
 		/*CREAZIONE DI 2 MALATTIE*/
-		for(int i=0; i<2; i++){
-			Malattia mCreata = creaMalattia(listaE);
-			listaM.add(mCreata);
+		for(int i=0; i<2; i++){;
+			listaM.add(creaMalattia(listaE));
 			stampaMex("");
 		}
 		stampaMex("");
@@ -1431,6 +1430,8 @@ public class CSMain implements Serializable{
 				}
 			stampaMex("");
 			}
+			CS.setElencoMalattia(listaM);
+			CS.setEsamiEffettuati(listaEE);
 		}
 		
 		stampaMex("");
