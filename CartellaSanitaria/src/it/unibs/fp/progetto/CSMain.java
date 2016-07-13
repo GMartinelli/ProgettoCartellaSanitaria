@@ -788,14 +788,6 @@ public class CSMain implements Serializable{
 		return null;
 	}
 	
-	/**
-	 * Metodo che crea un oggetto di tipo Malattia permettendo all'utente di inserire i dati desiderati
-	 * 
-	 * @param <strong>listaE</strong> la lista delle tipologie di esame create
-	 * @return la <strong>malattia</strong> creata
-	 * 
-	 * @author Valtulini Claudio
-	 */
 	public static Malattia creaMalattia(ListaEsame listaE){
 		String nome = null;
 		Date dataInizio = null;
@@ -830,6 +822,7 @@ public class CSMain implements Serializable{
 		
 		return new Malattia(nome, dataInizio, dataTermine, sintomi, diagnosi, listaAssociati, terapia);
 	}
+
 	
 	/**
 	 * Metodo che crea un oggetto della classe cartellaSanitaria
