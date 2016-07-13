@@ -1375,20 +1375,15 @@ public class CSMain implements Serializable{
 		
 		ArrayList<EsameEffettuato> listaEE = CS.getEsamiEffettuati();
 		ArrayList<Malattia> listaM = CS.getElencoMalattia();
-		try{
-			for(int i = 0; i < 4; i++){
-				if(((i + 1) % 2) == 0){
-					stampaMex(MEX_INS_TIPOLOGIA_D);
-					listaE.aggiungiEsame(creaEsame(1));
-				}
-				else{
-					stampaMex(MEX_INS_TIPOLOGIA_P);
-					listaE.aggiungiEsame(creaEsame(2));		
-				}
+		for(int i = 0; i < 4; i++){
+			if(((i + 1) % 2) == 0){
+				stampaMex(MEX_INS_TIPOLOGIA_D);
+				listaE.aggiungiEsame(creaEsame(1));
 			}
-		}
-		catch(NullPointerException e){
-			stampaMex(ERRORE_E_NON_CREATO);
+			else{
+				stampaMex(MEX_INS_TIPOLOGIA_P);
+				listaE.aggiungiEsame(creaEsame(2));		
+			}
 		}
 		stampaMex("");
 		stampaMex(MEX_INS_MALATTIA);
