@@ -24,7 +24,6 @@ public class CSMain implements Serializable{
 	private static final String[] P_OPZIONI_MODIFICA = {"Modifica nome","Modifica cognome","Modifica indirizzo","Modifica telefono","Modifica email", "Modifica luogo di nascita", "Modifica data di nascita", "Modifica genere", "Modifica codice fiscale", "Modifica gruppo sanguigno", "Aggiungi esame effettuato", "Aggiungi malattia", "Modifica esame effettuato", "Modifica malattia","Rimuovi esame effettuato", "Rimuovi malattia"};
 	
 	// Esame
-	private static final String E_MEX_RIMUOVI_TIP="Inserisci la tipologia dell'esame che vuoi eliminare: ";
 	private static final String E_MEX_RIC_RIMUOVI="Esame trovato. Vuoi eliminare l'esame %s? ";
 	private static final String[] E_OPZIONI_MODIFICA = {"Modifica nome", "Modifica raccomandazioni"};
 	private static final String[] E_OPZIONI_MODIFICA_EFFETTUATO = {"Modifica data", "Modifica esame", "Modifica luogo", "Modifica malattia", "Modifica ora", "Modifica esito", "Modifica avvisi (se l'esame e' di tipologia misurabile"};
@@ -86,7 +85,6 @@ public class CSMain implements Serializable{
 	private static final String M_MEX_INS_DIAGNOSI = "Inserisci la diagnosi effettuata dal medico: ";
 	private static final String M_MEX_INS_TERAPIA = "Inserisci la terapia consigliata: ";
 	private static final String M_MEX_CANCELLA = "Inserisci il nome della malattia che desideri eliminare: ";
-	private static final String M_MEX_RIC_RIMUOVI="Malattia trovata. Vuoi eleiminare la malattia %s? ";
 	private static final String M_MEX_PIU_MALATTIE = "Attenzione, sono presenti piu' malattie con questo nome: ";
 	private static final String M_MEX_CANCELLA_DATAI = "Inserire la data di inizio della malattia da cancellare: ";
 	
@@ -1500,10 +1498,10 @@ public class CSMain implements Serializable{
 			
 			switch(scelta){
 				case 1:
-					if(CS.getEsamiEffettuati() != null && CS.getElencoMalattia() != null){
+					try{
 						stampaMex(CS.toStringCompleto());
 					}
-					else{
+					catch(NullPointerException e){
 						stampaMex(ERRORE_MANCA_ESAME_MALATTIA);
 					}
 					break;
@@ -1647,12 +1645,14 @@ public class CSMain implements Serializable{
 					int sceltaD = 0;
 					
 					do{
-						if((caricato == true) && (visualizzato == false) && ((CS.getEsamiEffettuati() != null) || (CS.getElencoMalattia() != null))){
-							CS.toString();
-							visualizzato = true;
-						}
-						else if((caricato == true) && !visualizzato && ((CS.getEsamiEffettuati() == null) || (CS.getElencoMalattia() == null))){
-							stampaMex(ERRORE_MANCA_ESAME_MALATTIA);
+						if((CS != null) && !visualizzato){
+							try{
+								CS.toString();
+								visualizzato = true;
+							}
+							catch(NullPointerException e){
+								stampaMex(ERRORE_MANCA_ESAME_MALATTIA);
+							}
 						}
 						
 						MyMenu menuD = new MyMenu("Operazioni possibili", OPZIONI_D);
