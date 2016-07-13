@@ -128,7 +128,7 @@ public class CSMain implements Serializable{
 	 * @author Martinelli Giuseppe
 	 */
 	public static Esame creaEsame(){
-		String nome = MyInput.leggiStringaNonVuota(P_MEX_INS_NOME);
+		String nome = MyInput.leggiStringaNonVuota(E_MEX_INS_NOME);
 		String raccomandazioni = MyInput.leggiStringa(E_MEX_INS_RACCOMANDAZIONI);
 		int sceltaT = 0;
 		do{
@@ -794,7 +794,7 @@ public class CSMain implements Serializable{
 		
 		sintomi = MyInput.leggiStringaNonVuota(M_MEX_INS_SINTOMI);
 		diagnosi = MyInput.leggiStringaNonVuota(M_MEX_INS_DIAGNOSI);
-		terapia = MyInput.leggiStringaNonVuota(M_MEX_INS_DIAGNOSI);
+		terapia = MyInput.leggiStringaNonVuota(M_MEX_INS_TERAPIA);
 		
 		boolean inserisciEsame = MyInput.yesOrNo(M_SCELTA_INS_ASSOCIATO);
 		String nomeAssociato = null;
@@ -1344,7 +1344,7 @@ public class CSMain implements Serializable{
 	 * @param <strong>listaEE</strong> lista esami effettuati/prenotati
 	 * @param <strong>listaM</strong> lista malattia
 	 */
-	public static void creazioneGuidata(CartellaSanitaria CS, ListaEsame listaE){
+	public static void Guidata(CartellaSanitaria CS, ListaEsame listaE){
 		/*CREAZIONE 4 TIPOLOGIE ESAME*/
 		ArrayList<EsameEffettuato> listaEE = CS.getEsamiEffettuati();
 		ArrayList<Malattia> listaM = CS.getElencoMalattia();
