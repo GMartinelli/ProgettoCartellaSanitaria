@@ -1706,9 +1706,14 @@ public class CSMain implements Serializable{
 								MyServizioFile.salvaSingoloOggetto(fileListaE, listaE);
 								break;
 							case 2:	/*AGGIUNGI tipologia esame*/
-								Esame eCreato = creaEsame();
-								listaE.aggiungiEsame(eCreato);
-								MyServizioFile.salvaSingoloOggetto(fileListaE, listaE);
+								try{
+									Esame eCreato = creaEsame();
+									listaE.aggiungiEsame(eCreato);
+									MyServizioFile.salvaSingoloOggetto(fileListaE, listaE);
+								}
+								catch(NullPointerException e){
+									stampaMex(ERRORE_E_NON_CREATO);
+								}
 								break;
 							case 3: /*Modifica tipologia esame*/
 								String nomeModifica = null;
