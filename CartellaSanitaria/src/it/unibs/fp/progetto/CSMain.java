@@ -796,7 +796,7 @@ public class CSMain implements Serializable{
 		Date dataTermine = null;
 		String sintomi = null;
 		String diagnosi = null;
-		ArrayList<Esame> listaAssociati = new ArrayList<Esame>();
+		ArrayList<Esame> lista = new ArrayList<Esame>();
 		String terapia = null;
 		
 		nome = MyInput.leggiStringaNonVuota(M_MEX_INS_NOME);
@@ -814,7 +814,7 @@ public class CSMain implements Serializable{
 		while(inserisciEsame){
 			nomeAssociato = MyInput.leggiStringaNonVuota(E_MEX_INS_NOME);
 			if(listaE.isEsistente(nomeAssociato)){
-				listaAssociati.add(listaE.cercaEsame(nomeAssociato));
+				lista.add(listaE.cercaEsame(nomeAssociato));
 			}
 			else{
 				stampaMex(ERRORE_ESAME_NON_TROVATO);
@@ -822,7 +822,8 @@ public class CSMain implements Serializable{
 			inserisciEsame = MyInput.yesOrNo(M_SCELTA_INS_ALTRO_ASSOCIATO);
 		}
 		
-		return new Malattia(nome, dataInizio, dataTermine, sintomi, diagnosi, listaAssociati, terapia);
+		ListaEsame listaEA = new ListaEsame(lista);
+		return new Malattia(nome, dataInizio, dataTermine, sintomi, diagnosi, listaEA, terapia);
 	}
 	
 	/**
