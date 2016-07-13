@@ -39,6 +39,8 @@ public class EPeriodicoMisurabileEffettuato extends EsameEffettuato{
 	//costruttori
 	/**
 	 * Costruttore vuoto che crea un oggetto con tutti i riferimenti null ed esito uguale al valore di default per esame non effettuato
+	 * 
+	 * @author Valtulini Claudio
 	 */
 	public EPeriodicoMisurabileEffettuato(){
 		super();
@@ -51,8 +53,10 @@ public class EPeriodicoMisurabileEffettuato extends EsameEffettuato{
 	 * 
 	 * Se malattia ed esame non sono coerenti viene lanciata IllegalArgumentException
 	 * 
-	 * @param esame la tipologia di esame da prenotare
-	 * @param malattia la malattia per il quale viene richiesto
+	 * @param <strong>esame</strong> la tipologia di esame da prenotare
+	 * @param <strong>malattia</strong> la malattia per il quale viene richiesto
+	 * 
+	 * @author Valtulini Claudio
 	 */
 	public EPeriodicoMisurabileEffettuato(EsamePeriodicoMisurabile esame, Malattia malattia)
 			throws IllegalAccessException, IllegalArgumentException{
@@ -67,11 +71,13 @@ public class EPeriodicoMisurabileEffettuato extends EsameEffettuato{
 	 * 
 	 * Se malattia ed esame non sono coerenti viene lanciata IllegalArgumentException
 	 * 
-	 * @param esame la tipologia di esame da prenotare
-	 * @param malattia la malattia per il quale viene richiesto
-	 * @param luogo il luogo in cui effettuare l'esame
-	 * @param data la data in cui effettuare l'esame
-	 * @param ora l'ora in cui effettuare l'esame
+	 * @param <strong>esame</strong> la tipologia di esame da prenotare
+	 * @param <strong>malattia</strong> la malattia per il quale viene richiesto
+	 * @param <strong>luogo</strong> il luogo in cui effettuare l'esame
+	 * @param <strong>data</strong> la data in cui effettuare l'esame
+	 * @param <strong>ora</strong> l'ora in cui effettuare l'esame
+	 * 
+	 * @author Valtulini Claudio
 	 */
 	public EPeriodicoMisurabileEffettuato(EsamePeriodicoMisurabile esame, Malattia malattia, String luogo, Date data, String ora)
 			throws IllegalAccessException, IllegalArgumentException{
@@ -87,12 +93,14 @@ public class EPeriodicoMisurabileEffettuato extends EsameEffettuato{
 	 * 
 	 * Se malattia ed esame non sono coerenti viene lanciata IllegalArgumentException
 	 * 
-	 * @param esame la tipologia di esame da prenotare
-	 * @param malattia la malattia per il quale viene richiesto
-	 * @param luogo il luogo in cui effettuare l'esame
-	 * @param data la data in cui effettuare l'esame
-	 * @param ora l'ora in cui effettuare l'esame
-	 * @param esito l'esito dell'esame
+	 * @param <strong>esame</strong> la tipologia di esame da prenotare
+	 * @param <strong>malattia</strong> la malattia per il quale viene richiesto
+	 * @param <strong>luogo</strong> il luogo in cui effettuare l'esame
+	 * @param <strong>data</strong> la data in cui effettuare l'esame
+	 * @param <strong>ora</strong> l'ora in cui effettuare l'esame
+	 * @param <strong>esito</strong> l'esito dell'esame
+	 * 
+	 * @author Valtulini Claudio
 	 */
 	public EPeriodicoMisurabileEffettuato(EsamePeriodicoMisurabile esame, Malattia malattia, String luogo, Date data, String ora, double esito)
 			throws IllegalAccessException, IllegalArgumentException{
@@ -114,7 +122,9 @@ public class EPeriodicoMisurabileEffettuato extends EsameEffettuato{
 	/**
 	 * Ritorna il valore di esito
 	 * 
-	 * @return esito l'esito dell'esame
+	 * @return <strong>esito</strong> l'esito dell'esame
+	 * 
+	 * @author Valtulini Claudio
 	 */
 	public double getEsito() {
 		return esito;
@@ -124,7 +134,9 @@ public class EPeriodicoMisurabileEffettuato extends EsameEffettuato{
 	 * 
 	 * se l'esito non e' stato impostato e di conseguenza viene lanciata IllegalAccessException ritorna il suo getMessage() 
 	 * 
-	 * @return avvisi impostati in base all'esito
+	 * @return <strong>avvisi</strong> impostati in base all'esito
+	 * 
+	 * @author Valtulini Claudio
 	 */
 	public String getAvvisi() {
 		try{
@@ -138,9 +150,15 @@ public class EPeriodicoMisurabileEffettuato extends EsameEffettuato{
 		
 	//setters
 	/**
-	 * Permette di impostare la tipologia di esame
+	 * Permette di impostare la tipologia di esame e gestisce il caso in cui l'esame sia già stato effettuato o non sia compatibile
+	 * con la malattia indicata
 	 * 
-	 * @param esame la tipologia di esame che si vuole impostare
+	 * @param <strong>esame</strong> la tipologia di esame che si vuole impostare
+	 * 
+	 * @throws <strong>TooLateException<strong> se l'esito e' gia' stato impostato
+	 * @throws <strong>IllegalArgumentException<strong> se l'esame e la malattia indicati non sono compatibili
+	 * 
+	 * @author Valtulini Claudio
 	 */
 	public void setEsame(EsamePeriodicoMisurabile esame) throws IllegalArgumentException{
 		if(!isEffettuato()){
@@ -162,7 +180,9 @@ public class EPeriodicoMisurabileEffettuato extends EsameEffettuato{
 	/**
 	 * Permette di impostare l'esito dell'esame
 	 * 
-	 * @param esito l'esito da impostare
+	 * @param <strong>esito</strong> l'esito da impostare
+	 * 
+	 * @author Valtulini Claudio
 	 */
 	public void setEsito(double esito) {
 		this.esito = esito;
@@ -171,9 +191,10 @@ public class EPeriodicoMisurabileEffettuato extends EsameEffettuato{
 	/**
 	 * Metodo che genera gli avvisi a seconda dell'esito dell'esame
 	 * 
-	 * @throws IllegalAccessException se non e' stato impostato un esito
+	 * @throws <strong>IllegalAccessException</strong> se non e' stato impostato un esito
+	 * 
+	 * @author Valtulini Claudio
 	 */
-	//ANNOTAZIONE metodo con un po' di controlli, controllare se corretto (SI E' Sbagliato)
 	public void setAvvisi() throws IllegalAccessException{
 		if(isEffettuato()){
 			if(isInRange()) this.avvisi = COMPRESO;
@@ -192,7 +213,11 @@ public class EPeriodicoMisurabileEffettuato extends EsameEffettuato{
 	/**
 	 * Sovrascrive setLuogo di EsameEffettuato e controlla che non sia gia' stato effettuato l'esame
 	 * 
-	 * @param luogo il luogo in cui effettuare l'esame
+	 * @param <strong>luogo</strong> il luogo in cui effettuare l'esame
+	 * 
+	 * @throws <strong>TooLateException<strong> se l'esito e' gia' stato impostato
+	 * 
+	 * @author Valtulini Claudio
 	 */
 	@Override
 	public void setLuogo(String luogo){
@@ -207,7 +232,11 @@ public class EPeriodicoMisurabileEffettuato extends EsameEffettuato{
 	/**
 	 * Sovrascrive setOra di EsameEffettuato, chiamandolo e controllando che non sia gia' stato effettuato l'esame
 	 * 
-	 * @param ora l'ora in cui si vuole effettuare l'esame
+	 * @param <strong>ora</strong> l'ora in cui si vuole effettuare l'esame
+	 * 
+	 * @throws <strong>TooLateException<strong> se l'esito e' gia' stato impostato
+	 * 
+	 * @author Valtulini Claudio
 	 */
 	@Override
 	public void setOra(String ora){
@@ -222,7 +251,11 @@ public class EPeriodicoMisurabileEffettuato extends EsameEffettuato{
 	/**
 	 * Sovrascrive setData di EsameEffettuato, chiamandolo e controllando che non sia gia' stato effettuato l'esame
 	 * 
-	 * @param data la data in cui si vuole effettuare l'esame
+	 * @param <strong>data</strong> la data in cui si vuole effettuare l'esame
+	 * 
+	 * @throws <strong>TooLateException<strong> se l'esito e' gia' stato impostato
+	 * 
+	 * @author Valtulini Claudio
 	 */
 	@Override
 	public void setData(Date data){
@@ -238,7 +271,9 @@ public class EPeriodicoMisurabileEffettuato extends EsameEffettuato{
 	/**
 	 * Controlla se l'esito e' all'interno dei valori di range della tipologia di esame
 	 * 
-	 * @return true se il valore dell'esito e' all'interno dei valori definiti, false altrimenti
+	 * @return <strong>true</strong> se il valore dell'esito e' all'interno dei valori definiti, false altrimenti
+	 * 
+	 * @author Valtulini Claudio
 	 */
 	public boolean isInRange(){
 		if(esito > this.esame.getValoreMin() && esito < this.esame.getValoreMax()) return true;
@@ -248,13 +283,15 @@ public class EPeriodicoMisurabileEffettuato extends EsameEffettuato{
 	/**
 	 * Controlla se il valore e' oltre ai valori di soglia impostati nella tipologia di esame
 	 * 
-	 * @return true se il valore dell'esito e' oltre i valori di soglia, false altrimenti
+	 * @return <strong>true</strong> se il valore dell'esito e' oltre i valori di soglia, <strong>false</strong> altrimenti
+	 * 
+	 * @author Valtulini Claudio
 	 */
-	//ANNOTAZIONE come gestire il caso di valore calcolato <0 ?
-	/*
+	/* Il caso di valore sogliaMin calcolato < 0
+	 *
 	 * ES: Max = 50 , Min = 15 , Soglia = 20
-	 * SogliaMin = -5 , quindi "non posso" avere valori oltre soglia min
-	 * per ora se si scende calcolo che sono oltre soglia 
+	 * SogliaMin = -5 
+	 * Non posso avere valori oltre soglia min (perche' assumo che gli esiti non possano essere negativi)
 	 */
 	public boolean isOltreSoglia(){
 		try{
@@ -269,7 +306,7 @@ public class EPeriodicoMisurabileEffettuato extends EsameEffettuato{
 	/**
 	 * Controlla se il valore e' oltre al valore di soglia minima impostata nella tipologia di esame
 	 * 
-	 * @return true se il valore dell'esito e' oltre al valore di soglia minima, false altrimenti
+	 * @return <strong>true</strong> se il valore dell'esito e' oltre al valore di soglia minima, <strong>false</strong> altrimenti
 	 * 
 	 * @author Manenti Gabriele
 	 */
@@ -286,7 +323,7 @@ public class EPeriodicoMisurabileEffettuato extends EsameEffettuato{
 	/**
 	 * Controlla se il valore e' inferiore al range definito nella tipologia di esame
 	 * 
-	 * @return true se il valore dell'esito e' inferiore a quello di range, false altrimenti
+	 * @return <strong>true</strong> se il valore dell'esito e' inferiore a quello di range, <strong>false</strong> altrimenti
 	 * 
 	 * @author Manenti Gabriele
 	 */
@@ -303,7 +340,7 @@ public class EPeriodicoMisurabileEffettuato extends EsameEffettuato{
 	/**
 	 * Controlla se il valore e' oltre al valore di soglia massima impostata nella tipologia di esame
 	 * 
-	 * @return true se il valore dell'esito e' oltre al valore di soglia massima, false altrimenti
+	 * @return <strong>true</strong> se il valore dell'esito e' oltre al valore di soglia massima, <strong>false</strong> altrimenti
 	 * 
 	 * @author Manenti Gabriele
 	 */
@@ -320,7 +357,11 @@ public class EPeriodicoMisurabileEffettuato extends EsameEffettuato{
 	/**
 	 * Controlla se il valore dell'esito e' superiore al range definito dalla tipologia di esame
 	 * 
-	 * @return true se il valore dell'esito e' superiore a quello di range, false se altrimenti
+	 * @return <strong>true</strong> se il valore dell'esito e' superiore a quello di range, <strong>false</strong> altrimenti
+	 * 
+	 * @throws <strong>IllegalStateException</strong> se il valore e' nei range, perche' in tal caso non ha senso controllare se sia superiore o inferiore ai valori di range
+	 * 
+	 * @author Valtulini Claudio
 	 */
 	public boolean isSuperioreRange(){
 		if(isInRange()) throw new IllegalStateException(COMPRESO_ECC);
@@ -333,7 +374,9 @@ public class EPeriodicoMisurabileEffettuato extends EsameEffettuato{
 	/**
 	 * Controlla se l'esame e' stato effettuato
 	 * 
-	 * @return true se l'esito e' stato impostato, false se l'esito e' quello impostato di default dal costruttore
+	 * @return <strong>true</strong> se l'esito e' stato impostato, <strong>false</strong> se l'esito e' quello impostato di default dal costruttore
+	 * 
+	 * @author Valtulini Claudio
 	 */
 	private boolean isEffettuato(){
 		if(Double.compare(esito, DEFAULT_NE) == 0) return false;
@@ -344,8 +387,10 @@ public class EPeriodicoMisurabileEffettuato extends EsameEffettuato{
 	 * Partendo da un ArrayList (che dovrebbe essere di esami della stessa tipologia) restituisce un ArrayList di EsameEffettuato
 	 * contenente quello/quelli (se più di uno con lo stesso esito) con esito minimo
 	 * 
-	 * @param listaEPME la lista di esami in cui cercare quello con esito minore
-	 * @return una lista di esami contenente quelli con esito minimo
+	 * @param <strong>listaEPME</strong> la lista di esami in cui cercare quello con esito minore
+	 * @return <strong>una lista di esami</strong> contenente quelli con esito minimo
+	 * 
+	 * @throws <strong>IllegalArgumentException</strong> se gli esami contenuti nella lista non sono di tipo EPeriodicoMisurabileEffettuato
 	 * 
 	 * @author Valtulini Claudio
 	 */
@@ -381,12 +426,13 @@ public class EPeriodicoMisurabileEffettuato extends EsameEffettuato{
 	 * Partendo da un ArrayList (che dovrebbe essere di esami della stessa tipologia) restituisce un ArrayList di EsameEffettuato
 	 * contenente quello/quelli (se più di uno con lo stesso esito) con esito massimo
 	 * 
-	 * @param listaEPME la lista di esami in cui cercare quello con esito maggiore
-	 * @return una lista di esami contenente quelli con esito massimo
-	 * 
+	 * @param <strong>listaEPME</strong> la lista di esami in cui cercare quello con esito maggiore
+	 * @return <strong>una lista di esami</strong> contenente quelli con esito massimo
+	 *
+	 * @throws <strong>IllegalArgumentException</strong> se gli esami contenuti nella lista non sono di tipo EPeriodicoMisurabileEffettuato
+	 *
 	 * @author Valtulini Claudio
 	 */
-	//da decidere se ignorare i valori oltre soglia, in tal caso va modificato
 	public static ArrayList<EPeriodicoMisurabileEffettuato> esameEsitoMax(ArrayList<EsameEffettuato> listaEPME){
 		if(listaEPME.get(0) instanceof EPeriodicoMisurabileEffettuato){
 			ArrayList<EPeriodicoMisurabileEffettuato> listaMax = new ArrayList<>();
@@ -419,8 +465,10 @@ public class EPeriodicoMisurabileEffettuato extends EsameEffettuato{
 	 * Partendo da un ArrayList (che dovrebbe essere di esami della stessa tipologia) restituisce un ArrayList di EsameEffettuato
 	 * contenente quello/quelli (se più di uno con lo stesso esito) oltre soglia
 	 * 
-	 * @param listaEPME la lista di esami in cui cercare quello con esito maggiore
-	 * @return una lista di esami contenente quelli con esito massimo
+	 * @param <strong>listaEPME</strong> la lista di esami in cui cercare quello con esito maggiore
+	 * @return <strong>una lista di esami</strong> contenente quelli con esito massimo
+	 * 
+	 * @throws <strong>IllegalArgumentException</strong> se gli esami contenuti nella lista non sono di tipo EPeriodicoMisurabileEffettuato
 	 * 
 	 * @author Valtulini Claudio
 	 */
@@ -453,13 +501,13 @@ public class EPeriodicoMisurabileEffettuato extends EsameEffettuato{
 	 * Partendo da un ArrayList (che dovrebbe essere di esami della stessa tipologia) restituisce un double contenente il valore
 	 * medio degli esiti
 	 * 
-	 * @param listaEPME la lista di esami dei quali trovare l'esito medio
-	 * @return vMedio il valore medio degli esiti
+	 * @param <strong>listaEPME</strong> la lista di esami dei quali trovare l'esito medio
+	 * @return <strong>vMedio</strong> il valore medio degli esiti
+	 * 
+	 * @throws <strong>IllegalArgumentException</strong> se gli esami contenuti nella lista non sono di tipo EPeriodicoMisurabileEffettuato
 	 * 
 	 * @author Valtulini Claudio
 	 */
-	 //Stessa cosa riguardante esito max e min
-	 //decidere se controllare se la dimensione dell'arraylist passato sia maggiore di 0
 	 public static double esameEsitoMedio(ArrayList<EsameEffettuato> listaEPME){
 		if(listaEPME.get(0) instanceof EPeriodicoMisurabileEffettuato){
 			ArrayList<EPeriodicoMisurabileEffettuato> listaCopia = new ArrayList<>();
@@ -484,7 +532,14 @@ public class EPeriodicoMisurabileEffettuato extends EsameEffettuato{
 			throw new IllegalArgumentException(ERRORE_TIPO);
 		}
 	}
-	 
+	
+	/**
+	 * Metodo toString, mostra una descrizione sintetica dell'esame
+	 * 
+	 * @return <strong>descrizione</strong> una stringa contenente il toString di EsameEffettuato + l'esito dell'esame
+	 * 
+	 * @author Valtulini Claudio
+	 */
 	@Override
 	public String toString(){
 		String descrizione = super.toString() + "%n  Esito:" + this.esito;
@@ -493,7 +548,11 @@ public class EPeriodicoMisurabileEffettuato extends EsameEffettuato{
 		
 	/**
 	 * Ritorna una stringa contenente tutte le informazioni relative all'esame effettuato
-	 * @return <strong>stringaDescrittivaCompleta</strong> la stringa contenente le informazioni
+	 * 
+	 * @return <strong>stringaDescrittivaCompleta</strong> la stringa contenente le informazioni (il toStringCompleto di Esame effettuato
+	 * i valori di riferimento della tipologia di esame, l'esito (se presente) e gli eventuali avvisi)
+	 * 
+	 * @author Valtulini Claudio
 	 */
 	public String toStringCompleto(){
 		String stringaDescrittivaCompleta = super.toStringCompleto() + 

@@ -7,7 +7,6 @@ import java.util.ArrayList;
  * EsameEffettuato fornisce lo scheletro per costruire un oggetto che contiene i dati di un esame da effettuare/effettuato
  * 
  * @author Valtulini Claudio
- * 
  */
 
 import java.util.Date;
@@ -31,6 +30,8 @@ public class EsameEffettuato implements Serializable{
 	//costruttori
 	/**
 	 * Costruttore di default, imposta tutti i riferimenti a null
+	 * 
+	 * @author Valtulini Claudio
 	 */
 	public EsameEffettuato(){
 		esame = null;
@@ -41,12 +42,14 @@ public class EsameEffettuato implements Serializable{
 	}
 	
 	/**
-	 * Imposta i riferimenti di esame e malattia
+	 * Imposta i valori di esame e malattia
 	 * 
-	 * Se l'esame non e' presente nella lista degli esami effettuabili per la malattia specificata lancia IllegalArgumentException
+	 * @param <strong>esame</strong> la tipologia di esame
+	 * @param <strong>malattia</strong> la malattia per cui l'esame è richiesto
 	 * 
-	 * @param esame la tipologia di esame
-	 * @param malattia la malattia per cui l'esame è richiesto
+	 * @throws <strong>IllegalArgumentException</strong> e l'esame non e' presente nella lista degli esami effettuabili per la malattia specificata 
+	 * 
+	 * @author Valtulini Claudio
 	 */
 	public EsameEffettuato(Esame esame, Malattia malattia) throws IllegalAccessException, IllegalArgumentException{
 		this.esame = esame;
@@ -60,12 +63,17 @@ public class EsameEffettuato implements Serializable{
 	}
 	
 	/**
-	 * Imposta i riferimenti di esame, malattia, luogo, data e ora
+	 * Imposta i valori di esame, malattia, luogo, data e ora
 	 * 
-	 * Se l'esame non è presente nella lista degli esami effettuabili per la malattia specificata lancia IllegalArgumentException
+	 * @param <strong>esame</strong> la tipologia di esame
+	 * @param <strong>malattia</strong> la malattia per cui l'esame è richiesto
+	 * @param <strong>luogo</strong> il luogo in cui l'esame viene effettuato
+	 * @param <strong>data</strong> la data in cui l'esame viene effettuato
+	 * @param <strong>ora</strong> l'ora in cui l'esame viene effettuato
 	 * 
-	 * @param esame la tipologia di esame
-	 * @param malattia la malattia per cui l'esame è richiesto
+	 * @throws <strong>IllegalArgumentException</strong> e l'esame non e' presente nella lista degli esami effettuabili per la malattia specificata 
+	 * 
+	 * @author Valtulini Claudio
 	 */
 	public EsameEffettuato(Esame esame, Malattia malattia, String luogo, Date data, String ora) throws IllegalAccessException, IllegalArgumentException{
 		this.esame = esame;
@@ -82,7 +90,9 @@ public class EsameEffettuato implements Serializable{
 	/**
 	 * Ritorna il riferimento dell'attributo esame
 	 * 
-	 * @return esame la tipologia di esame
+	 * @return <strong>esame</strong> la tipologia di esame
+	 * 
+	 * @author Valtulini Claudio
 	 */
 	public Esame getEsame() {
 		return esame;
@@ -90,7 +100,9 @@ public class EsameEffettuato implements Serializable{
 	/**
 	 * Ritorna la data impostata
 	 * 
-	 * @return data la data in cui l'esame viene effettuato
+	 * @return <strong>data</strong> la data in cui l'esame viene effettuato
+	 * 
+	 * @author Valtulini Claudio
 	 */
 	public Date getData() {
 		return data;
@@ -98,7 +110,9 @@ public class EsameEffettuato implements Serializable{
 	/**
 	 * Ritorna l'ora impostata
 	 * 
-	 * @return ora l'ora in cui l'esame viene effettuato
+	 * @return <strong>ora</strong> l'ora in cui l'esame viene effettuato
+	 * 
+	 * @author Valtulini Claudio
 	 */
 	public String getOra() {
 		return ora;
@@ -106,14 +120,19 @@ public class EsameEffettuato implements Serializable{
 	/**
 	 * Ritorna il luogo impostato
 	 * 
-	 * @return luogo il luogo in cui l'esame viene effettuato
+	 * @return <strong>luogo</strong> il luogo in cui l'esame viene effettuato
+	 * 
+	 * @author Valtulini Claudio
 	 */
 	public String getLuogo() {
 		return luogo;
 	}
 	/**
 	 * Ritorna la malattia impostata
-	 * @return malattia la malattia per la quale e' richiesto l'esame
+	 * 
+	 * @return <strong>malattia</strong> la malattia per la quale e' richiesto l'esame
+	 * 
+	 * @author Valtulini Claudio
 	 */
 	public Malattia getMalattia() {
 		return malattia;
@@ -122,10 +141,12 @@ public class EsameEffettuato implements Serializable{
 	//setters
 	/**
 	 * Permette di impostare la tipologia di esame
+	 *
+	 * @param <strong>esame</strong> la tipologia di esame da impostare
 	 * 
-	 * se la tipologia impostata non e' presente nella lista di esami associati alla malattia, lancia IllegalArgumentException
+	 * @throws <strong>IllegalArgumentException</strong> se la tipologia impostata non e' presente nella lista di esami associati alla malattia
 	 * 
-	 * @param esame la tipologia di esame da impostare
+	 * @author Valtulini Claudio
 	 */
 	public void setEsame(Esame esame) throws IllegalArgumentException{
 		try{
@@ -137,13 +158,15 @@ public class EsameEffettuato implements Serializable{
 			}
 		}
 		catch(IllegalAccessException e){
-			//ignoro perchè tutto a posto, l'assegnamento è comunque valido dato che non è stata impostata una malattia
+			//ignoro perchè ho gia' reimpostato l'esame precedente
 		}
 	}
 	/**
 	 * Permette di impostare la data in cui effettuare l'esame
 	 * 
-	 * @param data la data che si vuole impostare
+	 * @param <strong>data</strong> la data che si vuole impostare
+	 * 
+	 * @author Valtulini Claudio
 	 */
 	public void setData(Date data) {
 		this.data = data;
@@ -151,7 +174,9 @@ public class EsameEffettuato implements Serializable{
 	/**
 	 * Permette di impostare l'ora in cui effettuare l'esame
 	 * 
-	 * @param ora l'ora che si vuole impostare
+	 * @param <strong>ora</strong> l'ora che si vuole impostare
+	 * 
+	 * @author Valtulini Claudio
 	 */
 	public void setOra(String ora) {
 		this.ora = ora;
@@ -159,7 +184,9 @@ public class EsameEffettuato implements Serializable{
 	/**
 	 * Permette di impostare il luogo in cui effettuare l'esame
 	 * 
-	 * @param luogo il luogo che si vuole impostare
+	 * @param <strong>luogo</strong> il luogo che si vuole impostare
+	 * 
+	 * @author Valtulini Claudio
 	 */
 	public void setLuogo(String luogo) {
 		this.luogo = luogo;
@@ -167,7 +194,9 @@ public class EsameEffettuato implements Serializable{
 	/**
 	 * Permette di impostare la malattia per cui si richiede l'esame
 	 * 
-	 * @param malattia la malattia che si vuole impostare
+	 * @param <strong>malattia</strong> la malattia che si vuole impostare
+	 * 
+	 * @author Valtulini Claudio
 	 */
 	public void setMalattia(Malattia malattia) {
 		this.malattia = malattia;

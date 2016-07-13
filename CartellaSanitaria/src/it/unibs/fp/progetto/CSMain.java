@@ -72,6 +72,7 @@ public class CSMain implements Serializable{
 	private static final String E_MEX_INS_TIPOLOGIA = "Inserisci il nome della tipologia di cui visualizzare le statistiche: ";
 	private static final String E_MEX_DIAGNOSTICO = "Esame diagnostico";
 	private static final String E_MEX_PERIODICO = "Esame periodico";
+	private static final String E_MEX_CREAZIONE = "Stai creando una nuova tipologia di esame";
 	
 	private static final String E_SCELTA_CREA_CERCA = "Si desidera creare una tipologia di esame o cercarne una già esistente?";
 	private static final String E_SCELTA_TIPO = "Si desidera inserire un nuovo Esame Effettuato Diagnostico o Periodico Misurabile?";
@@ -128,6 +129,7 @@ public class CSMain implements Serializable{
 	 * @author Martinelli Giuseppe
 	 */
 	public static Esame creaEsame(){
+		stampaMex(E_MEX_CREAZIONE);
 		String nome = MyInput.leggiStringaNonVuota(E_MEX_INS_NOME);
 		String raccomandazioni = MyInput.leggiStringa(E_MEX_INS_RACCOMANDAZIONI);
 		int sceltaT = 0;
@@ -179,6 +181,7 @@ public class CSMain implements Serializable{
 	 * @return l'<strong>esame</strong> creato
 	 */
 	public static Esame creaEsame(int scelta){
+		stampaMex(E_MEX_CREAZIONE);
 		String nome = MyInput.leggiStringaNonVuota(E_MEX_INS_NOME);
 		String raccomandazioni = MyInput.leggiStringa(E_MEX_INS_RACCOMANDAZIONI);
 		
