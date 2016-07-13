@@ -4,7 +4,9 @@ import java.util.ArrayList;
 /**
  * La classe EsamePeriodicoMisurabile estende la classe Esame per poter creare oggetti EsamePeriodicoMisurabile.
  * Rispetto alla classe madre permette inoltre di definire i risultati di un esame Periodico/Misurabile.
+ * 
  * In particolare definisce:
+ * 
  * valoreMin, il valore minimo del range di riferimento di un campo dell'esame;
  * valoreMax, il valore massimo del range di riferimento di un campo dell'esame;
  * sogliaErrore, la soglia(troppo BASSA o troppo ALTA) per cui sicuramente e' avvenuta un'anomalia durante l'analisi in merito all'esame.

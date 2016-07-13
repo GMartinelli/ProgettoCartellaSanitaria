@@ -98,11 +98,23 @@ public class ListaEsame implements Serializable{
 	public void rimuoviEsame(Esame esame){
 		lista.remove(esame);
 	}
-	
+	/**
+	 * Metodo che ritorna la dimensione dell'ArrayList lista
+	 * 
+	 * @return lista.size() la dimensione dell'ArrayList lista
+	 * 
+	 * @author Manenti Gabriele
+	 */
 	public int dimensione(){
 		return lista.size();
 	}
-	
+	/**
+	 * Metodo che ritorna un'esame dell'ArrayList lista alla posizione "pos"
+	 * 
+	 * @return lista.get(pos) un'esame dell'ArrayList lista alla posizione "pos"
+	 * 
+	 * @author Manenti Gabriele
+	 */
 	public Esame getEsame(int pos){
 		return lista.get(pos);
 	}
