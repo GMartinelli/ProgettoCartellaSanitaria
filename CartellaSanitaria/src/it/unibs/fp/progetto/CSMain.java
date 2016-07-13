@@ -74,7 +74,7 @@ public class CSMain implements Serializable{
 	private static final String E_MEX_PERIODICO = "Esame periodico";
 	private static final String E_MEX_CREAZIONE = "Stai creando una nuova tipologia di esame";
 	
-	private static final String E_SCELTA_CREA_CERCA = "Si desidera creare una tipologia di esame o cercarne una gia'  esistente?";
+	private static final String E_SCELTA_CREA_CERCA = "Si desidera creare una tipologia di esame o cercarne una gia'ï¿½ esistente?";
 	private static final String E_SCELTA_TIPO = "Si desidera inserire un nuovo Esame Effettuato Diagnostico o Periodico Misurabile?";
 	private static final String E_SCELTA_VISUALIZZA = "Quale esame vuoi visualizzare?";
 	
@@ -95,7 +95,7 @@ public class CSMain implements Serializable{
 	private static final String M_SCELTA_VISUALIZZA = "Quale malattia vuoi visualizzare?";
 	
 	// Avvisi
-	private static final String NON_MODIFICA = "Attenzione, non verrà chiesto di inserire alcun dato.";
+	private static final String NON_MODIFICA = "Attenzione, non verrï¿½ chiesto di inserire alcun dato.";
 	private static final String AVVISI_IMPOSTATI_CORRETTAMENTE = "Gli avvisi sono stati impostati correttamente. Operazione finita.";
 	
 	// Errori
@@ -106,6 +106,7 @@ public class CSMain implements Serializable{
 	private static final String ERRORE_ESAME_NON_TROVATO = "Attenzione! Non e' presente alcun esame con quel nome!";
 	private static final String ERRORE_MALATTIA_NON_TROVATA = "Attenzione! Non e' presente alcuna malattia con quel nome!";
 	private static final String ERRORE_MANCA_ESAME_MALATTIA = "Attenzione! Non ci sono esami o malattie nella cartella sanitaria! Impossibile visualizzare!";
+	private static final String ERRORE_E_NON_CREATO = "L'esame non e' stato creato";
 	
 	//Messaggi creazione guidata
 	private static final String BEN_C_GUIDATA="Benvenuto nella creazione guidata di una cartella sanitaria!";
@@ -219,6 +220,8 @@ public class CSMain implements Serializable{
 					EsamePeriodicoMisurabile e1 = new EsamePeriodicoMisurabile(nome, raccomandazioni, valoreMin, valoreMax, sogliaErrore);
 					return e1;	
 				}
+			case 0:
+				break;
 			default:
 				stampaMex(ERRORE_INS);
 				break;
@@ -1370,16 +1373,20 @@ public class CSMain implements Serializable{
 		
 		ArrayList<EsameEffettuato> listaEE = CS.getEsamiEffettuati();
 		ArrayList<Malattia> listaM = CS.getElencoMalattia();
-		for(int i = 0; i < 4; i++){
-			if(((i + 1) % 2) == 0){
-				stampaMex(MEX_INS_TIPOLOGIA_D);
-				listaE.aggiungiEsame(creaEsame(1));
+		try{
+			for(int i = 0; i < 4; i++){
+				if(((i + 1) % 2) == 0){
+					stampaMex(MEX_INS_TIPOLOGIA_D);
+					listaE.aggiungiEsame(creaEsame(1));
+				}
+				else{
+					stampaMex(MEX_INS_TIPOLOGIA_P);
+					listaE.aggiungiEsame(creaEsame(2));		
+				}
 			}
-			else{
-				stampaMex(MEX_INS_TIPOLOGIA_P);
-				listaE.aggiungiEsame(creaEsame(2));
-				
-			}
+		}
+		catch(NullPointerException e){
+			stampaMex(ERRORE_E_NON_CREATO);
 		}
 		stampaMex("");
 		stampaMex(MEX_INS_MALATTIA);
