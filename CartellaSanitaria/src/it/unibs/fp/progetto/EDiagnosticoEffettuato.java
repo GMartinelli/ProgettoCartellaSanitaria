@@ -234,7 +234,7 @@ public class EDiagnosticoEffettuato extends EsameEffettuato{
 			"Area Interessata: " + esame.getAreaInteressata();
 		}
 		if(esito != null){ stringaDescrittivaCompleta +=
-			"Esito: " + esito + "%n";
+			"Esito: " + esito + "\n";
 		}
 		return stringaDescrittivaCompleta;
 	}

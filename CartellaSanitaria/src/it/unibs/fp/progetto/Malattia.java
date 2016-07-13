@@ -214,15 +214,15 @@ public class Malattia  implements Serializable{
 	 * @return descrizione la descrizione sintetica della malattia
 	 */
 	public String toString(){ /*Modificato Metodo to String nell'acquisizione data(aggiunto MyTime.toStringData)*/
-		String descrizione = nome + "%n   Iniziata: " + MyTime.toStringData(dataInizio);
-		if(dataTermine != null) descrizione += ("%n   Terminata:  " + MyTime.toStringData(dataTermine)); 
+		String descrizione = nome + "\n   Iniziata: " + MyTime.toStringData(dataInizio);
+		if(dataTermine != null) descrizione += ("\n   Terminata:  " + MyTime.toStringData(dataTermine)); 
 		
 		return descrizione;
 	}
 	
 	public String toStringCompleto(){
 		String stringaDescrittivaCompleta =
-				this.toString() + "%n";
+				this.toString() + "\n";
 			if(this.getSintomi() != null){ stringaDescrittivaCompleta +=
 				"  Sintomi: " + this.getSintomi();
 			}
@@ -230,7 +230,7 @@ public class Malattia  implements Serializable{
 				" Diagnosi: "+ this.getDiagnosi();
 			}
 			if(this.getElencoEsamiAssociati().size() > 0){ stringaDescrittivaCompleta +=
-				"  Elenco delle tipologie di esame associate: " + "%n";
+				"  Elenco delle tipologie di esame associate: " + "\n";
 				for(Esame elemento: this.getElencoEsamiAssociati()){ stringaDescrittivaCompleta +=
 				"   " + elemento.toString();
 				}
