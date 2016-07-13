@@ -67,7 +67,7 @@ public class Malattia  implements Serializable{
 	}
 	/**
 	 * Ritorna l'ArrayList di oggetti della classe Esame contenente l'elenco degli esami associati alla malattia
-	 * @return elencoEsamiAssociati gli esami per cui la malattia può essere richiesta
+	 * @return elencoEsamiAssociati gli esami per cui la malattia puï¿½ essere richiesta
 	 */
 	public ArrayList<Esame> getElencoEsamiAssociati() {
 		return elencoEsamiAssociati;
@@ -157,7 +157,7 @@ public class Malattia  implements Serializable{
 	 * @param dataInizio la data di inizio
 	 * @param sintomi i sintomi 
 	 * @param diagnosi la diagnosi
-	 * @param elencoEsamiAssociati l'elenco di esami che è possibile richiedere per questa malattia
+	 * @param elencoEsamiAssociati l'elenco di esami che ï¿½ possibile richiedere per questa malattia
 	 * @param terapia la terapia
 	 */
 	public Malattia(String nome, Date dataInizio, String sintomi, String diagnosi, ArrayList<Esame> elencoEsamiAssociati, String terapia){
@@ -178,7 +178,7 @@ public class Malattia  implements Serializable{
 	 * @param dataTermine la data di termine
 	 * @param sintomi i sintomi 
 	 * @param diagnosi la diagnosi
-	 * @param elencoEsamiAssociati l'elenco di esami che è possibile richiedere per questa malattia
+	 * @param elencoEsamiAssociati l'elenco di esami che ï¿½ possibile richiedere per questa malattia
 	 * @param terapia la terapia
 	 */
 	public Malattia(String nome, Date dataInizio, Date dataTermine, String sintomi, String diagnosi, ArrayList<Esame> elencoEsamiAssociati, String terapia){
@@ -194,10 +194,10 @@ public class Malattia  implements Serializable{
 	
 	//metodi	
 	/**
-	 * Metodo che, dato il nome di un esame, permette di sapere se questo è presente nella lista di esami associati ad una malattia
+	 * Metodo che, dato il nome di un esame, permette di sapere se questo ï¿½ presente nella lista di esami associati ad una malattia
 	 * 
 	 * @param nomeEsame il nome dell'esame da cercare
-	 * @return true se l'esame è presente nell'elenco di esami associati, false altrimenti
+	 * @return true se l'esame ï¿½ presente nell'elenco di esami associati, false altrimenti
 	 */
 	public boolean isAssociato(String nomeEsame){
 		for(Esame elemento: elencoEsamiAssociati){
@@ -223,20 +223,20 @@ public class Malattia  implements Serializable{
 	public String toStringCompleto(){
 		String stringaDescrittivaCompleta =
 				this.toString() + "\n";
-			if(this.getSintomi() != null){ stringaDescrittivaCompleta +=
-				"  Sintomi: " + this.getSintomi();
+			if(this.sintomi != null){ stringaDescrittivaCompleta +=
+				"  Sintomi: " + this.sintomi;
 			}
-			if(this.getDiagnosi() != null){ stringaDescrittivaCompleta +=
-				" Diagnosi: "+ this.getDiagnosi();
+			if(this.diagnosi != null){ stringaDescrittivaCompleta +=
+				" Diagnosi: "+ this.diagnosi;
 			}
-			if(this.getElencoEsamiAssociati().size() > 0){ stringaDescrittivaCompleta +=
+			if(this.elencoEsamiAssociati.size() > 0){ stringaDescrittivaCompleta +=
 				"  Elenco delle tipologie di esame associate: " + "\n";
-				for(Esame elemento: this.getElencoEsamiAssociati()){ stringaDescrittivaCompleta +=
+				for(Esame elemento: this.elencoEsamiAssociati){ stringaDescrittivaCompleta +=
 				"   " + elemento.toString();
 				}
 			}
-			if(this.getTerapia() != null){ stringaDescrittivaCompleta +=
-				"  Terapia: " + this.getTerapia();
+			if(this.terapia != null){ stringaDescrittivaCompleta +=
+				"  Terapia: " + this.terapia;
 			}
 		return stringaDescrittivaCompleta;
 	}

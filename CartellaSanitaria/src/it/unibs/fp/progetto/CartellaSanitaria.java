@@ -689,32 +689,32 @@ public class CartellaSanitaria implements Serializable{
 	 * @author Valtulini Claudio
 	 */
 	public String toStringCompleto(){
-		String stringaDescrittivaCompleta = "Cartella sanitaria di " + this.getNome() + " " + this.getCognome() + "\n" +
-				"Residente in: " + this.getIndirizzo() + "\n" +
+		String stringaDescrittivaCompleta = "Cartella sanitaria di " + this.nome + " " + this.cognome + "\n" +
+				"Residente in: " + this.indirizzo + "\n" +
 				"Contatti: " + "\n" +
-				"  Numero Telefonico: " + this.getTelefono() + "\n";
+				"  Numero Telefonico: " + this.telefono + "\n";
 			if(this.getEmail() != null){ stringaDescrittivaCompleta += 
-				"  Indirizzo E-Mail: " + this.getEmail() + "\n";
+				"  Indirizzo E-Mail: " + this.email + "\n";
 			}
 			stringaDescrittivaCompleta +=
-				"Nato il: " + this.getDataNascita().toString() + "\n" +
-				"A: " + this.getLuogoNascita() + "\n" +
+				"Nato il: " + this.dataNascita.toString() + "\n" +
+				"A: " + this.luogoNascita + "\n" +
 				"Genere: " + this.getStringaGenere() + "\n" +
-				"Gruppo Sanguigno: " + this.getGruppoSanguigno() + "\n" +
-				"Codice Fiscale: " + this.getCodiceFiscale() + "\n";
+				"Gruppo Sanguigno: " + this.gruppoSanguigno + "\n" +
+				"Codice Fiscale: " + this.codiceFiscale + "\n";
 			this.generaCodiceSanitario();
 			stringaDescrittivaCompleta +=
-				"Codice Sanitario: " + this.getCodiceSanitario() + "\n" +
+				"Codice Sanitario: " + this.codiceSanitario + "\n" +
 				"Esami Effettuati: " + "\n";
 			int i = 1;
-			for(EsameEffettuato elemento: this.getEsamiEffettuati()){ stringaDescrittivaCompleta +=
+			for(EsameEffettuato elemento: this.esamiEffettuati){ stringaDescrittivaCompleta +=
 				"  " + i + ". " + elemento.toString() + "\n";
 				i++;
 			}
 			stringaDescrittivaCompleta +=
 				"Malattie: " + "\n";
 			i = 1;
-			for(Malattia elemento: this.getElencoMalattia()){ stringaDescrittivaCompleta +=
+			for(Malattia elemento: this.elencoMalattia){ stringaDescrittivaCompleta +=
 				"  " + i + ". " + elemento.toString() + "\n";
 				i++;
 			}
