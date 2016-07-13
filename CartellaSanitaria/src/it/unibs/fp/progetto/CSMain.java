@@ -925,6 +925,8 @@ public class CSMain implements Serializable{
 		
 		CartellaSanitaria cs = new CartellaSanitaria(nome, cognome, indirizzo, telefono, mail, dataN, luogoN, genereP, codiceF, gruppoS);
 		cs.generaCodiceSanitario();
+		cs.setElencoMalattia(new ArrayList<Malattia>());
+		cs.setEsamiEffettuati(new ArrayList<EsameEffettuato>());
 		return cs;
 	}
 	
