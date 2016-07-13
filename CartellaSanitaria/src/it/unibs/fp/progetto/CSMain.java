@@ -1432,6 +1432,7 @@ public class CSMain implements Serializable{
 						EPeriodicoMisurabileEffettuato eInserito = new EPeriodicoMisurabileEffettuato(esameScelto, mAss, luogo, data, ora, esito);
 						//EPM CREATO, AGGIUNGO ALLA LISTA DEGLI ESAMI
 						listaEE.add(eInserito);
+						valido = true;
 					}
 					catch(IllegalAccessException e){
 						e.getMessage();
