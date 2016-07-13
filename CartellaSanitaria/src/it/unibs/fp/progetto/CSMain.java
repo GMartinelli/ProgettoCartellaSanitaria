@@ -41,7 +41,7 @@ public class CSMain implements Serializable{
 	// Inserimento Paziente
 	private static final String P_MEX_INS_NOME = "Inserisci il nome del paziente: ";
 	private static final String P_MEX_INS_COGNOME = "Inserisci il cognome del paziente: ";
-	private static final String P_MEX_INS_INDIRIZZO = "Inserisci l'indirizzo del paziente: ";
+	private static final String P_MEX_INS_INDIRIZZO = "Inserisci l'indirizzo del paziente (Via / Numero / Paese / (Provincia) ): ";
 	private static final String P_MEX_INS_TELEFONO = "Inserisci il numero di telefono del paziente: ";
 	private static final String P_MEX_INS_MAIL = "Inserisci l'indirizzo e-mail del paziente: ";
 	private static final String P_MEX_INS_DATAN = "Inserisci la data di nascita del paziente nel formato gg/mm/aaaa: ";
@@ -71,6 +71,8 @@ public class CSMain implements Serializable{
 	private static final String E_MEX_CERCA = "Inserire il nome dell'esame che si desidera cercare: ";
 	private static final String E_MEX_MODIFICA = "Inserire il nome dell'esame che si desidera modificare: ";
 	private static final String E_MEX_INS_TIPOLOGIA = "Inserisci il nome della tipologia di cui visualizzare le statistiche: ";
+	private static final String E_MEX_DIAGNOSTICO = "Esame diagnostico";
+	private static final String E_MEX_PERIODICO = "Esame periodico";
 	
 	private static final String E_SCELTA_CREA_CERCA = "Si desidera creare una tipologia di esame o cercarne una già esistente?";
 	private static final String E_SCELTA_TIPO = "Si desidera inserire un nuovo Esame Effettuato Diagnostico o Periodico Misurabile?";
@@ -136,6 +138,7 @@ public class CSMain implements Serializable{
 			sceltaT = menuTipo.scegli();
 			switch(sceltaT){
 			case 1:
+				stampaMex(E_MEX_DIAGNOSTICO);
 				String areaInteressata = MyInput.leggiStringaNonVuota(E_MEX_INS_AREAI);
 				if(raccomandazioni != null && BelleStringhe.togliSpazi(raccomandazioni) != ""){
 					EsameDiagnostico e1 = new EsameDiagnostico(nome, areaInteressata);
@@ -146,6 +149,7 @@ public class CSMain implements Serializable{
 					return e1;	
 				}
 			case 2:
+				stampaMex(E_MEX_PERIODICO);
 				int valoreMin = MyInput.leggiInteroConMinimo(E_MEX_INS_VALORE_MIN, 0);
 				int valoreMax = MyInput.leggiInteroConMinimo(E_MEX_INS_VALORE_MAX, valoreMin+1);
 				int sogliaErrore = MyInput.leggiInteroConMinimo(E_MEX_INS_SOGLIA, 0);
@@ -182,6 +186,7 @@ public class CSMain implements Serializable{
 		
 		switch(scelta){
 			case 1:
+				stampaMex(E_MEX_DIAGNOSTICO);
 				String areaInteressata = MyInput.leggiStringaNonVuota(E_MEX_INS_AREAI);
 				if(raccomandazioni != null && BelleStringhe.togliSpazi(raccomandazioni) != ""){
 					EsameDiagnostico e1 = new EsameDiagnostico(nome, areaInteressata);
@@ -192,6 +197,7 @@ public class CSMain implements Serializable{
 					return e1;	
 				}
 			case 2:
+				stampaMex(E_MEX_PERIODICO);
 				int valoreMin = MyInput.leggiInteroConMinimo(E_MEX_INS_VALORE_MIN, 0);
 				int valoreMax = MyInput.leggiInteroConMinimo(E_MEX_INS_VALORE_MAX, valoreMin+1);
 				int sogliaErrore = MyInput.leggiInteroConMinimo(E_MEX_INS_SOGLIA, 0);
