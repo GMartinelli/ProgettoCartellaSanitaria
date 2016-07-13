@@ -1462,25 +1462,25 @@ public class CSMain implements Serializable{
 				boolean valido = false;
 				Malattia mAss = null;
 				do{
-					String nomeMalattiaAss = MyInput.leggiStringaNonVuota(E_MEX_INS_MRELATIVO);
-					for(int i = 0; i < listaM.size() && valido == false; i++){
-						if(listaM.get(i).getNome().equals(nomeMalattiaAss)){
-							mAss = listaM.get(i);
-							valido = true;
+					do{
+						String nomeMalattiaAss = MyInput.leggiStringaNonVuota(E_MEX_INS_MRELATIVO);
+						for(int i = 0; i < listaM.size() && valido == false; i++){
+							if(listaM.get(i).getNome().equals(nomeMalattiaAss)){
+								mAss = listaM.get(i);
+								valido = true;
+							}
 						}
-					}
-					if(!valido){
-						stampaMex(ERRORE_MALATTIA_NON_TROVATA);
-					}
-				}while(!valido);
-				
-				String luogo = MyInput.leggiStringaNonVuota(E_MEX_INS_LUOGO);
-				Date data = MyInput.leggiData(E_MEX_INS_DATA);
-				String ora = MyInput.leggiStringaNonVuota(E_MEX_INS_ORA);
-				String esito = MyInput.leggiStringaNonVuota(E_MEX_INS_ESITO);
-				
-				valido = false;
-				do{
+						if(!valido){
+							stampaMex(ERRORE_MALATTIA_NON_TROVATA);
+						}
+					}while(!valido);
+					
+					String luogo = MyInput.leggiStringaNonVuota(E_MEX_INS_LUOGO);
+					Date data = MyInput.leggiData(E_MEX_INS_DATA);
+					String ora = MyInput.leggiStringaNonVuota(E_MEX_INS_ORA);
+					String esito = MyInput.leggiStringaNonVuota(E_MEX_INS_ESITO);
+					
+					valido = false;
 					try{
 						EDiagnosticoEffettuato eInserito = new EDiagnosticoEffettuato(esameSceltoD, mAss, luogo, data, ora, esito);
 						listaEE.add(eInserito);
@@ -1494,7 +1494,11 @@ public class CSMain implements Serializable{
 						e.getMessage();
 					}
 
+
 				}while(valido == false);
+
+			
+
 			}
 			stampaMex("");
 		}
