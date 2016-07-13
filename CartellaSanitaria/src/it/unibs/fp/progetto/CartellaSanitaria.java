@@ -518,7 +518,7 @@ public class CartellaSanitaria implements Serializable{
 	 */
 	public boolean isEsameEsistente(String nomeEsame){
 		for(EsameEffettuato elemento: esamiEffettuati){
-			if(elemento.getEsame().getNome() == nomeEsame)
+			if(elemento.getEsame().getNome().equals(nomeEsame))
 				return true;
 		}
 		return false;
@@ -534,7 +534,7 @@ public class CartellaSanitaria implements Serializable{
 	 */
 	public EsameEffettuato cercaEsame(String nomeEsame){
 		for(int i=0; i<esamiEffettuati.size();i++){
-			if(esamiEffettuati.get(i).getEsame().getNome()==nomeEsame)
+			if(esamiEffettuati.get(i).getEsame().getNome().equals(nomeEsame))
 				return esamiEffettuati.get(i);
 		}
 		return null;
@@ -552,7 +552,7 @@ public class CartellaSanitaria implements Serializable{
 	 */
 	public EsameEffettuato cercaEsame(String nomeEsame, Date dataEsame){
 		for(EsameEffettuato elemento: esamiEffettuati){
-			if(elemento.getEsame().getNome() == nomeEsame && elemento.getData() == dataEsame)
+			if(elemento.getEsame().getNome().equals(nomeEsame) && elemento.getData() == dataEsame)
 				return elemento;
 		}
 		return null;
@@ -570,7 +570,7 @@ public class CartellaSanitaria implements Serializable{
 	public int contaEsame(String nomeEsame){
 		int nCorrispondenze = 0;
 		for(EsameEffettuato elemento: esamiEffettuati){
-			if(elemento.getEsame().getNome() == nomeEsame)
+			if(elemento.getEsame().getNome().equals(nomeEsame))
 				nCorrispondenze++;
 		}
 		return nCorrispondenze;
@@ -587,7 +587,7 @@ public class CartellaSanitaria implements Serializable{
 	 */
 	public boolean isMalattiaEsistente(String nomeMalattia){
 		for(Malattia elemento: elencoMalattia){
-			if(elemento.getNome() == nomeMalattia)
+			if(elemento.getNome().equals(nomeMalattia))
 				return true;
 		}
 		return false;
@@ -604,7 +604,7 @@ public class CartellaSanitaria implements Serializable{
 	public int contaMalattiaEsistente(String nomeMalattia){
 		int nCorrispondenze = 0;
 		for(Malattia elemento: elencoMalattia){
-			if(elemento.getNome() == nomeMalattia)
+			if(elemento.getNome().equals(nomeMalattia))
 				nCorrispondenze++;
 		}
 		return nCorrispondenze;
@@ -620,7 +620,7 @@ public class CartellaSanitaria implements Serializable{
 	 */
 	public Malattia cercaMalattia(String nomeMalattia){
 		for(int i=0; i<elencoMalattia.size();i++){
-			if(elencoMalattia.get(i).getNome()==nomeMalattia)
+			if(elencoMalattia.get(i).getNome().equals(nomeMalattia))
 				return elencoMalattia.get(i);
 		}
 		return null;
@@ -636,7 +636,7 @@ public class CartellaSanitaria implements Serializable{
 	 */
 	public Malattia cercaMalattia(String nomeMalattia, Date dataInizio){
 		for(Malattia elemento: elencoMalattia){
-			if(elemento.getNome() == nomeMalattia && elemento.getDataInizio() == dataInizio)
+			if(elemento.getNome().equals(nomeMalattia) && elemento.getDataInizio() == dataInizio)
 				return elemento;
 		}
 		return null;

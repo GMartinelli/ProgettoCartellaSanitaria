@@ -788,6 +788,11 @@ public class CSMain implements Serializable{
 		return null;
 	}
 	
+	/**
+	 * Permette di creare una malattia
+	 * @param <strong>listaE</strong> la lista nella quale cercare gli esami da associare
+	 * @return la <strong>malattia</strong> creata
+	 */
 	public static Malattia creaMalattia(ListaEsame listaE){
 		String nome = null;
 		Date dataInizio = null;
@@ -1399,7 +1404,7 @@ public class CSMain implements Serializable{
 		MyMenu menuEME = new MyMenu("Scegli un esame misurabile di cui creare 6 esami effettuati", nomiEsami);
 		int sceltaEME = menuEME.scegli(); 
 		if(sceltaEME != 0){//E' stato scelto un esame misurabile di cui creare i 6 effettuati
-			EsamePeriodicoMisurabile esameScelto = listaEPM.get(sceltaEME);
+			EsamePeriodicoMisurabile esameScelto = listaEPM.get(sceltaEME - 1);
 			for(int j = 0; j < 6; j++){
 				boolean valido = false;
 				Malattia mAss = null;
@@ -1431,8 +1436,6 @@ public class CSMain implements Serializable{
 				}
 			stampaMex("");
 			}
-			CS.setElencoMalattia(listaM);
-			CS.setEsamiEffettuati(listaEE);
 		}
 		
 		stampaMex("");
