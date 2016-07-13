@@ -1,5 +1,6 @@
 
 package it.unibs.fp.progetto;
+import java.util.ArrayList;
 /**
  * La classe EsamePeriodicoMisurabile estende la classe Esame per poter creare oggetti EsamePeriodicoMisurabile.
  * Rispetto alla classe madre permette inoltre di definire i risultati di un esame Periodico/Misurabile.
@@ -150,6 +151,26 @@ public class EsamePeriodicoMisurabile extends Esame {
 	}
 	
 	//Metodi
-	
+	/**
+	 * Metodo che crea una lista di esami periodici misurabili selezionati da una lista di esami data in ingresso
+	 * 
+	 * @param listaE lista degli esami da cui selezionare quelli periodici misurabili
+	 * @return lista degli esami periodici misurabili
+	 * 
+	 * @author Manenti Gabriele
+	 */
+	public static ArrayList<EsamePeriodicoMisurabile> selezionaEsamePMisurabili(ListaEsame listaE){
+		ArrayList<EsamePeriodicoMisurabile> listaPM = new ArrayList<>();
+		
+		for(int i=0; i<listaE.dimensione(); i++){
+			Esame elemento  = listaE.getEsame(i);
+			if(elemento instanceof EsamePeriodicoMisurabile){
+				EsamePeriodicoMisurabile e = (EsamePeriodicoMisurabile) elemento;
+				listaPM.add(e);
+			}
+		}
+		
+		return listaPM;
+	}
 	
 }

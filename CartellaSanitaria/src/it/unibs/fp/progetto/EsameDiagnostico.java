@@ -1,4 +1,5 @@
 package it.unibs.fp.progetto;
+import java.util.ArrayList;
 /**
  * La classe EsameDiagnostico estende la classe Esame per poter creare oggetti EsameDiagnostico.
  * Rispetto alla classe madre permette inoltre di definire:  
@@ -76,6 +77,28 @@ public class EsameDiagnostico extends Esame {
 		this.areaInteressata = areaInteressata;
 	}
 	//Metodi
+	/**
+	 * Metodo che crea una lista di esami diagnostici selezionati da una lista di esami data in ingresso
+	 * 
+	 * @param listaE lista degli esami da cui selezionare quelli diagnostici
+	 * @return lista degli esami diagnostici
+	 * 
+	 * @author Manenti Gabriele
+	 */
+	public static ArrayList<EsameDiagnostico> selezionaEsameDiagnostico(ListaEsame listaE){
+		ArrayList<EsameDiagnostico> listaDiagnostico = new ArrayList<EsameDiagnostico>();
+		
+		for(int i=0; i<listaE.dimensione(); i++){
+			Esame elemento  = listaE.getEsame(i);
+			if(elemento instanceof EsameDiagnostico){
+				EsameDiagnostico e = (EsameDiagnostico) elemento;
+				listaDiagnostico.add(e);
+			}
+		}
+		
+		return listaDiagnostico;
+	}
 	
+
 
 }

@@ -1,12 +1,12 @@
 package it.unibs.fp.progetto;
 import java.io.Serializable;
+import java.util.ArrayList;
+
 /**
  * La classe ListaEsame permette di creare una lista in cui inserire un elenco di Esami.
  * 
  * @author Manenti Gabriele
  */
-import java.util.ArrayList;
-
 public class ListaEsame implements Serializable{
 	//Attributi
 	private ArrayList<Esame> lista;
@@ -97,5 +97,13 @@ public class ListaEsame implements Serializable{
 	 */
 	public void rimuoviEsame(Esame esame){
 		lista.remove(esame);
+	}
+	
+	public int dimensione(){
+		return lista.size();
+	}
+	
+	public Esame getEsame(int pos){
+		return lista.get(pos);
 	}
 }
