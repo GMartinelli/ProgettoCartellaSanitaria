@@ -68,6 +68,7 @@ public class CSMain implements Serializable{
 	private static final String E_MEX_PIU_ESAMI = "Attenzione, sono presenti piu' esami di questo tipo: ";
 	private static final String E_MEX_CANCELLA_DATA = "Inserire la data dell'esame da cancellare: ";
 	private static final String E_MEX_CERCA = "Inserire il nome dell'esame che si desidera cercare: ";
+	private static final String E_MEX_MODIFICA = "Inserire il nome dell'esame che si desidera modificare: ";
 	private static final String E_MEX_INS_TIPOLOGIA = "Inserisci il nome della tipologia di cui visualizzare le statistiche: ";
 	
 	private static final String E_SCELTA_CREA_CERCA = "Si desidera creare una tipologia di esame o cercarne una già esistente?";
@@ -914,7 +915,7 @@ public class CSMain implements Serializable{
 	 * 
 	 * @author Martinelli Giuseppe
 	 */
-	public static void modificaEsame(Esame esame, ListaEsame listaE){
+	public static void modificaEsame(Esame esame){
 		int scelta = 0;
 		MyMenu menuModificaEsame = new MyMenu(MODIFICA_INFO_E, E_OPZIONI_MODIFICA);
 		do{
@@ -1568,10 +1569,13 @@ public class CSMain implements Serializable{
 		String nomeEsame = MyInput.leggiStringaNonVuota(E_MEX_CANCELLA_NOME);
 		if(listaE.isEsistente(nomeEsame)){
 			boolean rimuovi = MyInput.yesOrNo(String.format(E_MEX_RIC_RIMUOVI, nomeEsame));
-			if(rimuovi)
+			if(rimuovi){
 				listaE.rimuoviEsame(listaE.cercaEsame(nomeEsame));
-		}else
+			}
+		}
+		else{
 			System.out.println(ERRORE_ESAME_NON_TROVATO);
+		}
 	}
 
 	/*Main*/
@@ -1580,6 +1584,7 @@ public class CSMain implements Serializable{
 		
 		boolean visualizzato = false;
 		boolean caricato = false;
+		boolean valido = false;
 		CartellaSanitaria CS = null;
 
 		ArrayList<Esame> lista = new ArrayList<Esame>();
@@ -1641,10 +1646,24 @@ public class CSMain implements Serializable{
 								richiesteCartellaSanitaria(CS, listaE, listaM);
 								break;
 							case 2:	/*AGGIUNGI tipologia esame*/
+								creaEsame();
 								break;
 							case 3: /*Modifica tipologia esame*/
+								String nomeModifica = null;
+								valido = false;
+								do{
+									nomeModifica = MyInput.leggiStringaNonVuota(E_MEX_MODIFICA);
+									if(listaE.isEsistente(nomeModifica)){
+										modificaEsame(listaE.cercaEsame(nomeModifica));
+										valido = true;
+									}
+									else{
+										stampaMex(ERRORE_ESAME_NON_TROVATO);
+									}
+								}while(!valido);
 								break;
 							case 4: /*ELIMINA tipologia esame*/
+								eliminaEsame(listaE);
 								break;
 							default:
 								/*ERRORE*/
@@ -1657,6 +1676,5 @@ public class CSMain implements Serializable{
 				}
 		}while(sceltaI!=0);
 		stampaMex(MEX_USCITA);
-		
 	}
 }
