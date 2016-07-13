@@ -1457,7 +1457,7 @@ public class CSMain implements Serializable{
 		MyMenu menuED = new MyMenu("Scegli un esame diagnostico di cui creare 3 esami effettuati", nomiEsamiD);
 		int sceltaED = menuED.scegli(); 
 		if(sceltaED!=0){//E' stato scelto un esame misurabile su cui creare i 6 effettuati
-			EsameDiagnostico esameSceltoD = listaD.get(sceltaED);
+			EsameDiagnostico esameSceltoD = listaD.get(sceltaED - 1);
 			for(int j = 0; j < 6; j++){
 				boolean valido = false;
 				Malattia mAss = null;
