@@ -34,7 +34,8 @@ public class CSMain implements Serializable{
 	private static final String[] M_OPZIONI_MODIFICA = {"Modifica nome", "Modifica data di inizio", "Modifica data di termine", "Modifica sintomi", "Modifica diagnosi", "Modifica terapia"};
 	
 	// Gestione File
-	private static final String PATH = "cartella_sanitaria.txt";
+	private static final String PATH_C = "cartella_sanitaria.txt";
+	private static final String PATH_L = "lista_tipologia_esame.txt";
 	private static final String MEX_SOVRASCIVERE="E' gia' presente una cartella sanitaria, desidera sovrasciverla e crearne una nuova?";
 	
 	// Inserimento Paziente
@@ -1480,7 +1481,7 @@ public class CSMain implements Serializable{
 	 * 
 	 */
 	
-	public static void richiesteCartellaSanitaria(CartellaSanitaria CS, ListaEsame listaE, ArrayList<Malattia> listaM){
+	public static void richiesteCartellaSanitaria(CartellaSanitaria CS, ListaEsame listaE){
 		
 		int scelta = 0;
 		MyMenu menuRichieste = new MyMenu("Cosa si desidera fare?", OPZIONI_RICHIESTE);
@@ -1588,15 +1589,19 @@ public class CSMain implements Serializable{
 		CartellaSanitaria CS = null;
 
 		ArrayList<Esame> lista = new ArrayList<Esame>();
-		ArrayList<Malattia> listaM = new ArrayList<Malattia>();
 		ListaEsame listaE = new ListaEsame(lista);
 
-		File file = new File(PATH);
+		File fileCS = new File(PATH_C);
+		File fileListaE = new File(PATH_L);
 		
 		//SE ESISTE IL FILE LO CARICO
-		if (file.exists()){
-			CS = (CartellaSanitaria) MyServizioFile.caricaSingoloOggetto(file);
+		if (fileCS.exists()){
+			CS = (CartellaSanitaria) MyServizioFile.caricaSingoloOggetto(fileCS);
 			caricato = true;
+		}
+		
+		if(fileListaE.exists()){
+			listaE = (ListaEsame) MyServizioFile.caricaSingoloOggetto(fileListaE);
 		}
 		
 		/*INIZIO CON I MENU: PRIMO MENU PER SCEGLIERE SE CREARE CARTELLA O FARE RICHIESTE TRACCIA (VISUALIZZAZIONE ECC.) */
@@ -1614,15 +1619,15 @@ public class CSMain implements Serializable{
 						if(scelta){	//SOVRASCIVO
 							CS = creaCartellaSanitaria();
 							//FINITO DI RICREARE IL FILE
-							MyServizioFile.salvaSingoloOggetto(file, CS);
+							MyServizioFile.salvaSingoloOggetto(fileCS, CS);
 						}
 						else{//CARICO I DATI PRECEDENTI
-							CS = (CartellaSanitaria) MyServizioFile.caricaSingoloOggetto(file);
+							CS = (CartellaSanitaria) MyServizioFile.caricaSingoloOggetto(fileCS);
 							caricato = true;
 						}
 					}
 					else{
-						MyServizioFile.creaFile(PATH);
+						MyServizioFile.creaFile(PATH_C);
 						CS = creaCartellaSanitaria();
 					}
 					break;
@@ -1643,10 +1648,14 @@ public class CSMain implements Serializable{
 						sceltaD = menuD.scegli();
 						switch(sceltaD){
 							case 1: //richieste
-								richiesteCartellaSanitaria(CS, listaE, listaM);
+								richiesteCartellaSanitaria(CS, listaE);
+								MyServizioFile.salvaSingoloOggetto(fileCS, CS);
+								MyServizioFile.salvaSingoloOggetto(fileListaE, listaE);
 								break;
 							case 2:	/*AGGIUNGI tipologia esame*/
-								creaEsame();
+								Esame eCreato = creaEsame();
+								listaE.aggiungiEsame(eCreato);
+								MyServizioFile.salvaSingoloOggetto(fileListaE, listaE);
 								break;
 							case 3: /*Modifica tipologia esame*/
 								String nomeModifica = null;
@@ -1661,9 +1670,11 @@ public class CSMain implements Serializable{
 										stampaMex(ERRORE_ESAME_NON_TROVATO);
 									}
 								}while(!valido);
+								MyServizioFile.salvaSingoloOggetto(fileListaE, listaE);
 								break;
 							case 4: /*ELIMINA tipologia esame*/
 								eliminaEsame(listaE);
+								MyServizioFile.salvaSingoloOggetto(fileListaE, listaE);
 								break;
 							default:
 								/*ERRORE*/
