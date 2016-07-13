@@ -18,7 +18,7 @@ public class CSMain implements Serializable{
 	
 	// Opzioni menu'
 	private static final String[] OPZIONI_I={"Crea Cartella Sanitaria", "Visualizzazione e operazioni su oggetti"};
-	private static final String[] OPZIONI_D={"Visualizzazione completa cartella / Modifica dati cartella", "Aggiungi tipologia", "Modifica tipologia", "Elimina tipologia"};
+	private static final String[] OPZIONI_D={"Visualizzazione completa cartella / Modifica dati cartella", "Aggiungi tipologia esame", "Modifica tipologia esame", "Elimina tipologia esame"};
 	private static final String[] OPZIONI_RICHIESTE = {"Visualizzazione completa dati anagrafici", "Visualizzazione completa di un esame tra quelli mostrati nella lista", "Visualizzazione completa di una malattia tra quelle mostrate nella lista", "Scelta di una tipologia di esame di cui visualizzare le statistiche", "Modifica Cartella Sanitaria"};
 	
 	private static final String[] P_OPZIONI_MODIFICA = {"Modifica nome","Modifica cognome","Modifica indirizzo","Modifica telefono","Modifica email", "Modifica luogo di nascita", "Modifica data di nascita", "Modifica genere", "Modifica codice fiscale", "Modifica gruppo sanguigno", "Aggiungi esame effettuato", "Aggiungi malattia", "Modifica esame effettuato", "Modifica malattia","Rimuovi esame effettuato", "Rimuovi malattia"};
@@ -104,7 +104,7 @@ public class CSMain implements Serializable{
 	private static final String ERRORE_OPERAZIONE_ND_TIPO = "Attenzione, operazione non disponibile per il tipo di esame scelto."; //ND = NON DISPONIBILE
 	private static final String ERRORE_ESAME_NON_TROVATO = "Attenzione! Non e' presente alcun esame con quel nome!";
 	private static final String ERRORE_MALATTIA_NON_TROVATA = "Attenzione! Non e' presente alcuna malattia con quel nome!";
-	private static final String ERRORE_MANCA_ESAME_MALATTIA = "Attenzione! Non ci sono esami o malattie nella cartella sanitaria!";
+	private static final String ERRORE_MANCA_ESAME_MALATTIA = "Attenzione! Non ci sono esami o malattie nella cartella sanitaria! Impossibile visualizzare!";
 	
 	//metodi
 	/**
@@ -1213,7 +1213,10 @@ public class CSMain implements Serializable{
 					aggiungiEffettuato(CS, listaE);
 					break;
 				case 12: //aggiungi malattia
-					creaMalattia(listaE);
+					Malattia m = creaMalattia(listaE);
+					ArrayList<Malattia> listaM = CS.getElencoMalattia();
+					listaM.add(m);
+					CS.setElencoMalattia(listaM);
 					break;
 				case 13: //modifica effettuato
 					String nomeModificaE = MyInput.leggiStringaNonVuota(E_MEX_CANCELLA_NOME);
@@ -1338,7 +1341,7 @@ public class CSMain implements Serializable{
 	 * 3 esami prenotati (senza esito)
 	*/
 	/**
-	 * Creazione guidata di 4 tipologie di esami, 6 esami misurabili effettuati dello stesso tipo, 3 esami diagnostici effettuuati dello stesso tipo, 3 esami prenotati nella cartella sanitaria
+	 * Creazione guidata di 4 tipologie di esami, 2 malattie, 6 esami misurabili effettuati dello stesso tipo, 3 esami diagnostici effettuuati dello stesso tipo, 3 esami prenotati nella cartella sanitaria
 	 * @param <strong>CS</strong> Cartella Sanitaria nella quale verrano prese le informazioni degli utenti
 	 * @param <strong>listaE</strong> lista tipologie esami
 	 * @param <strong>listaEE</strong> lista esami effettuati/prenotati
@@ -1355,6 +1358,11 @@ public class CSMain implements Serializable{
 			else{
 				listaE.aggiungiEsame(creaEsame(2));
 			}
+		}
+		/*CREAZIONE DI 2 MALATTIE*/
+		for(int i=0; i<2; i++){
+			Malattia mCreata = creaMalattia(listaE);
+			listaM.add(mCreata);
 		}
 		
 		/*CREAZIONE 6 ESAMI MISURABILI EFFETTUATI DELLO STESSO TIPO*/
