@@ -40,7 +40,7 @@ public class CSMain implements Serializable{
 	// Inserimento Paziente
 	private static final String P_MEX_INS_NOME = "Inserisci il nome del paziente: ";
 	private static final String P_MEX_INS_COGNOME = "Inserisci il cognome del paziente: ";
-	private static final String P_MEX_INS_INDIRIZZO = "Inserisci l'indirizzo del paziente (Via / Numero / Paese / (Provincia) ): ";
+	private static final String P_MEX_INS_INDIRIZZO = "Inserisci l'indirizzo del paziente (Via / Numero / Paese / CAP / (Provincia) ): ";
 	private static final String P_MEX_INS_TELEFONO = "Inserisci il numero di telefono del paziente: ";
 	private static final String P_MEX_INS_MAIL = "Inserisci l'indirizzo e-mail del paziente: ";
 	private static final String P_MEX_INS_DATAN = "Inserisci la data di nascita del paziente nel formato gg/mm/aaaa: ";
@@ -53,10 +53,10 @@ public class CSMain implements Serializable{
 	private static final String E_MEX_INS_NOME = "Inserisci il nome dell'esame: ";
 	private static final String E_MEX_INS_RACCOMANDAZIONI = "Inserisci eventuali raccomandazioni: ";
 	private static final String E_MEX_INS_AREAI = "Inserisci l'area interessata: ";
-	private static final String E_MEX_INS_DATA = "Inserisci la data: ";
-	private static final String E_MEX_INS_LUOGO = "Inserisci il nome del luogo: ";
+	private static final String E_MEX_INS_DATA = "Inserisci la data in cui è stato effettuato l'esame nel formato gg/mm/aaaa: ";
+	private static final String E_MEX_INS_LUOGO = "Inserisci il nome del luogo in cui è stato effettuato l'esame: ";
 	private static final String E_MEX_INS_MALATTIAN = "Inserisci il nome della malattia: ";
-	private static final String E_MEX_INS_ORA = "Inserisci l'ora: ";
+	private static final String E_MEX_INS_ORA = "Inserisci l'ora in cui si è effettuato l'esame (hh:mm): ";
 	private static final String E_MEX_INS_ESITO_PERIODICO = "Inserisci l'esito dell'esame (>= 0): ";
 	private static final String E_MEX_INS_ESITO_DIAGNOSTICO = "Inserisci l'esito dell'esame: ";
 	private static final String E_MEX_INS_VALORE_MIN = "Inserisci il valore minimo: ";
@@ -67,7 +67,7 @@ public class CSMain implements Serializable{
 	private static final String E_MEX_INS_MRELATIVO = "Inserisci il nome della malattia a cui e' associato: ";
 	private static final String E_MEX_CANCELLA_NOME = "Inserisci il nome dell'esame da cancellare: ";
 	private static final String E_MEX_PIU_ESAMI = "Attenzione, sono presenti piu' esami di questo tipo: ";
-	private static final String E_MEX_CANCELLA_DATA = "Inserire la data dell'esame da cancellare: ";
+	private static final String E_MEX_CANCELLA_DATA = "Inserire la data dell'esame da cancellare nel formato gg/mm/aaaa: ";
 	private static final String E_MEX_CERCA = "Inserire il nome dell'esame che si desidera cercare: ";
 	private static final String E_MEX_MODIFICA = "Inserire il nome dell'esame che si desidera modificare: ";
 	private static final String E_MEX_INS_TIPOLOGIA = "Inserisci il nome della tipologia di cui visualizzare le statistiche: ";
@@ -81,14 +81,14 @@ public class CSMain implements Serializable{
 	
 	// Inserimento Malattia
 	private static final String M_MEX_INS_NOME = "Inserisci il nome della malattia: ";
-	private static final String M_MEX_INS_DATAI = "Inserisci la data di inizio della malattia: ";
-	private static final String M_MEX_INS_DATAT = "Inserisci la data di termine della malattia: ";
+	private static final String M_MEX_INS_DATAI = "Inserisci la data di inizio della malattia nel formato gg/mm/aaaa: ";
+	private static final String M_MEX_INS_DATAT = "Inserisci la data di termine della malattia nel formato gg/mm/aaaa: ";
 	private static final String M_MEX_INS_SINTOMI = "Inserisci i sintomi della malattia: ";
 	private static final String M_MEX_INS_DIAGNOSI = "Inserisci la diagnosi effettuata dal medico: ";
 	private static final String M_MEX_INS_TERAPIA = "Inserisci la terapia consigliata: ";
 	private static final String M_MEX_CANCELLA = "Inserisci il nome della malattia che desideri eliminare: ";
 	private static final String M_MEX_PIU_MALATTIE = "Attenzione, sono presenti piu' malattie con questo nome: ";
-	private static final String M_MEX_CANCELLA_DATAI = "Inserire la data di inizio della malattia da cancellare: ";
+	private static final String M_MEX_CANCELLA_DATAI = "Inserire la data di inizio della malattia da cancellare nel formato gg/mm/aaaa: ";
 	
 	private static final String M_SCELTA_INS_DATAT = "Si desidera inserire una data di termine?";
 	private static final String M_SCELTA_INS_ASSOCIATO = "Si desidera inserire un esame associato?";
@@ -1503,10 +1503,14 @@ public class CSMain implements Serializable{
 					catch(IllegalAccessException e){
 						e.getMessage();
 					}
+
 					catch(IllegalArgumentException e){
 						e.getMessage();
 					}
-			}while(!valido);
+
+
+				}while(valido == false);
+
 			}
 			stampaMex("");
 		}
