@@ -905,6 +905,7 @@ public class CSMain implements Serializable{
 		}while(!valido);
 		
 		CartellaSanitaria cs = new CartellaSanitaria(nome, cognome, indirizzo, telefono, mail, dataN, luogoN, genereP, codiceF, gruppoS);
+		cs.generaCodiceSanitario();
 		return cs;
 	}
 	
@@ -1343,7 +1344,7 @@ public class CSMain implements Serializable{
 	 * @param listaEE lista esami effettuati/prenotati
 	 * @param listaM lista malattia
 	 */
-	public static void creazioneGuidata(CartellaSanitaria CS, ListaEsame listaE){
+	public static void Guidata(CartellaSanitaria CS, ListaEsame listaE){
 		/*CREAZIONE 4 TIPOLOGIE ESAME*/
 		ArrayList<EsameEffettuato> listaEE = CS.getEsamiEffettuati();
 		ArrayList<Malattia> listaM = CS.getElencoMalattia();
