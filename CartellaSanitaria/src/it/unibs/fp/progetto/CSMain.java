@@ -1497,8 +1497,6 @@ public class CSMain implements Serializable{
 
 				}while(valido == false);
 
-			
-
 			}
 			stampaMex("");
 		}
