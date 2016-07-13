@@ -1483,7 +1483,7 @@ public class CSMain implements Serializable{
 					catch(IllegalAccessException e){
 						e.printStackTrace();
 					}
-				while(valido == false);
+				}while(valido == false);
 			}
 			stampaMex("");
 		}

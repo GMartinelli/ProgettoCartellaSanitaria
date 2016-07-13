@@ -88,11 +88,9 @@ public class EsameDiagnostico extends Esame {
 	public static ArrayList<EsameDiagnostico> selezionaEsameDiagnostico(ListaEsame listaE){
 		ArrayList<EsameDiagnostico> listaDiagnostico = new ArrayList<EsameDiagnostico>();
 		
-		for(int i=0; i<listaE.dimensione(); i++){
-			Esame elemento  = listaE.getEsame(i);
+		for(Esame elemento: listaE.getLista()){
 			if(elemento instanceof EsameDiagnostico){
-				EsameDiagnostico e = (EsameDiagnostico) elemento;
-				listaDiagnostico.add(e);
+				listaDiagnostico.add((EsameDiagnostico) elemento);
 			}
 		}
 		
