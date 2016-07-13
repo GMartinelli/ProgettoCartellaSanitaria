@@ -788,6 +788,11 @@ public class CSMain implements Serializable{
 		return null;
 	}
 	
+	/**
+	 * Permette di creare una malattia
+	 * @param <strong>listaE</strong> la lista nella quale cercare gli esami da associare
+	 * @return la <strong>malattia</strong> creata
+	 */
 	public static Malattia creaMalattia(ListaEsame listaE){
 		String nome = null;
 		Date dataInizio = null;
@@ -918,6 +923,8 @@ public class CSMain implements Serializable{
 		
 		CartellaSanitaria cs = new CartellaSanitaria(nome, cognome, indirizzo, telefono, mail, dataN, luogoN, genereP, codiceF, gruppoS);
 		cs.generaCodiceSanitario();
+		cs.setElencoMalattia(new ArrayList<Malattia>());
+		cs.setEsamiEffettuati(new ArrayList<EsameEffettuato>());
 		return cs;
 	}
 	
@@ -1354,6 +1361,7 @@ public class CSMain implements Serializable{
 	*/
 	/**
 	 * Creazione guidata di 4 tipologie di esami, 2 malattie, 6 esami misurabili effettuati dello stesso tipo, 3 esami diagnostici effettuuati dello stesso tipo, 3 esami prenotati nella cartella sanitaria
+	 * 
 	 * @param <strong>CS</strong> Cartella Sanitaria nella quale verrano prese le informazioni degli utenti
 	 * @param <strong>listaE</strong> lista tipologie esami
 	 * @param <strong>listaEE</strong> lista esami effettuati/prenotati
@@ -1364,29 +1372,23 @@ public class CSMain implements Serializable{
 		stampaMex(BEN_C_GUIDATA);
 		stampaMex("");
 		
-		ArrayList<EsameEffettuato> listaEE = CS.getEsamiEffettuati();
-		ArrayList<Malattia> listaM = CS.getElencoMalattia();
-		try{
-			for(int i = 0; i < 4; i++){
-				if(((i + 1) % 2) == 0){
-					stampaMex(MEX_INS_TIPOLOGIA_D);
-					listaE.aggiungiEsame(creaEsame(1));
-				}
-				else{
-					stampaMex(MEX_INS_TIPOLOGIA_P);
-					listaE.aggiungiEsame(creaEsame(2));		
-				}
+		ArrayList<EsameEffettuato> listaEE = new ArrayList<EsameEffettuato>();
+		ArrayList<Malattia> listaM = new ArrayList<Malattia>();
+		for(int i = 0; i < 4; i++){
+			if(((i + 1) % 2) == 0){
+				stampaMex(MEX_INS_TIPOLOGIA_D);
+				listaE.aggiungiEsame(creaEsame(1));
 			}
-		}
-		catch(NullPointerException e){
-			stampaMex(ERRORE_E_NON_CREATO);
+			else{
+				stampaMex(MEX_INS_TIPOLOGIA_P);
+				listaE.aggiungiEsame(creaEsame(2));		
+			}
 		}
 		stampaMex("");
 		stampaMex(MEX_INS_MALATTIA);
 		/*CREAZIONE DI 2 MALATTIE*/
-		for(int i=0; i<2; i++){
-			Malattia mCreata = creaMalattia(listaE);
-			listaM.add(mCreata);
+		for(int i=0; i<2; i++){;
+			listaM.add(creaMalattia(listaE));
 			stampaMex("");
 		}
 		stampaMex("");
@@ -1402,7 +1404,7 @@ public class CSMain implements Serializable{
 		MyMenu menuEME = new MyMenu("Scegli un esame misurabile di cui creare 6 esami effettuati", nomiEsami);
 		int sceltaEME = menuEME.scegli(); 
 		if(sceltaEME != 0){//E' stato scelto un esame misurabile di cui creare i 6 effettuati
-			EsamePeriodicoMisurabile esameScelto = listaEPM.get(sceltaEME);
+			EsamePeriodicoMisurabile esameScelto = listaEPM.get(sceltaEME - 1);
 			for(int j = 0; j < 6; j++){
 				boolean valido = false;
 				Malattia mAss = null;
@@ -1702,9 +1704,14 @@ public class CSMain implements Serializable{
 								MyServizioFile.salvaSingoloOggetto(fileListaE, listaE);
 								break;
 							case 2:	/*AGGIUNGI tipologia esame*/
-								Esame eCreato = creaEsame();
-								listaE.aggiungiEsame(eCreato);
-								MyServizioFile.salvaSingoloOggetto(fileListaE, listaE);
+								try{
+									Esame eCreato = creaEsame();
+									listaE.aggiungiEsame(eCreato);
+									MyServizioFile.salvaSingoloOggetto(fileListaE, listaE);
+								}
+								catch(NullPointerException e){
+									stampaMex(ERRORE_E_NON_CREATO);
+								}
 								break;
 							case 3: /*Modifica tipologia esame*/
 								String nomeModifica = null;

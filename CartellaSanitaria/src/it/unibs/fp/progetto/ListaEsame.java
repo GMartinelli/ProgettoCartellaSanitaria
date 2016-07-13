@@ -58,8 +58,8 @@ public class ListaEsame implements Serializable{
 	 * @author Manenti Gabriele
 	 */
 	public boolean isEsistente(String nomeEsame){
-		for(int i = 0; i < lista.size(); i++){
-			if(lista.get(i).getNome() == nomeEsame)
+		for(Esame elemento: lista){
+			if(elemento.getNome().equals(nomeEsame))
 				return true;
 		}
 		return false;
@@ -73,7 +73,7 @@ public class ListaEsame implements Serializable{
 	 */
 	public Esame cercaEsame(String nomeEsame){
 		for(int i = 0; i < lista.size(); i++){
-			if(lista.get(i).getNome() == nomeEsame)
+			if(lista.get(i).getNome().equals(nomeEsame))
 				return lista.get(i);
 		}
 		return null;
