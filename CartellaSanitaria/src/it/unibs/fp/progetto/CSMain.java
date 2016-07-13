@@ -1339,33 +1339,37 @@ public class CSMain implements Serializable{
 	*/
 	/**
 	 * Creazione guidata di 4 tipologie di esami, 6 esami misurabili effettuati dello stesso tipo, 3 esami diagnostici effettuuati dello stesso tipo, 3 esami prenotati nella cartella sanitaria
-	 * @param CS Cartella Sanitaria nella quale verrano prese le informazioni degli utenti
-	 * @param listaE lista tipologie esami
-	 * @param listaEE lista esami effettuati/prenotati
-	 * @param listaM lista malattia
+	 * @param <strong>CS</strong> Cartella Sanitaria nella quale verrano prese le informazioni degli utenti
+	 * @param <strong>listaE</strong> lista tipologie esami
+	 * @param <strong>listaEE</strong> lista esami effettuati/prenotati
+	 * @param <strong>listaM</strong> lista malattia
 	 */
 	public static void Guidata(CartellaSanitaria CS, ListaEsame listaE){
 		/*CREAZIONE 4 TIPOLOGIE ESAME*/
 		ArrayList<EsameEffettuato> listaEE = CS.getEsamiEffettuati();
 		ArrayList<Malattia> listaM = CS.getElencoMalattia();
-		for(int i=0; i<4; i++){
-			Esame e1 = creaEsame();
-			listaE.aggiungiEsame(e1);
+		for(int i = 0; i < 4; i++){
+			if(((i + 1) % 2) == 0){
+				listaE.aggiungiEsame(creaEsame(1));
+			}
+			else{
+				listaE.aggiungiEsame(creaEsame(2));
+			}
 		}
 		
-		/*CREAZIONE 6 ESAMI MISURABILI EFFETTUATI DELLO STESSO TIPO EFFETTUATI*/
+		/*CREAZIONE 6 ESAMI MISURABILI EFFETTUATI DELLO STESSO TIPO*/
 		//Prima scelgo il tipo di esame su cui creare gli effettuati
 		ArrayList<EsamePeriodicoMisurabile> listaEPM = EsamePeriodicoMisurabile.selezionaEsamePMisurabili(listaE);
 		int DIM = listaEPM.size();
 		String[] nomiEsami = new String [DIM];
-		for(int i=0; i<listaEPM.size(); i++){
+		for(int i = 0; i < listaEPM.size(); i++){
 			nomiEsami[i] = listaEPM.get(i).getNome();
 		}
 		MyMenu menuEME = new MyMenu("Scegli un esame misurabile di cui creare 6 esami effettuati", nomiEsami);
 		int sceltaEME = menuEME.scegli(); 
-		if(sceltaEME!=0){//E' stato scelto un esame misurabile su cui creare i 6 effettuati
+		if(sceltaEME != 0){//E' stato scelto un esame misurabile di cui creare i 6 effettuati
 			EsamePeriodicoMisurabile esameScelto = listaEPM.get(sceltaEME);
-			for(int j=0; j<6; j++){
+			for(int j = 0; j < 6; j++){
 				boolean valido = false;
 				Malattia mAss = null;
 				do{
@@ -1387,8 +1391,8 @@ public class CSMain implements Serializable{
 				double esito = MyInput.leggiDoubleConMinimo(E_MEX_INS_ESITO,0);
 				
 				try{
-					EPeriodicoMisurabileEffettuato eInserito= new EPeriodicoMisurabileEffettuato(esameScelto, mAss, luogo, data, ora, esito);
-					//EPM CREATO, ADESSO LO AGGIUNGO ALLA LISTA DEGLI ESAMI
+					EPeriodicoMisurabileEffettuato eInserito = new EPeriodicoMisurabileEffettuato(esameScelto, mAss, luogo, data, ora, esito);
+					//EPM CREATO, AGGIUNGO ALLA LISTA DEGLI ESAMI
 					listaEE.add(eInserito);
 				}
 				catch(IllegalAccessException e){
@@ -1398,19 +1402,19 @@ public class CSMain implements Serializable{
 		}
 		
 		
-		/*CREAZIONE 3 ESAMI DIAGNOSTICI EFFETTUATI DELLO STESSO TIPO EFFETTUATI*/
-		//Prima scelgo il tipo di esame su cui creare gli effettuati
+		/*CREAZIONE 3 ESAMI DIAGNOSTICI EFFETTUATI DELLO STESSO TIPO*/
+		//Prima scelgo il tipo di esame di cui creare gli effettuati
 				ArrayList<EsameDiagnostico> listaD = EsameDiagnostico.selezionaEsameDiagnostico(listaE);
 				int DIMD = listaD.size();
 				String[] nomiEsamiD = new String [DIMD];
-				for(int i=0; i<listaD.size(); i++){
+				for(int i = 0; i < listaD.size(); i++){
 					nomiEsami[i] = listaD.get(i).getNome();
 				}
 				MyMenu menuED = new MyMenu("Scegli un esame diagnostico di cui creare 3 esami effettuati", nomiEsamiD);
 				int sceltaED = menuED.scegli(); 
 				if(sceltaED!=0){//E' stato scelto un esame misurabile su cui creare i 6 effettuati
 					EsameDiagnostico esameSceltoD = listaD.get(sceltaED);
-					for(int j=0; j<6; j++){
+					for(int j = 0; j < 6; j++){
 						boolean valido = false;
 						Malattia mAss = null;
 						do{
@@ -1442,8 +1446,7 @@ public class CSMain implements Serializable{
 				
 		/*3 ESAMI PRENOTATI (SENZA ESITO)*/
 		for(int i=0; i<3;i++){
-			EsameEffettuato eIns = creaEsamePrenotato(listaE, listaM);
-			listaEE.add(eIns);
+			listaEE.add(creaEsamePrenotato(listaE, listaM));
 		}
 		
 		//SALVO TUTTO NELLA CARELLA SANITARIA
@@ -1483,7 +1486,6 @@ public class CSMain implements Serializable{
 	 */
 	
 	public static void richiesteCartellaSanitaria(CartellaSanitaria CS, ListaEsame listaE){
-		
 		int scelta = 0;
 		MyMenu menuRichieste = new MyMenu("Cosa si desidera fare?", OPZIONI_RICHIESTE);
 		
