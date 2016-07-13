@@ -26,7 +26,7 @@ public class Malattia  implements Serializable{
 	private Date dataTermine;
 	private String sintomi;
 	private String diagnosi;
-	private ListaEsame elencoEsamiAssociati;
+	private ArrayList<Esame> elencoEsamiAssociati;
 	private String terapia;
 	
 	//getters
@@ -67,9 +67,9 @@ public class Malattia  implements Serializable{
 	}
 	/**
 	 * Ritorna l'ArrayList di oggetti della classe Esame contenente l'elenco degli esami associati alla malattia
-	 * @return elencoEsamiAssociati gli esami per cui la malattia puÃ² essere richiesta
+	 * @return elencoEsamiAssociati gli esami per cui la malattia può essere richiesta
 	 */
-	public ListaEsame getElencoEsamiAssociati() {
+	public ArrayList<Esame> getElencoEsamiAssociati() {
 		return elencoEsamiAssociati;
 	}
 	/**
@@ -120,7 +120,7 @@ public class Malattia  implements Serializable{
 	 * Permette di cambiare l'elenco di esami associati
 	 * @param elencoEsamiAssociati il nuovo elenco
 	 */
-	public void setElencoEsamiAssociati(ListaEsame elencoEsamiAssociati) {
+	public void setElencoEsamiAssociati(ArrayList<Esame> elencoEsamiAssociati) {
 		this.elencoEsamiAssociati = elencoEsamiAssociati;
 	}
 	/**
@@ -157,15 +157,16 @@ public class Malattia  implements Serializable{
 	 * @param dataInizio la data di inizio
 	 * @param sintomi i sintomi 
 	 * @param diagnosi la diagnosi
-	 * @param elencoEsamiAssociati l'elenco di esami che Ã¨ possibile richiedere per questa malattia
+	 * @param elencoEsamiAssociati l'elenco di esami che è possibile richiedere per questa malattia
 	 * @param terapia la terapia
 	 */
-	public Malattia(String nome, Date dataInizio, String sintomi, String diagnosi, ListaEsame elencoEsamiAssociati, String terapia){
+	public Malattia(String nome, Date dataInizio, String sintomi, String diagnosi, ArrayList<Esame> elencoEsamiAssociati, String terapia){
 		this.nome = nome;
 		this.dataInizio = dataInizio;
 		this.dataTermine = null;
 		this.sintomi = sintomi;
 		this.diagnosi = diagnosi;
+		this.elencoEsamiAssociati = new ArrayList<Esame>();
 		this.elencoEsamiAssociati = elencoEsamiAssociati;
 		this.terapia = terapia;
 	}
@@ -177,29 +178,29 @@ public class Malattia  implements Serializable{
 	 * @param dataTermine la data di termine
 	 * @param sintomi i sintomi 
 	 * @param diagnosi la diagnosi
-	 * @param elencoEsamiAssociati l'elenco di esami che Ã¨ possibile richiedere per questa malattia
+	 * @param elencoEsamiAssociati l'elenco di esami che è possibile richiedere per questa malattia
 	 * @param terapia la terapia
 	 */
-	public Malattia(String nome, Date dataInizio, Date dataTermine, String sintomi, String diagnosi, ListaEsame elencoEsamiAssociati, String terapia){
+	public Malattia(String nome, Date dataInizio, Date dataTermine, String sintomi, String diagnosi, ArrayList<Esame> elencoEsamiAssociati, String terapia){
 		this.nome = nome;
 		this.dataInizio = dataInizio;
 		this.dataTermine = dataTermine;
 		this.sintomi = sintomi;
 		this.diagnosi = diagnosi;
+		this.elencoEsamiAssociati = new ArrayList<Esame>();
 		this.elencoEsamiAssociati = elencoEsamiAssociati;
 		this.terapia = terapia;
 	}
 	
 	//metodi	
 	/**
-	 * Metodo che, dato il nome di un esame, permette di sapere se questo Ã¨ presente nella lista di esami associati ad una malattia
+	 * Metodo che, dato il nome di un esame, permette di sapere se questo è presente nella lista di esami associati ad una malattia
 	 * 
 	 * @param nomeEsame il nome dell'esame da cercare
-	 * @return true se l'esame Ã¨ presente nell'elenco di esami associati, false altrimenti
+	 * @return true se l'esame è presente nell'elenco di esami associati, false altrimenti
 	 */
 	public boolean isAssociato(String nomeEsame){
-		for(int i=0; i<elencoEsamiAssociati.dimensione(); i++){
-			Esame elemento = elencoEsamiAssociati.getEsame(i);
+		for(Esame elemento: elencoEsamiAssociati){
 			if(elemento.getNome()==nomeEsame)
 				return true;
 		}
@@ -213,26 +214,25 @@ public class Malattia  implements Serializable{
 	 * @return descrizione la descrizione sintetica della malattia
 	 */
 	public String toString(){ /*Modificato Metodo to String nell'acquisizione data(aggiunto MyTime.toStringData)*/
-		String descrizione = nome + "\n   Iniziata: " + MyTime.toStringData(dataInizio);
-		if(dataTermine != null) descrizione += ("\n   Terminata:  " + MyTime.toStringData(dataTermine)); 
+		String descrizione = nome + "%n   Iniziata: " + MyTime.toStringData(dataInizio);
+		if(dataTermine != null) descrizione += ("%n   Terminata:  " + MyTime.toStringData(dataTermine)); 
 		
 		return descrizione;
 	}
 	
 	public String toStringCompleto(){
 		String stringaDescrittivaCompleta =
-				this.toString() + "\n";
+				this.toString() + "%n";
 			if(this.getSintomi() != null){ stringaDescrittivaCompleta +=
 				"  Sintomi: " + this.getSintomi();
 			}
 			if(this.getDiagnosi() != null){ stringaDescrittivaCompleta +=
 				" Diagnosi: "+ this.getDiagnosi();
 			}
-			if(this.getElencoEsamiAssociati().dimensione() > 0){ stringaDescrittivaCompleta +=
-				"  Elenco delle tipologie di esame associate: " + "\n";
-				for(int i=0; i<elencoEsamiAssociati.dimensione(); i++){ 
-					Esame elemento = elencoEsamiAssociati.getEsame(i);
-					stringaDescrittivaCompleta += "   " + elemento.toString();
+			if(this.getElencoEsamiAssociati().size() > 0){ stringaDescrittivaCompleta +=
+				"  Elenco delle tipologie di esame associate: " + "%n";
+				for(Esame elemento: this.getElencoEsamiAssociati()){ stringaDescrittivaCompleta +=
+				"   " + elemento.toString();
 				}
 			}
 			if(this.getTerapia() != null){ stringaDescrittivaCompleta +=
@@ -241,3 +241,4 @@ public class Malattia  implements Serializable{
 		return stringaDescrittivaCompleta;
 	}
 }
+

@@ -44,9 +44,9 @@ public class CSMain implements Serializable{
 	private static final String P_MEX_INS_TELEFONO = "Inserisci il numero di telefono del paziente: ";
 	private static final String P_MEX_INS_MAIL = "Inserisci l'indirizzo e-mail del paziente: ";
 	private static final String P_MEX_INS_DATAN = "Inserisci la data di nascita del paziente nel formato gg/mm/aaaa: ";
-	private static final String P_MEX_INS_LUOGON = "Inserisci il luogo di nascita del paziente: ";
+	private static final String P_MEX_INS_LUOGON = "Inserisci il luogo di nascita del paziente ( Paese / (Provincia) ): ";
 	private static final String P_MEX_INS_CODICEF = "Inserisci il codice fiscale del paziente: ";
-	private static final String P_MEX_INS_GENERE = "Inserisci il genere del paziente: ";
+	private static final String P_MEX_INS_GENERE = "Inserisci il genere del paziente (m/f): ";
 	private static final String P_MEX_INS_GSANGUIGNO = "Inserisci il gruppo sanguigno del paziente: ";
 	
 	// Inserimento Esame
@@ -72,8 +72,9 @@ public class CSMain implements Serializable{
 	private static final String E_MEX_INS_TIPOLOGIA = "Inserisci il nome della tipologia di cui visualizzare le statistiche: ";
 	private static final String E_MEX_DIAGNOSTICO = "Esame diagnostico";
 	private static final String E_MEX_PERIODICO = "Esame periodico";
+	private static final String E_MEX_CREAZIONE = "Stai creando una nuova tipologia di esame";
 	
-	private static final String E_SCELTA_CREA_CERCA = "Si desidera creare una tipologia di esame o cercarne una già esistente?";
+	private static final String E_SCELTA_CREA_CERCA = "Si desidera creare una tipologia di esame o cercarne una gia'� esistente?";
 	private static final String E_SCELTA_TIPO = "Si desidera inserire un nuovo Esame Effettuato Diagnostico o Periodico Misurabile?";
 	private static final String E_SCELTA_VISUALIZZA = "Quale esame vuoi visualizzare?";
 	
@@ -94,7 +95,7 @@ public class CSMain implements Serializable{
 	private static final String M_SCELTA_VISUALIZZA = "Quale malattia vuoi visualizzare?";
 	
 	// Avvisi
-	private static final String NON_MODIFICA = "Attenzione, non verrà chiesto di inserire alcun dato.";
+	private static final String NON_MODIFICA = "Attenzione, non verr� chiesto di inserire alcun dato.";
 	private static final String AVVISI_IMPOSTATI_CORRETTAMENTE = "Gli avvisi sono stati impostati correttamente. Operazione finita.";
 	
 	// Errori
@@ -105,6 +106,7 @@ public class CSMain implements Serializable{
 	private static final String ERRORE_ESAME_NON_TROVATO = "Attenzione! Non e' presente alcun esame con quel nome!";
 	private static final String ERRORE_MALATTIA_NON_TROVATA = "Attenzione! Non e' presente alcuna malattia con quel nome!";
 	private static final String ERRORE_MANCA_ESAME_MALATTIA = "Attenzione! Non ci sono esami o malattie nella cartella sanitaria! Impossibile visualizzare!";
+	private static final String ERRORE_E_NON_CREATO = "L'esame non e' stato creato";
 	
 	//Messaggi creazione guidata
 	private static final String BEN_C_GUIDATA="Benvenuto nella creazione guidata di una cartella sanitaria!";
@@ -137,6 +139,7 @@ public class CSMain implements Serializable{
 	 * @author Martinelli Giuseppe
 	 */
 	public static Esame creaEsame(){
+		stampaMex(E_MEX_CREAZIONE);
 		String nome = MyInput.leggiStringaNonVuota(E_MEX_INS_NOME);
 		String raccomandazioni = MyInput.leggiStringa(E_MEX_INS_RACCOMANDAZIONI);
 		int sceltaT = 0;
@@ -188,6 +191,7 @@ public class CSMain implements Serializable{
 	 * @return l'<strong>esame</strong> creato
 	 */
 	public static Esame creaEsame(int scelta){
+		stampaMex(E_MEX_CREAZIONE);
 		String nome = MyInput.leggiStringaNonVuota(E_MEX_INS_NOME);
 		String raccomandazioni = MyInput.leggiStringa(E_MEX_INS_RACCOMANDAZIONI);
 		
@@ -216,6 +220,8 @@ public class CSMain implements Serializable{
 					EsamePeriodicoMisurabile e1 = new EsamePeriodicoMisurabile(nome, raccomandazioni, valoreMin, valoreMax, sogliaErrore);
 					return e1;	
 				}
+			case 0:
+				break;
 			default:
 				stampaMex(ERRORE_INS);
 				break;
@@ -782,21 +788,13 @@ public class CSMain implements Serializable{
 		return null;
 	}
 	
-	/**
-	 * Metodo che crea un oggetto di tipo Malattia permettendo all'utente di inserire i dati desiderati
-	 * 
-	 * @param <strong>listaE</strong> la lista delle tipologie di esame create
-	 * @return la <strong>malattia</strong> creata
-	 * 
-	 * @author Valtulini Claudio
-	 */
 	public static Malattia creaMalattia(ListaEsame listaE){
 		String nome = null;
 		Date dataInizio = null;
 		Date dataTermine = null;
 		String sintomi = null;
 		String diagnosi = null;
-		ArrayList<Esame> lista = new ArrayList<Esame>();
+		ArrayList<Esame> listaAssociati = new ArrayList<Esame>();
 		String terapia = null;
 		
 		nome = MyInput.leggiStringaNonVuota(M_MEX_INS_NOME);
@@ -814,7 +812,7 @@ public class CSMain implements Serializable{
 		while(inserisciEsame){
 			nomeAssociato = MyInput.leggiStringaNonVuota(E_MEX_INS_NOME);
 			if(listaE.isEsistente(nomeAssociato)){
-				lista.add(listaE.cercaEsame(nomeAssociato));
+				listaAssociati.add(listaE.cercaEsame(nomeAssociato));
 			}
 			else{
 				stampaMex(ERRORE_ESAME_NON_TROVATO);
@@ -822,9 +820,9 @@ public class CSMain implements Serializable{
 			inserisciEsame = MyInput.yesOrNo(M_SCELTA_INS_ALTRO_ASSOCIATO);
 		}
 		
-		ListaEsame listaEA = new ListaEsame(lista);
-		return new Malattia(nome, dataInizio, dataTermine, sintomi, diagnosi, listaEA, terapia);
+		return new Malattia(nome, dataInizio, dataTermine, sintomi, diagnosi, listaAssociati, terapia);
 	}
+
 	
 	/**
 	 * Metodo che crea un oggetto della classe cartellaSanitaria
@@ -1368,15 +1366,20 @@ public class CSMain implements Serializable{
 		
 		ArrayList<EsameEffettuato> listaEE = CS.getEsamiEffettuati();
 		ArrayList<Malattia> listaM = CS.getElencoMalattia();
-		for(int i = 0; i < 4; i++){
-			if(((i + 1) % 2) == 0){
-				stampaMex(MEX_INS_TIPOLOGIA_D);
-				listaE.aggiungiEsame(creaEsame(1));
+		try{
+			for(int i = 0; i < 4; i++){
+				if(((i + 1) % 2) == 0){
+					stampaMex(MEX_INS_TIPOLOGIA_D);
+					listaE.aggiungiEsame(creaEsame(1));
+				}
+				else{
+					stampaMex(MEX_INS_TIPOLOGIA_P);
+					listaE.aggiungiEsame(creaEsame(2));		
+				}
 			}
-			else{
-				stampaMex(MEX_INS_TIPOLOGIA_P);
-				listaE.aggiungiEsame(creaEsame(2));
-			}
+		}
+		catch(NullPointerException e){
+			stampaMex(ERRORE_E_NON_CREATO);
 		}
 		stampaMex("");
 		stampaMex(MEX_INS_MALATTIA);
