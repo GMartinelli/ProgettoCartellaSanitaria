@@ -19,7 +19,7 @@ public class CSMain implements Serializable{
 	// Opzioni menu'
 	private static final String[] OPZIONI_I={"Crea Cartella Sanitaria", "Visualizzazione e operazioni su oggetti"};
 	private static final String[] OPZIONI_D={"Visualizzazione completa cartella / Modifica dati cartella", "Aggiungi tipologia esame", "Modifica tipologia esame", "Elimina tipologia esame"};
-	private static final String[] OPZIONI_RICHIESTE = {"Visualizzazione dati anagrafici", "Visualizzazione nome, cognome, elenco esami e elenco malattie", "Visualizzazione completa di un esame tra quelli mostrati nella lista", "Visualizzazione completa di una malattia tra quelle mostrate nella lista", "Scelta di una tipologia di esame di cui visualizzare le statistiche", "Modifica Cartella Sanitaria"};
+	private static final String[] OPZIONI_RICHIESTE = {"Visualizzazione dati anagrafici", "Visualizzazione dati anagrafici, elenco esami e elenco malattie", "Visualizzazione completa di un esame tra quelli mostrati nella lista", "Visualizzazione completa di una malattia tra quelle mostrate nella lista", "Scelta di una tipologia di esame di cui visualizzare le statistiche", "Modifica Cartella Sanitaria"};
 	
 	private static final String[] P_OPZIONI_MODIFICA = {"Modifica nome","Modifica cognome","Modifica indirizzo","Modifica telefono","Modifica email", "Modifica luogo di nascita", "Modifica data di nascita", "Modifica genere", "Modifica codice fiscale", "Modifica gruppo sanguigno", "Aggiungi esame effettuato", "Aggiungi malattia", "Modifica esame effettuato", "Modifica malattia","Rimuovi esame effettuato", "Rimuovi malattia"};
 	
@@ -1615,7 +1615,7 @@ public class CSMain implements Serializable{
 					//scelgo e visualizzo esame
 					int visualizzaE = MyInput.leggiInteroConMinimo(E_SCELTA_VISUALIZZA, 1);
 					if((visualizzaE - 1) < CS.getEsamiEffettuati().size()){
-						CS.getEsamiEffettuati().get(visualizzaE - 1).toStringCompleto();
+						stampaMex(CS.getEsamiEffettuati().get(visualizzaE - 1).toStringCompleto());
 					}
 					else{
 						stampaMex(ERRORE_INS);
@@ -1625,7 +1625,7 @@ public class CSMain implements Serializable{
 					//scelgo e visualizzo malattia
 					int visualizzaM = MyInput.leggiInteroConMinimo(M_SCELTA_VISUALIZZA, 1);
 					if((visualizzaM - 1) < CS.getElencoMalattia().size()){
-						CS.getElencoMalattia().get(visualizzaM - 1).toStringCompleto();
+						stampaMex(CS.getElencoMalattia().get(visualizzaM - 1).toStringCompleto());
 					}
 					else{
 						stampaMex(ERRORE_INS);
