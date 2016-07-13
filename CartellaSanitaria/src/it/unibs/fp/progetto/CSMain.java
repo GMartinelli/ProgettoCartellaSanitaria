@@ -1440,6 +1440,5 @@ public class CSMain implements Serializable{
 				}
 		}while(sceltaI!=0);
 		stampaMex(MEX_USCITA);
-		
 	}
 }
