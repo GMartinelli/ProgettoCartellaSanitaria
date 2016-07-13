@@ -706,14 +706,14 @@ public class CartellaSanitaria implements Serializable{
 				"Esami Effettuati: " + "\n";
 			int i = 1;
 			for(EsameEffettuato elemento: this.getEsamiEffettuati()){ stringaDescrittivaCompleta +=
-				"  " + i + ". " + elemento.toString();
+				"  " + i + ". " + elemento.toString() + "\n";
 				i++;
 			}
 			stringaDescrittivaCompleta +=
 				"Malattie: " + "\n";
 			i = 1;
 			for(Malattia elemento: this.getElencoMalattia()){ stringaDescrittivaCompleta +=
-				"  " + i + ". " + elemento.toString();
+				"  " + i + ". " + elemento.toString() + "\n";
 				i++;
 			}
 			

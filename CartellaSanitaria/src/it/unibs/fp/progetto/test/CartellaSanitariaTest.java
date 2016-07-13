@@ -38,10 +38,75 @@ public class CartellaSanitariaTest {
 			CS1.setElencoMalattia(elencoMalattia);
 			CS1.setEsamiEffettuati(esamiEffettuati);
 			
-			String stringaMetodo = CS1.toString();
-			String stringaMia = "Nome: " + CS1.getNome() + "%nCognome: " + CS1.getCognome() + "%nElenco esami: %n" + esamiEffettuati.get(0).toString() +
-					"%n" + esamiEffettuati.get(1).toString() + "%nElenco malattie: %n" + malattia1.toString() + "%n" + malattia2.toString() + "%n";
 			
+			String stringaMetodo = CS1.toString();
+			int c = 0;
+			String stringaMia = "Nome: " + CS1.getNome() + "\nCognome: "+ CS1.getCognome() + "\nElenco esami: \n"; 
+			for(int i=0; i<esamiEffettuati.size();i++){
+						c = i + 1;
+						stringaMia+= c + ". " + esamiEffettuati.get(i).toString()+"\n";
+					}
+			stringaMia += "Elenco malattie: \n";
+			for(int i=0; i<elencoMalattia.size();i++){
+				c = i + 1;
+				stringaMia += c + ". " + elencoMalattia.get(i).toString()+"\n";
+			}
+			
+			assertEquals(stringaMetodo, stringaMia);
+		}
+		catch(IllegalAccessException e){
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void toStringCompletoTest(){
+		try{
+			ArrayList<Esame> associati = new ArrayList<>();
+			Esame esame1 = new Esame("Colesterolo");
+			Esame esame2 = new Esame("Sangue");
+			associati.add(esame1);
+			associati.add(esame2);
+			
+			ArrayList<Malattia> elencoMalattia = new ArrayList<>();
+			Malattia malattia1 = new Malattia("Raffreddore", MyTime.creaData("01/01/2009"), "Catarro", "Malato", associati, "Soffia");
+			Malattia malattia2 = new Malattia("Bronchite", MyTime.creaData("01/02/2009"), MyTime.creaData("15/02/2009"), "Catarro", "Malato", associati, "Soffia");
+			elencoMalattia.add(malattia1);
+			elencoMalattia.add(malattia2);
+
+			ArrayList<EsameEffettuato> esamiEffettuati = new ArrayList<>();
+			esamiEffettuati.add(new EsameEffettuato(esame1, malattia1, "Sarnico", MyTime.creaData("18/01/2009"), "15:30"));
+			esamiEffettuati.add(new EsameEffettuato(esame2, malattia2, "Sarnico", MyTime.creaData("18/01/2009"), "17:30"));
+			
+			CartellaSanitaria CS1 = new CartellaSanitaria("Mario", "Rossi", "Via Mario Rossi", "000000000", "ab@cd.ef", MyTime.creaData("22/09/1985"), "Iseo", false, "RSIROM85D18X999B", "+A");
+			CS1.setElencoMalattia(elencoMalattia);
+			CS1.setEsamiEffettuati(esamiEffettuati);
+			CS1.generaCodiceSanitario();
+			
+			
+			String stringaMetodo = CS1.toStringCompleto();
+			int c = 0;
+			String stringaMia = "Cartella sanitaria di " + CS1.getNome() + " "+ CS1.getCognome() + "\n" + "Residente in: " + CS1.getIndirizzo() + "\n" + 
+								"Contatti: " + "\n" + "  Numero Telefonico: " + CS1.getTelefono() + "\n" +
+								"  Indirizzo E-Mail: " + CS1.getEmail() + "\n" + "Nato il: " + CS1.getDataNascita().toString() + "\n" +
+								"A: " + CS1.getLuogoNascita() + "\n" +
+								"Genere: " + CS1.getStringaGenere() + "\n" +
+								"Gruppo Sanguigno: " + CS1.getGruppoSanguigno() + "\n" +
+								"Codice Fiscale: " + CS1.getCodiceFiscale() + "\n"+
+								"Codice Sanitario: " + CS1.getCodiceSanitario() + "\n" +
+								"Esami Effettuati: " + "\n";
+								int i = 1;
+								for(EsameEffettuato elemento: CS1.getEsamiEffettuati()){ 
+									stringaMia += "  " + i + ". " + elemento.toString() + "\n";
+									i++;
+								}
+								stringaMia += "Malattie: " + "\n";
+								i = 1;
+								for(Malattia elemento: CS1.getElencoMalattia()){ 
+									stringaMia += "  " + i + ". " + elemento.toString() + "\n";
+									i++;
+								}
+								
 			assertEquals(stringaMetodo, stringaMia);
 		}
 		catch(IllegalAccessException e){
