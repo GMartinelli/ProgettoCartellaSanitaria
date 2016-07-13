@@ -3,7 +3,7 @@
   associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
   <class id="1" language="java" name="it.unibs.fp.progetto.ListaEsame" project="CartellaSanitaria" 
     file="/CartellaSanitaria/src/it/unibs/fp/progetto/ListaEsame.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="225" width="184" x="139" y="1779"/>    
+    <position height="-1" width="-1" x="1315" y="1179"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -12,7 +12,7 @@
   </class>  
   <class id="2" language="java" name="it.unibs.fp.progetto.Malattia" project="CartellaSanitaria" 
     file="/CartellaSanitaria/src/it/unibs/fp/progetto/Malattia.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="531" width="333" x="384" y="1779"/>    
+    <position height="-1" width="-1" x="1028" y="726"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -21,7 +21,7 @@
   </class>  
   <class id="3" language="java" name="it.unibs.fp.progetto.EsameDiagnostico" project="CartellaSanitaria" 
     file="/CartellaSanitaria/src/it/unibs/fp/progetto/EsameDiagnostico.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="189" width="371" x="-289" y="2795"/>    
+    <position height="-1" width="-1" x="412" y="1433"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -30,7 +30,7 @@
   </class>  
   <class id="4" language="java" name="it.unibs.fp.progetto.Esame" project="CartellaSanitaria" 
     file="/CartellaSanitaria/src/it/unibs/fp/progetto/Esame.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="243" width="185" x="344" y="2512"/>    
+    <position height="-1" width="-1" x="1046" y="1185"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -39,7 +39,7 @@
   </class>  
   <class id="5" language="java" name="it.unibs.fp.progetto.CSMain" project="CartellaSanitaria" 
     file="/CartellaSanitaria/src/it/unibs/fp/progetto/CSMain.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="1971" width="394" x="37" y="-785"/>    
+    <position height="-1" width="-1" x="-78" y="202"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -48,7 +48,7 @@
   </class>  
   <class id="6" language="java" name="it.unibs.fp.progetto.EsameEffettuato" project="CartellaSanitaria" 
     file="/CartellaSanitaria/src/it/unibs/fp/progetto/EsameEffettuato.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="513" width="460" x="317" y="1226"/>    
+    <position height="-1" width="-1" x="441" y="928"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -58,7 +58,7 @@
   <class id="7" language="java" name="it.unibs.fp.progetto.EsamePeriodicoMisurabile" project="CartellaSanitaria" 
     file="/CartellaSanitaria/src/it/unibs/fp/progetto/EsamePeriodicoMisurabile.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="333" width="401" x="757" y="2795"/>    
+    <position height="-1" width="-1" x="-15" y="1793"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -67,7 +67,7 @@
   </class>  
   <class id="8" language="java" name="it.unibs.fp.progetto.EDiagnosticoEffettuato" project="CartellaSanitaria" 
     file="/CartellaSanitaria/src/it/unibs/fp/progetto/EDiagnosticoEffettuato.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="315" width="388" x="-289" y="1779"/>    
+    <position height="-1" width="-1" x="-71" y="1418"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -77,7 +77,7 @@
   <class id="9" language="java" name="it.unibs.fp.progetto.EPeriodicoMisurabileEffettuato" project="CartellaSanitaria" 
     file="/CartellaSanitaria/src/it/unibs/fp/progetto/EPeriodicoMisurabileEffettuato.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="693" width="464" x="757" y="1779"/>    
+    <position height="-1" width="-1" x="985" y="1719"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -94,87 +94,115 @@
     </display>  
   </class>  
   <generalization id="11">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="4"/>  
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="6"/>  
   </generalization>  
-  <generalization id="12">    
-    <end type="SOURCE" refId="7"/>    
-    <end type="TARGET" refId="4"/>  
-  </generalization>  
-  <association id="13">    
+  <association id="12">    
     <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="14" name="elencoEsamiAssociati"/>      
-      <multiplicity id="15" minimum="0" maximum="2147483647"/>    
+      <attribute id="13" name="elencoEsamiAssociati">        
+        <position height="0" width="0" x="610" y="-1448"/>      
+      </attribute>      
+      <multiplicity id="14" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="610" y="-1448"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="4" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="16">    
-    <bendpoint x="766" y="2512"/>    
+  <association id="15">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="16" name="lista">        
+        <position height="0" width="0" x="610" y="-1448"/>      
+      </attribute>      
+      <multiplicity id="17" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="610" y="-1448"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="18">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="19" name="malattia">        
+        <position height="0" width="0" x="478" y="-1318"/>      
+      </attribute>      
+      <multiplicity id="20" minimum="0" maximum="1">        
+        <position height="0" width="0" x="478" y="-1318"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="21">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="4"/>  
+  </generalization>  
+  <association id="22">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="23" name="esame">        
+        <position height="0" width="0" x="610" y="-1448"/>      
+      </attribute>      
+      <multiplicity id="24" minimum="0" maximum="1">        
+        <position height="0" width="0" x="610" y="-1448"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="25">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="4"/>  
+  </generalization>  
+  <association id="26">    
     <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="17" name="esame"/>      
-      <multiplicity id="18" minimum="0" maximum="1"/>    
+      <attribute id="27" name="esame">        
+        <position height="0" width="0" x="-972" y="-1168"/>      
+      </attribute>      
+      <multiplicity id="28" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-972" y="-1168"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="7" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="19">    
-    <bendpoint x="807" y="1226"/>    
-    <end type="SOURCE" refId="10" navigable="false">      
-      <attribute id="20" name="elencoMalattia"/>      
-      <multiplicity id="21" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="2" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="22">    
+  <generalization id="29">    
     <end type="SOURCE" refId="9"/>    
     <end type="TARGET" refId="6"/>  
   </generalization>  
-  <association id="23">    
-    <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="24" name="malattia"/>      
-      <multiplicity id="25" minimum="0" maximum="1"/>    
+  <association id="30">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="31" name="esamiEffettuati">        
+        <position height="0" width="0" x="-106" y="-554"/>      
+      </attribute>      
+      <multiplicity id="32" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="-106" y="-554"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="33">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="34" name="elencoMalattia">        
+        <position height="0" width="0" x="478" y="-1318"/>      
+      </attribute>      
+      <multiplicity id="35" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="478" y="-1318"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="2" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="26">    
-    <bendpoint x="353" y="1779"/>    
-    <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="27" name="esame"/>      
-      <multiplicity id="28" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="4" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="29">    
-    <bendpoint x="-280" y="2512"/>    
+  <association id="36">    
     <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="30" name="esame"/>      
-      <multiplicity id="31" minimum="0" maximum="1"/>    
+      <attribute id="37" name="esame">        
+        <position height="0" width="0" x="516" y="-1456"/>      
+      </attribute>      
+      <multiplicity id="38" minimum="0" maximum="1">        
+        <position height="0" width="0" x="516" y="-1456"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="3" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="32">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="33" name="lista"/>      
-      <multiplicity id="34" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="4" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="35">    
-    <end type="SOURCE" refId="8"/>    
-    <end type="TARGET" refId="6"/>  
-  </generalization>  
-  <association id="36">    
-    <end type="SOURCE" refId="10" navigable="false">      
-      <attribute id="37" name="esamiEffettuati"/>      
-      <multiplicity id="38" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="6" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
