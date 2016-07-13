@@ -1526,6 +1526,7 @@ public class CSMain implements Serializable{
 		//SALVO TUTTO NELLA CARELLA SANITARIA
 		CS.setElencoMalattia(listaM);
 		CS.setEsamiEffettuati(listaEE);
+		
 	}
 	
 	/* Cosa si dovrebbe fare nel main secondo la traccia (mia interpretazione V)
@@ -1778,5 +1779,8 @@ public class CSMain implements Serializable{
 				}
 		}while(sceltaI!=0);
 		stampaMex(MEX_USCITA);
+
+		MyServizioFile.salvaSingoloOggetto(fileCS, CS);
+		MyServizioFile.salvaSingoloOggetto(fileListaE, listaE);
 	}
 }
